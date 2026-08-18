@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/prepare-sites-build.mjs",
-    "build:cloudflare": "vite build --outDir dist",
+    "build:vercel": "vite build --outDir dist",
     "preview": "vite preview",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
