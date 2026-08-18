@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+
+# Local design and QA artifacts
+AGENTS.md
+design-qa.md
+implementation-*.png
+qa-*.png
+
