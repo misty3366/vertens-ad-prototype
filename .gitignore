@@ -9,6 +9,6 @@ dist/
 # Local design and QA artifacts
 AGENTS.md
 design-qa.md
+design-qa/
 implementation-*.png
 qa-*.png
-
