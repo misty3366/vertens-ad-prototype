@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  ArrowRight, Article, Baby, Barbell, Bed, BookOpen, BookmarkSimple, Buildings, Camera, Car, ChartLineUp, Check, CheckCircle,
+  ArrowRight, Article, Baby, Barbell, Bed, BookOpen, BookmarkSimple, Broadcast, Buildings, CalendarBlank, CalendarCheck, Camera, Car, ChartLineUp, Check, CheckCircle,
   CaretDown, CaretUp, CirclesFour, Clock, Code, Copy, CursorClick, Database, DotsThree,
   Coffee, Confetti, Eye, FacebookLogo, FileText, Fire, FolderSimple, ForkKnife, Globe, GraduationCap, Heart, Heartbeat, House, Image as ImageIcon,
-  InstagramLogo, LinkSimple, MagicWand, MagnifyingGlass, MapPin, Microphone,
+  Funnel, InstagramLogo, LinkSimple, MagicWand, MagnifyingGlass, MapPin, Microphone,
   Moon, Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle, Sun,
-  SpinnerGap, Storefront, Target, TiktokLogo, TrendUp, UploadSimple,
+  ShieldCheck, SpinnerGap, Storefront, Strategy, Target, TiktokLogo, TrendUp, UploadSimple, UserPlus,
   SidebarSimple, TShirt, UserCircle, Users, VideoCamera, WhatsappLogo, X
 } from '@phosphor-icons/react';
 import {
@@ -23,17 +23,23 @@ const images = {
   sofia: '/assets/actor-sofia.png'
 };
 
+const tierOrder = { lite: 1, pro: 2, plus: 3 };
+const tierLabels = { lite: 'Lite', pro: 'Pro', plus: 'Plus' };
 const navigation = [
   { section: 'Workspace', items: [
-    ['home', 'Home', House], ['projects', 'Projects', FolderSimple],
-    ['brand', 'My Brand', Buildings], ['assets', 'Assets', Package]
+    ['home', 'Home', House, 'lite'], ['projects', 'Projects', FolderSimple, 'lite'],
+    ['brand', 'My Brand', Buildings, 'lite'], ['assets', 'Assets', Package, 'lite'],
+    ['team', 'Team', Users, 'pro']
   ]},
   { section: 'Create', items: [
-    ['agent', 'AI Agent', Sparkle], ['templates', 'Templates', Article], ['canvas', 'Viral Canvas', ShareNetwork],
-    ['avatars', 'AI Avatars', UserCircle], ['service', 'Creative Service', VideoCamera]
+    ['agent', 'AI Agent', Sparkle, 'lite'], ['templates', 'Templates', Article, 'lite'], ['canvas', 'Viral Canvas', ShareNetwork, 'lite'],
+    ['avatars', 'AI Avatars', UserCircle, 'lite'], ['service', 'Creative Service', VideoCamera, 'lite']
+  ]},
+  { section: 'Operate', items: [
+    ['calendar', 'Marketing Calendar', CalendarBlank, 'lite'], ['publishing', 'Publishing', Broadcast, 'lite']
   ]},
   { section: 'Growth', items: [
-    ['performance', 'Performance', ChartLineUp], ['channels', 'Social accounts', CirclesFour]
+    ['performance', 'Performance', ChartLineUp, 'plus'], ['leads', 'Leads', Target, 'plus']
   ]}
 ];
 
@@ -72,14 +78,22 @@ function Logo() {
   return <div className="logo"><span className="logo-sun">S</span><strong>SunADS</strong></div>;
 }
 
-function Sidebar({ page, setPage, expanded, setExpanded, theme, setTheme }) {
-  return <aside className={`sidebar ${expanded ? 'expanded' : ''}`}>
+function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme, setTheme, tier, setTier }) {
+  const changeTier = nextTier => {
+    setTier(nextTier);
+    const currentItem = navigation.flatMap(group => group.items).find(item => item[0] === page);
+    if (currentItem && tierOrder[currentItem[3]] > tierOrder[nextTier]) setPage('home');
+  };
+  return <aside className={`sidebar ${expanded ? 'expanded' : ''} ${expanded && !pinned ? 'hover-expanded' : ''}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <Logo />
-    <button className="sidebar-toggle" aria-label={expanded ? 'Collapse menu' : 'Expand menu'} title={expanded ? 'Collapse menu' : 'Expand menu'} onClick={() => setExpanded(!expanded)}><SidebarSimple size={19}/></button>
+    <div className="tier-switch" aria-label="Prototype product stage">
+      {Object.keys(tierOrder).map(id => <button key={id} className={tier === id ? 'active' : ''} title={`${tierLabels[id]} feature scope`} onClick={() => changeTier(id)}>{tierLabels[id]}</button>)}
+    </div>
+    <button className={`sidebar-toggle ${pinned ? 'pinned' : ''}`} aria-label={pinned ? 'Unpin menu' : 'Pin menu'} title={pinned ? 'Unpin menu' : 'Pin menu'} onClick={() => setPinned(!pinned)}><SidebarSimple size={19} weight={pinned ? 'fill' : 'regular'}/></button>
     <nav>
       {navigation.map(group => <div className="nav-group" key={group.section}>
         <span>{group.section}</span>
-        {group.items.map(([id, label, Icon]) => <button key={id} aria-label={label} title={label} className={page === id ? 'active' : ''} onClick={() => setPage(id)}>
+        {group.items.filter(item => tierOrder[item[3]] <= tierOrder[tier]).map(([id, label, Icon]) => <button key={id} aria-label={label} title={label} className={page === id ? 'active' : ''} onClick={() => setPage(id)}>
           <Icon size={20} weight={page === id ? 'fill' : 'regular'} /><b>{label}</b>
           {id === 'performance' && <i>Beta</i>}
         </button>)}
@@ -87,10 +101,9 @@ function Sidebar({ page, setPage, expanded, setExpanded, theme, setTheme }) {
     </nav>
     <div className="sidebar-footer">
       <button className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-        <span>{theme === 'dark' ? <Sun size={18}/> : <Moon size={18}/>}</span><div><b>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</b><small>Appearance</small></div>
+        <span>{theme === 'dark' ? <Sun size={17}/> : <Moon size={17}/>}</span>
       </button>
       <button className="help"><span>?</span><div><b>Need help?</b><small>Talk to our team</small></div></button>
-      <a className="legacy-link" href="/legacy/index.html" title="Return to previous version" aria-label="Return to previous version"><span>S</span></a>
     </div>
   </aside>;
 }
@@ -436,9 +449,122 @@ function ServicePage({ notify }) {
   </div>;
 }
 
+const calendarContent = [
+  {day:2,time:'10:00',title:'Why homeowners delay this decision',format:'Owner video',channel:'TikTok',owner:'Maya',status:'Approved',theme:'Expose the pain'},
+  {day:4,time:'18:30',title:'Three details that change the final result',format:'Carousel',channel:'Instagram',owner:'Noah',status:'Draft',theme:'Educate'},
+  {day:6,time:'12:00',title:'Weekend showroom invitation',format:'Offer video',channel:'Facebook',owner:'Maya',status:'Scheduled',theme:'Visit CTA'},
+  {day:9,time:'09:30',title:'Before and after: small-space upgrade',format:'Transformation',channel:'TikTok',owner:'Liam',status:'In review',theme:'Proof'},
+  {day:11,time:'17:00',title:'Material comparison in 20 seconds',format:'Owner video',channel:'Facebook',owner:'Noah',status:'Approved',theme:'Feature deep dive'},
+  {day:15,time:'11:30',title:'What a complete project really costs',format:'Talking head',channel:'Instagram',owner:'Maya',status:'Draft',theme:'Proof of ROI'},
+  {day:18,time:'19:00',title:'Customer story: from enquiry to install',format:'Testimonial',channel:'TikTok',owner:'Liam',status:'Scheduled',theme:'Proof'},
+  {day:23,time:'10:30',title:'Last slots for the September offer',format:'Offer video',channel:'Facebook',owner:'Maya',status:'Approved',theme:'Direct conversion'},
+  {day:27,time:'16:00',title:'Meet the team behind every project',format:'Behind the scenes',channel:'Instagram',owner:'Noah',status:'Idea',theme:'Trust'}
+];
+
+function MarketingCalendarPage({ setPage, notify }) {
+  const [view, setView] = useState('month');
+  const [selected, setSelected] = useState(calendarContent[0]);
+  const [planning, setPlanning] = useState(false);
+  const generatePlan = () => {
+    setPlanning(true);
+    setTimeout(() => { setPlanning(false); notify('A 4-week content strategy was generated from My Brand.'); }, 900);
+  };
+  const weekThemes = [
+    ['Week 1','Expose the pain','Help local customers recognize the problem'],
+    ['Week 2','Feature deep dive','Turn expertise into useful education'],
+    ['Week 3','Proof of ROI','Show outcomes, proof and customer trust'],
+    ['Week 4','Direct conversion','Create urgency for visits and bookings']
+  ];
+  return <div className="page calendar-page">
+    <PageTitle eyebrow="LITE · CONTENT OPERATIONS" title="Marketing Calendar" copy="Plan one month of local content from your brand assets, then create, assign, approve and publish from one operating view." action={<div className="calendar-actions"><button className="secondary" onClick={() => setPage('brand')}><Buildings/> Review My Brand</button><button className="primary" onClick={generatePlan}>{planning ? <SpinnerGap className="spin"/> : <Strategy/>} Generate 4-week plan</button></div>}/>
+    <section className="strategy-overview">
+      <div className="strategy-title"><span>SEPTEMBER STRATEGY</span><h3>Turn expertise into measurable showroom visits.</h3><p>Built from My Brand, active offers, local market and current publishing capacity.</p></div>
+      <div className="strategy-facts"><div><span>Posting frequency</span><b>10 posts / week</b><small>Optimized</small></div><div><span>Platforms</span><b>Facebook · TikTok · Instagram</b></div><div><span>Goal</span><b>Qualified conversations and visits</b></div><div><span>Media mix</span><b>Video 6 · Image 2 · Carousel 2</b></div></div>
+      <div className="week-theme-row">{weekThemes.map(([week,title,copy],index) => <article key={week}><i>{index+1}</i><div><span>{week}</span><b>{title}</b><small>{copy}</small></div></article>)}</div>
+    </section>
+    <section className="calendar-workspace">
+      <div className="calendar-main">
+        <header><div><button><CaretDown/></button><h3>September 2026</h3><span>9 planned pieces</span></div><div className="view-switch"><button className={view === 'month' ? 'active' : ''} onClick={() => setView('month')}>Month</button><button className={view === 'list' ? 'active' : ''} onClick={() => setView('list')}>List</button></div></header>
+        {view === 'month' ? <><div className="calendar-weekdays">{['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day => <span key={day}>{day}</span>)}</div><div className="calendar-grid">{Array.from({length:35},(_,index) => {const day = index - 1; const items = calendarContent.filter(item => item.day === day); return <div className={`calendar-cell ${day < 1 || day > 30 ? 'muted' : ''}`} key={index}><span>{day > 0 && day <= 30 ? day : day <= 0 ? 31 + day : day - 30}</span>{items.map(item => <button key={item.title} className={`calendar-item ${item.status.toLowerCase().replace(' ','-')}`} onClick={() => setSelected(item)}><i></i><b>{item.title}</b><small>{item.time} · {item.channel}</small></button>)}</div>})}</div></> : <div className="calendar-list">{calendarContent.map(item => <button key={item.title} onClick={() => setSelected(item)}><span>SEP <b>{item.day}</b></span><div><b>{item.title}</b><small>{item.format} · {item.channel} · {item.time}</small></div><em>{item.owner}</em><i>{item.status}</i><ArrowRight/></button>)}</div>}
+      </div>
+      <aside className="calendar-inspector">
+        <span>CONTENT BRIEF</span><h3>{selected.title}</h3><p>{selected.theme} · designed to move a local customer toward a measurable action.</p>
+        <div className="brief-preview"><img src={selected.format.includes('Owner') || selected.format.includes('Talking') ? images.presenter : images.kitchen}/><button><Play weight="fill"/></button></div>
+        <dl><div><dt>Status</dt><dd>{selected.status}</dd></div><div><dt>Owner</dt><dd>{selected.owner}</dd></div><div><dt>Channel</dt><dd>{selected.channel}</dd></div><div><dt>Publish</dt><dd>Sep {selected.day} · {selected.time}</dd></div></dl>
+        <label>Local CTA<select defaultValue="Book a showroom visit"><option>Book a showroom visit</option><option>Start a WhatsApp chat</option><option>Get directions</option></select></label>
+        <button className="primary" onClick={() => setPage('agent')}><Sparkle/> Create this content</button><button className="secondary" onClick={() => notify('Content assigned to the selected employee.')}><Users/> Assign employee</button>
+      </aside>
+    </section>
+  </div>;
+}
+
+function PublishingPage({ notify }) {
+  const [selectedAccounts, setSelectedAccounts] = useState(['fb-madrid','tt-madrid']);
+  const [scheduled, setScheduled] = useState(false);
+  const accounts = [
+    ['fb-madrid','Casa Luma Madrid','Facebook Page',FacebookLogo,'Connected'],
+    ['ig-madrid','@casaluma.madrid','Instagram Business',InstagramLogo,'Connected'],
+    ['tt-madrid','@casaluma_showroom','TikTok Business',TiktokLogo,'Connected'],
+    ['fb-valencia','Casa Luma Valencia','Facebook Page',FacebookLogo,'Reconnect']
+  ];
+  const toggleAccount = id => setSelectedAccounts(items => items.includes(id) ? items.filter(item => item !== id) : [...items,id]);
+  return <div className="page publishing-page">
+    <PageTitle eyebrow="LITE · DISTRIBUTION" title="Publishing" copy="Connect business accounts, prepare platform-specific versions and publish one campaign across multiple stores without sharing passwords." action={<button className="primary" onClick={() => notify('Account connection flow opened.')}><Plus/> Connect account</button>}/>
+    <div className="publishing-layout">
+      <section className="account-panel"><div className="panel-head"><div><h3>Connected accounts</h3><p>Select the accounts used for this campaign.</p></div><button>Manage</button></div><div className="account-list">{accounts.map(([id,name,type,Icon,status]) => <button className={selectedAccounts.includes(id) ? 'selected' : ''} key={id} onClick={() => toggleAccount(id)}><i><Icon/></i><span><b>{name}</b><small>{type}</small></span><em className={status === 'Connected' ? 'ok' : ''}>{status}</em><strong>{selectedAccounts.includes(id) && <Check/>}</strong></button>)}</div><div className="account-note"><ShieldCheck/><span><b>Workspace-owned access</b><small>Employees receive publishing permission without seeing account credentials.</small></span></div></section>
+      <section className="publish-composer"><div className="panel-head"><div><h3>Schedule campaign</h3><p>Platform fields stay editable before publishing.</p></div><span>3 variants</span></div><div className="publish-preview"><img src={images.presenter}/><div><span>VERTICAL VIDEO · 20 SEC</span><h3>Three details that change your renovation result.</h3><p>Visit Casa Luma this weekend for a practical material comparison with our local team.</p><div><b>#MadridInteriors</b><b>#HomeRenovation</b><b>#ShowroomVisit</b></div></div></div><div className="publish-settings"><label>Publish date<input type="date" defaultValue="2026-09-06"/></label><label>Local time<input type="time" defaultValue="18:30"/></label><label>Assigned employee<select defaultValue="Maya Chen"><option>Maya Chen</option><option>Noah Williams</option><option>Liam Garcia</option></select></label></div><div className="platform-checks"><span><FacebookLogo/> Facebook copy ready <CheckCircle weight="fill"/></span><span><InstagramLogo/> Instagram cover ready <CheckCircle weight="fill"/></span><span><TiktokLogo/> TikTok caption ready <CheckCircle weight="fill"/></span></div><button className="publish-button" onClick={() => {setScheduled(true);notify('Campaign scheduled for selected business accounts.');}}>{scheduled ? <><CheckCircle weight="fill"/> Scheduled for Sep 6</> : <><CalendarCheck/> Schedule to {selectedAccounts.length} accounts</>}</button></section>
+      <aside className="publish-queue"><div className="panel-head"><div><h3>Publishing queue</h3><p>Next seven days</p></div></div>{[
+        ['Today · 18:30','Weekend showroom invitation','3 accounts','Ready'],['Sep 9 · 09:30','Before and after reveal','2 accounts','In review'],['Sep 11 · 17:00','Material comparison','3 accounts','Ready']
+      ].map(item => <article key={item[1]}><span>{item[0]}</span><b>{item[1]}</b><small>{item[2]}</small><em>{item[3]}</em></article>)}</aside>
+    </div>
+  </div>;
+}
+
+function TeamPage({ notify }) {
+  const [inviteOpen, setInviteOpen] = useState(false);
+  const team = [
+    ['Maya Chen','Marketing manager','Madrid showroom','24','61','14','$18.20','Admin'],
+    ['Noah Williams','Content creator','Madrid showroom','18','39','8','$22.80','Creator'],
+    ['Liam Garcia','Sales advisor','Valencia showroom','11','32','10','$15.60','Creator'],
+    ['Emma Davis','Store owner','All locations','6','18','7','$12.40','Owner']
+  ];
+  return <div className="page team-page">
+    <PageTitle eyebrow="PRO · TEAM OPERATIONS" title="Team" copy="Give every employee a clear role, publishing access and measurable local-acquisition responsibility." action={<button className="primary" onClick={() => setInviteOpen(true)}><UserPlus/> Add employee</button>}/>
+    <div className="team-kpis"><article><span>Active employees</span><b>4</b><small>2 locations</small></article><article><span>Assigned this week</span><b>15</b><small>12 completed</small></article><article><span>Qualified leads</span><b>150</b><small>Attributed by employee</small></article><article><span>Appointments</span><b>39</b><small>26% lead-to-booking</small></article></div>
+    <section className="team-table"><header><div><h3>Employee acquisition performance</h3><p>Content output is shown beside controllable lead and booking outcomes.</p></div><button><Clock/> Last 30 days</button></header><div className="team-row team-header"><span>Employee</span><span>Published</span><span>Qualified leads</span><span>Appointments</span><span>Cost / lead</span><span>Access</span><span></span></div>{team.map(([name,role,location,published,leads,appointments,cpl,access],index) => <div className="team-row" key={name}><span className="employee-name"><i>{name.split(' ').map(x=>x[0]).join('')}</i><span><b>{name}</b><small>{role} · {location}</small></span></span><span>{published}</span><span><b>{leads}</b></span><span>{appointments}</span><span>{cpl}</span><span><em>{access}</em></span><span><button onClick={() => notify(`${name} performance detail opened.`)}><ArrowRight/></button></span></div>)}</section>
+    <section className="approval-strip"><ShieldCheck/><div><span>APPROVAL WORKFLOW</span><h3>Creators submit. Managers approve. Only approved content can publish.</h3><p>Every edit, assignment and publishing action stays visible in the workspace audit trail.</p></div><button onClick={() => notify('Approval rules opened.')}>Configure rules <ArrowRight/></button></section>
+    {inviteOpen && <div className="brand-modal-backdrop" onMouseDown={() => setInviteOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setInviteOpen(false);notify('Employee invitation sent.');}}><div><span>PRO · TEAM</span><h3>Invite an employee</h3><button type="button" onClick={() => setInviteOpen(false)}><X/></button></div><label>Work email<input placeholder="employee@company.com"/></label><label>Role<select defaultValue="Creator"><option>Creator</option><option>Marketing manager</option><option>Viewer</option></select></label><label>Assigned location<select defaultValue="Madrid showroom"><option>Madrid showroom</option><option>Valencia showroom</option><option>All locations</option></select></label><footer><button type="button" onClick={() => setInviteOpen(false)}>Cancel</button><button className="primary" type="submit">Send invitation</button></footer></form></div>}
+  </div>;
+}
+
+function LeadsPage({ notify }) {
+  const leads = [
+    ['Carla Ruiz','WhatsApp','Material comparison','Maya Chen','Visit booked','Today · 10:42'],
+    ['Mateo Santos','TikTok form','Before & after reveal','Liam Garcia','Qualified','Today · 09:18'],
+    ['Sofia Martin','Facebook message','Weekend showroom offer','Noah Williams','New','Yesterday · 18:07'],
+    ['Daniel Vega','QR code','Owner expert video','Emma Davis','Visited','Yesterday · 16:32']
+  ];
+  return <div className="page leads-page"><PageTitle eyebrow="PLUS · ATTRIBUTION" title="Leads" copy="Connect every customer conversation to the content, account, store and employee that created it." action={<button className="primary" onClick={() => notify('Lead source connection opened.')}><Plus/> Connect lead source</button>}/><div className="lead-funnel">{[['Reach','186K'],['Profile visits','4,820'],['Conversations','426'],['Qualified','184'],['Visits booked','37'],['Sales','12']].map((item,index)=><article key={item[0]}><span>{index+1}</span><div><b>{item[1]}</b><small>{item[0]}</small></div>{index<5&&<ArrowRight/>}</article>)}</div><section className="lead-table"><header><div><h3>Attributed conversations</h3><p>UTM links, WhatsApp entry points, forms, QR codes and CRM outcomes.</p></div><button><Funnel/> Filter</button></header><div className="lead-row lead-header"><span>Customer</span><span>Source</span><span>Content</span><span>Employee</span><span>Status</span><span>Received</span></div>{leads.map(row=><div className="lead-row" key={row[0]}>{row.map((cell,index)=><span key={cell} className={index===4?cell.toLowerCase().replace(' ','-'):''}>{index===0?<b>{cell}</b>:cell}</span>)}</div>)}</section><div className="attribution-note"><Database/><div><b>Attribution confidence: 86%</b><small>Direct links and form IDs are deterministic. View-through and offline sales remain modeled until CRM matching is connected.</small></div><button>Review data quality</button></div></div>;
+}
+
 function MyBrandPage({ product, notify }) {
   const [activeTab, setActiveTab] = useState('overview');
   const [editOpen, setEditOpen] = useState(false);
+  const [socialUrl, setSocialUrl] = useState('');
+  const [importing, setImporting] = useState(false);
+  const [importedSource, setImportedSource] = useState(null);
+  const [brandInfo, setBrandInfo] = useState({ name:'Luma Local', market:'Downtown, USA', languages:'English, Spanish', category:'Local home & lifestyle' });
+  const importSocialProfile = () => {
+    if (!socialUrl.trim()) return notify('Paste a Facebook, Instagram or TikTok profile URL.');
+    setImporting(true);
+    setTimeout(() => {
+      const source = socialUrl.toLowerCase().includes('tiktok') ? 'TikTok' : socialUrl.toLowerCase().includes('instagram') ? 'Instagram' : 'Facebook';
+      setBrandInfo({ name:'Casa Luma Interiors', market:'Madrid, Spain', languages:'Spanish, English', category:'Home renovation showroom' });
+      setImportedSource(source);
+      setImporting(false);
+      notify(`${source} profile analyzed. Brand fields are ready to review.`);
+    }, 850);
+  };
   const tabs = [
     ['overview','Overview'], ['products','Offers'], ['avatars','Avatars'],
     ['voices','Voices'], ['assets','Asset Library'], ['kit','Brand Kit']
@@ -477,9 +603,16 @@ function MyBrandPage({ product, notify }) {
   const assetGrid = <div className="my-brand-asset-grid"><button className="brand-upload" onClick={() => openAdd('Upload assets')}><UploadSimple/><b>Upload brand assets</b><small>Images, video, logos or documents</small></button>{brandAssets.map(([image,name,type]) => <article key={name}><img src={image}/><div><b>{name}</b><small>{type}</small></div></article>)}</div>;
 
   return <div className="page my-brand-page">
+    <section className="brand-import-card">
+      <div className="brand-import-copy"><span>SOCIAL PROFILE IMPORT</span><h2>Build My Brand from what you already publish.</h2><p>Paste a Facebook, Instagram or TikTok business profile. SunADS extracts the business category, market, services, visual style, tone and reusable media for your review.</p><div className="supported-socials"><FacebookLogo/><InstagramLogo/><TiktokLogo/><span>Business profiles</span></div></div>
+      <div className="brand-import-action">
+        <label><LinkSimple/><input value={socialUrl} onChange={event => setSocialUrl(event.target.value)} onKeyDown={event => event.key === 'Enter' && importSocialProfile()} placeholder="Paste a social profile URL"/><button disabled={importing || !socialUrl.trim()} onClick={importSocialProfile}>{importing ? <SpinnerGap className="spin"/> : 'Import profile'}</button></label>
+        {importedSource ? <div className="import-success"><CheckCircle weight="fill"/><div><b>{importedSource} profile imported</b><small>14 posts, 3 offers and a consistent brand tone found.</small></div><button onClick={() => setActiveTab('assets')}>Review assets <ArrowRight/></button></div> : <small>Prototype preview: no login or password is requested.</small>}
+      </div>
+    </section>
     <section className="brand-space-card">
       <div className="brand-space-avatar">LL</div>
-      <div className="brand-space-copy"><span>BRAND WORKSPACE</span><h2>Luma Local Brand Space</h2><p><Users/> 3 team members <i></i><MapPin/> Downtown, USA <i></i><Globe/> English & Spanish</p></div>
+      <div className="brand-space-copy"><span>BRAND WORKSPACE</span><h2>{brandInfo.name} Brand Space</h2><p><Users/> 3 team members <i></i><MapPin/> {brandInfo.market} <i></i><Globe/> {brandInfo.languages}</p></div>
       <button className="brand-edit" onClick={() => setEditOpen(true)}><FileText/> Edit brand info</button>
     </section>
 
@@ -516,7 +649,7 @@ function MyBrandPage({ product, notify }) {
       </>}
     </section>
 
-    {editOpen && <div className="brand-modal-backdrop" onMouseDown={() => setEditOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setEditOpen(false);notify('Brand information saved.');}}><div><span>MY BRAND</span><h3>Edit brand information</h3><button type="button" onClick={() => setEditOpen(false)}><X/></button></div><label>Brand name<input defaultValue="Luma Local"/></label><label>Primary market<input defaultValue="Downtown, USA"/></label><label>Languages<input defaultValue="English, Spanish"/></label><label>Primary conversion goal<input defaultValue="Book a visit or appointment on WhatsApp"/></label><footer><button type="button" onClick={() => setEditOpen(false)}>Cancel</button><button className="primary" type="submit">Save brand</button></footer></form></div>}
+    {editOpen && <div className="brand-modal-backdrop" onMouseDown={() => setEditOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setEditOpen(false);notify('Brand information saved.');}}><div><span>MY BRAND</span><h3>Edit brand information</h3><button type="button" onClick={() => setEditOpen(false)}><X/></button></div><label>Brand name<input value={brandInfo.name} onChange={event => setBrandInfo({...brandInfo,name:event.target.value})}/></label><label>Primary market<input value={brandInfo.market} onChange={event => setBrandInfo({...brandInfo,market:event.target.value})}/></label><label>Languages<input value={brandInfo.languages} onChange={event => setBrandInfo({...brandInfo,languages:event.target.value})}/></label><label>Business category<input value={brandInfo.category} onChange={event => setBrandInfo({...brandInfo,category:event.target.value})}/></label><label>Primary conversion goal<input defaultValue="Book a visit or appointment on WhatsApp"/></label><footer><button type="button" onClick={() => setEditOpen(false)}>Cancel</button><button className="primary" type="submit">Save brand</button></footer></form></div>}
   </div>;
 }
 
@@ -535,7 +668,10 @@ function SimplePage({ page, product, setPage }) {
 
 export function App() {
   const [page, setPage] = useState('home');
-  const [menuExpanded, setMenuExpanded] = useState(true);
+  const [menuPinned, setMenuPinned] = useState(true);
+  const [menuHovered, setMenuHovered] = useState(false);
+  const menuExpanded = menuPinned || menuHovered;
+  const [tier, setTier] = useState(() => window.localStorage.getItem('sunads-tier') || 'lite');
   const [theme, setTheme] = useState(() => {
     const saved = window.localStorage.getItem('sunads-theme');
     if (saved === 'light' || saved === 'dark') return saved;
@@ -549,6 +685,7 @@ export function App() {
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem('sunads-theme', theme);
   }, [theme]);
+  useEffect(() => { window.localStorage.setItem('sunads-tier', tier); }, [tier]);
   const notify = message => { setNotice(typeof message === 'string' ? message : 'Updated.'); setTimeout(() => setNotice(''), 2600); };
   const content = useMemo(() => {
     if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify}/>;
@@ -557,9 +694,13 @@ export function App() {
     if (page === 'canvas') return <CanvasPage notify={notify} template={canvasTemplate}/>;
     if (page === 'avatars') return <AvatarsPage notify={notify}/>;
     if (page === 'brand') return <MyBrandPage product={product} notify={notify}/>;
+    if (page === 'calendar') return <MarketingCalendarPage setPage={setPage} notify={notify}/>;
+    if (page === 'publishing') return <PublishingPage notify={notify}/>;
+    if (page === 'team') return <TeamPage notify={notify}/>;
     if (page === 'performance') return <PerformancePage notify={notify}/>;
+    if (page === 'leads') return <LeadsPage notify={notify}/>;
     if (page === 'service') return <ServicePage notify={notify}/>;
     return <SimplePage page={page} product={product} setPage={setPage}/>;
   }, [page, product, canvasTemplate]);
-  return <div className={`app-shell ${menuExpanded ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} setExpanded={setMenuExpanded} theme={theme} setTheme={setTheme}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
+  return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
