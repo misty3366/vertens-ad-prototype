@@ -100,10 +100,10 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
       </div>)}
     </nav>
     <div className="sidebar-footer">
+      <button className="help"><span>?</span><div><b>Need help?</b><small>Talk to our team</small></div></button>
       <button className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
         <span>{theme === 'dark' ? <Sun size={17}/> : <Moon size={17}/>}</span>
       </button>
-      <button className="help"><span>?</span><div><b>Need help?</b><small>Talk to our team</small></div></button>
     </div>
   </aside>;
 }
