@@ -69,3 +69,168 @@
 .industry-filter button.active svg{color:#1769ff}
 .template-library-meta{margin-top:20px}
 @media(max-width:1100px){.getting-started-title{min-height:58px;height:auto}}
+
+/* Global type scale, theme switch and high-contrast Recreate workspace */
+:root{
+  --surface:#fff;
+  --surface-soft:#f6f7f9;
+  --surface-raised:#fff;
+  --text:#111318;
+  --text-muted:#69717c;
+  --line:#e1e5ea;
+  --blue:#1769ff;
+  --type-meta:12px;
+  --type-control:13px;
+  --type-body:14px;
+}
+html[data-theme="dark"]{
+  --surface:#0d1014;
+  --surface-soft:#15191f;
+  --surface-raised:#171b21;
+  --text:#f4f6f8;
+  --text-muted:#a9b0ba;
+  --line:#2b3139;
+}
+body{font-size:var(--type-body);line-height:1.45;background:var(--surface);color:var(--text);transition:background-color .2s ease,color .2s ease}
+button,input,textarea,select{font-size:var(--type-control)!important}
+p{font-size:var(--type-body)!important}
+small,label{font-size:var(--type-meta)!important;line-height:1.4}
+.nav-group>span,.nav-group button i,.mvp-badge,.step-label,.page-title>div>span,
+.getting-started-title>div>span,.getting-started-title>b,.product-ready small,.product-ready span,
+.simple-preview-meta small,.template-categories button span,.template-library-meta span,.template-library-meta p,
+.template-model,.template-card-copy>span,.template-card-copy>small,.template-empty p,
+.template-preview-input span,.template-preview-label small,.template-flow-node span,.template-flow-node small,
+.template-input-panel>span,.or-divider span,.template-upload small,.template-generate span,
+.flow-node span,.flow-node small,.canvas-toolbar small,.canvas-tag,.canvas-help p,
+.actor-grid>button>div>span,.actor-grid small,.actor-grid p,.kpi-grid span,.kpi-grid small,
+.my-brand-asset-grid small,.brand-kit-grid>article>span,.brand-palette i,.brand-modal>div:first-child>span{
+  font-size:var(--type-meta)!important;
+  line-height:1.4;
+}
+.nav-group button b,.help b,.credits,.primary,.secondary,.simple-primary,.simple-picks button,
+.simple-link-input input,.template-categories button,.templates-toolbar input,.template-recreate,
+.template-modal-tabs button,.template-modal-actions button,.autofill-brand,.template-input-panel select,
+.template-generate,.template-readonly,.template-readonly>button,.template-flow-node b,
+.template-preview-input b,.template-preview-label b,.template-upload b,.tool-library b,.tool-library small,
+.prompt-chips button,.agent-composer textarea,.agent-composer>div>button:first-child,.agent-composer>div>span,
+.result-preview button,.followup input,.canvas-toolbar label input,.canvas-toolbar label button,
+.flow-node b,.canvas-help b,.avatar-methods span,.avatar-methods p,.avatar-methods b,
+.filter-chips button,.clone-modal>span,.clone-modal>p,.clone-grid>button b,.clone-grid>button small,
+.clone-grid>div>b,.clone-grid p,.brand-modal label,.brand-modal input,.brand-modal footer>button:first-child{
+  font-size:var(--type-control)!important;
+  line-height:1.4;
+}
+.page-title p,.simple-step-body>p,.agent-empty>p,.message.ai p,.library-head p,
+.template-card-copy>b,.simple-entry-grid>button>b,.simple-preview-meta b,.product-ready strong{
+  font-size:var(--type-body)!important;
+}
+
+.theme-toggle{height:54px;flex:0 0 54px;border:1px solid #e4e7eb;background:#fafbfc;border-radius:12px;display:flex;align-items:center;gap:9px;padding:8px;color:#4f5660;text-align:left;transition:.18s}
+.theme-toggle:hover{border-color:#b9d2ff;background:#f2f6ff;color:#1769ff}
+.theme-toggle>span{width:34px;height:34px;border-radius:10px;background:#eaf1ff;color:#1769ff;display:grid;place-items:center;flex:0 0 34px}
+.theme-toggle b,.theme-toggle small{display:block;white-space:nowrap}
+.theme-toggle b{font-size:13px}.theme-toggle small{color:#8a919b;margin-top:2px}
+.sidebar.expanded .sidebar-footer{display:grid;grid-template-columns:1fr 44px}
+.sidebar.expanded .theme-toggle{grid-column:1/-1;width:100%}
+.sidebar:not(.expanded) .theme-toggle{width:100%;justify-content:center;padding:8px}
+.sidebar:not(.expanded) .theme-toggle>div{display:none}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .app-shell,
+html[data-theme="dark"] .app-shell>main,
+html[data-theme="dark"] .page{background:var(--surface);color:var(--text)}
+html[data-theme="dark"] .sidebar{background:#111419;border-color:var(--line)}
+html[data-theme="dark"] .logo strong,
+html[data-theme="dark"] .page-title h2,
+html[data-theme="dark"] .getting-started-title h2,
+html[data-theme="dark"] .simple-step-head>b,
+html[data-theme="dark"] .template-library-meta h3,
+html[data-theme="dark"] .template-card-copy>b,
+html[data-theme="dark"] .library-head h3,
+html[data-theme="dark"] .my-brand-page h3{color:var(--text)}
+html[data-theme="dark"] .nav-group button{color:#b6bdc7}
+html[data-theme="dark"] .nav-group button:hover{background:#1a2027;color:#fff}
+html[data-theme="dark"] .nav-group button.active{background:#172b4e;color:#6ea5ff}
+html[data-theme="dark"] .sidebar-toggle,
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .help,
+html[data-theme="dark"] .legacy-link{background:#171b21;border-color:var(--line);color:#e8ebef}
+html[data-theme="dark"] .theme-toggle>span{background:#1a3158;color:#7daeff}
+html[data-theme="dark"] .theme-toggle:hover,
+html[data-theme="dark"] .legacy-link:hover{background:#1b2636;border-color:#3f6ba8}
+html[data-theme="dark"] :is(
+  .simple-start-card,.simple-step-head,.simple-link-input,.simple-picks button,.simple-entry-grid>button,
+  .simple-preview,.onboarding-card,.mvp-path,.path-grid button,.agent-layout,.agent-workspace,.agent-composer,
+  .agent-composer>div>button:first-child,.prompt-chips button,.tool-library,.result-preview,.result-preview button,.followup,
+  .canvas-toolbar,.flow-node,.canvas-palette,.canvas-help,.avatar-methods>button,.library-head label,.filter-chips button,
+  .actor-grid>button>div,.clone-modal,.clone-grid>div,.kpi-grid article,.performance-card,.performance-grid article,
+  .service-card,.service-sample,.project-grid article,.asset-grid article,.add-asset,.channel-grid article,
+  .brand-space,.brand-stats article,.brand-panel,.my-brand-product-grid article,.my-brand-avatar-grid article,
+  .my-brand-asset-grid article,.brand-kit-grid>article,.brand-kit-grid>article>button,.brand-modal,
+  .templates-toolbar>label,.template-empty
+){background:var(--surface-raised)!important;border-color:var(--line)!important;color:var(--text)!important}
+html[data-theme="dark"] :is(input,textarea,select){background:#11151a;color:#eef1f5;border-color:var(--line)}
+html[data-theme="dark"] :is(input,textarea)::placeholder{color:#78808b}
+html[data-theme="dark"] .simple-preview-frame{background:#20262e}
+html[data-theme="dark"] .simple-step-head>svg,
+html[data-theme="dark"] .actor-grid>button{color:var(--text)}
+html[data-theme="dark"] .template-categories button{color:#aab1bb}
+html[data-theme="dark"] .template-categories button:hover{background:#1c2128;color:#fff}
+html[data-theme="dark"] .template-categories button.active{background:#eef2f7;color:#111318}
+html[data-theme="dark"] .industry-filter button{background:#151a20;border-color:#2b323b;color:#b7bec8}
+html[data-theme="dark"] .industry-filter button.active{background:#172b4e;border-color:#4a88e8;color:#75aaff;box-shadow:none}
+html[data-theme="dark"] .simple-primary{background:#f2f4f7;color:#111318}
+html[data-theme="dark"] .simple-primary:hover{background:#dfe4ea}
+html[data-theme="dark"] .simple-primary:disabled{background:#2a3038;color:#6f7884}
+html[data-theme="dark"] .modal-scrim,
+html[data-theme="dark"] .brand-modal-backdrop{background:rgba(0,0,0,.66)}
+
+/* Recreate remains a white creation workspace in both themes. */
+.template-modal{background:#fff;color:#17191d;border-color:#dfe3e8;box-shadow:0 35px 120px rgba(0,0,0,.28)}
+.template-modal>header{background:#fff;border-color:#e2e5e9}
+.template-modal>header h3{color:#17191d}
+.template-modal-tabs{background:#f1f3f6}
+.template-modal-tabs button{color:#6f7680}
+.template-modal-tabs button.active{background:#fff;color:#111318;box-shadow:0 1px 5px rgba(15,23,42,.12)}
+.template-modal-actions button{color:#545b65}
+.template-modal-actions button:hover{background:#f2f4f6}
+.template-modal-actions button:last-child{border-left-color:#e2e5e9}
+.template-stage{background:#f3f5f7}
+.template-stage.preview>video{background:#e6e9ed}
+.template-preview-input,.template-preview-label{background:rgba(255,255,255,.95);border-color:#d8dde4;color:#17191d;box-shadow:0 16px 42px rgba(29,42,62,.14)}
+.template-preview-input span,.template-preview-label small{color:#727a85}
+.template-stage.workflow .react-flow{background:#f3f5f7}
+.template-stage.workflow .react-flow__controls{background:#fff!important;border-color:#d6dce3!important}
+.template-stage.workflow .react-flow__controls-button{background:#fff!important;color:#252a31!important;border-color:#e5e8ec!important}
+.template-flow-node,.template-flow-node.analysis,.template-flow-node.generation,.template-flow-node.output{background:#fff;color:#17191d;box-shadow:0 13px 32px rgba(24,38,57,.1)}
+.template-flow-node{border-color:#b8c7db}.template-flow-node.analysis{border-color:#c9b7df}.template-flow-node.generation{border-color:#a7d1c4}.template-flow-node.output{border-color:#afd0b6}
+.template-flow-node small{color:#68717d}
+.template-readonly{background:rgba(255,255,255,.96);border-color:#d7dce3;color:#6c7480;box-shadow:0 12px 32px rgba(24,38,57,.12)}
+.template-readonly>button{background:#111318;color:#fff}
+.template-input-panel{background:#fff;border-left-color:#e2e5e9;color:#17191d}
+.template-input-panel>h3,.template-input-panel>label{color:#17191d}
+.autofill-brand{background:#f0f3f6;color:#17191d;border:1px solid #e0e4e9}
+.or-divider i{background:#e2e6eb}.or-divider span{color:#7a828d}
+.template-upload{background:#fafbfc;color:#17191d;border-color:#cdd4dc}
+.template-upload small{color:#747d88}
+.template-input-panel select{background:#fff;color:#17191d;border-color:#d9dee5}
+.template-generate{box-shadow:0 -10px 24px rgba(255,255,255,.95)}
+
+/* Final legibility pass: no product copy below 12px. */
+.legacy-link>span,.simple-step-head>span,.simple-preview-meta>span,
+.project-grid b,.asset-grid b,.channel-grid b,.add-asset b,
+.brand-space-copy>span,.my-brand-product-grid span,.brand-kit-summary>b,.brand-colors>span,.brand-people-summary>b,
+.agent-credit span,.model-control span,.agent-route-note,.inspiration-grid span,
+.service-hero>span,.sample-stack>span,.sample-grid b,.sample-grid span,
+.chart-y span,.chart-x span,.data-sources b,.data-sources strong,
+.brand-kit-summary b,.brand-people-summary b,.service-hero span,
+.insight-card span,.creative-table span,.creative-name b,.creative-table strong,
+.react-flow__attribution{
+  font-size:12px!important;
+  line-height:1.35;
+}
+html[data-theme="dark"] .template-input-panel select{
+  background:#fff!important;
+  color:#17191d!important;
+  border-color:#d9dee5!important;
+}

@@ -1,10 +1,10 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight, Article, Baby, Barbell, Bed, BookOpen, BookmarkSimple, Buildings, Camera, Car, ChartLineUp, Check, CheckCircle,
   CaretDown, CaretUp, CirclesFour, Clock, Code, Copy, CursorClick, Database, DotsThree,
   Coffee, Confetti, Eye, FacebookLogo, FileText, Fire, FolderSimple, ForkKnife, Globe, GraduationCap, Heart, Heartbeat, House, Image as ImageIcon,
   InstagramLogo, LinkSimple, MagicWand, MagnifyingGlass, MapPin, Microphone,
-  Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle,
+  Moon, Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle, Sun,
   SpinnerGap, Storefront, Target, TiktokLogo, TrendUp, UploadSimple,
   SidebarSimple, TShirt, UserCircle, Users, VideoCamera, WhatsappLogo, X
 } from '@phosphor-icons/react';
@@ -72,7 +72,7 @@ function Logo() {
   return <div className="logo"><span className="logo-sun">S</span><strong>SunADS</strong></div>;
 }
 
-function Sidebar({ page, setPage, expanded, setExpanded }) {
+function Sidebar({ page, setPage, expanded, setExpanded, theme, setTheme }) {
   return <aside className={`sidebar ${expanded ? 'expanded' : ''}`}>
     <Logo />
     <button className="sidebar-toggle" aria-label={expanded ? 'Collapse menu' : 'Expand menu'} title={expanded ? 'Collapse menu' : 'Expand menu'} onClick={() => setExpanded(!expanded)}><SidebarSimple size={19}/></button>
@@ -86,6 +86,9 @@ function Sidebar({ page, setPage, expanded, setExpanded }) {
       </div>)}
     </nav>
     <div className="sidebar-footer">
+      <button className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+        <span>{theme === 'dark' ? <Sun size={18}/> : <Moon size={18}/>}</span><div><b>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</b><small>Appearance</small></div>
+      </button>
       <button className="help"><span>?</span><div><b>Need help?</b><small>Talk to our team</small></div></button>
       <a className="legacy-link" href="/legacy/index.html" title="Return to previous version" aria-label="Return to previous version"><span>S</span></a>
     </div>
@@ -533,9 +536,19 @@ function SimplePage({ page, product, setPage }) {
 export function App() {
   const [page, setPage] = useState('home');
   const [menuExpanded, setMenuExpanded] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    const saved = window.localStorage.getItem('sunads-theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
   const [product, setProduct] = useState(null);
   const [canvasTemplate, setCanvasTemplate] = useState(null);
   const [notice, setNotice] = useState('');
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem('sunads-theme', theme);
+  }, [theme]);
   const notify = message => { setNotice(typeof message === 'string' ? message : 'Updated.'); setTimeout(() => setNotice(''), 2600); };
   const content = useMemo(() => {
     if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify}/>;
@@ -548,5 +561,5 @@ export function App() {
     if (page === 'service') return <ServicePage notify={notify}/>;
     return <SimplePage page={page} product={product} setPage={setPage}/>;
   }, [page, product, canvasTemplate]);
-  return <div className={`app-shell ${menuExpanded ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} setExpanded={setMenuExpanded}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
+  return <div className={`app-shell ${menuExpanded ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} setExpanded={setMenuExpanded} theme={theme} setTheme={setTheme}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
