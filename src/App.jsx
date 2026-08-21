@@ -29,7 +29,7 @@ const navigation = [
   { section: 'workspace', items: [
     ['home', 'Home', House, 'lite'], ['projects', 'Projects', FolderSimple, 'lite'],
     ['brand', 'My Brand', Buildings, 'lite'], ['assets', 'Assets', Package, 'lite'],
-    ['team', 'Users', Users, 'pro']
+    ['team', 'Team', Users, 'pro']
   ]},
   { section: 'create', items: [
     ['agent', 'AI Agent', Sparkle, 'lite'], ['templates', 'Templates', Article, 'lite'], ['canvas', 'Viral Canvas', ShareNetwork, 'lite'],
@@ -47,12 +47,12 @@ const navigation = [
 const uiCopy = {
   en: {
     sections:{workspace:'Workspace',create:'Create',operate:'Operate',growth:'Growth'},
-    nav:{home:'Home',projects:'Projects',brand:'My Brand',assets:'Assets',team:'Users',agent:'AI Agent',templates:'Templates',canvas:'Viral Canvas',avatars:'AI Avatars',service:'Human Admaker',calendar:'Marketing Calendar',publishing:'Publishing',channels:'Social Accounts',performance:'Performance',leads:'Leads'},
+    nav:{home:'Home',projects:'Projects',brand:'My Brand',assets:'Assets',team:'Team',agent:'AI Agent',templates:'Templates',canvas:'Viral Canvas',avatars:'AI Avatars',service:'Human Admaker',calendar:'Marketing Calendar',publishing:'Publishing',channels:'Social Accounts',performance:'Performance',leads:'Leads'},
     account:{help:'Help center',theme:'Appearance',language:'Language',usage:'Usage',logout:'Log out',remaining:'91% remaining'}
   },
   zh: {
     sections:{workspace:'工作台',create:'创作',operate:'运营',growth:'增长'},
-    nav:{home:'首页',projects:'项目',brand:'我的品牌',assets:'素材',team:'用户',agent:'AI 智能体',templates:'爆款模板',canvas:'爆款画布',avatars:'数字人',service:'人工广告服务',calendar:'营销日历',publishing:'发布',channels:'社媒账号',performance:'效果分析',leads:'线索'},
+    nav:{home:'首页',projects:'项目',brand:'我的品牌',assets:'素材',team:'团队',agent:'AI 智能体',templates:'爆款模板',canvas:'爆款画布',avatars:'数字人',service:'人工广告服务',calendar:'营销日历',publishing:'发布',channels:'社媒账号',performance:'效果分析',leads:'线索'},
     account:{help:'帮助中心',theme:'显示模式',language:'语言',usage:'使用情况',logout:'退出登录',remaining:'剩余 91%'}
   }
 };
@@ -158,6 +158,17 @@ function PageTitle({ eyebrow, title, copy, action }) {
   </div>;
 }
 
+function AvatarEntryDialog({ language, onClose, onClone, onCustom }) {
+  const zh = language === 'zh';
+  return <div className="avatar-entry-scrim" onMouseDown={onClose}><section className="avatar-entry-modal" onMouseDown={event=>event.stopPropagation()}>
+    <header><div><span>{zh?'创建数字人':'CREATE AVATAR'}</span><h3>{zh?'选择你的数字人创建方式':'How would you like to start?'}</h3><p>{zh?'克隆本人建立长期信任，或使用现成角色快速开始。':'Clone yourself for lasting trust, or customize a ready AI presenter.'}</p></div><button onClick={onClose}><X/></button></header>
+    <div className="avatar-entry-options">
+      <button className="avatar-entry-clone" onClick={onClone}><div><span>{zh?'你的核心资产':'YOUR STRONGEST ASSET'}</span><h4>{zh?'克隆自己':'Clone yourself'}</h4><p>{zh?'录制一次，长期生成保留本人形象与声音的门店广告。':'Record once. Keep your face and voice across every owner-led ad.'}</p><b>{zh?'开始克隆':'Start cloning'}<ArrowRight/></b></div><img src={images.presenter}/></button>
+      <button className="avatar-entry-custom" onClick={onCustom}><div><span>{zh?'最快开始':'FASTEST START'}</span><h4>{zh?'自定义数字人':'Custom avatar'}</h4><p>{zh?'从角色库选择形象，再按行业、市场和广告风格进行定制。':'Choose a ready presenter, then customize it for your market and ad style.'}</p><b>{zh?'选择数字人':'Customize avatar'}<ArrowRight/></b></div><img src={images.sofia}/></button>
+    </div>
+  </section></div>;
+}
+
 function ProfilePage({ tier, language }) {
   const zh = language === 'zh';
   return <div className="page profile-page">
@@ -170,27 +181,34 @@ function ProfilePage({ tier, language }) {
   </div>;
 }
 
-function HomePage({ product, setProduct, setPage, notify, language, startAvatarWizard }) {
+function HomePage({ product, setProduct, setPage, notify, language, startAvatarWizard, personalAvatars, setSelectedAvatar, startBrandImport }) {
   const zh = language === 'zh';
+  const [brandProfileUrl, setBrandProfileUrl] = useState('');
+  const [avatarEntryOpen, setAvatarEntryOpen] = useState(false);
   const steps = [
     [VideoCamera,zh?'录制 20 秒':'Record 20 seconds',zh?'用手机自然口播一次':'Speak naturally once'],
     [UserCircle,zh?'生成老板分身':'Create your clone',zh?'保留你的形象与声音':'Keep your face and voice'],
     [UploadSimple,zh?'选择店内实拍':'Pick store footage',zh?'产品、空间与服务过程':'Products, space and service'],
     [Sparkle,zh?'批量生成广告':'Generate a batch',zh?'口播与实拍自动混剪':'Owner voice + real footage']
   ];
-  const cases = [
-    [images.presenter,zh?'老板讲本周主推':'Owner explains the weekly product',zh?'老板口播 + 产品实拍':'Owner avatar + product footage','18s'],
-    [images.kitchen,zh?'材料差异怎么选':'How to choose between materials',zh?'老板声纹 + 展厅细节':'Owner voice + showroom details','22s'],
-    [images.patio,zh?'改造前后案例':'Before-and-after customer story',zh?'老板解说 + 项目实拍':'Owner narration + project footage','20s']
-  ];
+  const createWithAvatar = avatar => {
+    setSelectedAvatar(avatar);
+    setPage('agent');
+    notify(zh?`已选择 ${avatar.name}，可以开始制作短视频。`:`${avatar.name} selected. Start creating your video.`);
+  };
   return <div className="page home-page">
     <section className="owner-ad-hero">
       <div className="owner-ad-copy"><span>{zh?'老板口播广告':'OWNER-LED ADS'}</span><h1>{zh?'老板只录一次，门店广告持续更新。':'Record once. Keep your store ads running.'}</h1><p>{zh?'用你的数字分身讲清产品，再把店内实拍自动混剪成一批适合 Facebook、Instagram 和 TikTok 的短视频。':'Your avatar explains the product. VertensAI mixes it with real store footage and creates a batch for Facebook, Instagram and TikTok.'}</p><div><button className="primary" onClick={startAvatarWizard}><VideoCamera/>{zh?'录制我的 20 秒':'Record my 20 seconds'}</button><button className="secondary" onClick={()=>setPage('agent')}><Play/>{zh?'查看口播案例':'See owner-led examples'}</button></div></div>
       <div className="owner-ad-visual"><article className="owner-card"><img src={images.presenter}/><span>{zh?'你的数字分身':'YOUR AVATAR'}</span><i><Play weight="fill"/></i></article><article className="store-card"><img src={images.kitchen}/><span>{zh?'店内真实素材':'REAL STORE FOOTAGE'}</span></article><div className="owner-ad-output"><Sparkle weight="fill"/><b>{zh?'已生成 8 条广告':'8 ads ready'}</b><small>{zh?'口播 + 实拍混剪':'Avatar + real footage'}</small></div></div>
     </section>
     <section className="owner-ad-steps">{steps.map(([Icon,title,copy],index)=><article key={title}><i>{index+1}</i><Icon/><div><b>{title}</b><small>{copy}</small></div>{index<steps.length-1&&<ArrowRight/>}</article>)}</section>
-    <section className="owner-cases"><header><div><span>{zh?'口播案例':'OWNER-LED EXAMPLES'}</span><h2>{zh?'老板口播负责信任，实拍负责证明。':'Your voice builds trust. Real footage proves it.'}</h2></div><button onClick={()=>setPage('templates')}>{zh?'查看全部模板':'View all templates'}<ArrowRight/></button></header><div>{cases.map(([image,title,copy,duration])=><article key={title}><div><img src={image}/><button><Play weight="fill"/></button><span>{duration}</span></div><b>{title}</b><small>{copy}</small></article>)}</div>
+    <section className="personal-avatars"><header><div><span>{zh?'我的数字人':'MY AVATARS'}</span><h2>{zh?'你的专属数字人':'Your personal avatars'}</h2><p>{zh?'选择一个数字人，直接开始制作老板口播短视频。':'Choose an avatar and create an owner-led video.'}</p></div><button onClick={()=>setAvatarEntryOpen(true)}><Plus/>{zh?'创建新数字人':'Create new avatar'}</button></header><div className="personal-avatar-grid">{personalAvatars.map(avatar=><article key={avatar.id} className="personal-avatar-card"><div className="personal-avatar-media"><img src={avatar.image}/><span><CheckCircle weight="fill"/>{zh?'可使用':'Ready'}</span></div><div className="personal-avatar-info"><div><b>{avatar.name}</b><small>{avatar.role}</small><p>{avatar.locale}</p></div><button className="primary" onClick={()=>createWithAvatar(avatar)}><VideoCamera/>{zh?'创建短视频':'Create video'}<ArrowRight/></button></div></article>)}<button className="personal-avatar-add" onClick={()=>setAvatarEntryOpen(true)}><span><Plus/></span><b>{zh?'创建另一个数字人':'Create another avatar'}</b><small>{zh?'克隆自己或自定义角色':'Clone yourself or customize a presenter'}</small></button></div>
     </section>
+    <section className="home-brand-import">
+      <div className="home-brand-copy"><span>{zh?'导入品牌':'IMPORT YOUR BRAND'}</span><h2>{zh?'让 VertensAI 知道该讲什么。':'Give your avatar something worth saying.'}</h2><p>{zh?'粘贴企业社媒主页，我们会提取品牌、产品与内容风格，并生成首月营销日历。':'Paste a business profile. VertensAI turns it into a brand profile and a ready-to-use 30-day marketing calendar.'}</p><div className="home-brand-platforms"><FacebookLogo/><InstagramLogo/><TiktokLogo/><small>{zh?'支持企业主页':'Business profiles'}</small></div><label><LinkSimple/><input value={brandProfileUrl} onChange={event=>setBrandProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&startBrandImport(brandProfileUrl)} placeholder={zh?'粘贴 Facebook、Instagram 或 TikTok 主页链接':'Paste a Facebook, Instagram or TikTok profile URL'}/><button className="primary" disabled={!brandProfileUrl.trim()} onClick={()=>startBrandImport(brandProfileUrl)}>{zh?'分析品牌':'Analyze brand'}<ArrowRight/></button></label><button className="home-brand-manual" onClick={()=>startBrandImport('')}>{zh?'或进入我的品牌手动填写':'Or set up My Brand manually'}<ArrowRight/></button></div>
+      <div className="home-brand-result"><header><span>{zh?'导入后自动生成':'CREATED AUTOMATICALLY'}</span><b>{zh?'品牌资料 + 30 天内容计划':'Brand profile + 30-day plan'}</b></header><div><article><i><Buildings/></i><span><b>{zh?'品牌资料':'My Brand'}</b><small>{zh?'产品、市场、语气':'Products, market, voice'}</small></span><CheckCircle weight="fill"/></article><article><i><Strategy/></i><span><b>{zh?'内容主题':'Content angles'}</b><small>{zh?'口播、实拍、案例':'Owner, proof, stories'}</small></span><CheckCircle weight="fill"/></article><article><i><CalendarCheck/></i><span><b>{zh?'营销日历':'Marketing calendar'}</b><small>{zh?'首月内容可直接生产':'First month ready to create'}</small></span><CheckCircle weight="fill"/></article></div><footer><div><span>01</span><span>02</span><span>03</span><span>04</span></div><small>{zh?'每周一个清晰的增长主题':'One clear growth theme per week'}</small></footer></div>
+    </section>
+    {avatarEntryOpen&&<AvatarEntryDialog language={language} onClose={()=>setAvatarEntryOpen(false)} onClone={()=>{setAvatarEntryOpen(false);startAvatarWizard();}} onCustom={()=>{setAvatarEntryOpen(false);setPage('avatars');}}/>}
   </div>;
 }
 
@@ -222,7 +240,6 @@ function AgentPage({ product, setPage, notify, language, selectedAvatar, setSele
       return;
     }
     setView('chat');
-    notify(zh?'创作任务已开始。':'Creative task started.');
   };
   const examples = [
     {type:'video',label:'OWNER-LED VIDEO',title:'Turn the owner into a trusted local expert',copy:'A 20-second vertical ad with one clear booking or store-visit CTA.',image:images.presenter,prompt:'Create a 20-second owner-led video for my local business product with a clear booking CTA.'},
@@ -283,7 +300,6 @@ function AgentPage({ product, setPage, notify, language, selectedAvatar, setSele
           <button className="creative-send" disabled={!prompt.trim()} onClick={send}><ArrowRight/></button>
         </div>
       </div>
-      <div className="agent-route-note">{destination === 'chat' ? (zh?'提交后进入项目对话。':'Submit to start a project creative task.') : (zh?'提交后直接进入爆款画布。':'Submit to open the brief directly in Viral Canvas.')}</div>
     </section>
     <section className="agent-inspiration">
       <div className="recommended-title"><div><span>{zh?'推荐模板':'RECOMMENDED TEMPLATES'}</span><h3>{zh?'从验证过的创意方向开始':'Start from a proven creative direction'}</h3></div><button onClick={()=>setPage('templates')}>{zh?'更多模板':'More templates'}<ArrowRight/></button></div>
@@ -327,7 +343,6 @@ const templateNodeTypes = { templateFlow: TemplateFlowNode };
 
 function TemplatesPage({ setPage, setCanvasTemplate, notify, language }) {
   const zh = language === 'zh';
-  const [category, setCategory] = useState('All');
   const [industry, setIndustry] = useState('All industries');
   const [query, setQuery] = useState('');
   const [saved, setSaved] = useState(['restaurant-dish','beauty-transform','building-proof']);
@@ -339,13 +354,11 @@ function TemplatesPage({ setPage, setCanvasTemplate, notify, language }) {
   const [analysisReady, setAnalysisReady] = useState(false);
   const [rewrite, setRewrite] = useState('A local-store version that opens with a sharp problem, proves the result in one scene, and ends with a direct visit CTA.');
   const [customTemplates, setCustomTemplates] = useState([]);
-  const categories = ['All','Essentials','UGC Ads','Animated Ads','Product Demos','Before & After','Saved'];
   const allTemplates = [...customTemplates, ...templateCatalog];
   const visibleTemplates = allTemplates.filter(item => {
-    const matchesCategory = category === 'All' || (category === 'Saved' ? saved.includes(item.id) : item.category === category);
     const matchesIndustry = industry === 'All industries' || item.industry === industry;
     const matchesSearch = `${item.title} ${item.category} ${item.industry} ${item.theme}`.toLowerCase().includes(query.toLowerCase());
-    return matchesCategory && matchesIndustry && matchesSearch;
+    return matchesIndustry && matchesSearch;
   });
   const openTemplate = (item, mode = 'preview') => { setSelected(item); setModalMode(mode); setAutofilled(false); };
   const toggleSaved = id => setSaved(items => items.includes(id) ? items.filter(item => item !== id) : [...items,id]);
@@ -358,7 +371,6 @@ function TemplatesPage({ setPage, setCanvasTemplate, notify, language }) {
     const custom = {id:`custom-${Date.now()}`,title:zh?'我的爆款复刻模板':'My viral rewrite',industry:'Custom',category:'UGC Ads',image:images.presenter,video:'/assets/sample-owner-story.mp4',views:'NEW',uses:'1',duration:'20s',model:'Custom',theme:rewrite,character:'Your selected avatar'};
     setCustomTemplates(items => [custom,...items]);
     setSaved(items => [custom.id,...items]);
-    setCategory('Saved');
     setAnalysisReady(false);
     setVideoUrl('');
     notify(zh?'已保存为自定义模板。':'Saved as a custom template.');
@@ -383,12 +395,10 @@ function TemplatesPage({ setPage, setCanvasTemplate, notify, language }) {
   ].map(([source,target],index) => ({id:`tw${index}`,source,target,type:'smoothstep',animated:true,style:{stroke:'#5b8fff',strokeWidth:1.4}}));
 
   return <div className="page templates-page">
-    <section className="viral-link-analyzer">
+    <div className="templates-toolbar templates-head-row">
+      <h2>{zh?'爆款模板':'Templates'}</h2>
       <div className="viral-link-input"><span><LinkSimple/><b>{zh?'链接生成模板':'Link to template'}</b></span><label><input value={videoUrl} onChange={event => setVideoUrl(event.target.value)} placeholder={zh?'粘贴 TikTok、Instagram 或 Facebook 短视频链接':'Paste a TikTok, Instagram or Facebook video link'}/><button disabled={!videoUrl.trim()||analyzing} onClick={analyzeVideo}>{analyzing?<SpinnerGap className="spin"/>:<MagicWand/>}{zh?'分析':'Analyze'}</button></label></div>
-    </section>
-    <div className="templates-toolbar">
-      <div className="template-categories"><h2>Templates</h2>{categories.map(item => <button key={item} className={category === item ? 'active' : ''} onClick={() => setCategory(item)}>{item}{item === 'Saved' && <span>{saved.length}</span>}</button>)}</div>
-      <label><MagnifyingGlass/><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search templates"/></label>
+      <label className="template-search"><MagnifyingGlass/><input value={query} onChange={event => setQuery(event.target.value)} placeholder={zh?'搜索模板':'Search templates'}/></label>
     </div>
     <div className="industry-filter" aria-label="Industry template filters">{industryFilters.map(([name,Icon]) => <button key={name} className={industry === name ? 'active' : ''} onClick={() => setIndustry(name)}><Icon/>{name}</button>)}</div>
     <div className="template-library-meta"><div><span>LOCAL BUSINESS TEMPLATE LIBRARY</span><h3>{industry === 'All industries' ? 'Proven store-visit structures across 16 industries' : `${industry} templates`}</h3></div><p>{visibleTemplates.length} templates · Click any image to preview</p></div>
@@ -398,7 +408,7 @@ function TemplatesPage({ setPage, setCanvasTemplate, notify, language }) {
       </div>
       <div className="template-card-copy"><b>{item.title}</b><span><Eye/> {item.views} views <i>·</i> <Fire/> {item.uses} uses <i>·</i> Demo</span><small>{item.industry} · {item.duration} · {item.category}</small></div>
     </article>)}</div>
-    {!visibleTemplates.length && <div className="template-empty"><MagnifyingGlass/><h3>No matching templates</h3><p>Try another search, industry or format.</p><button onClick={() => {setCategory('All');setIndustry('All industries');setQuery('');}}>Show all templates</button></div>}
+    {!visibleTemplates.length && <div className="template-empty"><MagnifyingGlass/><h3>No matching templates</h3><p>Try another search or industry.</p><button onClick={() => {setIndustry('All industries');setQuery('');}}>Show all templates</button></div>}
 
     {analysisReady && <div className="viral-analysis-scrim" onMouseDown={() => setAnalysisReady(false)}><section className="viral-analysis-modal" onMouseDown={event => event.stopPropagation()}>
       <header><div><span>{zh?'爆款结构分析':'VIRAL STRUCTURE'}</span><h3>{zh?'改写成你的门店模板':'Rewrite it for your store'}</h3></div><button onClick={() => setAnalysisReady(false)}><X/></button></header>
@@ -457,29 +467,37 @@ function CanvasPage({ template, theme }) {
   </div>;
 }
 
-function AvatarsPage({ notify, setPage, language, selectedAvatar, setSelectedAvatar, wizardOpen, closeWizard }) {
+function AvatarsPage({ notify, setPage, language, selectedAvatar, setSelectedAvatar, wizardOpen, closeWizard, onAvatarCreated }) {
   const zh = language === 'zh';
   const [query, setQuery] = useState('');
   const [cloneOpen, setCloneOpen] = useState(false);
   const [wizardStep, setWizardStep] = useState(1);
+  const libraryRef = useRef(null);
   useEffect(() => { if (wizardOpen) { setCloneOpen(true); setWizardStep(1); closeWizard?.(); } }, [wizardOpen, closeWizard]);
   const filtered = actors.filter(a => a.join(' ').toLowerCase().includes(query.toLowerCase()));
   const selectActor = ([name,role,locale,image]) => { setSelectedAvatar({name,role,locale,image}); notify(zh?`已选择数字人 ${name}`:`${name} selected. Opening Agent.`); setPage('agent'); };
-  const finishOwner = () => { const owner={name:'Your owner clone',role:'Verified business owner',locale:'English · Spanish',image:images.presenter}; setSelectedAvatar(owner); setCloneOpen(false); setWizardStep(1); notify(zh?'数字人已通过验证，可以使用。':'Owner avatar verified and ready.'); setPage('agent'); };
+  const finishOwner = () => {
+    const owner={id:`owner-${Date.now()}`,name:zh?'我的老板数字人':'My owner avatar',role:zh?'门店老板分身':'Store owner clone',locale:zh?'中文 · 英语':'English · Chinese',image:images.presenter};
+    setSelectedAvatar(owner);
+    onAvatarCreated?.(owner);
+    setCloneOpen(false);
+    setWizardStep(1);
+    notify(zh?'数字人创建成功，已加入首页。':'Your avatar is ready and has been added to Home.');
+    setPage('home');
+  };
   return <div className="page avatars-page">
-    <PageTitle eyebrow={zh?'数字人库':'PRESENTER LIBRARY'} title={zh?'让可信的人出现在每条广告里':'Put a trusted face in every ad'} copy={zh?'选择现成演员，或克隆老板本人。':'Choose a ready actor or clone the business owner.'} action={<button className="primary" onClick={() => {setCloneOpen(true);setWizardStep(1);}}><Plus/> {zh?'克隆老板':'Clone the owner'}</button>}/>
+    <PageTitle eyebrow={zh?'数字人':'AI AVATARS'} title={zh?'选择你的数字人创建方式':'Choose how to create your avatar'} copy={zh?'克隆本人建立长期信任，或自定义一个现成数字人快速开始。':'Clone yourself for lasting trust, or customize a ready presenter for a faster start.'}/>
     <div className="avatar-methods">
-      <button onClick={() => setCloneOpen(true)}><div><span>YOUR STRONGEST ASSET</span><h3>Clone the store owner</h3><p>Record once. Create owner-led videos in multiple languages while keeping consent and brand control.</p><b>Start owner clone <ArrowRight/></b></div><img src={images.presenter}/></button>
-      <button><div><span>FASTEST START</span><h3>Choose an AI actor</h3><p>Use a ready presenter matched to your industry, market and ad style.</p><b>Browse 40+ actors <ArrowRight/></b></div><img src={images.sofia}/></button>
+      <button onClick={() => {setCloneOpen(true);setWizardStep(1);}}><div><span>{zh?'你的核心资产':'YOUR STRONGEST ASSET'}</span><h3>{zh?'克隆自己':'Clone yourself'}</h3><p>{zh?'录制一次，持续生成保留本人形象与声音的多语言门店广告。':'Record once. Create owner-led videos in multiple languages with your face and voice.'}</p><b>{zh?'开始克隆':'Start cloning'} <ArrowRight/></b></div><img src={images.presenter}/></button>
+      <button onClick={()=>libraryRef.current?.scrollIntoView({behavior:'smooth',block:'start'})}><div><span>{zh?'最快开始':'FASTEST START'}</span><h3>{zh?'自定义数字人':'Custom avatar'}</h3><p>{zh?'从角色库选择形象，再按行业、市场和广告风格进行定制。':'Choose a ready presenter, then customize it for your industry, market and ad style.'}</p><b>{zh?'自定义数字人':'Customize avatar'} <ArrowRight/></b></div><img src={images.sofia}/></button>
     </div>
-    <div className="library-head"><div><h3>AI actors</h3><p>Realistic presenters for paid and organic content</p></div><label><MagnifyingGlass/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search actors, language, role"/></label></div>
-    <div className="filter-chips"><button className="active">All actors</button><button>English</button><button>Spanish</button><button>Local business</button><button>Saved</button></div>
+    <div className="library-head" ref={libraryRef}><div><h3>{zh?'自定义数字人':'Custom avatar library'}</h3><p>{zh?'选择形象，并用于广告和自然内容。':'Choose a presenter for paid and organic content.'}</p></div><label><MagnifyingGlass/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={zh?'搜索形象、语言或角色':'Search avatars, language or role'}/></label></div>
+    <div className="filter-chips"><button className="active">{zh?'全部数字人':'All avatars'}</button><button>English</button><button>Spanish</button><button>{zh?'本地门店':'Local business'}</button><button>{zh?'已收藏':'Saved'}</button></div>
     <div className="actor-grid">{filtered.map((actor, i) => {const [name,role,locale,image]=actor;return <button className={selectedAvatar?.name === name ? 'selected' : ''} key={`${name}-${i}`} onClick={() => selectActor(actor)}><div><img src={image}/>{selectedAvatar?.name === name && <i><Check/></i>}<span>{i < 3 ? 'POPULAR' : 'HD'}</span></div><b>{name}</b><small>{role}</small><p>{locale}</p></button>;})}</div>
-    {cloneOpen && <div className="modal-scrim" onMouseDown={()=>setCloneOpen(false)}><div className="clone-modal avatar-wizard" onMouseDown={event=>event.stopPropagation()}><button className="modal-close" onClick={() => setCloneOpen(false)}><X/></button><span>{zh?'老板数字人':'OWNER AVATAR'}</span><h2>{zh?'20 秒创建你的老板分身':'Create your owner avatar in 20 seconds'}</h2><div className="wizard-progress">{[1,2,3,4].map(step=><i key={step} className={wizardStep>=step?'active':''}>{wizardStep>step?<Check/>:step}</i>)}</div>
+    {cloneOpen && <div className="modal-scrim" onMouseDown={()=>setCloneOpen(false)}><div className="clone-modal avatar-wizard" onMouseDown={event=>event.stopPropagation()}><button className="modal-close" onClick={() => setCloneOpen(false)}><X/></button><span>{zh?'老板数字人':'OWNER AVATAR'}</span><h2>{zh?'20 秒创建你的老板分身':'Create your owner avatar in 20 seconds'}</h2><div className="wizard-progress">{[1,2,3].map(step=><i key={step} className={wizardStep>=step?'active':''}>{wizardStep>step?<Check/>:step}</i>)}</div>
       {wizardStep===1&&<section className="wizard-panel"><ShieldCheck/><h3>{zh?'授权形象与声纹使用':'Consent and usage rights'}</h3><p>{zh?'仅用于当前工作区生成广告。你可以随时停用或删除。':'Used only for ads in this workspace. You can disable or delete it at any time.'}</p><label><input type="checkbox" defaultChecked/>{zh?'我确认本人授权，并同意形象与声音用于内容生成。':'I confirm consent to use my face and voice for generated content.'}</label><button className="primary" onClick={()=>setWizardStep(2)}>{zh?'同意并继续':'Agree and continue'}<ArrowRight/></button></section>}
       {wizardStep===2&&<section className="wizard-panel"><VideoCamera/><h3>{zh?'录制或上传素材':'Record or upload'}</h3><p>{zh?'自然看向镜头说 20 秒，光线均匀，声音清晰。':'Look at the camera and speak naturally for 20 seconds.'}</p><div className="wizard-actions"><button onClick={()=>setWizardStep(3)}><Camera/><b>{zh?'开始录制':'Start recording'}</b></button><button onClick={()=>setWizardStep(3)}><UploadSimple/><b>{zh?'上传视频':'Upload video'}</b></button></div></section>}
-      {wizardStep===3&&<section className="wizard-panel generating"><SpinnerGap className="spin"/><h3>{zh?'正在生成数字人':'Generating your avatar'}</h3><p>{zh?'提取形象、表情和声纹，并创建可重复使用的数字分身。':'Building a reusable face, motion and voice profile.'}</p><button className="primary" onClick={()=>setWizardStep(4)}>{zh?'生成完成，去验证':'Avatar ready · verify identity'}<ArrowRight/></button></section>}
-      {wizardStep===4&&<section className="wizard-panel"><Globe/><h3>{zh?'Google 人脸验证':'Google face verification'}</h3><p>{zh?'使用 Google 安全验证确认本人身份，验证后数字人才可启用。':'Confirm the owner identity with Google verification before activation.'}</p><button className="google-verify" onClick={finishOwner}><b>G</b>{zh?'使用 Google 验证并启用':'Verify with Google and activate'}</button></section>}
+      {wizardStep===3&&<section className="wizard-panel generating"><SpinnerGap className="spin"/><h3>{zh?'数字人已生成':'Your avatar is ready'}</h3><p>{zh?'形象、表情和声纹已创建，可立即用于老板口播短视频。':'Your reusable face, motion and voice profile is ready for owner-led videos.'}</p><button className="primary" onClick={finishOwner}>{zh?'完成并返回首页':'Finish and view my avatar'}<ArrowRight/></button></section>}
     </div></div>}
   </div>;
 }
@@ -637,18 +655,66 @@ function SocialAccountsPage({ notify, language }) {
 
 function TeamPage({ notify, language }) {
   const zh = language === 'zh';
-  const [inviteOpen, setInviteOpen] = useState(false);
-  const team = [
-    ['Maya Chen','Marketing manager','Madrid showroom','24','61','14','$18.20','Admin',[[FacebookLogo,'Casa Luma Madrid'],[InstagramLogo,'@casaluma.madrid']]],
-    ['Noah Williams','Content creator','Madrid showroom','18','39','8','$22.80','Creator',[[TiktokLogo,'@casaluma.video']]],
-    ['Liam Garcia','Sales advisor','Valencia showroom','11','32','10','$15.60','Creator',[[FacebookLogo,'Casa Luma Valencia']]],
-    ['Emma Davis','Store owner','All locations','6','18','7','$12.40','Owner',[[InstagramLogo,'@casaluma.owner'],[TiktokLogo,'@emma.local']]]
-  ];
+  const [createMode, setCreateMode] = useState(null);
+  const [editingUser, setEditingUser] = useState(null);
+  const [selectedShop, setSelectedShop] = useState('madrid');
+  const [shops, setShops] = useState([
+    {id:'madrid',name:'Casa Luma Madrid',city:'Madrid',members:[
+      {id:'maya',name:'Maya Chen',email:'maya@vertens.ai',role:'Marketing manager',published:'24',leads:'61',appointments:'14',access:'Admin',accounts:[[FacebookLogo,'Casa Luma Madrid'],[InstagramLogo,'@casaluma.madrid']]},
+      {id:'noah',name:'Noah Williams',email:'noah@vertens.ai',role:'Content creator',published:'18',leads:'39',appointments:'8',access:'Creator',accounts:[[TiktokLogo,'@casaluma.video']]}
+    ]},
+    {id:'valencia',name:'Casa Luma Valencia',city:'Valencia',members:[
+      {id:'liam',name:'Liam Garcia',email:'liam@vertens.ai',role:'Sales advisor',published:'11',leads:'32',appointments:'10',access:'Creator',accounts:[[FacebookLogo,'Casa Luma Valencia']]},
+      {id:'emma',name:'Emma Davis',email:'emma@vertens.ai',role:'Store owner',published:'6',leads:'18',appointments:'7',access:'Owner',accounts:[[InstagramLogo,'@casaluma.owner'],[TiktokLogo,'@emma.local']]}
+    ]}
+  ]);
+  const activeShop = shops.find(shop => shop.id === selectedShop) || shops[0];
+  const allMembers = shops.flatMap(shop => shop.members.map(member => ({...member,shopId:shop.id,shopName:shop.name})));
+  const openMember = (member, shop) => setEditingUser({...member,shopId:shop.id,shopName:shop.name,accounts:[...member.accounts]});
+  const saveMember = () => {
+    setShops(current => current.map(shop => {
+      const members = shop.members.filter(member => member.id !== editingUser.id);
+      return shop.id === editingUser.shopId ? {...shop,members:[...members,{...editingUser,shopId:undefined,shopName:undefined}]} : {...shop,members};
+    }));
+    notify(zh?'成员资料和账号绑定已保存。':'Member details and connected accounts saved.');
+    setEditingUser(null);
+  };
+  const createShop = event => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get('shopName') || '').trim();
+    if (!name) return;
+    const id = `shop-${Date.now()}`;
+    setShops(current => [...current,{id,name,city:String(data.get('city') || ''),members:[]}]);
+    setSelectedShop(id); setCreateMode(null);
+    notify(zh?'门店已创建。':'Shop created.');
+  };
+  const createMember = event => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const shopId = String(data.get('shopId') || selectedShop);
+    const name = String(data.get('name') || '').trim();
+    if (!name) return;
+    const email = String(data.get('email') || `${name.toLowerCase().replace(/\s+/g,'.')}@vertens.ai`);
+    const member = {id:`member-${Date.now()}`,name,email,role:String(data.get('role') || 'Content creator'),published:'0',leads:'0',appointments:'0',access:String(data.get('access') || 'Creator'),accounts:[]};
+    setShops(current => current.map(shop => shop.id === shopId ? {...shop,members:[...shop.members,member]} : shop));
+    setSelectedShop(shopId); setCreateMode(null);
+    notify(zh?'成员账号已创建，可直接登录。':'Member account created and ready to sign in.');
+  };
   return <div className="page team-page">
-    <PageTitle eyebrow="PRO · USER OPERATIONS" title={zh?'用户':'Users'} copy={zh?'管理角色、绑定账号和获客绩效。':'Manage roles, connected accounts and local-acquisition performance.'} action={<button className="primary" onClick={() => setInviteOpen(true)}><UserPlus/> {zh?'添加用户':'Add user'}</button>}/>
-    <div className="team-kpis"><article><span>{zh?'活跃用户':'Active users'}</span><b>4</b><small>2 locations</small></article><article><span>{zh?'本周发布':'Published this week'}</span><b>15</b><small>12 completed</small></article><article><span>{zh?'有效线索':'Qualified leads'}</span><b>150</b><small>{zh?'按用户归因':'Attributed by user'}</small></article><article><span>{zh?'预约':'Appointments'}</span><b>39</b><small>26% lead-to-booking</small></article></div>
-    <section className="team-table"><header><div><h3>{zh?'用户与绑定账号':'Users and connected accounts'}</h3><p>{zh?'管理员可以直接向每个用户绑定的账号发布。':'Admins can publish directly to any connected user account.'}</p></div><button><Clock/> {zh?'近 30 天':'Last 30 days'}</button></header><div className="team-row team-header"><span>{zh?'用户':'User'}</span><span>{zh?'绑定账号':'Connected accounts'}</span><span>{zh?'发布':'Published'}</span><span>{zh?'有效线索':'Qualified leads'}</span><span>{zh?'预约':'Appointments'}</span><span>{zh?'权限':'Access'}</span><span></span></div>{team.map(([name,role,location,published,leads,appointments,cpl,access,accounts]) => <div className="team-row" key={name}><span className="employee-name"><i>{name.split(' ').map(x=>x[0]).join('')}</i><span><b>{name}</b><small>{role} · {location}</small></span></span><span className="user-accounts">{accounts.map(([Icon,handle])=><small key={handle}><Icon/>{handle}</small>)}</span><span>{published}</span><span><b>{leads}</b></span><span>{appointments}</span><span><em>{access}</em></span><span><button className="user-publish" onClick={() => notify(zh?`已选择 ${name} 的发布账号。`:`${name}'s accounts selected for publishing.`)}><Broadcast/>{zh?'发布':'Publish'}</button></span></div>)}</section>
-    {inviteOpen && <div className="brand-modal-backdrop" onMouseDown={() => setInviteOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setInviteOpen(false);notify(zh?'用户邀请已发送。':'User invitation sent.');}}><div><span>PRO · USERS</span><h3>{zh?'邀请用户':'Invite a user'}</h3><button type="button" onClick={() => setInviteOpen(false)}><X/></button></div><label>{zh?'工作邮箱':'Work email'}<input placeholder="user@company.com"/></label><label>{zh?'角色':'Role'}<select defaultValue="Creator"><option>Creator</option><option>Marketing manager</option><option>Viewer</option></select></label><label>{zh?'分配门店':'Assigned location'}<select defaultValue="Madrid showroom"><option>Madrid showroom</option><option>Valencia showroom</option><option>All locations</option></select></label><footer><button type="button" onClick={() => setInviteOpen(false)}>{zh?'取消':'Cancel'}</button><button className="primary" type="submit">{zh?'发送邀请':'Send invitation'}</button></footer></form></div>}
+    <PageTitle eyebrow="PRO · TEAM OPERATIONS" title={zh?'团队':'Team'} copy={zh?'按门店管理成员、登录账号、社媒绑定和获客绩效。':'Manage shops, member logins, connected social accounts and acquisition performance.'} action={<div className="team-title-actions"><button className="secondary" onClick={() => setCreateMode('shop')}><Storefront/> {zh?'新增门店':'Add shop'}</button><button className="primary" onClick={() => setCreateMode('member')}><UserPlus/> {zh?'新增成员':'Add member'}</button></div>}/>
+    <div className="team-kpis"><article><span>{zh?'门店':'Shops'}</span><b>{shops.length}</b><small>{zh?'组织节点':'Organization nodes'}</small></article><article><span>{zh?'团队成员':'Team members'}</span><b>{allMembers.length}</b><small>{zh?'创建后可直接登录':'Ready to sign in'}</small></article><article><span>{zh?'有效线索':'Qualified leads'}</span><b>{allMembers.reduce((sum,member)=>sum+Number(member.leads),0)}</b><small>{zh?'按成员归因':'Attributed by member'}</small></article><article><span>{zh?'绑定账号':'Connected accounts'}</span><b>{allMembers.reduce((sum,member)=>sum+member.accounts.length,0)}</b><small>Facebook · Instagram · TikTok</small></article></div>
+    <section className="team-org-shell">
+      <aside className="org-tree"><header><div><span>{zh?'组织架构':'ORGANIZATION'}</span><h3>{zh?'门店':'Shops'}</h3></div><button onClick={() => setCreateMode('shop')} aria-label={zh?'新增门店':'Add shop'}><Plus/></button></header><div className="org-root"><b><Buildings/>{zh?'全部门店':'All shops'}</b><small>{shops.length} {zh?'家门店':'shops'}</small></div>{shops.map(shop => <section key={shop.id} className={selectedShop===shop.id?'active':''}><button className="org-shop" onClick={() => setSelectedShop(shop.id)}><Storefront/><span><b>{shop.name}</b><small>{shop.city}</small></span></button></section>)}</aside>
+      <div className="shop-team-card"><header><div><span>{zh?'当前门店':'SELECTED SHOP'}</span><h3>{activeShop?.name}</h3><p><MapPin/>{activeShop?.city} · {activeShop?.members.length || 0} {zh?'位成员':'members'}</p></div><button className="secondary" onClick={()=>setCreateMode('member')}><UserPlus/>{zh?'新增成员':'Add member'}</button></header><div className="shop-member-head"><span>{zh?'成员':'Member'}</span><span>{zh?'绑定账号':'Connected accounts'}</span><span>{zh?'发布':'Published'}</span><span>{zh?'有效线索':'Leads'}</span><span>{zh?'权限':'Access'}</span><span></span></div>{activeShop?.members.map(member=><div className="shop-member-row" key={member.id} role="button" tabIndex="0" onClick={()=>openMember(member,activeShop)} onKeyDown={event=>event.key==='Enter'&&openMember(member,activeShop)}><span className="employee-name"><i>{member.name.split(' ').map(x=>x[0]).join('')}</i><span><b>{member.name}</b><small>{member.role} · {member.email}</small></span></span><span className="user-accounts">{member.accounts.length?member.accounts.map(([Icon,handle])=><small key={handle}><Icon/>{handle}</small>):<em>{zh?'未绑定':'Not connected'}</em>}</span><span>{member.published}</span><span><b>{member.leads}</b></span><span><em>{member.access}</em></span><span><button className="user-publish" disabled={!member.accounts.length} onClick={event=>{event.stopPropagation();notify(zh?`已选择 ${member.name} 的账号。`:`${member.name}'s account selected.`);}}><Broadcast/></button></span></div>)}</div>
+    </section>
+    {editingUser && <div className="user-detail-scrim" onMouseDown={() => setEditingUser(null)}><section className="user-detail-modal" onMouseDown={event => event.stopPropagation()}>
+      <header><div className="user-detail-identity"><i>{editingUser.name.split(' ').map(x=>x[0]).join('')}</i><span><small>{zh?'成员详情':'MEMBER DETAILS'}</small><h3>{editingUser.name}</h3><p>{editingUser.email}</p></span></div><button aria-label="Close" onClick={() => setEditingUser(null)}><X/></button></header>
+      <div className="user-detail-fields"><label>{zh?'姓名':'Name'}<input value={editingUser.name} onChange={event => setEditingUser(user => ({...user,name:event.target.value}))}/></label><label>{zh?'登录邮箱':'Login email'}<input value={editingUser.email} onChange={event => setEditingUser(user => ({...user,email:event.target.value}))}/></label><label>{zh?'角色':'Role'}<select value={editingUser.role} onChange={event => setEditingUser(user => ({...user,role:event.target.value}))}><option>Marketing manager</option><option>Content creator</option><option>Sales advisor</option><option>Store owner</option></select></label><label>{zh?'门店':'Shop'}<select value={editingUser.shopId} onChange={event => setEditingUser(user => ({...user,shopId:event.target.value}))}>{shops.map(shop=><option key={shop.id} value={shop.id}>{shop.name}</option>)}</select></label><label>{zh?'权限':'Access'}<select value={editingUser.access} onChange={event => setEditingUser(user => ({...user,access:event.target.value}))}><option>Admin</option><option>Creator</option><option>Owner</option><option>Viewer</option></select></label><label>{zh?'登录状态':'Login status'}<input value={zh?'可直接登录':'Ready to sign in'} readOnly/></label></div>
+      <div className="user-account-editor"><div><span><small>{zh?'绑定账号':'CONNECTED ACCOUNTS'}</small><h4>{zh?'编辑该成员的发布账号':'Manage publishing accounts'}</h4></span><b>{editingUser.accounts.length}</b></div><div className="user-account-list">{editingUser.accounts.map(([Icon,handle],index)=><article key={`${handle}-${index}`}><i><Icon/></i><span><b>{handle}</b><small>{zh?'已授权发布':'Publishing connected'}</small></span><button onClick={() => setEditingUser(user => ({...user,accounts:user.accounts.filter((_,itemIndex) => itemIndex !== index)}))}>{zh?'解绑':'Remove'}</button></article>)}</div><div className="bind-account-actions"><span>{zh?'绑定新账号':'Bind another account'}</span><button onClick={() => setEditingUser(user => ({...user,accounts:[...user.accounts,[FacebookLogo,'New Facebook Page']]}))}><FacebookLogo/>Facebook</button><button onClick={() => setEditingUser(user => ({...user,accounts:[...user.accounts,[InstagramLogo,'@new.instagram']]}))}><InstagramLogo/>Instagram</button><button onClick={() => setEditingUser(user => ({...user,accounts:[...user.accounts,[TiktokLogo,'@new.tiktok']]}))}><TiktokLogo/>TikTok</button></div></div>
+      <footer><button className="secondary" onClick={() => setEditingUser(null)}>{zh?'取消':'Cancel'}</button><button className="primary" onClick={saveMember}>{zh?'保存修改':'Save changes'}</button></footer>
+    </section></div>}
+    {createMode && <div className="brand-modal-backdrop" onMouseDown={() => setCreateMode(null)}><form className="brand-modal team-create-modal" onMouseDown={event => event.stopPropagation()} onSubmit={createMode==='shop'?createShop:createMember}><div><span>PRO · TEAM</span><h3>{createMode==='shop'?(zh?'新增门店':'Add a shop'):(zh?'新增成员':'Add a member')}</h3><button type="button" onClick={() => setCreateMode(null)}><X/></button></div>{createMode==='shop'?<><label>{zh?'门店名称':'Shop name'}<input name="shopName" required placeholder={zh?'例如：广州天河店':'e.g. Downtown showroom'}/></label><label>{zh?'城市 / 区域':'City / market'}<input name="city" required placeholder={zh?'广州':'Madrid'}/></label></>:<><label>{zh?'姓名':'Name'}<input name="name" required placeholder="Alex Morgan"/></label><label>{zh?'登录邮箱':'Login email'}<input name="email" type="email" required placeholder="alex@vertens.ai"/></label><label>{zh?'角色':'Role'}<select name="role" defaultValue="Content creator"><option>Content creator</option><option>Marketing manager</option><option>Sales advisor</option><option>Store owner</option></select></label><label>{zh?'所属门店':'Shop'}<select name="shopId" defaultValue={selectedShop}>{shops.map(shop=><option key={shop.id} value={shop.id}>{shop.name}</option>)}</select></label><label>{zh?'权限':'Access'}<select name="access" defaultValue="Creator"><option>Creator</option><option>Admin</option><option>Owner</option><option>Viewer</option></select></label><div className="login-ready-note"><CheckCircle weight="fill"/><span><b>{zh?'创建后可直接登录':'Ready to sign in after creation'}</b><small>{zh?'系统直接创建账号，不发送邀请。':'The account is created immediately. No invitation step.'}</small></span></div></>}<footer><button type="button" onClick={() => setCreateMode(null)}>{zh?'取消':'Cancel'}</button><button className="primary" type="submit">{createMode==='shop'?(zh?'创建门店':'Create shop'):(zh?'创建成员账号':'Create member account')}</button></footer></form></div>}
   </div>;
 }
 
@@ -662,7 +728,7 @@ function LeadsPage({ notify }) {
   return <div className="page leads-page"><PageTitle eyebrow="PLUS · ATTRIBUTION" title="Leads" copy="Connect every customer conversation to the content, account, store and employee that created it." action={<button className="primary" onClick={() => notify('Lead source connection opened.')}><Plus/> Connect lead source</button>}/><div className="lead-funnel">{[['Reach','186K'],['Profile visits','4,820'],['Conversations','426'],['Qualified','184'],['Visits booked','37'],['Sales','12']].map((item,index)=><article key={item[0]}><span>{index+1}</span><div><b>{item[1]}</b><small>{item[0]}</small></div>{index<5&&<ArrowRight/>}</article>)}</div><section className="lead-table"><header><div><h3>Attributed conversations</h3><p>UTM links, WhatsApp entry points, forms, QR codes and CRM outcomes.</p></div><button><Funnel/> Filter</button></header><div className="lead-row lead-header"><span>Customer</span><span>Source</span><span>Content</span><span>Employee</span><span>Status</span><span>Received</span></div>{leads.map(row=><div className="lead-row" key={row[0]}>{row.map((cell,index)=><span key={cell} className={index===4?cell.toLowerCase().replace(' ','-'):''}>{index===0?<b>{cell}</b>:cell}</span>)}</div>)}</section><div className="attribution-note"><Database/><div><b>Attribution confidence: 86%</b><small>Direct links and form IDs are deterministic. View-through and offline sales remain modeled until CRM matching is connected.</small></div><button>Review data quality</button></div></div>;
 }
 
-function MyBrandPage({ product, notify, language, setPage }) {
+function MyBrandPage({ product, notify, language, setPage, importRequest, onImportRequestHandled }) {
   const zh = language === 'zh';
   const [activeTab, setActiveTab] = useState('overview');
   const [editOpen, setEditOpen] = useState(false);
@@ -671,6 +737,13 @@ function MyBrandPage({ product, notify, language, setPage }) {
   const [importing, setImporting] = useState(false);
   const [importedSource, setImportedSource] = useState(null);
   const [brandInfo, setBrandInfo] = useState({ name:'Luma Local', market:'Downtown, USA', languages:'English, Spanish', category:'Local home & lifestyle' });
+  useEffect(() => {
+    if (!importRequest) return;
+    setSocialUrl(importRequest.url || '');
+    setImportedSource(null);
+    setImportOpen(true);
+    onImportRequestHandled?.();
+  }, [importRequest]);
   const importSocialProfile = () => {
     if (!socialUrl.trim()) return notify('Paste a Facebook, Instagram or TikTok profile URL.');
     setImporting(true);
@@ -842,7 +915,11 @@ export function App() {
   const [publishAsset, setPublishAsset] = useState(null);
   const [canvasTemplate, setCanvasTemplate] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [personalAvatars, setPersonalAvatars] = useState([
+    {id:'owner-demo',name:'Wen · Owner Avatar',role:'Store owner clone',locale:'English · Chinese',image:images.presenter}
+  ]);
   const [avatarWizardOpen, setAvatarWizardOpen] = useState(false);
+  const [brandImportRequest, setBrandImportRequest] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
   const [agentDraft, setAgentDraft] = useState('');
   const [notice, setNotice] = useState('');
@@ -855,15 +932,17 @@ export function App() {
   useEffect(() => { window.localStorage.setItem('sunads-language', language); document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'; }, [language]);
   const notify = message => { setNotice(typeof message === 'string' ? message : 'Updated.'); setTimeout(() => setNotice(''), 2600); };
   const startAvatarWizard = () => { setAvatarWizardOpen(true); setPage('avatars'); };
+  const startBrandImport = url => { setBrandImportRequest({ id: Date.now(), url: url?.trim() || '' }); setPage('brand'); };
+  const addPersonalAvatar = avatar => setPersonalAvatars(current => current.some(item => item.id === avatar.id) ? current : [avatar, ...current]);
   const openAgentWithDraft = draft => { setAgentDraft(draft || ''); setActiveProject(null); setPage('agent'); };
   const content = useMemo(() => {
-    if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify} language={language} startAvatarWizard={startAvatarWizard}/>;
+    if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify} language={language} startAvatarWizard={startAvatarWizard} personalAvatars={personalAvatars} setSelectedAvatar={setSelectedAvatar} startBrandImport={startBrandImport}/>;
     if (page === 'profile') return <ProfilePage tier={tier} language={language}/>;
     if (page === 'agent') return <AgentPage product={product} setPage={setPage} notify={notify} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} activeProject={activeProject} setActiveProject={setActiveProject} initialDraft={agentDraft} clearInitialDraft={() => setAgentDraft('')}/>;
     if (page === 'templates') return <TemplatesPage setPage={setPage} setCanvasTemplate={setCanvasTemplate} notify={notify} language={language}/>;
     if (page === 'canvas') return <CanvasPage template={canvasTemplate} theme={theme}/>;
-    if (page === 'avatars') return <AvatarsPage notify={notify} setPage={setPage} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} wizardOpen={avatarWizardOpen} closeWizard={() => setAvatarWizardOpen(false)}/>;
-    if (page === 'brand') return <MyBrandPage product={product} notify={notify} language={language} setPage={setPage}/>;
+    if (page === 'avatars') return <AvatarsPage notify={notify} setPage={setPage} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} wizardOpen={avatarWizardOpen} closeWizard={() => setAvatarWizardOpen(false)} onAvatarCreated={addPersonalAvatar}/>;
+    if (page === 'brand') return <MyBrandPage product={product} notify={notify} language={language} setPage={setPage} importRequest={brandImportRequest} onImportRequestHandled={() => setBrandImportRequest(null)}/>;
     if (page === 'calendar') return <MarketingCalendarPage setPage={setPage} notify={notify} language={language} openAgentWithDraft={openAgentWithDraft}/>;
     if (page === 'publishing') return <PublishingPage notify={notify} publishAsset={publishAsset} setPublishAsset={setPublishAsset} setPage={setPage} language={language}/>;
     if (page === 'channels') return <SocialAccountsPage notify={notify} language={language}/>;
@@ -873,6 +952,6 @@ export function App() {
     if (page === 'leads') return <LeadsPage notify={notify}/>;
     if (page === 'service') return <ServicePage notify={notify} language={language}/>;
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
-  }, [page, product, canvasTemplate, language, publishAsset, theme, selectedAvatar, avatarWizardOpen, activeProject, agentDraft]);
+  }, [page, product, canvasTemplate, language, publishAsset, theme, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest]);
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
