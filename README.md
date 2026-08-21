@@ -1,6 +1,6 @@
-# SunADS
+# VertensAI
 
-SunADS is an interactive product prototype for AI-powered local-store marketing. It helps offline businesses recreate winning ads, localize the offer, generate image and video variants, and learn which creatives produce visits, bookings and qualified conversations.
+VertensAI is an interactive product prototype for AI-powered local-store marketing. It helps offline businesses recreate winning ads, localize the offer, generate image and video variants, and learn which creatives produce visits, bookings and qualified conversations.
 
 ## Product modules
 
