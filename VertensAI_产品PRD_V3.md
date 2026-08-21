@@ -98,7 +98,6 @@ Performance / Leads 识别有效内容、账号、门店与成员
 - Templates
 - Viral Canvas
 - AI Avatars
-- Human Admaker
 - Marketing Calendar
 - Publishing
 - Social Accounts
@@ -148,8 +147,7 @@ Create
 ├── AI Agent                     Lite
 ├── Templates                    Lite
 ├── Viral Canvas                 Lite
-├── AI Avatars                   Lite
-└── Human Admaker                Lite
+└── AI Avatars                   Lite
 
 Operate
 ├── Marketing Calendar           Lite
@@ -168,6 +166,9 @@ Growth                           Plus only
 - 点击固定按钮后，菜单保持展开，不再自动收回。
 - 收起时保留图标、当前选中状态和 Tooltip。
 - 账号入口位于左下角；点击后打开账号菜单。
+- Human Admaker 不作为功能菜单出现；以一行独立广告入口放在主菜单滚动内容的末尾。
+- 广告入口不固定，只有滚动到菜单最底部才可见；展开侧栏时仅显示“Human Admaker”一行，折叠时显示紧凑服务图标。
+- 点击 Banner 进入 Human Admaker 服务页。
 
 ### 3.2 账号菜单
 
@@ -175,6 +176,7 @@ Growth                           Plus only
 
 - 用户名与邮箱；点击进入个人中心。
 - 使用情况。
+- Upgrade plan / 升级套餐；点击进入独立 Plan 页面。
 - Light / Dark 图标切换。
 - English / 中文选择框。
 - Help Center。
@@ -697,6 +699,7 @@ Workspace
 
 ### 页面交互
 
+- 入口是主菜单滚动内容末尾的一行独立广告入口，不固定，也不占用 Create 功能菜单。
 - 展示可播放的外包样片。
 - `Start for $500/month` 打开联系表单。
 - 表单包含姓名、电话和 WhatsApp。
@@ -704,7 +707,41 @@ Workspace
 
 ---
 
-## F14｜Performance 与 Leads（Plus）
+## F14｜Plan
+
+### 入口
+
+- 账号菜单中的 `Upgrade plan / 升级套餐`。
+- 个人中心中的 `Plan and billing / 套餐与账单`。
+
+### 计费切换
+
+- 默认展示年付，并标注 `Save 50%`。
+- 可切换月付 / 年付；年付金额为一次性支付。
+- 7 天免费试用，赠送 500 credits，无需信用卡。
+
+### 套餐
+
+| | Lite | Pro（推荐） | Plus |
+|---|---:|---:|---:|
+| 年付 | $174 / 年 | $474 / 年 | $1,194 / 年 |
+| 月付 | $29 / 月 | $79 / 月 | $199 / 月 |
+| Credits | 1,500 / 月 | 4,000 / 月 | 10,000 / 月 |
+| 数字人 | 1 个 | 3 个 | 不限 |
+| 员工席位 | 3 席 | 3 席 | 3 席 |
+| 每席社媒账号 | 2 个 | 2 个 | 2 个 |
+| 门店 | 不限 | 不限 | 不限 |
+| Seedance | 可增购 | ≤ 60 秒 / 月 | ≤ 120 秒 / 月 |
+
+- Pro 明确标注为推荐方案。
+- 当前套餐显示 `Current plan / 当前套餐`，按钮不可重复点击。
+- 点击其他套餐后更新全局 Lite / Pro / Plus 功能范围，并显示成功提示。
+- 老板本人账号不占员工席位。
+- Credits 和员工席位可增购；纯实拍合成不消耗 credits。
+
+---
+
+## F15｜Performance 与 Leads（Plus）
 
 ### Performance
 

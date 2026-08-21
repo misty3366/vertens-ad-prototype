@@ -5,7 +5,7 @@ import {
   Coffee, Confetti, Eye, FacebookLogo, FileText, Fire, FolderSimple, ForkKnife, Globe, GraduationCap, Heart, Heartbeat, House, Image as ImageIcon,
   Funnel, InstagramLogo, LinkSimple, MagicWand, MagnifyingGlass, MapPin, Microphone,
   Moon, Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle, Sun,
-  ShieldCheck, SpinnerGap, Storefront, Strategy, Target, TiktokLogo, TrendUp, UploadSimple, UserPlus,
+  ArrowCircleUp, ShieldCheck, SpinnerGap, Storefront, Strategy, Target, TiktokLogo, TrendUp, UploadSimple, UserPlus,
   SidebarSimple, TShirt, UserCircle, Users, VideoCamera, WhatsappLogo, X
 } from '@phosphor-icons/react';
 import {
@@ -27,17 +27,15 @@ const tierOrder = { lite: 1, pro: 2, plus: 3 };
 const tierLabels = { lite: 'Lite', pro: 'Pro', plus: 'Plus' };
 const navigation = [
   { section: 'workspace', items: [
-    ['home', 'Home', House, 'lite'], ['projects', 'Projects', FolderSimple, 'lite'],
-    ['brand', 'My Brand', Buildings, 'lite'], ['assets', 'Assets', Package, 'lite'],
-    ['team', 'Team', Users, 'pro']
+    ['home', 'Home', House, 'lite'], ['brand', 'My Brand', Buildings, 'lite'],
+    ['assets', 'Assets', Package, 'lite'], ['avatars', 'AI Avatars', UserCircle, 'lite']
   ]},
   { section: 'create', items: [
-    ['agent', 'AI Agent', Sparkle, 'lite'], ['templates', 'Templates', Article, 'lite'], ['canvas', 'Viral Canvas', ShareNetwork, 'lite'],
-    ['avatars', 'AI Avatars', UserCircle, 'lite'], ['service', 'Human Admaker', VideoCamera, 'lite']
+    ['agent', 'AI Agent', Sparkle, 'lite'], ['templates', 'Templates', Article, 'lite'], ['canvas', 'Viral Canvas', ShareNetwork, 'lite']
   ]},
   { section: 'operate', items: [
     ['calendar', 'Marketing Calendar', CalendarBlank, 'lite'], ['publishing', 'Publishing', Broadcast, 'lite'],
-    ['channels', 'Social Accounts', CirclesFour, 'lite']
+    ['channels', 'Social Accounts', CirclesFour, 'lite'], ['team', 'Team', Users, 'pro']
   ]},
   { section: 'growth', items: [
     ['performance', 'Performance', ChartLineUp, 'plus'], ['leads', 'Leads', Target, 'plus']
@@ -48,12 +46,12 @@ const uiCopy = {
   en: {
     sections:{workspace:'Workspace',create:'Create',operate:'Operate',growth:'Growth'},
     nav:{home:'Home',projects:'Projects',brand:'My Brand',assets:'Assets',team:'Team',agent:'AI Agent',templates:'Templates',canvas:'Viral Canvas',avatars:'AI Avatars',service:'Human Admaker',calendar:'Marketing Calendar',publishing:'Publishing',channels:'Social Accounts',performance:'Performance',leads:'Leads'},
-    account:{help:'Help center',theme:'Appearance',language:'Language',usage:'Usage',logout:'Log out',remaining:'91% remaining'}
+    account:{help:'Help center',theme:'Appearance',language:'Language',usage:'Usage',plan:'Upgrade plan',logout:'Log out',remaining:'91% remaining'}
   },
   zh: {
     sections:{workspace:'工作台',create:'创作',operate:'运营',growth:'增长'},
     nav:{home:'首页',projects:'项目',brand:'我的品牌',assets:'素材',team:'团队',agent:'AI 智能体',templates:'爆款模板',canvas:'爆款画布',avatars:'数字人',service:'人工广告服务',calendar:'营销日历',publishing:'发布',channels:'社媒账号',performance:'效果分析',leads:'线索'},
-    account:{help:'帮助中心',theme:'显示模式',language:'语言',usage:'使用情况',logout:'退出登录',remaining:'剩余 91%'}
+    account:{help:'帮助中心',theme:'显示模式',language:'语言',usage:'使用情况',plan:'升级套餐',logout:'退出登录',remaining:'剩余 91%'}
   }
 };
 
@@ -134,11 +132,17 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
           {id === 'performance' && <i>Beta</i>}
         </button>)}
       </div>})}
+      <button className={`human-admaker-banner ${page === 'service' ? 'active' : ''}`} aria-label={language === 'zh' ? '查看人工广告制作服务' : 'View Human Admaker service'} onClick={() => setPage('service')}>
+        <VideoCamera weight="fill" />
+        <b>{language === 'zh' ? '人工广告制作' : 'Human Admaker'}</b>
+        <ArrowRight />
+      </button>
     </nav>
     <div className="sidebar-footer">
       {accountOpen && <><div className="account-menu-scrim" onMouseDown={() => setAccountOpen(false)}></div><div className="account-popover">
         <button className="account-profile-entry" onClick={() => { setPage('profile'); setAccountOpen(false); }}><span>WZ</span><div><b>wen zy</b><small>wenzy@vertens.ai</small></div><ArrowRight/></button>
         <button><ChartLineUp/><span><b>{copy.account.usage}</b><small>{copy.account.remaining}</small></span></button>
+        <button className="upgrade-plan-entry" onClick={() => { setPage('plan'); setAccountOpen(false); }}><ArrowCircleUp/><span><b>{copy.account.plan}</b></span></button>
         <button className="appearance-row" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}><span><b>{copy.account.theme}</b></span><i className="appearance-icon" aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? <Sun weight="fill"/> : <Moon weight="fill"/>}</i></button>
         <label className="language-row"><Globe/><b>{copy.account.language}</b><select aria-label={copy.account.language} value={language} onChange={event => setLanguage(event.target.value)}><option value="en">English</option><option value="zh">中文</option></select></label>
         <button><BookOpen/><span><b>{copy.account.help}</b><small>VertensAI Guide</small></span></button>
@@ -169,15 +173,47 @@ function AvatarEntryDialog({ language, onClose, onClone, onCustom }) {
   </section></div>;
 }
 
-function ProfilePage({ tier, language }) {
+function ProfilePage({ tier, language, setPage }) {
   const zh = language === 'zh';
   return <div className="page profile-page">
     <PageTitle eyebrow={zh?'个人中心':'ACCOUNT'} title={zh?'个人中心':'Profile'} copy={zh?'管理账号、套餐和使用情况。':'Manage your account, plan and usage.'}/>
     <section className="profile-shell">
       <div className="profile-identity"><span>WZ</span><div><h3>wen zy</h3><p>wenzy@vertens.ai</p></div><button>{zh?'编辑资料':'Edit profile'}</button></div>
       <div className="profile-stats"><article><span>{zh?'当前套餐':'PLAN'}</span><b>{tierLabels[tier]}</b><small>{zh?'原型功能范围':'Prototype feature scope'}</small></article><article><span>{zh?'本月用量':'USAGE'}</span><b>9%</b><small>{zh?'剩余 91%':'91% remaining'}</small></article><article><span>{zh?'工作区':'WORKSPACE'}</span><b>VertensAI</b><small>{zh?'1 位成员':'1 member'}</small></article></div>
-      <div className="profile-settings"><button><div><b>{zh?'账号信息':'Account details'}</b><small>{zh?'姓名、邮箱和登录方式':'Name, email and sign-in'}</small></div><ArrowRight/></button><button><div><b>{zh?'套餐与账单':'Plan and billing'}</b><small>{zh?'管理订阅和付款方式':'Manage subscription and payment'}</small></div><ArrowRight/></button><button><div><b>{zh?'通知':'Notifications'}</b><small>{zh?'发布和任务提醒':'Publishing and task updates'}</small></div><ArrowRight/></button></div>
+      <div className="profile-settings"><button><div><b>{zh?'账号信息':'Account details'}</b><small>{zh?'姓名、邮箱和登录方式':'Name, email and sign-in'}</small></div><ArrowRight/></button><button onClick={()=>setPage('plan')}><div><b>{zh?'套餐与账单':'Plan and billing'}</b><small>{zh?'管理订阅和付款方式':'Manage subscription and payment'}</small></div><ArrowRight/></button><button><div><b>{zh?'通知':'Notifications'}</b><small>{zh?'发布和任务提醒':'Publishing and task updates'}</small></div><ArrowRight/></button></div>
     </section>
+  </div>;
+}
+
+function PlanPage({ tier, setTier, language, notify }) {
+  const zh = language === 'zh';
+  const [billing, setBilling] = useState('annual');
+  const plans = [
+    {id:'lite',name:'Lite',audience:zh?'单店试水':'For one store getting started',annual:174,monthly:29,equivalent:'14.50',credits:'1,500',avatars:zh?'1 个数字人':'1 avatar',seedance:zh?'可增购 Seedance':'Seedance available as add-on',features:zh?['品牌、模板与营销日历','社媒发布与素材库','3 个员工席位 · 每席 2 个账号','门店数量不限']:['Brand, templates and calendar','Publishing and asset library','3 employee seats · 2 accounts each','Unlimited shops']},
+    {id:'pro',name:'Pro',audience:zh?'单店完整矩阵':'For a complete store content engine',annual:474,monthly:79,equivalent:'39.50',credits:'4,000',avatars:zh?'3 个数字人':'3 avatars',seedance:zh?'每月 60 秒 Seedance':'60 sec Seedance / month',recommended:true,features:zh?['Lite 全部功能','AI Agent 与爆款画布','团队与效果分析','3 个员工席位 · 门店不限']:['Everything in Lite','AI Agent and Viral Canvas','Team and Performance','3 employee seats · unlimited shops']},
+    {id:'plus',name:'Plus',audience:zh?'多店与连锁':'For multi-store growth',annual:1194,monthly:199,equivalent:'99.50',credits:'10,000',avatars:zh?'无限数字人':'Unlimited avatars',seedance:zh?'每月 120 秒 Seedance':'120 sec Seedance / month',features:zh?['Pro 全部功能','线索与员工级归因','跨店、跨账号对比','数据导出、API 与客户成功']:['Everything in Pro','Leads and employee attribution','Cross-store and account comparison','Data export, API and customer success']}
+  ];
+  const selectPlan = plan => {
+    setTier(plan.id);
+    notify(zh?`已切换到 ${plan.name} 套餐。`:`${plan.name} plan selected.`);
+  };
+  return <div className="page plan-page">
+    <section className="plan-hero">
+      <div><span>{zh?'套餐':'PLAN'}</span><h1>{zh?'选择适合门店的套餐':'Choose the plan that fits your store'}</h1><p>{zh?'所有套餐都支持无限门店，老板本人账号不占员工席位。':'Every plan includes unlimited shops. The owner account never uses an employee seat.'}</p></div>
+      <div className="billing-switch" role="group" aria-label={zh?'计费周期':'Billing cycle'}><button className={billing==='monthly'?'active':''} onClick={()=>setBilling('monthly')}>{zh?'月付':'Monthly'}</button><button className={billing==='annual'?'active':''} onClick={()=>setBilling('annual')}>{zh?'年付':'Yearly'}<small>{zh?'省 50%':'Save 50%'}</small></button></div>
+    </section>
+    <section className="pricing-grid">
+      {plans.map(plan=><article className={`pricing-card ${plan.recommended?'recommended':''} ${tier===plan.id?'current':''}`} key={plan.id}>
+        {plan.recommended&&<div className="popular-plan-banner"><Sparkle weight="fill"/>{zh?'最受欢迎':'Most popular'}</div>}
+        <header><div><h2>{plan.name}</h2>{tier===plan.id&&<i>{zh?'当前套餐':'CURRENT'}</i>}</div><p>{plan.audience}</p></header>
+        <div className="plan-price"><b>${billing==='annual'?plan.equivalent:plan.monthly}</b><span>{zh?' / 月':' / month'}</span>{billing==='annual'&&<del>${plan.monthly}</del>}</div>
+        <small className="plan-billing-note">{billing==='annual'?(zh?`按年支付 $${plan.annual} · 省 50%`:`Billed $${plan.annual} annually · Save 50%`):(zh?'按月支付，可随时取消':'Billed monthly · Cancel anytime')}</small>
+        <div className="plan-allowance"><CheckCircle weight="fill"/><div><b>{plan.credits} credits / {zh?'月':'month'}</b><small>{plan.avatars} · {plan.seedance}</small></div></div>
+        <button className={plan.recommended?'primary':'secondary'} disabled={tier===plan.id} onClick={()=>selectPlan(plan)}>{tier===plan.id?(zh?'当前套餐':'Current plan'):(zh?`选择 ${plan.name}`:`Choose ${plan.name}`)}{tier!==plan.id&&<ArrowRight/>}</button>
+        <ul>{plan.features.map(feature=><li key={feature}><CheckCircle weight="bold"/>{feature}</li>)}</ul>
+      </article>)}
+    </section>
+    <section className="plan-extras"><div><span>{zh?'免费开始':'START FREE'}</span><h3>{zh?'7 天免费试用，赠送 500 credits':'7-day free trial with 500 credits'}</h3><p>{zh?'无需信用卡。纯实拍合成不消耗 credits。':'No credit card required. Real-footage editing uses zero credits.'}</p></div><div className="plan-extra-items"><article><b>{zh?'增购 1,000 credits':'Add 1,000 credits'}</b><small>Lite $12 · Pro $10 · Plus $8</small></article><article><b>{zh?'增购员工席位':'Add an employee seat'}</b><small>Lite $6 · Pro $5 · Plus $4 / {zh?'月':'month'}</small></article></div></section>
   </div>;
 }
 
@@ -904,13 +940,13 @@ export function App() {
   const [menuPinned, setMenuPinned] = useState(true);
   const [menuHovered, setMenuHovered] = useState(false);
   const menuExpanded = menuPinned || menuHovered;
-  const [tier, setTier] = useState(() => window.localStorage.getItem('sunads-tier') || 'lite');
+  const [tier, setTier] = useState(() => window.localStorage.getItem('vertensai-tier') || 'lite');
   const [theme, setTheme] = useState(() => {
-    const saved = window.localStorage.getItem('sunads-theme');
+    const saved = window.localStorage.getItem('vertensai-theme');
     if (saved === 'light' || saved === 'dark') return saved;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
-  const [language, setLanguage] = useState(() => window.localStorage.getItem('sunads-language') || 'en');
+  const [language, setLanguage] = useState(() => window.localStorage.getItem('vertensai-language') || 'en');
   const [product, setProduct] = useState(null);
   const [publishAsset, setPublishAsset] = useState(null);
   const [canvasTemplate, setCanvasTemplate] = useState(null);
@@ -926,10 +962,10 @@ export function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    window.localStorage.setItem('sunads-theme', theme);
+    window.localStorage.setItem('vertensai-theme', theme);
   }, [theme]);
-  useEffect(() => { window.localStorage.setItem('sunads-tier', tier); }, [tier]);
-  useEffect(() => { window.localStorage.setItem('sunads-language', language); document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'; }, [language]);
+  useEffect(() => { window.localStorage.setItem('vertensai-tier', tier); }, [tier]);
+  useEffect(() => { window.localStorage.setItem('vertensai-language', language); document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'; }, [language]);
   const notify = message => { setNotice(typeof message === 'string' ? message : 'Updated.'); setTimeout(() => setNotice(''), 2600); };
   const startAvatarWizard = () => { setAvatarWizardOpen(true); setPage('avatars'); };
   const startBrandImport = url => { setBrandImportRequest({ id: Date.now(), url: url?.trim() || '' }); setPage('brand'); };
@@ -937,7 +973,8 @@ export function App() {
   const openAgentWithDraft = draft => { setAgentDraft(draft || ''); setActiveProject(null); setPage('agent'); };
   const content = useMemo(() => {
     if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify} language={language} startAvatarWizard={startAvatarWizard} personalAvatars={personalAvatars} setSelectedAvatar={setSelectedAvatar} startBrandImport={startBrandImport}/>;
-    if (page === 'profile') return <ProfilePage tier={tier} language={language}/>;
+    if (page === 'profile') return <ProfilePage tier={tier} language={language} setPage={setPage}/>;
+    if (page === 'plan') return <PlanPage tier={tier} setTier={setTier} language={language} notify={notify}/>;
     if (page === 'agent') return <AgentPage product={product} setPage={setPage} notify={notify} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} activeProject={activeProject} setActiveProject={setActiveProject} initialDraft={agentDraft} clearInitialDraft={() => setAgentDraft('')}/>;
     if (page === 'templates') return <TemplatesPage setPage={setPage} setCanvasTemplate={setCanvasTemplate} notify={notify} language={language}/>;
     if (page === 'canvas') return <CanvasPage template={canvasTemplate} theme={theme}/>;
@@ -952,6 +989,6 @@ export function App() {
     if (page === 'leads') return <LeadsPage notify={notify}/>;
     if (page === 'service') return <ServicePage notify={notify} language={language}/>;
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
-  }, [page, product, canvasTemplate, language, publishAsset, theme, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest]);
+  }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest]);
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
