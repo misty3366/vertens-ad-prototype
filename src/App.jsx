@@ -139,7 +139,6 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
       </button>
     </nav>
     <div className="sidebar-footer">
-      <div className="sidebar-credits"><Sparkle weight="fill"/><span><b>{tier === 'lite' ? '620' : '3,480'} credits</b><small>{language === 'zh' ? '本月剩余' : 'remaining this month'}</small></span><button onClick={() => setPage('plan')}>{language === 'zh' ? '购买' : 'Buy'}</button></div>
       {accountOpen && <><div className="account-menu-scrim" onMouseDown={() => setAccountOpen(false)}></div><div className="account-popover">
         <button className="account-profile-entry" onClick={() => { setPage('profile'); setAccountOpen(false); }}><span>WZ</span><div><b>wen zy</b><small>wenzy@vertens.ai</small></div><ArrowRight/></button>
         <button><ChartLineUp/><span><b>{copy.account.usage}</b><small>{tier === 'lite' ? `620 ${copy.account.remaining}` : `3,480 ${copy.account.remaining}`}</small></span></button>
@@ -191,8 +190,8 @@ function PlanPage({ tier, setTier, language, notify }) {
   const zh = language === 'zh';
   const [billing, setBilling] = useState('annual');
   const plans = [
-    {id:'lite',name:'Lite',audience:zh?'单店低成本开始':'Low-cost start for one store',annual:54,monthly:9,equivalent:'4.50',credits:'800',avatars:zh?'1 个门店':'1 shop',seedance:zh?'Seedance 仅 Pro 可用':'Seedance available in Pro',features:zh?['内容生成、素材与模板','发布到单个社媒账号','3 位团队成员','线索总量与部分归因']:['Creation, assets and templates','Publish to one social account','3 team members','Lead totals and partial attribution']},
-    {id:'pro',name:'Pro',audience:zh?'完整内容增长闭环':'The complete content growth system',annual:474,monthly:79,equivalent:'39.50',credits:'4,000',avatars:zh?'1 个门店 · 可增购':'1 shop · add more anytime',seedance:zh?'每月 60 秒 Seedance':'60 sec Seedance / month',recommended:true,features:zh?['Lite 全部功能','30 天营销日历','完整内容与员工归因','无限团队成员']:['Everything in Lite','30-day marketing calendar','Full content and employee attribution','Unlimited team members']}
+    {id:'lite',name:'Lite',audience:zh?'低成本跑通一轮':'Get one full cycle running',annual:120,monthly:20,equivalent:'10',credits:'1,200',avatars:zh?'门店 · 员工 · 账号全不限':'Unlimited shops, employees, accounts',seedance:zh?'Seedance 不设上限':'Seedance with no cap',features:zh?['内容生成、素材、模板与爆款复刻','门店、员工、社媒账号、发布渠道全部不限','Seedance 2.5 / 2.0 按 credits，不设上限','账号体检 50 credits / 次（首次免费）','线索总量（不含明细归因）']:['Creation, assets, templates and viral remix','Unlimited shops, employees, accounts and channels','Seedance 2.5 and 2.0 on credits, no cap','Account checkup at 50 credits (first one free)','Lead totals only, no breakdown']},
+    {id:'pro',name:'Pro',audience:zh?'完整内容增长闭环':'The complete content growth system',annual:300,monthly:50,equivalent:'25',credits:'3,600',avatars:zh?'门店 · 员工 · 账号全不限':'Unlimited shops, employees, accounts',seedance:zh?'Seedance 不设上限':'Seedance with no cap',recommended:true,features:zh?['Lite 全部功能','30 天营销日历，每条文案可编辑','完整归因：内容级 · 员工级 · 跨店','团队协作：门店、成员与账号管理','效果分析看板 · 数据导出 / API','3 倍积分只收 2.5 倍价格 —— credits 便宜 16.7%']:['Everything in Lite','30-day calendar with every script editable','Full attribution: content, employee and cross-shop','Team collaboration: shops, members and account management','Performance dashboard, export and API','3× the credits for 2.5× the price — 16.7% cheaper per credit']}
   ];
   const selectPlan = plan => {
     setTier(plan.id);
@@ -200,7 +199,7 @@ function PlanPage({ tier, setTier, language, notify }) {
   };
   return <div className="page plan-page">
     <section className="plan-hero">
-      <div><span>{zh?'套餐':'PLAN'}</span><h1>{zh?'从内容生产，到可追踪的到店增长':'From content creation to attributable store growth'}</h1><p>{zh?'员工账号不收费。Lite 低成本开始，Pro 解锁完整归因、多门店与增长闭环。':'Employee seats are free. Start lean with Lite, then unlock full attribution and multi-store growth with Pro.'}</p></div>
+      <div><span>{zh?'套餐':'PLAN'}</span><h1>{zh?'从内容生产，到可追踪的到店增长':'From content creation to attributable store growth'}</h1><p>{zh?'只按 credits 收费。门店、员工、社媒账号、发布渠道全部不限 —— 两档只差含多少 credits、多便宜，以及归因看多深。':'Priced on credits only. Shops, employees, accounts and channels are all unlimited — the two plans differ in how many credits you get, how cheap they are, and how deep attribution goes.'}</p></div>
       <div className="billing-switch" role="group" aria-label={zh?'计费周期':'Billing cycle'}><button className={billing==='monthly'?'active':''} onClick={()=>setBilling('monthly')}>{zh?'月付':'Monthly'}</button><button className={billing==='annual'?'active':''} onClick={()=>setBilling('annual')}>{zh?'年付':'Yearly'}<small>{zh?'省 50%':'Save 50%'}</small></button></div>
     </section>
     <section className="pricing-grid">
@@ -214,39 +213,358 @@ function PlanPage({ tier, setTier, language, notify }) {
         <ul>{plan.features.map(feature=><li key={feature}><CheckCircle weight="bold"/>{feature}</li>)}</ul>
       </article>)}
     </section>
-    <section className="plan-extras"><div><span>{zh?'灵活扩展':'FLEXIBLE ADD-ONS'}</span><h3>{zh?'员工永远免费，按额度和门店扩展':'Employees stay free. Scale credits and shops.'}</h3><p>{zh?'纯实拍素材合成不消耗 credits。10 家以上门店可联系定制。':'Real-footage composition uses zero credits. Contact us for 10+ shops.'}</p></div><div className="plan-extra-items"><article><b>{zh?'增购 1,000 credits':'Add 1,000 credits'}</b><small>Lite $12 · Pro $10</small></article><article><b>{zh?'Pro 增购门店':'Additional Pro shop'}</b><small>$39 / {zh?'月 · $234 / 年':'month · $234 / year'}</small></article><article className="custom-plan"><b>{zh?'10+ 门店定制':'Custom for 10+ shops'}</b><small>{zh?'联系销售获取部署方案':'Talk to sales for rollout'}</small></article></div></section>
+    <section className="plan-output">
+      <header><div><span>{zh?'额度能做什么':'WHAT YOUR CREDITS MAKE'}</span><h3>{zh?'同一笔额度，不同做法产出差 20 倍':'The same credits go 20× further on one route than the other'}</h3><p>{zh?'纯实拍合成不消耗任何 credits，不限条数。Seedance 视频不设月度上限，按 credits 计。':'Real-footage composition uses zero credits and has no limit. Seedance has no monthly cap — it simply draws on credits.'}</p></div></header>
+      <div className="output-table">
+        <div className="output-row output-head"><span>{zh?'每月可产出':'Monthly output'}</span><b>Lite<i>1,200 credits</i></b><b>Pro<i>3,600 credits</i></b></div>
+        {[
+          [zh?'纯实拍成片':'Real-footage videos',zh?'不限':'Unlimited',zh?'不限':'Unlimited',true],
+          [zh?'18 秒图片合成片':'18-sec composed videos','20 '+(zh?'条':'videos'),'60 '+(zh?'条':'videos'),true],
+          [zh?'20 秒老板口播片':'20-sec owner-led videos','8 '+(zh?'条':'videos'),'24 '+(zh?'条':'videos'),false],
+          ['Seedance 2.5 · 10'+(zh?' 秒':'s'),'2 '+(zh?'条':'videos'),'8 '+(zh?'条':'videos'),false],
+          ['Seedance 2.5 · 18'+(zh?' 秒':'s'),'1 '+(zh?'条':'video'),'4 '+(zh?'条':'videos'),false],
+          ['Seedance 2.0 · 10'+(zh?' 秒':'s'),'4 '+(zh?'条':'videos'),'12 '+(zh?'条':'videos'),false],
+          ['Seedance 2.0 · 18'+(zh?' 秒':'s'),'2 '+(zh?'条':'videos'),'6 '+(zh?'条':'videos'),false]
+        ].map(([label,lite,pro,highlight])=><div className={`output-row ${highlight?'highlight':''}`} key={label}><span>{label}</span><b>{lite}</b><b>{pro}</b></div>)}
+      </div>
+      <footer><Sparkle weight="fill"/><span>{zh?'Seedance 2.5 每秒 45 credits，2.0 每秒 30 credits —— 按成本等比定价，两代毛利一致，你可以自由选型号。':'Seedance 2.5 costs 45 credits per second, 2.0 costs 30 — priced proportionally to cost, so you can pick either model freely.'}</span></footer>
+    </section>
+    <section className="plan-compare">
+      <header><div><span>{zh?'功能差异':'FEATURE COMPARISON'}</span><h3>{zh?'两档容量完全一致，只差能力':'Identical capacity on both plans — the difference is capability'}</h3><p>{zh?'门店、员工、社媒账号、发布渠道、Seedance 使用，两档都不限。':'Shops, employees, social accounts, publishing channels and Seedance use are unlimited on both.'}</p></div></header>
+      <div className="compare-table">
+        <div className="compare-row compare-head"><span>{zh?'能力':'Capability'}</span><b>Lite</b><b>Pro</b></div>
+        {[
+          [zh?'账号体检（首次免费，之后 50 credits）':'Account checkup (first free, then 50 credits)',1,1],
+          [zh?'品牌资产提取':'Brand asset extraction',1,1],
+          [zh?'模板库 · 素材库 · 爆款复刻':'Templates, assets and viral remix',1,1],
+          [zh?'AI 渲染图 · 数字人口播 · Seedance 视频':'AI images, avatar videos and Seedance',1,1],
+          [zh?'实拍混剪（不消耗 credits）':'Real-footage composition (zero credits)',1,1],
+          [zh?'多平台一键发布':'One-click multi-platform publishing',1,1],
+          [zh?'门店 · 员工 · 账号 · 渠道数量':'Shops, employees, accounts, channels',zh?'不限':'Unlimited',zh?'不限':'Unlimited'],
+          [zh?'线索总量':'Lead totals',1,1],
+          [zh?'30 天营销日历（每条文案可编辑）':'30-day calendar with editable scripts',0,1],
+          [zh?'完整归因：内容级 · 员工级 · 跨店':'Full attribution: content, employee, cross-shop',0,1],
+          [zh?'团队协作：门店、成员与账号管理':'Team collaboration: shops, members and account management',0,1],
+          [zh?'效果分析看板':'Performance dashboard',0,1],
+          [zh?'数据导出 / API':'Data export and API',0,1],
+          [zh?'含额度单 credit 价':'Effective credit price','$0.00833',zh?'$0.00694（8.3 折）':'$0.00694 (17% less)'],
+          [zh?'增购单价':'Top-up price','$12 / 1,000','$10 / 1,000']
+        ].map(([label,lite,pro])=><div className={`compare-row ${lite===0?'pro-only':''}`} key={label}>
+          <span>{label}</span>
+          <b>{lite===1?<CheckCircle weight="fill"/>:lite===0?<i className="dash">—</i>:lite}</b>
+          <b>{pro===1?<CheckCircle weight="fill"/>:pro}</b>
+        </div>)}
+      </div>
+      <footer><ArrowCircleUp weight="fill"/><span>{zh?'Lite 能把内容做出来；Pro 让内容变成可管理、可归因的经营动作。':'Lite gets the content made. Pro turns it into a managed, attributable growth operation.'}</span></footer>
+    </section>
+    <section className="plan-extras"><div><span>{zh?'灵活扩展':'FLEXIBLE ADD-ONS'}</span><h3>{zh?'不为数量收费，只为用量收费':'You pay for usage, never for headcount'}</h3><p>{zh?'门店、员工、账号越多越好 —— 向它们收费等于向自己的增长收税。纯实拍素材合成不消耗 credits。':'More shops, employees and accounts are exactly what we want. Charging for them would be taxing our own growth. Real-footage composition uses zero credits.'}</p></div><div className="plan-extra-items"><article><b>{zh?'增购 1,000 credits':'Add 1,000 credits'}</b><small>Lite $12 · Pro $10</small></article><article><b>{zh?'账号体检':'Account checkup'}</b><small>{zh?'50 credits / 次 · 首次免费':'50 credits each · first one free'}</small></article><article><b>{zh?'Seedance 视频':'Seedance video'}</b><small>{zh?'2.5 版 45 cr/秒 · 2.0 版 30 cr/秒':'2.5 at 45 cr/sec · 2.0 at 30 cr/sec'}</small></article><article className="custom-plan"><b>{zh?'10+ 门店定制':'Custom for 10+ shops'}</b><small>{zh?'联系销售获取部署方案':'Talk to sales for rollout'}</small></article></div></section>
   </div>;
 }
 
-function HomePage({ product, setProduct, setPage, notify, language, tier, startAvatarWizard, personalAvatars, setSelectedAvatar, startBrandImport }) {
+const checkupFindingLibrary = [
+  ['critical','门店信息缺失','Posts without store info'],
+  ['critical','发布频次不足与断更','Low posting frequency and gaps'],
+  ['warning','内容里没有真人出镜','No real person on camera'],
+  ['warning','缺少明确的引导动作','No clear next step'],
+  ['warning','平台覆盖不足','Limited platform coverage'],
+  ['info','只有一个账号在发布','Only one account publishing']
+];
+
+function CheckupHistoryModal({ language, checkups, onClose }) {
+  const zh = language === 'zh';
+  const [viewing, setViewing] = useState(null);
+  const oldest = checkups[checkups.length-1];
+  const latest = checkups[0];
+  if (viewing) {
+    const index = checkups.findIndex(item => item.id === viewing.id);
+    const previous = checkups[index+1];
+    const delta = previous ? viewing.score - previous.score : null;
+    return <div className="avatar-entry-scrim" onMouseDown={onClose}><section className="checkup-modal history-modal" onMouseDown={event=>event.stopPropagation()}>
+      <header className="checkup-modal-head">
+        <div className="modal-back"><button className="back-button" onClick={()=>setViewing(null)}><ArrowRight/>{zh?'返回报告列表':'Back to reports'}</button><span>{zh?'历史体检报告':'PAST CHECKUP REPORT'}</span><h3>{viewing.date}</h3><p>{viewing.source} · {viewing.handle}</p></div>
+        <button onClick={onClose}><X/></button>
+      </header>
+      <div className="checkup-result-top">
+        <div className="checkup-result-score"><span>{zh?'账号健康分':'ACCOUNT HEALTH'}</span><div><b>{viewing.score}</b><i>/100</i></div><div className="checkup-gauge"><i style={{width:`${viewing.score}%`}}/></div></div>
+        <ul className="checkup-metrics">
+          <li><b>{viewing.issues}</b><small>{zh?'发现的问题':'issues found'}</small></li>
+          <li><b>{viewing.daysAgo}</b><small>{zh?'天前':'days ago'}</small></li>
+          {delta!==null&&<li className={delta<0?'danger':''}><b>{delta>0?'+':''}{delta}</b><small>{zh?'较上一次':'vs previous'}</small></li>}
+        </ul>
+      </div>
+      <div className="past-findings">
+        <header><span>{zh?'当时的结论':'FINDINGS AT THE TIME'}</span></header>
+        <ul>{checkupFindingLibrary.slice(0, viewing.issues).map(([level,zhLabel,enLabel])=><li key={enLabel} className={level}><i/><span>{zh?zhLabel:enLabel}</span></li>)}</ul>
+      </div>
+      <footer className="checkup-modal-foot">
+        <small>{zh?'这是一份历史报告，只保留数据与结论。行动指南只对最近一次体检有效。':'This is a past report — data and findings only. The action plan applies to the latest checkup.'}</small>
+        <button className="primary" onClick={onClose}>{zh?'去做新一次体检':'Run a new checkup'}<ArrowRight/></button>
+      </footer>
+    </section></div>;
+  }
+  return <div className="avatar-entry-scrim" onMouseDown={onClose}><section className="checkup-modal history-modal" onMouseDown={event=>event.stopPropagation()}>
+    <header className="checkup-modal-head">
+      <div><span>{zh?'体检报告':'CHECKUP REPORTS'}</span><h3>{zh?`共 ${checkups.length} 份报告`:`${checkups.length} reports`}</h3><p>{zh?'每次体检都会生成一份报告，可随时回看对比。':'Every checkup produces a report you can reopen and compare.'}</p></div>
+      <button onClick={onClose}><X/></button>
+    </header>
+    <div className="history-rows">{checkups.map((item,index)=>{
+      const previous = checkups[index+1];
+      const delta = previous ? item.score - previous.score : null;
+      return <article key={item.id} className={index===0?'current':''}>
+        <div className="history-when"><b>{item.date}</b><small>{item.source} · {item.handle}</small></div>
+        <div className="history-score"><b>{item.score}</b><i>/100</i>{delta!==null&&<em className={delta<0?'down':'up'}>{delta<0?'▼':'▲'}{Math.abs(delta)}</em>}</div>
+        <div className="history-bar"><i style={{width:`${item.score}%`}}/></div>
+        <span className="history-issues">{item.issues} {zh?'个问题':'issues'}</span>
+        <button onClick={()=>setViewing(item)}>{zh?'查看报告':'Open report'}<ArrowRight/></button>
+      </article>;
+    })}</div>
+    {latest&&oldest&&latest!==oldest&&<footer className="history-modal-foot"><TrendUp weight="bold"/><span>{zh?`分数从 ${oldest.score} 一路降到 ${latest.score} —— 问题不是变难了，是一直没修。`:`The score slid from ${oldest.score} to ${latest.score}. Nothing got harder — the gaps just never got fixed.`}</span></footer>}
+  </section></div>;
+}
+
+function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, setPage }) {
+  const zh = language === 'zh';
+  const [step, setStep] = useState(0);
+  const [phase, setPhase] = useState('running');
+  const [score, setScore] = useState(0);
+  // 顺序: 图标 / 中文步骤 / 英文步骤 / 中文结果 / 英文结果
+  const steps = [
+    [Globe,'读取公开主页','Reading public profile','Casa Luma Interiors · '+(source||'Instagram'),'Casa Luma Interiors · '+(source||'Instagram')],
+    [Article,'采集近 30 天内容','Collecting posts from the last 30 days','找到 22 条内容','22 posts found'],
+    [MapPin,'检查门店信息与引导动作','Checking store info and local CTAs','18 条缺地址或电话','18 posts missing address or phone'],
+    [UserCircle,'识别出镜人物与内容类型','Detecting presenters and content types','0 条有真人出镜','0 posts with a person on camera'],
+    [TrendUp,'对比你上次的体检结果','Comparing with your last checkup','分数从 48 降到 42','Score moved from 48 to 42'],
+    [CalendarCheck,'生成 30 天行动方案','Building your 30-day action plan','6 个问题已排好优先级','6 fixes prioritized']
+  ];
+  useEffect(() => {
+    if (phase !== 'running') return;
+    if (step >= steps.length) { const t = setTimeout(()=>setPhase('result'), 460); return ()=>clearTimeout(t); }
+    const t = setTimeout(()=>setStep(current=>current+1), step===0?560:820);
+    return ()=>clearTimeout(t);
+  }, [step, phase]);
+  useEffect(() => {
+    if (phase !== 'result') return;
+    let value = 0;
+    const id = setInterval(()=>{ value += 2; if (value >= 42) { value = 42; clearInterval(id); } setScore(value); }, 22);
+    return ()=>clearInterval(id);
+  }, [phase]);
+  // 顺序: 周次 / 中文标题 / 英文标题 / 中文说明 / 英文说明 / 中文按钮 / 英文按钮 / 目标页
+  const moves = [
+    ['1','给每条内容加上门店信息','Put store info on every post','18 条内容没有地址或电话。模板改一次，之后每条都自动带上。','18 posts have neither. Fix the template once and every future post carries it.','去设置模板','Open templates','templates'],
+    ['2','发 3 条老板出镜的短视频','Publish 3 owner-led videos','先拍你被问得最多的那几个问题，这类内容最容易带来到店咨询。','Start with the questions you answer most. They convert into store enquiries fastest.','创建数字人','Create avatar','avatars'],
+    ['3','让 3 个店员一起发','Turn on 3 employee accounts','所有内容都压在一个号上，触达面被卡死。员工账号不额外收费。','Everything sits on one handle today. Employee seats cost nothing.','邀请店员','Invite employees','team']
+  ];
+  const goto = target => { onClose(); setPage(target); };
+  return <div className="avatar-entry-scrim" onMouseDown={onClose}><section className="checkup-modal" onMouseDown={event=>event.stopPropagation()}>
+    {phase==='running' ? <>
+      <header className="checkup-modal-head">
+        <div><span>{zh?'账号体检进行中':'CHECKUP IN PROGRESS'}</span><h3>{zh?'正在分析你的门店账号':'Analyzing your store account'}</h3><p>{profileUrl||'instagram.com/casalumainteriors'}</p></div>
+        <button onClick={onClose}><X/></button>
+      </header>
+      <div className="checkup-progress"><i style={{width:`${Math.min(100,Math.round(step/steps.length*100))}%`}}/></div>
+      <small className="checkup-cost-note"><Sparkle weight="fill"/>{zh?'本次体检消耗 50 credits':'This checkup uses 50 credits'}</small>
+      <ol className="checkup-steps">{steps.map(([Icon,zhLabel,enLabel,zhResult,enResult],index)=>{
+        const state = index < step ? 'done' : index === step ? 'active' : 'idle';
+        return <li key={enLabel} className={state}>
+          <i>{state==='done'?<Check weight="bold"/>:state==='active'?<SpinnerGap className="spin"/>:<Icon/>}</i>
+          <div><b>{zh?zhLabel:enLabel}</b>{state==='done'&&<small>{zh?zhResult:enResult}</small>}</div>
+        </li>;
+      })}</ol>
+    </> : <>
+      <header className="checkup-modal-head">
+        <div><span>{zh?'体检完成':'CHECKUP COMPLETE'}</span><h3>{zh?'发现 6 个问题，先修这 3 件':'6 issues found. Start with these 3.'}</h3><p>{profileUrl||'instagram.com/casalumainteriors'}</p></div>
+        <button onClick={onClose}><X/></button>
+      </header>
+      <div className="checkup-result-top">
+        <div className="checkup-result-score"><span>{zh?'账号健康分':'ACCOUNT HEALTH'}</span><div><b>{score}</b><i>/100</i></div><div className="checkup-gauge"><i style={{width:`${score}%`}}/></div></div>
+        <ul className="checkup-metrics">
+          <li><b>4</b><small>{zh?'30 天发布条数':'posts / 30 days'}</small></li>
+          <li><b>18</b><small>{zh?'缺门店信息':'missing store info'}</small></li>
+          <li className="danger"><b>−6</b><small>{zh?'较上次体检':'vs last checkup'}</small></li>
+        </ul>
+      </div>
+      <div className="checkup-moves">
+        <header><span>{zh?'下一步行动':'YOUR NEXT MOVES'}</span><b>{zh?'按这个顺序做，三周把主要问题补上':'Do them in this order and the main gaps are closed in three weeks'}</b></header>
+        {moves.map(([week,zhTitle,enTitle,zhBody,enBody,zhCta,enCta,target])=><article key={enTitle}>
+          <i>{zh?`第 ${week} 周`:`WEEK ${week}`}</i>
+          <div><b>{zh?zhTitle:enTitle}</b><small>{zh?zhBody:enBody}</small></div>
+          <button onClick={()=>goto(target)}>{zh?zhCta:enCta}<ArrowRight/></button>
+        </article>)}
+      </div>
+      <footer className="checkup-modal-foot">
+        <small>{zh?'仅统计公开主页可见的数据，未包含私信与广告投放。':'Counted from public profile data only. Direct messages and paid campaigns are not included.'}</small>
+        <button className="primary" onClick={onOpenReport}>{zh?'查看完整体检报告':'See the full report'}<ArrowRight/></button>
+      </footer>
+    </>}
+  </section></div>;
+}
+
+function HomePage({ setPage, notify, language, tier, startBrandImport, checkups, addCheckup, onBuildCalendar }) {
   const zh = language === 'zh';
   const hasMarketingCalendar = tierOrder[tier] >= tierOrder.pro;
-  const [brandProfileUrl, setBrandProfileUrl] = useState('');
-  const [avatarEntryOpen, setAvatarEntryOpen] = useState(false);
-  const steps = [
-    [VideoCamera,zh?'录制 20 秒':'Record 20 seconds',zh?'用手机自然口播一次':'Speak naturally once'],
-    [UserCircle,zh?'生成老板分身':'Create your clone',zh?'保留你的形象与声音':'Keep your face and voice'],
-    [UploadSimple,zh?'选择店内实拍':'Pick store footage',zh?'产品、空间与服务过程':'Products, space and service'],
-    [Target,zh?'追踪到店线索':'Track store visits',zh?'看清内容和员工贡献':'See content and employee impact']
+  const [profileUrl, setProfileUrl] = useState('');
+  const [stage, setStage] = useState('idle');
+  const [source, setSource] = useState(null);
+  const inputRef = useRef(null);
+  const latest = checkups[0];
+  const [stateOverride, setStateOverride] = useState(null);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const onboarding = stateOverride ? stateOverride === 'onboarding' : checkups.length === 0;
+  const showOnboarding = () => { setStateOverride('onboarding'); setStage('idle'); setProfileUrl(''); };
+  const showOperating = () => setStateOverride('operating');
+  const CYCLE = 30;
+  const dueIn = latest ? CYCLE - latest.daysAgo : 0;
+  const overdue = !!latest && dueIn <= 0;
+  const hasAttribution = tierOrder[tier] >= tierOrder.pro;
+  // 顺序: 图标 / 数值 / 中标签 / 英标签 / 中对比 / 英对比 / 趋势
+  const overview = [
+    [Article,'4','本月发布','Posts this month','上月 6 条','6 last month','down'],
+    [Eye,'12.4K','触达','Reach','环比 -18%','-18% vs last month','down'],
+    [ChartLineUp,'38','互动与私信','Conversations','环比 +4','+4 vs last month','up'],
+    [Users,'1 / 6','在发的账号','Accounts publishing','0 个员工号在发','0 employee accounts','down']
   ];
-  const createWithAvatar = avatar => {
-    setSelectedAvatar(avatar);
-    setPage('agent');
-    notify(zh?`已选择 ${avatar.name}，可以开始制作短视频。`:`${avatar.name} selected. Start creating your video.`);
+  if (hasAttribution) overview.push([Target,'9','到店','Store visits','7 条已确认归因','7 confirmed by attribution','up']);
+  const runCheckup = () => {
+    if (!profileUrl.trim()) { inputRef.current?.focus(); return notify(zh?'请先粘贴门店社媒主页链接。':'Paste your store profile URL first.'); }
+    const url = profileUrl.toLowerCase();
+    setSource(url.includes('tiktok')?'TikTok':url.includes('instagram')?'Instagram':'Facebook');
+    setStage('running');
   };
+  const openReport = () => {
+    const url = profileUrl.toLowerCase();
+    addCheckup({
+      id:`chk-${Date.now()}`,
+      source: url.includes('tiktok')?'TikTok':url.includes('instagram')?'Instagram':'Facebook',
+      handle: profileUrl.replace(/^https?:\/\//,'').replace(/\/$/,'') || 'casalumainteriors',
+      score: 42, issues: 6, date: zh?'今天':'Today', daysAgo: 0
+    });
+    setStage('done');
+    notify(zh?'体检报告已保存，6 个问题都有对应的解决入口。':'Report saved. Every issue has a fix you can open.');
+  };
+  const checks = [
+    [CalendarBlank,zh?'发布节奏与断更':'Posting rhythm and gaps'],
+    [MapPin,zh?'门店信息是否齐全':'Store info on every post'],
+    [CursorClick,zh?'是否有明确引导动作':'Clear next step in each post'],
+    [UserCircle,zh?'内容里有没有真人':'Real people on camera'],
+    [CirclesFour,zh?'平台覆盖与账号数':'Platform and account coverage'],
+    [TrendUp,zh?'与上次体检相比的变化':'Change since your last checkup']
+  ];
+  // 顺序: 严重度 / 图标 / 中标题 / 英标题 / 中说明 / 英说明 / 中按钮 / 英按钮 / 跳转页
+  const findings = [
+    ['critical',MapPin,'22 条内容里，18 条没有门店信息','18 of 22 posts have no store info','没有地址、电话或预约方式 —— 想找你的人找不到你。','No address, phone or booking link. People who want you cannot find you.','用模板强制带上','Fix with templates','templates'],
+    ['critical',CalendarBlank,'30 天只发了 4 条，最长断更 19 天','4 posts in 30 days, longest gap 19 days','上次体检是 6 条，这次只有 4 条，还在往下走。','Last checkup had 6. This one has 4. The trend is still down.','生成 30 天计划','Build a 30-day plan',hasMarketingCalendar?'calendar':'plan'],
+    ['warning',UserCircle,'没有一条内容有真人出镜','No post has a real person on camera','本地生意里，老板出镜的内容信任度最高。','In local business, owner-led content earns the most trust.','创建老板数字人','Create owner avatar','avatars'],
+    ['warning',CursorClick,'15 条内容没有明确的下一步','15 posts have no clear next step','没有到店、预约或私信的引导动作。','No prompt to visit, book or message.','换成带 CTA 的模板','Use templates with CTA','templates'],
+    ['warning',CirclesFour,'只发布到 1 个平台','Publishing to 1 platform only','Instagram 已连接，Facebook 与 TikTok 未连接。','Instagram is connected. Facebook and TikTok are not.','连接更多账号','Connect accounts','channels'],
+    ['info',Users,'所有内容都来自同一个账号','All posts come from a single account','没有员工账号在发布，触达面被限制在一个号上。','No employee account is publishing. Your reach sits on one handle.','启用员工矩阵','Turn on employee posting','team']
+  ];
+  // 顺序: 日期 / 分数 / 问题数 / 是否本次
+  const trend = [...checkups].reverse().map((item,index,list)=>[item.date,item.score,item.issues,index===list.length-1]);
+  const moves = [
+    ['1','给每条内容加上门店信息','Put store info on every post','18 条内容没有地址或电话。模板改一次，之后每条都自动带上。','18 posts have neither. Fix the template once and every future post carries it.','去设置模板','Open templates','templates'],
+    ['2','发 3 条老板出镜的短视频','Publish 3 owner-led videos','先拍你被问得最多的那几个问题，这类内容最容易带来到店咨询。','Start with the questions you answer most. They convert into store enquiries fastest.','创建数字人','Create avatar','avatars'],
+    ['3','让 3 个店员一起发','Turn on 3 employee accounts','所有内容都压在一个号上，触达面被卡死。员工账号不额外收费。','Everything sits on one handle today. Employee seats cost nothing.','邀请店员','Invite employees','team']
+  ];
+  const path = [
+    [MagnifyingGlass,zh?'账号体检':'Run the checkup',zh?'看清差距在哪':'See where the gaps are'],
+    [Buildings,zh?'提取品牌资产':'Extract brand assets',zh?'产品、市场、语气':'Products, market, voice'],
+    [CalendarCheck,zh?'生成 30 天方案':'Get a 30-day plan',zh?'按优先级逐条修复':'Fix the gaps in order'],
+    [VideoCamera,zh?'生产并发布':'Create and publish',zh?'数字人 + 店内实拍':'Owner avatar + real footage'],
+    [Target,zh?'归因到人':'Attribute to people',zh?'哪条内容、哪个员工带来到店':'Which content and employee drove visits']
+  ];
   return <div className="page home-page">
-    <section className="owner-ad-hero">
-      <div className="owner-ad-copy"><span>{zh?'到店增长归因':'STORE-VISIT ATTRIBUTION'}</span><h1>{zh?'知道哪条内容带来了到店，以及是谁发布的。':'Know which content brings customers in — and who posted it.'}</h1><p>{zh?'用老板数字人口播与店内实拍持续生产内容，再把线索、预约和到店结果连接回具体内容与员工账号。':'Create owner-led ads from your avatar and real store footage, then connect leads, bookings and visits back to the content and employee account that generated them.'}</p><div><button className="primary" onClick={()=>setPage('leads')}><Target/>{zh?'查看线索归因':'See lead attribution'}</button><button className="secondary" onClick={()=>setPage('agent')}><Sparkle/>{zh?'创建门店内容':'Create store content'}</button></div></div>
-      <div className="owner-ad-visual"><article className="owner-card"><img src={images.presenter}/><span>{zh?'老板口播内容':'OWNER-LED CONTENT'}</span><i><Play weight="fill"/></i></article><article className="store-card"><img src={images.kitchen}/><span>{zh?'门店实拍证明':'REAL STORE PROOF'}</span></article><div className="owner-ad-output attribution-output"><Target weight="fill"/><b>{zh?'12 条线索 · 4 次到店':'12 leads · 4 visits'}</b><small>{zh?'内容 + 账号 + 员工归因':'Content + account + employee'}</small></div></div>
+    <div className="home-state-switch">
+      <span>{zh?'原型状态':'PROTOTYPE STATE'}</span>
+      <div role="group" aria-label={zh?'原型状态':'Prototype state'}>
+        <button className={onboarding?'active':''} onClick={showOnboarding}>{zh?'新手引导':'Onboarding'}</button>
+        <button className={!onboarding?'active':''} onClick={showOperating}>{zh?'运营中':'Operating'}</button>
+      </div>
+    </div>
+    {onboarding ? <>
+    <section className="home-checkup">
+      <div className="checkup-copy">
+        <span>{zh?'免费账号体检':'FREE ACCOUNT CHECKUP'}</span>
+        <h1>{zh?'先看清楚，你的门店账号差在哪。':'See exactly what is holding your store account back.'}</h1>
+        <p>{zh?'粘贴门店社媒主页，VertensAI 会检查发布节奏、内容结构与获客信息，和你上次体检做对比，再把每个问题变成可执行的 30 天方案。':'Paste your store profile. VertensAI checks your posting rhythm, content structure and local CTAs, compares it with your last checkup, then turns every gap into a 30-day plan.'}</p>
+        <div className="checkup-platforms"><FacebookLogo/><InstagramLogo/><TiktokLogo/><small>{zh?'仅读取公开主页数据':'Public profile data only'}</small></div>
+        <label className="checkup-input"><MagnifyingGlass/><input ref={inputRef} value={profileUrl} onChange={event=>setProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&runCheckup()} placeholder={zh?'粘贴 Facebook、Instagram 或 TikTok 主页链接':'Paste a Facebook, Instagram or TikTok profile URL'}/><button className="primary" disabled={stage==='running'} onClick={runCheckup}>{zh?'免费体检':'Run free checkup'}<ArrowRight/></button></label>
+        <small className="checkup-note">{zh?'首次体检免费，无需注册，无需交出账号密码。之后每次 50 credits。':'Your first checkup is free — no signup, no passwords. Each later checkup costs 50 credits.'}</small>
+        <button className="checkup-manual" onClick={()=>startBrandImport(profileUrl)}>{zh?'或进入我的品牌手动填写':'Or set up My Brand manually'}<ArrowRight/></button>
+      </div>
+      {stage==='done' ? <aside className="checkup-scorecard">
+        <header><div><span>{zh?'账号健康分':'ACCOUNT HEALTH'}</span><b>42</b><i>/100</i></div><p>{`${source} · Casa Luma Interiors`}</p></header>
+        <div className="checkup-gauge"><i style={{width:'42%'}}/></div>
+        <ul className="checkup-metrics">
+          <li><b>4</b><small>{zh?'30 天发布条数':'posts / 30 days'}</small></li>
+          <li><b>18</b><small>{zh?'缺门店信息':'missing store info'}</small></li>
+          <li className="danger"><b>−6</b><small>{zh?'较上次体检':'vs last checkup'}</small></li>
+        </ul>
+        <footer><TrendUp weight="bold"/><span>{zh?'三次体检，分数从 55 掉到 42 —— 问题不是变难了，是一直没修。':'Across three checkups the score slid from 55 to 42. Nothing got harder — the gaps just never got fixed.'}</span></footer>
+      </aside> : <aside className="checkup-covers">
+        <header><span>{zh?'体检覆盖':'THE CHECKUP COVERS'}</span><b>{zh?'6 项检查，60 秒出报告':'6 checks, report in 60 seconds'}</b></header>
+        <ul>{checks.map(([Icon,label])=><li key={label}><i><Icon weight="bold"/></i><span>{label}</span></li>)}</ul>
+        <footer><ShieldCheck weight="bold"/><span>{zh?'只读取公开主页数据，不需要账号密码或授权。':'Public profile data only. No password or account access required.'}</span></footer>
+      </aside>}
     </section>
-    <section className="owner-ad-steps">{steps.map(([Icon,title,copy],index)=><article key={title}><i>{index+1}</i><Icon/><div><b>{title}</b><small>{copy}</small></div>{index<steps.length-1&&<ArrowRight/>}</article>)}</section>
-    <section className="personal-avatars"><header><div><span>{zh?'我的数字人':'MY AVATARS'}</span><h2>{zh?'你的专属数字人':'Your personal avatars'}</h2><p>{zh?'选择一个数字人，直接开始制作老板口播短视频。':'Choose an avatar and create an owner-led video.'}</p></div><button onClick={()=>setAvatarEntryOpen(true)}><Plus/>{zh?'创建新数字人':'Create new avatar'}</button></header><div className="personal-avatar-grid">{personalAvatars.map(avatar=><article key={avatar.id} className="personal-avatar-card"><div className="personal-avatar-media"><img src={avatar.image}/><span><CheckCircle weight="fill"/>{zh?'可使用':'Ready'}</span></div><div className="personal-avatar-info"><div><b>{avatar.name}</b><small>{avatar.role}</small><p>{avatar.locale}</p></div><button className="primary" onClick={()=>createWithAvatar(avatar)}><VideoCamera/>{zh?'创建短视频':'Create video'}<ArrowRight/></button></div></article>)}<button className="personal-avatar-add" onClick={()=>setAvatarEntryOpen(true)}><span><Plus/></span><b>{zh?'创建另一个数字人':'Create another avatar'}</b><small>{zh?'克隆自己或自定义角色':'Clone yourself or customize a presenter'}</small></button></div>
-    </section>
-    <section className="home-brand-import">
-      <div className="home-brand-copy"><span>{zh?'导入品牌':'IMPORT YOUR BRAND'}</span><h2>{zh?'让 VertensAI 知道该讲什么。':'Give your avatar something worth saying.'}</h2><p>{hasMarketingCalendar?(zh?'粘贴企业社媒主页，我们会提取品牌、产品与内容风格，并生成首月营销日历。':'Paste a business profile. VertensAI turns it into a brand profile and a ready-to-use 30-day marketing calendar.'):(zh?'粘贴企业社媒主页，快速建立品牌、产品与内容风格；升级 Pro 后可自动生成营销日历。':'Paste a business profile to build your brand, products and content style. Upgrade to Pro for an automatic marketing calendar.')}</p><div className="home-brand-platforms"><FacebookLogo/><InstagramLogo/><TiktokLogo/><small>{zh?'支持企业主页':'Business profiles'}</small></div><label><LinkSimple/><input value={brandProfileUrl} onChange={event=>setBrandProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&startBrandImport(brandProfileUrl)} placeholder={zh?'粘贴 Facebook、Instagram 或 TikTok 主页链接':'Paste a Facebook, Instagram or TikTok profile URL'}/><button className="primary" disabled={!brandProfileUrl.trim()} onClick={()=>startBrandImport(brandProfileUrl)}>{zh?'分析品牌':'Analyze brand'}<ArrowRight/></button></label><button className="home-brand-manual" onClick={()=>startBrandImport('')}>{zh?'或进入我的品牌手动填写':'Or set up My Brand manually'}<ArrowRight/></button></div>
-      <div className="home-brand-result"><header><span>{hasMarketingCalendar?(zh?'导入后自动生成':'CREATED AUTOMATICALLY'):(zh?'LITE + PRO 能力':'LITE + PRO')}</span><b>{hasMarketingCalendar?(zh?'品牌资料 + 30 天内容计划':'Brand profile + 30-day plan'):(zh?'品牌资料；Pro 解锁内容计划':'Brand profile now. Calendar in Pro.')}</b></header><div><article><i><Buildings/></i><span><b>{zh?'品牌资料':'My Brand'}</b><small>{zh?'产品、市场、语气':'Products, market, voice'}</small></span><CheckCircle weight="fill"/></article><article><i><Strategy/></i><span><b>{zh?'内容主题':'Content angles'}</b><small>{zh?'口播、实拍、案例':'Owner, proof, stories'}</small></span><CheckCircle weight="fill"/></article><article><i><CalendarCheck/></i><span><b>{zh?'营销日历':'Marketing calendar'}</b><small>{hasMarketingCalendar?(zh?'首月内容可直接生产':'First month ready to create'):(zh?'Pro 版本解锁':'Available in Pro')}</small></span>{hasMarketingCalendar?<CheckCircle weight="fill"/>:<ArrowCircleUp/>}</article></div><footer><div><span>01</span><span>02</span><span>03</span><span>04</span></div><small>{hasMarketingCalendar?(zh?'每周一个清晰的增长主题':'One clear growth theme per week'):(zh?'升级 Pro，自动规划 30 天内容':'Upgrade to Pro for a 30-day plan')}</small></footer></div>
-    </section>
-    {avatarEntryOpen&&<AvatarEntryDialog language={language} onClose={()=>setAvatarEntryOpen(false)} onClone={()=>{setAvatarEntryOpen(false);startAvatarWizard();}} onCustom={()=>{setAvatarEntryOpen(false);setPage('avatars');}}/>}
+    </> : <>
+      <section className="home-overview">
+        <header><div><span>{zh?'本月运营概览':'THIS MONTH'}</span><h2>{zh?'Casa Luma Interiors · 运营数据':'Casa Luma Interiors · account overview'}</h2></div><button onClick={()=>setPage(hasAttribution?'performance':'publishing')}>{zh?'查看明细':'View details'}<ArrowRight/></button></header>
+        <div className="overview-grid">{overview.map(([Icon,value,zhLabel,enLabel,zhDelta,enDelta,trend])=><article key={enLabel}>
+          <i><Icon weight="bold"/></i>
+          <b>{value}</b>
+          <small>{zh?zhLabel:enLabel}</small>
+          <em className={trend}>{trend==='down'?'▼':'▲'} {zh?zhDelta:enDelta}</em>
+        </article>)}</div>
+      </section>
+      <section className={`checkup-due ${overdue?'overdue':''}`}>
+        <div className="due-copy">
+          <span>{overdue?(zh?'该体检了':'CHECKUP DUE'):(zh?'体检周期':'CHECKUP CYCLE')}</span>
+          <h2>{overdue?(zh?`距上次体检已经 ${latest.daysAgo} 天`:`It has been ${latest.daysAgo} days since your last checkup`):(zh?`下次建议体检还有 ${dueIn} 天`:`Next checkup suggested in ${dueIn} days`)}</h2>
+          <p>{overdue?(zh?'账号每个月都在变。体检一次只是一个点，连成线才知道是在变好还是在变差。':'Your account keeps moving. One checkup is a dot; a monthly line is what tells you whether it is improving.'):(zh?'到期我们会提醒你。也可以随时提前体检。':'We will remind you when it is due. You can also run one early.')}</p>
+          <button className="due-history" onClick={()=>setHistoryOpen(true)}><FileText weight="bold"/>{zh?`历史体检报告（${checkups.length}）`:`Checkup reports (${checkups.length})`}<ArrowRight/></button>
+        </div>
+        <label className="checkup-input"><MagnifyingGlass/><input ref={inputRef} value={profileUrl} onChange={event=>setProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&runCheckup()} placeholder={latest?latest.handle:(zh?'粘贴主页链接':'Paste a profile URL')}/><button className="primary" disabled={stage==='running'} onClick={runCheckup}>{overdue?(zh?'立即体检':'Run checkup now'):(zh?'提前体检':'Run early')}<ArrowRight/></button></label>
+        <small className="due-cost"><Sparkle weight="fill"/>{zh?'本次体检消耗 50 credits':'This checkup uses 50 credits'}</small>
+      </section>
+    </>}
+    {onboarding && <section className="owner-ad-steps">{path.map(([Icon,title,copy],index)=><article key={title}><i>{index+1}</i><Icon/><div><b>{title}</b><small>{copy}</small></div>{index<path.length-1&&<ArrowRight/>}</article>)}</section>}
+
+    {!onboarding && stage==='done' && <>
+      <section className="checkup-report">
+        <div className="checkup-findings">
+          <header><div><span>{zh?'体检结果':'CHECKUP RESULT'}</span><h2>{zh?'发现 6 个问题，每个都有对应的解决方式':'6 issues found — each one has a fix'}</h2></div><i className="checkup-sample">{source}</i></header>
+          <div className="checkup-finding-list">{findings.map(([level,Icon,zhTitle,enTitle,zhBody,enBody,zhFix,enFix,target])=><article key={enTitle} className={`checkup-finding ${level}`}>
+            <i><Icon weight="bold"/></i>
+            <div><b>{zh?zhTitle:enTitle}</b><small>{zh?zhBody:enBody}</small></div>
+            <button onClick={()=>setPage(target)}>{zh?zhFix:enFix}<ArrowRight/></button>
+          </article>)}</div>
+        </div>
+        <aside className="checkup-trend">
+          <header><span>{zh?'你的体检趋势':'YOUR TREND'}</span><b>{zh?'和你自己的历史比':'Measured against your own history'}</b></header>
+          <div className="trend-rows">{trend.map(([date,score,issues,current])=><article key={date} className={current?'current':''}>
+            <div className="trend-when"><b>{date}</b><small>{issues} {zh?'个问题':'issues'}</small></div>
+            <div className="trend-bar"><i style={{width:`${score}%`}}/></div>
+            <span>{score}<i>/100</i></span>
+          </article>)}</div>
+          <footer><Clock weight="bold"/><span>{zh?'每月体检一次，这条线才有意义。修完再体检，看它能不能拉回去。':'Run it monthly for this line to mean anything. Fix the gaps, then check again and see if it turns.'}</span></footer>
+        </aside>
+      </section>
+      <section className="checkup-moves page-moves">
+        <div className="moves-cta">
+          <div><span>{zh?'从体检到排期':'FROM CHECKUP TO PLAN'}</span><b>{zh?'把这 6 个问题变成一份 30 天营销日历':'Turn these 6 issues into a 30-day marketing calendar'}</b><small>{zh?'按优先级排期：先补门店信息，再上老板出镜内容，最后让店员一起发。每条文案都可以改。':'Sequenced by priority: store info first, then owner-led videos, then employee accounts. Every script stays editable.'}</small></div>
+          <button className="primary" onClick={()=>onBuildCalendar?.()}><CalendarCheck weight="bold"/>{zh?'生成 30 天日历':'Generate 30-day calendar'}<ArrowRight/></button>
+        </div>
+        <header><span>{zh?'下一步行动':'YOUR NEXT MOVES'}</span><b>{zh?'按这个顺序做，三周把主要问题补上':'Do them in this order and the main gaps are closed in three weeks'}</b></header>
+        {moves.map(([week,zhTitle,enTitle,zhBody,enBody,zhCta,enCta,target])=><article key={enTitle}>
+          <i>{zh?`第 ${week} 周`:`WEEK ${week}`}</i>
+          <div><b>{zh?zhTitle:enTitle}</b><small>{zh?zhBody:enBody}</small></div>
+          <button onClick={()=>setPage(target)}>{zh?zhCta:enCta}<ArrowRight/></button>
+        </article>)}
+      </section>
+    </>}
+
+    {historyOpen&&<CheckupHistoryModal language={language} checkups={checkups} onClose={()=>setHistoryOpen(false)} />}
+    {stage==='running'&&<CheckupModal language={language} source={source} profileUrl={profileUrl} onClose={()=>setStage('idle')} onOpenReport={openReport} setPage={setPage}/>}
   </div>;
 }
 
@@ -511,37 +829,51 @@ function CanvasPage({ template, theme }) {
   </div>;
 }
 
-function AvatarsPage({ notify, setPage, language, selectedAvatar, setSelectedAvatar, wizardOpen, closeWizard, onAvatarCreated }) {
+function AvatarsPage({ notify, setPage, language, selectedAvatar, setSelectedAvatar, personalAvatars, wizardOpen, closeWizard, onAvatarCreated }) {
   const zh = language === 'zh';
   const [query, setQuery] = useState('');
-  const [cloneOpen, setCloneOpen] = useState(false);
+  const [flow, setFlow] = useState(null);
   const [wizardStep, setWizardStep] = useState(1);
-  const libraryRef = useRef(null);
-  useEffect(() => { if (wizardOpen) { setCloneOpen(true); setWizardStep(1); closeWizard?.(); } }, [wizardOpen, closeWizard]);
+  const [consented, setConsented] = useState(false);
+  const [ownerName, setOwnerName] = useState(zh ? '我的老板数字人' : 'My owner avatar');
+  const [custom, setCustom] = useState({ base:0, gender:'Female', age:'30–45', market:'North America', hair:'Dark · shoulder length', wardrobe:'Smart casual', scene:'Showroom', voice:'Warm & confident', language:'English' });
+  useEffect(() => { if (wizardOpen) { setFlow('clone'); setWizardStep(1); setConsented(false); closeWizard?.(); } }, [wizardOpen, closeWizard]);
   const filtered = actors.filter(a => a.join(' ').toLowerCase().includes(query.toLowerCase()));
-  const selectActor = ([name,role,locale,image]) => { setSelectedAvatar({name,role,locale,image}); notify(zh?`已选择数字人 ${name}`:`${name} selected. Opening Agent.`); setPage('agent'); };
+  const openFlow = type => { setFlow(type); setWizardStep(1); setConsented(false); };
+  const useAvatar = avatar => { setSelectedAvatar(avatar); notify(zh?`已选择数字人 ${avatar.name}`:`${avatar.name} selected. Opening Agent.`); setPage('agent'); };
   const finishOwner = () => {
-    const owner={id:`owner-${Date.now()}`,name:zh?'我的老板数字人':'My owner avatar',role:zh?'门店老板分身':'Store owner clone',locale:zh?'中文 · 英语':'English · Chinese',image:images.presenter};
+    const owner={id:`owner-${Date.now()}`,name:ownerName.trim() || (zh?'我的老板数字人':'My owner avatar'),role:zh?'门店老板分身':'Store owner clone',locale:zh?'中文 · 英语':'English · Chinese',image:images.presenter};
     setSelectedAvatar(owner);
     onAvatarCreated?.(owner);
-    setCloneOpen(false);
+    setFlow(null);
     setWizardStep(1);
-    notify(zh?'数字人创建成功，已加入首页。':'Your avatar is ready and has been added to Home.');
-    setPage('home');
+    notify(zh?'克隆数字人已保存到“我的数字人”。':'Your cloned avatar is saved in My avatars.');
+  };
+  const finishCustom = () => {
+    const source=actors[custom.base];
+    const avatar={id:`custom-${Date.now()}`,name:zh?`定制数字人 · ${source[0]}`:`Custom · ${source[0]}`,role:`${custom.wardrobe} · ${custom.scene}`,locale:`${custom.language} · ${custom.voice}`,image:source[3]};
+    setSelectedAvatar(avatar); onAvatarCreated?.(avatar); setFlow(null); setWizardStep(1);
+    notify(zh?'定制数字人已生成并保存。':'Your custom avatar is generated and saved.');
   };
   return <div className="page avatars-page">
     <PageTitle eyebrow={zh?'数字人':'AI AVATARS'} title={zh?'选择你的数字人创建方式':'Choose how to create your avatar'} copy={zh?'克隆本人建立长期信任，或自定义一个现成数字人快速开始。':'Clone yourself for lasting trust, or customize a ready presenter for a faster start.'}/>
     <div className="avatar-methods">
-      <button onClick={() => {setCloneOpen(true);setWizardStep(1);}}><div><span>{zh?'你的核心资产':'YOUR STRONGEST ASSET'}</span><h3>{zh?'克隆自己':'Clone yourself'}</h3><p>{zh?'录制一次，持续生成保留本人形象与声音的多语言门店广告。':'Record once. Create owner-led videos in multiple languages with your face and voice.'}</p><b>{zh?'开始克隆':'Start cloning'} <ArrowRight/></b></div><img src={images.presenter}/></button>
-      <button onClick={()=>libraryRef.current?.scrollIntoView({behavior:'smooth',block:'start'})}><div><span>{zh?'最快开始':'FASTEST START'}</span><h3>{zh?'自定义数字人':'Custom avatar'}</h3><p>{zh?'从角色库选择形象，再按行业、市场和广告风格进行定制。':'Choose a ready presenter, then customize it for your industry, market and ad style.'}</p><b>{zh?'自定义数字人':'Customize avatar'} <ArrowRight/></b></div><img src={images.sofia}/></button>
+      <button onClick={() => openFlow('clone')}><div><span>{zh?'你的核心资产':'YOUR STRONGEST ASSET'}</span><h3>{zh?'克隆自己':'Clone yourself'}</h3><p>{zh?'录制一次，持续生成保留本人形象与声音的多语言门店广告。':'Record once. Create owner-led videos in multiple languages with your face and voice.'}</p><b>{zh?'开始克隆':'Start cloning'} <ArrowRight/></b></div><img src={images.presenter}/></button>
+      <button onClick={() => openFlow('custom')}><div><span>{zh?'最快开始':'FASTEST START'}</span><h3>{zh?'自定义数字人':'Custom avatar'}</h3><p>{zh?'选择人物属性、行业场景、语言与声音，生成专属广告角色。':'Choose appearance, industry scene, language and voice to generate your presenter.'}</p><b>{zh?'开始定制':'Customize avatar'} <ArrowRight/></b></div><img src={images.sofia}/></button>
     </div>
-    <div className="library-head" ref={libraryRef}><div><h3>{zh?'自定义数字人':'Custom avatar library'}</h3><p>{zh?'选择形象，并用于广告和自然内容。':'Choose a presenter for paid and organic content.'}</p></div><label><MagnifyingGlass/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={zh?'搜索形象、语言或角色':'Search avatars, language or role'}/></label></div>
+    <section className="my-avatar-section"><div className="library-head"><div><span>{zh?'我的资产':'MY ASSETS'}</span><h3>{zh?'我的数字人':'My avatars'}</h3><p>{zh?'克隆和定制完成后会保存在这里，可直接用于创作。':'Cloned and custom avatars are saved here, ready for creation.'}</p></div><button className="secondary" onClick={()=>openFlow('clone')}><Plus/>{zh?'创建数字人':'Create avatar'}</button></div><div className="my-avatar-grid">{personalAvatars.map(avatar=><article key={avatar.id} className={selectedAvatar?.id===avatar.id?'selected':''}><div><img src={avatar.image}/><span>{avatar.role.includes('clone')||avatar.role.includes('分身')?(zh?'本人克隆':'OWNER CLONE'):(zh?'定制角色':'CUSTOM')}</span></div><section><b>{avatar.name}</b><small>{avatar.role}</small><p>{avatar.locale}</p><button onClick={()=>useAvatar(avatar)}>{zh?'用它创作':'Create with avatar'}<ArrowRight/></button></section></article>)}</div></section>
+    <div className="library-head avatar-library-head"><div><span>{zh?'角色参考':'PRESENTER LIBRARY'}</span><h3>{zh?'浏览可定制角色':'Browse presenter styles'}</h3><p>{zh?'选择任一形象将进入属性定制流程。':'Pick a look, then tailor its attributes before saving.'}</p></div><label><MagnifyingGlass/><input value={query} onChange={e => setQuery(e.target.value)} placeholder={zh?'搜索形象、语言或角色':'Search avatars, language or role'}/></label></div>
     <div className="filter-chips"><button className="active">{zh?'全部数字人':'All avatars'}</button><button>English</button><button>Spanish</button><button>{zh?'本地门店':'Local business'}</button><button>{zh?'已收藏':'Saved'}</button></div>
-    <div className="actor-grid">{filtered.map((actor, i) => {const [name,role,locale,image]=actor;return <button className={selectedAvatar?.name === name ? 'selected' : ''} key={`${name}-${i}`} onClick={() => selectActor(actor)}><div><img src={image}/>{selectedAvatar?.name === name && <i><Check/></i>}<span>{i < 3 ? 'POPULAR' : 'HD'}</span></div><b>{name}</b><small>{role}</small><p>{locale}</p></button>;})}</div>
-    {cloneOpen && <div className="modal-scrim" onMouseDown={()=>setCloneOpen(false)}><div className="clone-modal avatar-wizard" onMouseDown={event=>event.stopPropagation()}><button className="modal-close" onClick={() => setCloneOpen(false)}><X/></button><span>{zh?'老板数字人':'OWNER AVATAR'}</span><h2>{zh?'20 秒创建你的老板分身':'Create your owner avatar in 20 seconds'}</h2><div className="wizard-progress">{[1,2,3].map(step=><i key={step} className={wizardStep>=step?'active':''}>{wizardStep>step?<Check/>:step}</i>)}</div>
-      {wizardStep===1&&<section className="wizard-panel"><ShieldCheck/><h3>{zh?'授权形象与声纹使用':'Consent and usage rights'}</h3><p>{zh?'仅用于当前工作区生成广告。你可以随时停用或删除。':'Used only for ads in this workspace. You can disable or delete it at any time.'}</p><label><input type="checkbox" defaultChecked/>{zh?'我确认本人授权，并同意形象与声音用于内容生成。':'I confirm consent to use my face and voice for generated content.'}</label><button className="primary" onClick={()=>setWizardStep(2)}>{zh?'同意并继续':'Agree and continue'}<ArrowRight/></button></section>}
-      {wizardStep===2&&<section className="wizard-panel"><VideoCamera/><h3>{zh?'录制或上传素材':'Record or upload'}</h3><p>{zh?'自然看向镜头说 20 秒，光线均匀，声音清晰。':'Look at the camera and speak naturally for 20 seconds.'}</p><div className="wizard-actions"><button onClick={()=>setWizardStep(3)}><Camera/><b>{zh?'开始录制':'Start recording'}</b></button><button onClick={()=>setWizardStep(3)}><UploadSimple/><b>{zh?'上传视频':'Upload video'}</b></button></div></section>}
-      {wizardStep===3&&<section className="wizard-panel generating"><SpinnerGap className="spin"/><h3>{zh?'数字人已生成':'Your avatar is ready'}</h3><p>{zh?'形象、表情和声纹已创建，可立即用于老板口播短视频。':'Your reusable face, motion and voice profile is ready for owner-led videos.'}</p><button className="primary" onClick={finishOwner}>{zh?'完成并返回首页':'Finish and view my avatar'}<ArrowRight/></button></section>}
+    <div className="actor-grid">{filtered.map((actor, i) => {const [name,role,locale,image]=actor;return <button key={`${name}-${i}`} onClick={() => {setCustom(c=>({...c,base:actors.indexOf(actor)}));openFlow('custom');}}><div><img src={image}/><span>{i < 3 ? 'POPULAR' : 'HD'}</span></div><b>{name}</b><small>{role}</small><p>{locale}</p></button>;})}</div>
+    {flow && <div className="modal-scrim" onMouseDown={()=>setFlow(null)}><div className="clone-modal avatar-wizard avatar-flow-modal" onMouseDown={event=>event.stopPropagation()}><button className="modal-close" onClick={() => setFlow(null)}><X/></button><span>{flow==='clone'?(zh?'克隆本人':'CLONE YOURSELF'):(zh?'定制角色':'CUSTOM AVATAR')}</span><h2>{flow==='clone'?(zh?'创建可重复使用的老板分身':'Create your reusable owner avatar'):(zh?'生成符合品牌的专属数字人':'Build an avatar for your brand')}</h2><div className="wizard-progress">{[1,2,3,4].map(step=><div key={step} className={wizardStep>=step?'active':''}><i>{wizardStep>step?<Check/>:step}</i><b>{flow==='clone'?[zh?'授权':'Consent',zh?'录制':'Record',zh?'检查':'Review',zh?'保存':'Save'][step-1]:[zh?'人物':'Person',zh?'造型':'Look',zh?'声音':'Voice',zh?'预览':'Preview'][step-1]}</b></div>)}</div>
+      {flow==='clone'&&wizardStep===1&&<section className="wizard-panel"><ShieldCheck/><h3>{zh?'确认本人授权':'Confirm consent'}</h3><p>{zh?'你的形象与声音只用于当前工作区，可随时停用或删除。':'Your face and voice stay in this workspace and can be disabled or deleted.'}</p><label className="consent-check"><input type="checkbox" checked={consented} onChange={e=>setConsented(e.target.checked)}/><span>{zh?'我确认由本人创建，并授权用于生成内容。':'I am creating my own avatar and authorize its use for generated content.'}</span></label><div className="wizard-actions"><button className="primary" disabled={!consented} onClick={()=>setWizardStep(2)}>{zh?'同意并继续':'Agree and continue'}<ArrowRight/></button></div></section>}
+      {flow==='clone'&&wizardStep===2&&<section className="wizard-panel"><VideoCamera/><h3>{zh?'录制 20 秒清晰视频':'Record a clear 20-second video'}</h3><div className="recording-guide"><span><Check/> {zh?'正面看镜头':'Face the camera'}</span><span><Check/> {zh?'环境安静、光线均匀':'Quiet room, even light'}</span><span><Check/> {zh?'自然说话并轻微转头':'Speak naturally and turn slightly'}</span></div><div className="wizard-actions"><button onClick={()=>setWizardStep(3)}><UploadSimple/>{zh?'上传视频':'Upload video'}</button><button className="primary" onClick={()=>setWizardStep(3)}><Camera/>{zh?'开始录制':'Start recording'}</button></div></section>}
+      {flow==='clone'&&wizardStep===3&&<section className="wizard-panel avatar-review"><img src={images.presenter}/><div><CheckCircle weight="fill"/><h3>{zh?'素材检查通过':'Recording checks passed'}</h3><p>{zh?'人脸清晰、声音完整，已准备生成。':'Face and voice quality are ready for generation.'}</p><div className="wizard-actions"><button onClick={()=>setWizardStep(2)}>{zh?'重新录制':'Record again'}</button><button className="primary" onClick={()=>setWizardStep(4)}>{zh?'生成数字人':'Generate avatar'}<ArrowRight/></button></div></div></section>}
+      {flow==='clone'&&wizardStep===4&&<section className="wizard-panel avatar-save"><img src={images.presenter}/><div><CheckCircle weight="fill"/><h3>{zh?'你的分身已准备好':'Your avatar is ready'}</h3><label>{zh?'数字人名称':'Avatar name'}<input value={ownerName} onChange={e=>setOwnerName(e.target.value)}/></label><p>{zh?'保存后将出现在“我的数字人”，并可直接进入 Agent 创作。':'It will appear in My avatars and can be used directly in Agent.'}</p><button className="primary" onClick={finishOwner}>{zh?'保存到我的数字人':'Save to My avatars'}<ArrowRight/></button></div></section>}
+      {flow==='custom'&&wizardStep===1&&<section className="wizard-panel"><h3>{zh?'选择基础人物与受众属性':'Choose a person and audience fit'}</h3><div className="avatar-base-options">{actors.slice(0,4).map((a,i)=><button className={custom.base===i?'selected':''} key={a[0]} onClick={()=>setCustom(c=>({...c,base:i}))}><img src={a[3]}/><b>{a[0]}</b></button>)}</div><div className="attribute-grid"><label>{zh?'性别表达':'Gender'}<select value={custom.gender} onChange={e=>setCustom(c=>({...c,gender:e.target.value}))}><option>Female</option><option>Male</option><option>Non-binary</option></select></label><label>{zh?'年龄段':'Age'}<select value={custom.age} onChange={e=>setCustom(c=>({...c,age:e.target.value}))}><option>18–29</option><option>30–45</option><option>46–60</option><option>60+</option></select></label><label>{zh?'目标市场':'Market'}<select value={custom.market} onChange={e=>setCustom(c=>({...c,market:e.target.value}))}><option>North America</option><option>Europe</option><option>Latin America</option><option>Southeast Asia</option></select></label></div><div className="wizard-actions"><button className="primary" onClick={()=>setWizardStep(2)}>{zh?'下一步：造型':'Next: appearance'}<ArrowRight/></button></div></section>}
+      {flow==='custom'&&wizardStep===2&&<section className="wizard-panel"><h3>{zh?'定制外观与门店场景':'Customize appearance and scene'}</h3><div className="attribute-grid"><label>{zh?'发型':'Hair'}<select value={custom.hair} onChange={e=>setCustom(c=>({...c,hair:e.target.value}))}><option>Dark · shoulder length</option><option>Short · professional</option><option>Curly · natural</option><option>Blonde · long</option></select></label><label>{zh?'服装':'Wardrobe'}<select value={custom.wardrobe} onChange={e=>setCustom(c=>({...c,wardrobe:e.target.value}))}><option>Smart casual</option><option>Business formal</option><option>Store uniform</option><option>Creative casual</option></select></label><label>{zh?'场景':'Scene'}<select value={custom.scene} onChange={e=>setCustom(c=>({...c,scene:e.target.value}))}><option>Showroom</option><option>Restaurant</option><option>Beauty studio</option><option>Retail store</option><option>Clean studio</option></select></label></div><div className="wizard-actions"><button onClick={()=>setWizardStep(1)}>{zh?'返回':'Back'}</button><button className="primary" onClick={()=>setWizardStep(3)}>{zh?'下一步：声音':'Next: voice'}<ArrowRight/></button></div></section>}
+      {flow==='custom'&&wizardStep===3&&<section className="wizard-panel"><h3>{zh?'选择语言与表达风格':'Choose voice and delivery'}</h3><div className="attribute-grid"><label>{zh?'主要语言':'Language'}<select value={custom.language} onChange={e=>setCustom(c=>({...c,language:e.target.value}))}><option>English</option><option>Spanish</option><option>Chinese</option><option>French</option><option>Portuguese</option></select></label><label>{zh?'声音风格':'Voice'}<select value={custom.voice} onChange={e=>setCustom(c=>({...c,voice:e.target.value}))}><option>Warm & confident</option><option>Energetic & friendly</option><option>Calm & expert</option><option>Direct & persuasive</option></select></label></div><button className="voice-preview" onClick={()=>notify(zh?'正在播放声音预览。':'Playing voice preview.')}><Play weight="fill"/>{zh?'试听声音':'Preview voice'}</button><div className="wizard-actions"><button onClick={()=>setWizardStep(2)}>{zh?'返回':'Back'}</button><button className="primary" onClick={()=>setWizardStep(4)}>{zh?'生成预览':'Generate preview'}<ArrowRight/></button></div></section>}
+      {flow==='custom'&&wizardStep===4&&<section className="wizard-panel custom-preview"><img src={actors[custom.base][3]}/><div><span>{zh?'预览已生成':'PREVIEW READY'}</span><h3>{zh?'你的专属广告角色':'Your custom presenter'}</h3><p>{custom.gender} · {custom.age} · {custom.market}</p><p>{custom.wardrobe} · {custom.scene}</p><p>{custom.language} · {custom.voice}</p><div className="wizard-actions"><button onClick={()=>setWizardStep(1)}>{zh?'继续调整':'Edit attributes'}</button><button className="primary" onClick={finishCustom}>{zh?'保存并使用':'Save avatar'}<ArrowRight/></button></div></div></section>}
     </div></div>}
   </div>;
 }
@@ -594,11 +926,20 @@ const calendarContent = [
   {day:27,time:'16:00',title:'Meet the team behind every project',titleZh:'认识项目背后的服务团队',format:'Behind the scenes',formatZh:'幕后图文',channel:'Instagram',owner:'Noah',status:'Idea',statusZh:'创意',theme:'Trust'}
 ];
 
-function MarketingCalendarPage({ setPage, notify, language, openAgentWithDraft }) {
+function MarketingCalendarPage({ setPage, notify, language, openAgentWithDraft, fromCheckup, clearFromCheckup }) {
   const zh = language === 'zh';
   const [view, setView] = useState('calendar');
   const [planning, setPlanning] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [scripts, setScripts] = useState({});
+  const [draft, setDraft] = useState(null);
+  const defaultScript = () => zh
+    ? {hook:'还在为这个选择反复纠结？先看完这 20 秒。',body:'我们用真实案例拆解关键差异，让效果和预算都更清楚。',cta:'预约到店，现场看样并领取本周方案。'}
+    : {hook:'Still comparing options? Give us 20 seconds before you decide.',body:'A real customer result shows the difference in material, finish and final value.',cta:'Book a showroom visit and see the finish in person this week.'};
+  useEffect(() => { setDraft(selectedPost ? (scripts[selectedPost.title] || defaultScript()) : null); }, [selectedPost, language]);
+  const dirty = !!selectedPost && !!draft && JSON.stringify(draft) !== JSON.stringify(scripts[selectedPost.title] || defaultScript());
+  const saveScript = () => { setScripts(current => ({...current, [selectedPost.title]: draft})); notify(zh?'文案已保存，后续生成会使用你改过的版本。':'Copy saved. Generation will use your edited version.'); };
+  const resetScript = () => { setDraft(defaultScript()); notify(zh?'已恢复 AI 初稿。':'Reset to the AI draft.'); };
   const generatePlan = () => {
     setPlanning(true);
     setTimeout(() => { setPlanning(false); notify(zh?'已根据品牌更新 4 周内容计划。':'Your 4-week plan has been refreshed.'); }, 900);
@@ -611,14 +952,16 @@ function MarketingCalendarPage({ setPage, notify, language, openAgentWithDraft }
   ];
   const createSelectedInAgent = () => {
     if (!selectedPost) return;
+    const copy = draft || defaultScript();
     const script = zh
-      ? `为「${selectedPost.titleZh}」生成一条短视频。\n\n开场：还在为这个选择反复纠结？先看完这 20 秒。\n正文：我们用真实案例拆解关键差异，让效果和预算都更清楚。\n行动：预约到店，现场看样并领取本周方案。\n\n形式：${selectedPost.formatZh}；渠道：${selectedPost.channel}；时间：${selectedPost.time}。`
-      : `Create a short video for "${selectedPost.title}".\n\nHook: Still comparing options? Give us 20 seconds before you decide.\nBody: A real customer result shows the difference in material, finish and final value.\nCTA: Book a showroom visit and see the finish in person this week.\n\nFormat: ${selectedPost.format}; Channel: ${selectedPost.channel}; Time: ${selectedPost.time}.`;
+      ? `为「${selectedPost.titleZh}」生成一条短视频。\n\n开场：${copy.hook}\n正文：${copy.body}\n行动：${copy.cta}\n\n形式：${selectedPost.formatZh}；渠道：${selectedPost.channel}；时间：${selectedPost.time}。`
+      : `Create a short video for "${selectedPost.title}".\n\nHook: ${copy.hook}\nBody: ${copy.body}\nCTA: ${copy.cta}\n\nFormat: ${selectedPost.format}; Channel: ${selectedPost.channel}; Time: ${selectedPost.time}.`;
     setSelectedPost(null);
     openAgentWithDraft?.(script);
   };
   return <div className="page calendar-page">
     <PageTitle eyebrow="PRO" title={zh?'营销日历':'Marketing Calendar'} copy={zh?'从品牌资产生成每周文案和短视频。':'Weekly copy and video ideas, built from My Brand.'} action={<div className="calendar-actions"><button className="secondary" onClick={() => setPage('brand')}><Buildings/> {zh?'我的品牌':'My Brand'}</button><button className="primary" onClick={generatePlan}>{planning ? <SpinnerGap className="spin"/> : <Strategy/>} {zh?'更新计划':'Refresh plan'}</button></div>}/>
+    {fromCheckup&&<div className="calendar-from-checkup"><MagnifyingGlass weight="bold"/><div><b>{zh?'这份日历是按你最近一次账号体检排的':'This calendar is sequenced from your latest account checkup'}</b><small>{zh?'第 1 周补门店信息 · 第 2 周上老板出镜内容 · 第 3 周让店员一起发。每条文案点开都能改。':'Week 1 fixes store info, week 2 adds owner-led video, week 3 brings employees in. Open any post to edit its copy.'}</small></div><button onClick={clearFromCheckup}><X/></button></div>}
     <section className="calendar-summary">
       <div><span>{zh?'本月目标':'MONTHLY GOAL'}</span><h3>{zh?'吸引到店与预约':'Drive visits and bookings'}</h3></div>
       <div className="calendar-summary-meta"><b>9</b><small>{zh?'条内容':'posts'}</small><b>6</b><small>{zh?'条短视频':'videos'}</small><b>3</b><small>{zh?'个平台':'channels'}</small></div>
@@ -630,7 +973,7 @@ function MarketingCalendarPage({ setPage, notify, language, openAgentWithDraft }
         {view === 'calendar' ? <><div className="calendar-weekdays">{(zh?['一','二','三','四','五','六','日']:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']).map(day => <span key={day}>{day}</span>)}</div><div className="calendar-grid">{Array.from({length:35},(_,index) => {const day = index - 1; const items = calendarContent.filter(item => item.day === day); return <div className={`calendar-cell ${day < 1 || day > 30 ? 'muted' : ''}`} key={index}><span>{day > 0 && day <= 30 ? day : day <= 0 ? 31 + day : day - 30}</span>{items.map(item => <button key={item.title} className={`calendar-item ${item.status.toLowerCase().replace(' ','-')}`} onClick={() => setSelectedPost(item)}><i></i><b>{zh?item.titleZh:item.title}</b><small>{item.format.includes('video') || item.format.includes('head') || item.format.includes('Transformation') ? (zh?'短视频 · 预览':'Video · Preview') : (zh?'文案 · 预览':'Copy · Preview')}</small><Eye/></button>)}</div>})}</div></> : <div className="calendar-list">{calendarContent.map(item => <div className="calendar-list-row" key={item.title}><span>{zh?'9月':'SEP'} <b>{item.day}</b></span><div><b>{zh?item.titleZh:item.title}</b><small>{zh?item.formatZh:item.format} · {item.channel} · {item.time}</small></div><em>{zh?item.statusZh:item.status}</em><button onClick={() => setSelectedPost(item)}><Eye/> {zh?'预览文案':'Preview'}</button></div>)}</div>}
       </div>
     </section>
-    {selectedPost&&<div className="calendar-preview-scrim" onMouseDown={() => setSelectedPost(null)}><section className="calendar-preview-modal" onMouseDown={event=>event.stopPropagation()}><header><div><span>{zh?'内容预览':'CONTENT PREVIEW'}</span><h3>{zh?selectedPost.titleZh:selectedPost.title}</h3></div><button onClick={()=>setSelectedPost(null)}><X/></button></header><div className="calendar-video-preview"><img src={selectedPost.day%2?images.kitchen:images.presenter}/><i><Play weight="fill"/></i><span>{selectedPost.formatZh||selectedPost.format} · {selectedPost.time}</span></div><div className="calendar-script"><span>{zh?'短视频文案':'VIDEO SCRIPT'}</span><p><b>{zh?'开场：':'Hook: '}</b>{zh?'还在为这个选择反复纠结？先看完这 20 秒。':'Still comparing options? Give us 20 seconds before you decide.'}</p><p><b>{zh?'正文：':'Body: '}</b>{zh?'我们用真实案例拆解关键差异，让效果和预算都更清楚。':'A real customer result shows the difference in material, finish and final value.'}</p><p><b>{zh?'行动：':'CTA: '}</b>{zh?'预约到店，现场看样并领取本周方案。':'Book a showroom visit and see the finish in person this week.'}</p></div><button className="create-agent-button" onClick={createSelectedInAgent}><Sparkle weight="fill"/>{zh?'在 Agent 中生成':'Create in Agent'}<ArrowRight/></button></section></div>}
+    {selectedPost&&<div className="calendar-preview-scrim" onMouseDown={() => setSelectedPost(null)}><section className="calendar-preview-modal" onMouseDown={event=>event.stopPropagation()}><header><div><span>{zh?'内容预览':'CONTENT PREVIEW'}</span><h3>{zh?selectedPost.titleZh:selectedPost.title}</h3></div><button onClick={()=>setSelectedPost(null)}><X/></button></header><div className="calendar-video-preview"><img src={selectedPost.day%2?images.kitchen:images.presenter}/><i><Play weight="fill"/></i><span>{selectedPost.formatZh||selectedPost.format} · {selectedPost.time}</span></div><div className="calendar-script editable"><header><span>{zh?'短视频文案 · 可直接编辑':'VIDEO SCRIPT · EDITABLE'}</span>{dirty&&<em>{zh?'未保存':'Unsaved'}</em>}</header>{draft&&[['hook',zh?'开场':'Hook'],['body',zh?'正文':'Body'],['cta',zh?'行动':'CTA']].map(([key,label])=><label key={key}><b>{label}</b><textarea rows={key==='body'?3:2} value={draft[key]} onChange={event=>setDraft(current=>({...current,[key]:event.target.value}))}/></label>)}<div className="script-actions"><button onClick={resetScript}>{zh?'恢复 AI 初稿':'Reset to AI draft'}</button><button className="primary" disabled={!dirty} onClick={saveScript}>{zh?'保存文案':'Save copy'}</button></div></div><button className="create-agent-button" onClick={createSelectedInAgent}><Sparkle weight="fill"/>{zh?'在 Agent 中生成':'Create in Agent'}<ArrowRight/></button></section></div>}
   </div>;
 }
 
@@ -972,6 +1315,17 @@ export function App() {
   ]);
   const [avatarWizardOpen, setAvatarWizardOpen] = useState(false);
   const [brandImportRequest, setBrandImportRequest] = useState(null);
+  const [checkups, setCheckups] = useState([
+    {id:'chk-jul',source:'Instagram',handle:'instagram.com/casalumainteriors',score:48,issues:5,date:'Jul 20',daysAgo:32},
+    {id:'chk-jun',source:'Instagram',handle:'instagram.com/casalumainteriors',score:55,issues:4,date:'Jun 18',daysAgo:64}
+  ]);
+  const addCheckup = entry => setCheckups(current => [entry, ...current].slice(0, 6));
+  const [calendarFromCheckup, setCalendarFromCheckup] = useState(false);
+  const buildCalendarFromCheckup = () => {
+    const canPlan = tierOrder[tier] >= tierOrder.pro;
+    setCalendarFromCheckup(canPlan);
+    setPage(canPlan ? 'calendar' : 'plan');
+  };
   const [activeProject, setActiveProject] = useState(null);
   const [agentDraft, setAgentDraft] = useState('');
   const [notice, setNotice] = useState('');
@@ -988,15 +1342,15 @@ export function App() {
   const addPersonalAvatar = avatar => setPersonalAvatars(current => current.some(item => item.id === avatar.id) ? current : [avatar, ...current]);
   const openAgentWithDraft = draft => { setAgentDraft(draft || ''); setActiveProject(null); setPage('agent'); };
   const content = useMemo(() => {
-    if (page === 'home') return <HomePage product={product} setProduct={setProduct} setPage={setPage} notify={notify} language={language} tier={tier} startAvatarWizard={startAvatarWizard} personalAvatars={personalAvatars} setSelectedAvatar={setSelectedAvatar} startBrandImport={startBrandImport}/>;
+    if (page === 'home') return <HomePage setPage={setPage} notify={notify} language={language} tier={tier} startBrandImport={startBrandImport} checkups={checkups} addCheckup={addCheckup} onBuildCalendar={buildCalendarFromCheckup}/>;
     if (page === 'profile') return <ProfilePage tier={tier} language={language} setPage={setPage}/>;
     if (page === 'plan') return <PlanPage tier={tier} setTier={setTier} language={language} notify={notify}/>;
     if (page === 'agent') return <AgentPage product={product} setPage={setPage} notify={notify} language={language} tier={tier} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} activeProject={activeProject} setActiveProject={setActiveProject} initialDraft={agentDraft} clearInitialDraft={() => setAgentDraft('')}/>;
     if (page === 'templates') return <TemplatesPage setPage={setPage} setCanvasTemplate={setCanvasTemplate} notify={notify} language={language}/>;
     if (page === 'canvas') return <CanvasPage template={canvasTemplate} theme={theme}/>;
-    if (page === 'avatars') return <AvatarsPage notify={notify} setPage={setPage} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} wizardOpen={avatarWizardOpen} closeWizard={() => setAvatarWizardOpen(false)} onAvatarCreated={addPersonalAvatar}/>;
+    if (page === 'avatars') return <AvatarsPage notify={notify} setPage={setPage} language={language} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} personalAvatars={personalAvatars} wizardOpen={avatarWizardOpen} closeWizard={() => setAvatarWizardOpen(false)} onAvatarCreated={addPersonalAvatar}/>;
     if (page === 'brand') return <MyBrandPage product={product} notify={notify} language={language} tier={tier} setPage={setPage} importRequest={brandImportRequest} onImportRequestHandled={() => setBrandImportRequest(null)}/>;
-    if (page === 'calendar') return <MarketingCalendarPage setPage={setPage} notify={notify} language={language} openAgentWithDraft={openAgentWithDraft}/>;
+    if (page === 'calendar') return <MarketingCalendarPage setPage={setPage} notify={notify} language={language} openAgentWithDraft={openAgentWithDraft} fromCheckup={calendarFromCheckup} clearFromCheckup={()=>setCalendarFromCheckup(false)}/>;
     if (page === 'publishing') return <PublishingPage notify={notify} publishAsset={publishAsset} setPublishAsset={setPublishAsset} setPage={setPage} language={language}/>;
     if (page === 'channels') return <SocialAccountsPage notify={notify} language={language}/>;
     if (page === 'assets') return <AssetsPage product={product} setPage={setPage} setPublishAsset={setPublishAsset} language={language} notify={notify}/>;
@@ -1005,6 +1359,6 @@ export function App() {
     if (page === 'leads') return <LeadsPage notify={notify} tier={tier} setPage={setPage} language={language}/>;
     if (page === 'service') return <ServicePage notify={notify} language={language}/>;
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
-  }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest]);
+  }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest, checkups, calendarFromCheckup]);
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
