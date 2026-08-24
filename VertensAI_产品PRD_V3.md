@@ -1,16 +1,16 @@
-# VertensAI 产品需求文档（PRD V3.2）
+# VertensAI 产品需求文档（PRD V3.3）
 
 | 项目 | 内容 |
 |---|---|
 | 产品名称 | **VertensAI** |
-| 文档版本 | **V3.2｜双路径数字人 × 两档纯 Credits 版** |
+| 文档版本 | **V3.3｜账号体检入口 × 门店内容经营闭环版** |
 | 更新日期 | **2026-08-24** |
 | 文档状态 | 最新原型基线 / 产品、研发、运营评审稿 |
 | 产品形态 | 面向海外线下门店的 AI 短视频生产、发布与获客数据工作台 |
 | 当前原型 | `main` 分支 |
 | 默认语言 | 英文；支持中文切换 |
 
-> 本文只保留当前已确认的产品定位、信息架构和功能特性。产品价格与版本范围以 `VertensAI_定价策略_V3.md` 为准。Offer、Plus 档、独立 Projects 菜单、邀请成员、审批流、Google 人脸认证和泛 AI 工具平台等旧设计，不再作为当前产品基线。
+> 本文基于 2026-08-24 对当前 `main` 原型的逐页复核更新，只保留已确认的产品定位、流程和功能。Offer、Plus 档、独立 Projects 菜单、邀请成员、审批流、Google 人脸认证和泛 AI 工具平台等旧设计，不再作为当前产品基线。
 
 ---
 
@@ -18,24 +18,31 @@
 
 ### 1.1 产品定位
 
-> **VertensAI 是帮助海外线下门店持续生产“老板数字人口播 + 门店真实实拍”短视频广告的营销工作台。**
+> **VertensAI 是以“社媒账号体检”为入口，帮助海外线下门店持续生产并验证“老板数字人口播 + 门店真实实拍”短视频广告的营销工作台。**
 
-老板只需录制一次 20 秒视频，即可建立自己的数字分身。VertensAI 再结合门店的产品、品牌资料、真实环境和服务过程，持续生成适合 Facebook、Instagram 和 TikTok 的本地化广告内容，并把发布、线索和门店结果关联起来。
+门店先粘贴公开的 Facebook、Instagram 或 TikTok 企业主页，免费获得第一次账号体检。系统识别发布断档、门店资料、CTA、真人出镜、平台覆盖和历史变化，并把问题直接转化为可执行的品牌资料、30 天内容计划和短视频任务。老板只需录制一次 20 秒视频，即可建立自己的数字分身；VertensAI 再结合产品、门店实拍和服务过程持续生成本地化广告，并把发布、线索和到店结果关联起来。
 
-VertensAI 当前不做泛 AI 创作平台，也不以模型数量作为主要卖点。产品首先解决三个明确问题：
+VertensAI 当前不做泛 AI 创作平台，也不以模型数量作为主要卖点。产品首先解决四个明确问题：
 
-1. **老板不知道每天应该讲什么。**
-2. **真人无法持续出镜，拍摄与剪辑成本高。**
-3. **内容发布后，门店不知道哪条视频真正带来咨询和到店。**
+1. **门店不知道自己的社媒账号哪里有问题、应该先改什么。**
+2. **老板不知道每天应该讲什么。**
+3. **真人无法持续出镜，拍摄与剪辑成本高。**
+4. **内容发布后，门店不知道哪条视频真正带来咨询和到店。**
 
 ### 1.2 核心闭环
 
 ```text
-创建老板数字人 / 选择自定义数字人
-                +
-导入品牌主页，生成品牌资料和营销日历
+粘贴公开社媒主页，完成第一次免费账号体检
                 ↓
-从营销日历、模板或爆款链接获得短视频脚本
+保存体检报告，识别最高优先级问题
+                ↓
+提取并确认 My Brand / Products / 门店资产
+                ↓
+Pro 生成 30 天营销日历；Lite 进入模板与直接创作
+                ↓
+创建老板数字人 / 选择自定义数字人
+                ↓
+从最新体检、营销日历、模板或爆款链接获得脚本
                 ↓
 选择产品、数字人、门店实拍和生成模型
                 ↓
@@ -45,7 +52,7 @@ AI Agent 或 Viral Canvas 生成短视频
                 ↓
 Performance / Leads 识别有效内容、账号、门店与成员
                 ↓
-继续生成和放大下一批内容
+30 天后重新体检，仅与自己的历史结果比较并进入下一轮
 ```
 
 ### 1.3 首要用户
@@ -70,13 +77,15 @@ Performance / Leads 识别有效内容、账号、门店与成员
 ### 1.5 产品原则
 
 1. **老板信任优先**：数字人不是替代品牌人物，而是放大老板本人长期建立的信任。
-2. **真实素材证明**：成片优先采用“口播解释 + 产品 / 空间 / 服务过程实拍”的混剪结构。
-3. **产品而非 Offer**：全站统一使用 Products，覆盖商品与服务；不再使用 Offers 作为用户可见名称。
-4. **先生成内容，再进入复杂工作流**：普通老板从首页、日历和模板开始；专业人员再进入 Agent 与 Viral Canvas。
-5. **一个视频只发一个账号**：发布时只允许选择一个社媒账号，避免重复内容跨账号直接分发。
-6. **门店是组织核心节点**：Team 以门店为单位管理成员、登录账号、社媒账号和获客绩效。
-7. **创建即登录**：新增成员后直接生成可登录账号，不使用邀请流程。
-8. **数据沉淀为资产**：品牌、产品、数字人、内容、账号、门店、成员和获客结果必须可关联。
+2. **诊断先于生产**：先告诉门店当前问题和优先级，再把结论变成脚本、日历和创作任务。
+3. **只与自己的历史比较**：不做竞品排名和虚构损失，使用连续体检报告验证真实改善。
+4. **历史报告与行动计划分离**：历史报告保留当时数据和发现；行动计划只展示最新一版，避免执行冲突。
+5. **真实素材证明**：成片优先采用“口播解释 + 产品 / 空间 / 服务过程实拍”的混剪结构。
+6. **产品而非 Offer**：全站统一使用 Products，覆盖商品与服务；不再使用 Offers 作为用户可见名称。
+7. **一个视频只发一个账号**：发布时只允许选择一个社媒账号，避免重复内容跨账号直接分发。
+8. **门店是组织核心节点**：Team 以门店为单位管理成员、登录账号、社媒账号和获客绩效。
+9. **创建即登录**：新增成员后直接生成可登录账号，不使用邀请流程。
+10. **数据沉淀为资产**：体检、品牌、产品、数字人、内容、账号、门店、成员和获客结果必须可关联。
 
 ---
 
@@ -86,11 +95,12 @@ Performance / Leads 识别有效内容、账号、门店与成员
 
 ### 2.1 Lite｜内容生产与基础发布
 
-目标：让门店在不建立专职内容团队的前提下，完成品牌建立、数字人创建、内容生成、爆款复刻、多平台发布和线索总量查看。
+目标：让门店先通过账号体检看清问题，再在不建立专职内容团队的前提下完成品牌建立、数字人创建、内容生成、爆款复刻、多平台发布和线索总量查看。
 
 包含：
 
-- Home、My Brand、Assets、AI Avatars
+- Home 账号体检、历史报告与月度经营概览
+- My Brand、Assets、AI Avatars
 - AI Agent、Templates、Viral Canvas
 - Publishing、Social Accounts
 - Leads（只显示线索总量，不显示内容、成员与跨店归因）
@@ -113,6 +123,8 @@ Performance / Leads 识别有效内容、账号、门店与成员
 - 只保留 Lite / Pro 两个 SKU；10 店以上或私有部署作为 Custom 商务方案，不增加第三个产品开关。
 - 两档都不限门店、成员、社媒账号和发布渠道。
 - 两档都可按 credits 使用 Seedance，不设独立月度时长上限。
+- 第一次账号体检免费，无需注册或输入密码；后续每次体检消耗 50 credits。
+- 体检只读取用户主动提交的公开企业主页信息，不要求社媒账号 OAuth。
 - Lite 的升级引擎是“已看见线索总量，但看不见具体归因”；Pro 解锁完整归因。
 - 切换到 Lite 时，如当前页面属于 Pro，自动返回 Home。
 
@@ -132,15 +144,15 @@ Create
 ├── Templates                    Lite
 └── Viral Canvas                 Lite
 
+Growth
+├── Leads                        Lite 预览 / Pro 完整归因
+└── Performance                  Pro
+
 Operate
 ├── Marketing Calendar           Pro
 ├── Publishing                   Lite
 ├── Social Accounts              Lite
 └── Team                         Pro
-
-Growth
-├── Leads                        Lite 预览 / Pro 完整归因
-└── Performance                  Pro
 ```
 
 ### 3.1 左侧导航交互
@@ -187,19 +199,44 @@ Growth
 
 ```text
 进入 Home
-  ├── 创建数字人
-  │     ├── 克隆自己：授权 → 录制 20 秒 → 质量检查 → 生成 → 保存
-  │     └── 自定义数字人：选择基础人物 → 人物属性 → 场景和着装 → 语言声音 → 预览 → 保存
-  │                 ↓
-  │           进入 My avatars 列表 → Create with avatar → Agent 选中标签
-  └── 导入品牌
-        └── 粘贴 Facebook / Instagram / TikTok 企业主页
-              → 自动提取品牌与产品
-              → 用户确认
-              → Lite 保存 My Brand / Pro 生成 30 天营销日历
+      ↓
+粘贴 Facebook / Instagram / TikTok 公开企业主页
+      ↓
+第一次免费体检，无需注册或密码
+      ↓
+分析六类问题并生成可保存的体检报告
+      ↓
+提取品牌、Products、门店资料与内容素材 → 用户确认 My Brand
+      ↓
+  ├── Lite：打开最新修复动作 → Templates / AI Avatars / Social Accounts
+  └── Pro：基于最新报告生成 30 天营销日历
+      ↓
+创建数字人
+  ├── 克隆自己：授权 → 录制 20 秒 → 质量检查 → 生成 → 保存
+  └── 自定义数字人：基础人物 → 人物属性 → 场景着装 → 语言声音 → 预览 → 保存
+      ↓
+进入 My avatars → Create with avatar → Agent 显示选中标签
+      ↓
+完成第一条内容并发布；30 天后再次体检
 ```
 
-### 4.2 从营销日历生产短视频
+### 4.2 月度账号体检与复盘
+
+```text
+Home 提示到期 → Run checkup（50 credits）
+      ↓
+读取最新公开主页数据并保存新报告
+      ↓
+仅与该门店自己的上一期报告比较
+      ↓
+展示当前健康分、六类发现、变化趋势和三个优先动作
+      ↓
+打开最新行动计划 → 修复品牌资料 / 账号连接 / 模板 / 数字人 / 日历
+      ↓
+进入下一轮内容生产、发布和线索验证
+```
+
+### 4.3 从营销日历生产短视频
 
 ```text
 打开 Marketing Calendar
@@ -217,7 +254,7 @@ Create in Agent
 选择 Product + Avatar + Model → 生成
 ```
 
-### 4.3 从模板复刻
+### 4.4 从模板复刻
 
 ```text
 Templates
@@ -232,7 +269,7 @@ Recreate
   └── Open in Viral Canvas → 复制为可编辑画布
 ```
 
-### 4.4 发布
+### 4.5 发布
 
 ```text
 从 Assets 或 Publishing 选择一个视频
@@ -246,7 +283,7 @@ Recreate
 右上角动态队列按钮查看状态
 ```
 
-### 4.5 多门店团队管理
+### 4.6 多门店团队管理
 
 ```text
 Team → Add shop
@@ -270,37 +307,49 @@ Team → Add shop
 
 ### 目标
 
-首页只呈现两项最重要的初始化资产：**你的数字人**与**你的品牌**，并解释“老板口播 + 门店实拍”的最终结果。
+Home 是 VertensAI 的获客入口与月度经营入口：新用户先完成公开社媒账号体检，已激活用户查看经营概览、历史报告、最新问题和下一步动作。数字人、品牌、模板和日历均由体检结果直接引导，而不是在首页平铺为通用工具导航。
 
 ### 页面结构
 
-1. **老板口播广告 Hero**
-   - 核心文案：录一次，持续生成门店广告。
-   - 主要按钮：`Record my 20 seconds`。
-   - 次要按钮：查看老板口播案例。
-   - 视觉展示：老板数字人、门店实拍和批量成片结果。
+1. **Onboarding｜第一次免费体检**
+   - 标题明确表达“免费账号体检”，不使用泛 AI 创作口号。
+   - 输入一个公开的 Facebook、Instagram 或 TikTok 企业主页 URL。
+   - 明确说明：第一次免费、无需注册、无需密码、不连接私有账号。
+   - 展示六项检查：发布断档、门店资料完整度、CTA、真人内容、平台 / 账号覆盖、相对上次的变化。
+   - 体检完成后依次引导：提取品牌资产 → 获得内容计划 → 创建老板数字人和真实素材内容 → 绑定到店结果。
 
-2. **四步流程**
-   - 录制 20 秒。
-   - 创建数字分身。
-   - 选择门店实拍。
-   - 批量生成广告。
+2. **Checkup progress｜分析过程**
+   - 使用弹窗或全屏步骤反馈，不在首页挤压主体内容。
+   - 展示当前检查项、总体进度和可取消状态。
+   - 第一次体检不得显示扣除 50 credits；第二次起在提交前显示预计扣除 50 credits。
 
-3. **Your personal avatars**
-   - 展示用户已创建的专属数字人列表。
-   - 每张卡片包含状态、语言和 `Create video`。
-   - `Create new avatar` 和 `Create another avatar` 均打开统一的两选项弹窗。
+3. **Checkup result｜最新报告**
+   - 展示账号健康分、关键指标、六类发现和最多三个优先动作。
+   - 每个发现提供直接修复入口，可进入 My Brand、Templates、AI Avatars、Social Accounts、Team 或 Marketing Calendar。
+   - Pro 可从最新报告生成 30 天营销日历；Lite 点击该能力进入 Plan。
 
-4. **Import your brand**
-   - 支持 Facebook、Instagram、TikTok 企业主页 URL。
-   - Lite 导入后生成 My Brand 与内容主题；Pro 同步生成 30 天营销日历。
-   - 提供手动进入 My Brand 的备选入口。
+4. **Operating｜已激活用户概览**
+   - 展示本月 Posts、Reach、Conversations、Accounts publishing 和 Pro 的 Store visits。
+   - 显示距离上次体检的天数、是否到期、`Run checkup` 和报告历史入口。
+   - 展示最近报告与上一期的变化，但不得出现竞品排名、行业百分位或虚构的损失金额。
+
+5. **Report history｜历史报告**
+   - 每次体检都保存为独立报告，不覆盖历史数据。
+   - 历史报告只展示当时的数据、健康分和发现。
+   - 行动计划只使用最新报告版本，历史报告不提供过期行动方案。
+
+6. **原型状态开关**
+   - 当前原型可在 Onboarding / Operating 间切换，仅用于演示与验收。
+   - 正式产品不向用户暴露该开关；系统根据是否存在已完成体检报告自动决定页面状态。
 
 ### 验收
 
-- 首页不展示大面积通用工具导航。
-- 已创建的数字人必须在首页可见并可直接进入 Agent。
-- 品牌导入成功后进入 My Brand 确认流程；Pro 再生成日历，Lite 显示升级入口。
+- 第一次体检无需登录即可开始，完成后再引导创建 Workspace。
+- 第一次体检标记为 Free；后续体检提交前明确显示 50 credits。
+- 六类检查均有完成、失败和无法读取状态。
+- 每次完成体检均新增历史报告，并正确计算与自己上一次报告的变化。
+- 历史报告不展示旧行动计划；最新报告可直接进入对应修复功能。
+- 首页不展示大面积通用工具导航，也不以模型或工具数量作为首屏卖点。
 
 ---
 
@@ -323,9 +372,10 @@ Team → Add shop
 
 ### Social Profile Import
 
-- 入口位于 My Brand，并在 Home 提供快捷入口。
+- 主入口由 Home 账号体检触发，My Brand 保留再次导入和手动补充入口。
 - 以弹窗向导完成，不在页面中长期占据大面积空间。
-- 三步：Import profile → Review My Brand → Lite 保存品牌 / Pro 创建营销日历。
+- 三步：Import / Check profile → Review My Brand → Lite 保存品牌 / Pro 创建营销日历。
+- 体检提取的品牌名称、行业、城市、主页简介、联系方式、Products 和媒体素材自动预填到对应标签页。
 - 自动提取结果必须允许用户确认和修改。
 - URL 无法读取时允许手动录入。
 
@@ -340,7 +390,7 @@ AI Avatars 顶部只保留两个并列入口：
 1. `Clone yourself`：克隆老板本人，用于建立长期信任。
 2. `Custom avatar`：选择基础人物并按市场、行业、风格进行定制，用于快速开始。
 
-Home 的 `Create avatar` 入口也必须先打开同一个两选项窗口，不直接默认进入任一流程。
+Home 的体检修复动作进入 AI Avatars 后，也必须由这两个入口开始，不直接默认进入任一流程。
 
 ### 3.1 Clone yourself 流程
 
@@ -355,7 +405,7 @@ Home 的 `Create avatar` 入口也必须先打开同一个两选项窗口，不�
 
 - 当前版本不包含 Google 人脸认证。
 - 生成失败时保留录制与授权状态，允许重试。
-- 克隆成功后立即出现在 AI Avatars 的 `My avatars` 列表，Home 页也同步展示。
+- 克隆成功后立即出现在 AI Avatars 的 `My avatars` 列表，并可直接进入 Agent 创作。
 
 ### 3.2 Custom avatar 流程
 
@@ -429,6 +479,8 @@ Agent 是所有基础创作能力的统一入口，一级只区分 Video 与 Ima
 - OpenAI
 
 模型面板支持能力标签，例如参考图、文生视频、多图参考、首尾帧、视频编辑、视频延长等。
+
+版本规则：Lite 与 Pro 都按 credits 使用可用的 Seedance、Kling 等模型，不以套餐锁定 Seedance；套餐差异来自 credits 数量、经营功能与归因深度。原型中如仍出现 Lite 锁定 Seedance 的状态，应视为待修复的实现偏差。
 
 ### Chat 模式
 
@@ -581,7 +633,7 @@ Generate Variants
 
 ### 目标
 
-根据 My Brand 的产品、目标市场、品牌语气和历史内容，自动生成一个月的内容策划。
+根据最新账号体检发现、My Brand 的 Products、目标市场、品牌语气和历史内容，自动生成一个月的内容策划。
 
 ### 内容策略
 
@@ -591,6 +643,7 @@ Generate Variants
 - Tone。
 - 图片、轮播和视频比例。
 - 每周增长主题。
+- 同一 Workspace 只维护一份当前行动日历；从新报告重新生成前，提示保留或替换未完成内容。
 
 ### 视图
 
@@ -751,7 +804,6 @@ Human Admaker 不属于 Workspace、Create、Operate 或 Growth 功能菜单，�
 
 - 默认展示年付，并标注 `Save 50%`。
 - 可切换月付 / 年付；年付金额为一次性支付。
-- 7 天免费试用，赠送 500 credits，无需信用卡。
 
 ### 套餐
 
@@ -824,6 +876,9 @@ Human Admaker 不属于 Workspace、Create、Operate 或 Growth 功能菜单，�
 | Shop | id、workspace_id、name、city、market、address |
 | Member | id、shop_id、name、email、role、access、login_status |
 | Brand | id、workspace_id、name、industry、market、tone、default_cta、brand_kit |
+| CheckupReport | id、workspace_id、shop_id、profile_url、platform、is_first_free、credit_cost、health_score、metrics、completed_at、status |
+| CheckupFinding | id、report_id、category、severity、title、evidence、recommended_destination、status |
+| CheckupActionPlan | id、report_id、version、priority_actions、is_current、created_at |
 | Product | id、brand_id、name、type、url、media、selling_points、price、proof、cta |
 | Avatar | id、brand_id、type（owner_clone / custom）、name、image、base_actor_id、gender_expression、age_range、market、hair、wardrobe、scene、language、voice_style、consent_id、rights_status、status |
 | Voice | id、avatar_id、language、style、sample、consent_id、status |
@@ -846,6 +901,8 @@ Human Admaker 不属于 Workspace、Create、Operate 或 Growth 功能菜单，�
 
 ```text
 Workspace → Shop → Member → SocialAccount
+Workspace → CheckupReport → CheckupFinding
+Latest CheckupReport → Current CheckupActionPlan → My Brand / Calendar / Agent
 Workspace → Brand → Product / Avatar / Voice / Asset
 Brand → ContentPlan → CalendarItem → Agent Task
 Agent Project → Thread → Workflow → Creative → PublishJob
@@ -858,6 +915,11 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 
 | 场景 | 产品处理 |
 |---|---|
+| 第一次体检 | 标记为 Free，不扣 credits；完成后再引导创建 Workspace |
+| 后续体检 | 提交前展示 50 credits 预计消耗；余额不足时不启动 |
+| 公开主页部分字段不可读 | 对每个检查项单独标记“无法读取”，报告仍可完成，不伪造结论 |
+| 没有上一期报告 | 不展示趋势箭头或变化值，提示“首份基线报告” |
+| 打开历史报告 | 只展示当时数据和发现；行动按钮统一跳转到最新行动计划 |
 | 企业主页无法读取 | 提示原因，允许重试或手动填写 My Brand |
 | 数字人录制失败 | 保留授权状态，允许重新录制，不创建不可用数字人 |
 | 数字人未授权 | 禁止生成正式成片 |
@@ -879,12 +941,16 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 
 ### 9.2 激活指标
 
+- 首次免费账号体检开始率。
+- 首次账号体检完成率。
+- 体检报告 → 修复动作点击率。
 - 首个数字人创建率。
 - 品牌主页导入率。
 - My Brand 完成率。
 - 首个 Product 创建率。
 - 首份营销日历生成率。
 - 首条视频生成时间。
+- 首次体检完成 → 首条视频生成时间。
 
 ### 9.3 生产指标
 
@@ -905,9 +971,18 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 - Appointment Rate。
 - Creative Win Rate。
 - 门店 / 成员 / 账号归因覆盖率。
+- 30 天复检率。
+- 复检后健康分和关键问题改善率。
 
 ### 9.5 关键事件
 
+- `account_checkup_started`
+- `account_checkup_completed`
+- `account_checkup_failed`
+- `checkup_report_opened`
+- `checkup_history_opened`
+- `checkup_finding_fix_opened`
+- `checkup_calendar_created`
 - `avatar_clone_started`
 - `avatar_consent_confirmed`
 - `avatar_recording_completed`
@@ -977,7 +1052,8 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 
 ### 第一阶段｜资产与人工验证
 
-- Home 定位与老板口播案例。
+- Home 第一次免费账号体检、分析进度、最新报告与历史报告。
+- 体检结论直达 My Brand、Templates、AI Avatars、Social Accounts 和 Pro Calendar。
 - My Brand、Products、Assets。
 - Clone yourself / Custom avatar。
 - Human Admaker 服务交付。
@@ -1013,18 +1089,20 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 
 ### 12.1 Lite 端到端验收
 
-1. 用户完成 Clone yourself 或 Custom avatar 任一流程。
-2. 数字人出现在 My avatars，并可带入 Agent。
-3. 用户导入企业主页并确认品牌资料。
-4. 用户从 Templates、爆款链接或 Agent 直接创建内容。
-5. 用户选择 Product、Avatar 和模型。
-6. 系统生成至少一条 9:16 短视频并保存至 Assets。
-7. 用户选择一个已连接账号即时或定时发布。
-8. Leads 显示线索总量，但不暴露内容、成员和跨店归因明细。
+1. 新用户粘贴公开企业主页，无需注册完成第一次免费账号体检。
+2. 系统保存首份报告，展示健康分、六类发现和优先动作，并把品牌资料预填到 My Brand。
+3. 用户完成 Clone yourself 或 Custom avatar 任一流程。
+4. 数字人出现在 My avatars，并可带入 Agent。
+5. 用户从体检修复动作、Templates、爆款链接或 Agent 直接创建内容。
+6. 用户选择 Product、Avatar 和模型。
+7. 系统生成至少一条 9:16 短视频并保存至 Assets。
+8. 用户选择一个已连接账号即时或定时发布。
+9. Leads 显示线索总量，但不暴露内容、成员和跨店归因明细。
+10. 第二次体检在提交前显示并正确扣除 50 credits，同时新增一份报告。
 
 ### 12.2 Pro 端到端验收
 
-1. 用户导入品牌并生成 30 天营销日历，可把完整脚本发送到 Agent。
+1. 用户从最新体检报告生成 30 天营销日历，可把完整脚本发送到 Agent。
 2. Owner 创建两个 Shop，每个 Shop 创建至少两个可直接登录的成员账号。
 3. 管理员为成员绑定社媒账号，并可从成员详情选择该账号进入 Publishing。
 4. Creative 与发布账号、Shop、Member 关联。
@@ -1035,13 +1113,14 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 
 | 维度 | 门槛 |
 |---|---|
-| 激活 | 70% 测试用户完成数字人或品牌导入中的至少一项 |
-| 首次价值 | 50% 测试用户在 15 分钟内进入首次生成 |
+| 激活 | 70% 测试用户完成第一次免费账号体检 |
+| 首次价值 | 50% 完成体检的用户在 15 分钟内打开至少一个修复动作 |
 | 稳定性 | 核心生成流程成功率 ≥ 95% |
 | 发布 | 已连接账号的发布成功率 ≥ 95% |
 | 内容质量 | 种子客户首轮可用率 ≥ 70% |
 | 数据 | Pro 客户的 Shop / Member / Creative 归因覆盖率 ≥ 85% |
 | 合规 | 所有克隆数字人均有可追溯授权 |
+| 诊断可信度 | 不使用竞品排名、行业百分位和虚构损失；无法读取的数据明确标记 |
 
 ---
 
@@ -1059,27 +1138,43 @@ Creative → SocialAccount → PerformanceSnapshot / Lead
 - Plus 第三个自助套餐。
 - 同一视频一次多账号发布。
 - 模板交易市场与创作者分成。
+- 竞品排名、行业百分位和基于不完整数据估算“损失收入”。
+- 在正式产品中暴露 Onboarding / Operating 原型状态开关。
 
 ---
 
 ## 14. 待评审问题
 
-1. Clone yourself 的第三方供应商与授权协议最终采用哪一套？
-2. Social Profile Import 在 Facebook、Instagram、TikTok 的合法读取边界如何定义？
-3. Lite 首发是否同时支持 Facebook、Instagram 与 TikTok 发布，还是先完成其中两个？
-4. 30 天营销日历的默认发布频次如何按行业自动调整？
-5. Human Admaker 的 8 条视频是否包含一次重做与多语言版本？
-6. 一个 Social Account 是否允许在管理员操作下重新绑定至其他 Member？
-7. Qualified Lead 的判定由客户手动标注、统一规则还是 CRM 状态决定？
-8. Pro 的归因窗口与离线成交匹配规则如何定义？
-9. Clone yourself 与 Custom avatar 的实际生成供应商、质量阈值和回调状态如何统一？
+1. 账号体检对 Facebook、Instagram、TikTok 公开主页的合法读取范围和失败降级策略如何定义？
+2. 六类体检指标的评分权重、健康分计算与“严重 / 建议”阈值如何验证？
+3. 30 天复检是固定周期，还是根据行业和账号活跃度动态调整？
+4. Clone yourself 的第三方供应商与授权协议最终采用哪一套？
+5. Lite 首发是否同时支持 Facebook、Instagram 与 TikTok 发布，还是先完成其中两个？
+6. 30 天营销日历的默认发布频次如何按行业自动调整？
+7. Human Admaker 的 8 条视频是否包含一次重做与多语言版本？
+8. 一个 Social Account 是否允许在管理员操作下重新绑定至其他 Member？
+9. Qualified Lead 的判定由客户手动标注、统一规则还是 CRM 状态决定？
+10. Pro 的归因窗口与离线成交匹配规则如何定义？
+11. Clone yourself 与 Custom avatar 的实际生成供应商、质量阈值和回调状态如何统一？
 
 ---
 
-## 15. 版本结论
+## 15. 当前原型校准清单
 
-VertensAI V3.2 的核心不是“提供最多的 AI 模型”，而是完成一个更窄、更可信、更容易验证的门店营销闭环：
+以下项目是逐页复核时发现的实现偏差，研发应以本 PRD 的目标规则为准：
 
-> **老板数字人口播建立信任，门店真实实拍提供证明，品牌与营销日历解决每天讲什么，发布与数据告诉团队什么真正有效。**
+1. 第一次免费体检的分析弹窗不得显示“消耗 50 credits”；只有后续体检显示并扣除 50 credits。
+2. Lite 与 Pro 都可按 credits 使用 Seedance；Agent 中不得把 Seedance 作为 Pro 专属锁定项。
+3. 体检建议中的旧文案 `Invite employees` 必须改为 `Add members` / `Manage team`，因为当前版本不使用邀请流程。
+4. Onboarding / Operating 状态切换器只保留在原型调试环境，生产环境由历史报告状态自动判断。
+5. 中文界面不得残留未翻译的体检步骤、报告状态、错误、空状态和 credits 提示。
 
-Lite 让门店以最低门槛完成“数字人—内容—发布—线索总量”闭环；Pro 再用营销日历、Team、Performance 与完整 Leads 归因，把内容生产变成可管理、可度量的经营系统。
+---
+
+## 16. 版本结论
+
+VertensAI V3.3 的核心不是“提供最多的 AI 模型”，而是从一个低门槛、可重复的账号体检开始，完成更窄、更可信、更容易验证的门店营销闭环：
+
+> **账号体检告诉门店先改什么，老板数字人口播建立信任，门店真实实拍提供证明，内容计划解决每天讲什么，发布与数据告诉团队什么真正有效。**
+
+Lite 让门店以第一次免费体检完成冷启动，并建立“体检—品牌—数字人—内容—发布—线索总量”的基础闭环；Pro 再用营销日历、Team、Performance 与完整 Leads 归因，把内容生产变成可管理、可度量、可按月复盘的经营系统。
