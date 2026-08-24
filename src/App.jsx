@@ -902,28 +902,34 @@ function AvatarsPage({ notify, setPage, language, selectedAvatar, setSelectedAva
   </div>;
 }
 
-function PerformancePage({ notify }) {
+function PerformancePage({ notify, language }) {
+  const zh = language === 'zh';
   const [connected, setConnected] = useState(['meta','tiktok']);
-  const toggle = id => { setConnected(c => c.includes(id) ? c.filter(x => x !== id) : [...c,id]); notify(c => c); };
+  const toggle = id => {
+    const isConnected = connected.includes(id);
+    setConnected(current => isConnected ? current.filter(item => item !== id) : [...current,id]);
+    notify(isConnected ? (zh?'数据源已断开。':'Data source disconnected.') : (zh?'数据源已连接。':'Data source connected.'));
+  };
   const sources = [
-    ['meta','Meta Ads',FacebookLogo,'Campaign, creative and message data'],
-    ['tiktok','TikTok',TiktokLogo,'Organic and paid creative data'],
-    ['whatsapp','WhatsApp',WhatsappLogo,'Qualified conversations and response time'],
-    ['crm','Lead / CRM',Users,'Appointments, quotes and closed sales']
+    ['meta','Meta Ads',FacebookLogo,zh?'广告系列、素材和消息数据':'Campaign, creative and message data'],
+    ['tiktok','TikTok',TiktokLogo,zh?'自然流量和付费素材数据':'Organic and paid creative data'],
+    ['whatsapp','WhatsApp',WhatsappLogo,zh?'有效咨询和响应时间':'Qualified conversations and response time'],
+    ['crm',zh?'线索 / CRM':'Lead / CRM',Users,zh?'预约、报价和成交数据':'Appointments, quotes and closed sales']
+  ];
+  const creatives = [
+    [images.presenter,zh?'老板讲解周末主推产品':'Owner explains the weekend product','Meta','$1,280','83','$15.42'],
+    [images.kitchen,zh?'招牌菜到店引流开场':'Signature dish visit hook','TikTok','$740','39','$18.97'],
+    [images.patio,zh?'美业改造预约广告':'Beauty transformation booking','Meta','$920','41','$22.44']
   ];
   return <div className="page performance-page">
-    <PageTitle eyebrow="DATA ASSET" title="Know which creative creates visits and bookings" copy="VertensAI connects content, spend, conversations and store outcomes. The system learns from your own data—not generic vanity metrics." action={<button className="secondary"><Clock/> Last 30 days</button>}/>
-    <div className="kpi-grid"><article><span>Qualified leads</span><strong>184</strong><small className="up">+22.4% vs prior period</small></article><article><span>Cost per qualified lead</span><strong>$18.40</strong><small className="up">−12.6% improvement</small></article><article><span>Appointments booked</span><strong>37</strong><small>20.1% of qualified leads</small></article><article><span>Attributed revenue</span><strong>$42.8K</strong><small>2.9× estimated ROAS</small></article></div>
+    <PageTitle eyebrow={zh?'数据资产':'DATA ASSET'} title={zh?'看清哪些素材真正带来到店和预约':'Know which creative creates visits and bookings'} copy={zh?'VertensAI 连接内容、花费、咨询与门店经营结果，并用你的真实业务数据持续学习。':'VertensAI connects content, spend, conversations and store outcomes. The system learns from your own data—not generic vanity metrics.'} action={<button className="secondary"><Clock/> {zh?'最近 30 天':'Last 30 days'}</button>}/>
+    <div className="kpi-grid"><article><span>{zh?'有效线索':'Qualified leads'}</span><strong>184</strong><small className="up">{zh?'较上期增长 22.4%':'+22.4% vs prior period'}</small></article><article><span>{zh?'单条有效线索成本':'Cost per qualified lead'}</span><strong>$18.40</strong><small className="up">{zh?'成本改善 12.6%':'−12.6% improvement'}</small></article><article><span>{zh?'已预约到店':'Appointments booked'}</span><strong>37</strong><small>{zh?'占有效线索的 20.1%':'20.1% of qualified leads'}</small></article><article><span>{zh?'归因收入':'Attributed revenue'}</span><strong>$42.8K</strong><small>{zh?'预估广告回报 2.9 倍':'2.9× estimated ROAS'}</small></article></div>
     <div className="performance-grid">
-      <section className="performance-chart"><div className="card-head"><div><h3>Lead quality trend</h3><p>Spend compared with qualified enquiries</p></div><button><DotsThree/></button></div><div className="chart-area"><div className="chart-y"><span>60</span><span>40</span><span>20</span><span>0</span></div><svg viewBox="0 0 700 220" preserveAspectRatio="none"><path className="area" d="M0 190 C70 160,100 172,150 140 S250 155,300 100 S400 130,460 73 S570 95,700 25 L700 220 L0 220Z"/><path className="line" d="M0 190 C70 160,100 172,150 140 S250 155,300 100 S400 130,460 73 S570 95,700 25"/></svg><div className="chart-x"><span>Jul 21</span><span>Jul 28</span><span>Aug 4</span><span>Aug 11</span><span>Aug 18</span></div></div></section>
-      <aside className="data-sources"><div className="card-head"><div><h3>Data sources</h3><p>Connect the full customer journey</p></div></div>{sources.map(([id,name,Icon,desc]) => <button key={id} onClick={() => toggle(id)}><i><Icon/></i><span><b>{name}</b><small>{desc}</small></span>{connected.includes(id) ? <em><Check/> Connected</em> : <strong>Connect</strong>}</button>)}</aside>
+      <section className="performance-chart"><div className="card-head"><div><h3>{zh?'线索质量趋势':'Lead quality trend'}</h3><p>{zh?'广告花费与有效咨询对比':'Spend compared with qualified enquiries'}</p></div><button aria-label={zh?'更多操作':'More actions'}><DotsThree/></button></div><div className="chart-area"><div className="chart-y"><span>60</span><span>40</span><span>20</span><span>0</span></div><svg viewBox="0 0 700 220" preserveAspectRatio="none"><path className="area" d="M0 190 C70 160,100 172,150 140 S250 155,300 100 S400 130,460 73 S570 95,700 25 L700 220 L0 220Z"/><path className="line" d="M0 190 C70 160,100 172,150 140 S250 155,300 100 S400 130,460 73 S570 95,700 25"/></svg><div className="chart-x"><span>{zh?'7月21日':'Jul 21'}</span><span>{zh?'7月28日':'Jul 28'}</span><span>{zh?'8月4日':'Aug 4'}</span><span>{zh?'8月11日':'Aug 11'}</span><span>{zh?'8月18日':'Aug 18'}</span></div></div></section>
+      <aside className="data-sources"><div className="card-head"><div><h3>{zh?'数据来源':'Data sources'}</h3><p>{zh?'连接完整的客户旅程':'Connect the full customer journey'}</p></div></div>{sources.map(([id,name,Icon,desc]) => <button key={id} onClick={() => toggle(id)}><i><Icon/></i><span><b>{name}</b><small>{desc}</small></span>{connected.includes(id) ? <em><Check/> {zh?'已连接':'Connected'}</em> : <strong>{zh?'连接':'Connect'}</strong>}</button>)}</aside>
     </div>
-    <div className="insight-card"><div className="insight-icon"><Sparkle weight="fill"/></div><div><span>PERFORMANCE AGENT</span><h3>Owner-led local product videos are producing 41% more qualified WhatsApp conversations.</h3><p>Recommendation: create three new variants using the same hook and increase budget only after appointment quality is confirmed.</p></div><button onClick={() => notify('Recommendation added to the next creative sprint.')}>Create variants <ArrowRight/></button></div>
-    <section className="creative-table"><div className="card-head"><div><h3>Creative performance</h3><p>Ranked by qualified lead efficiency</p></div><button>View all</button></div><div className="table-row table-header"><span>Creative</span><span>Channel</span><span>Spend</span><span>Qualified leads</span><span>Cost / lead</span><span>Action</span></div>{[
-      [images.presenter,'Owner explains the weekend product','Meta','$1,280','83','$15.42'],
-      [images.kitchen,'Signature dish visit hook','TikTok','$740','39','$18.97'],
-      [images.patio,'Beauty transformation booking','Meta','$920','41','$22.44']
-    ].map((r,i) => <div className="table-row" key={r[1]}><span className="creative-name"><img src={r[0]}/><b>{r[1]}</b></span>{r.slice(2).map((x,j)=><span key={j}>{x}</span>)}<span><button><ArrowRight/></button></span></div>)}</section>
+    <div className="insight-card"><div className="insight-icon"><Sparkle weight="fill"/></div><div><span>{zh?'效果分析智能体':'PERFORMANCE AGENT'}</span><h3>{zh?'老板出镜的本地产品视频使有效 WhatsApp 咨询量提升了 41%。':'Owner-led local product videos are producing 41% more qualified WhatsApp conversations.'}</h3><p>{zh?'建议：沿用同一开场生成 3 个新版本，并在确认预约质量后再增加预算。':'Recommendation: create three new variants using the same hook and increase budget only after appointment quality is confirmed.'}</p></div><button onClick={() => notify(zh?'建议已加入下一轮素材测试。':'Recommendation added to the next creative sprint.')}>{zh?'生成新版本':'Create variants'} <ArrowRight/></button></div>
+    <section className="creative-table"><div className="card-head"><div><h3>{zh?'素材效果':'Creative performance'}</h3><p>{zh?'按有效线索效率排序':'Ranked by qualified lead efficiency'}</p></div><button>{zh?'查看全部':'View all'}</button></div><div className="table-row table-header"><span>{zh?'素材':'Creative'}</span><span>{zh?'渠道':'Channel'}</span><span>{zh?'花费':'Spend'}</span><span>{zh?'有效线索':'Qualified leads'}</span><span>{zh?'单条线索成本':'Cost / lead'}</span><span>{zh?'操作':'Action'}</span></div>{creatives.map((r) => <div className="table-row" key={r[1]}><span className="creative-name"><img src={r[0]}/><b>{r[1]}</b></span>{r.slice(2).map((x,j)=><span key={j}>{x}</span>)}<span><button aria-label={zh?'查看素材详情':'View creative details'}><ArrowRight/></button></span></div>)}</section>
   </div>;
 }
 
@@ -1164,96 +1170,98 @@ function MyBrandPage({ product, notify, language, tier, setPage, importRequest, 
     onImportRequestHandled?.();
   }, [importRequest]);
   const importSocialProfile = () => {
-    if (!socialUrl.trim()) return notify('Paste a Facebook, Instagram or TikTok profile URL.');
+    if (!socialUrl.trim()) return notify(zh?'请粘贴 Facebook、Instagram 或 TikTok 主页链接。':'Paste a Facebook, Instagram or TikTok profile URL.');
     setImporting(true);
     setTimeout(() => {
       const source = socialUrl.toLowerCase().includes('tiktok') ? 'TikTok' : socialUrl.toLowerCase().includes('instagram') ? 'Instagram' : 'Facebook';
       setBrandInfo({ name:'Casa Luma Interiors', market:'Madrid, Spain', languages:'Spanish, English', category:'Home renovation showroom' });
       setImportedSource(source);
       setImporting(false);
-      notify(`${source} profile analyzed. Brand fields are ready to review.`);
+      notify(zh?`${source} 主页分析完成，请检查品牌资料。`:`${source} profile analyzed. Brand fields are ready to review.`);
     }, 850);
   };
   const tabs = [
-    ['overview','Overview'], ['products','Products'], ['avatars','Avatars'],
-    ['voices','Voices'], ['assets','Asset Library'], ['kit','Brand Kit']
+    ['overview',zh?'概览':'Overview'], ['products',zh?'产品':'Products'], ['avatars',zh?'数字人':'Avatars'],
+    ['voices',zh?'声音':'Voices'], ['assets',zh?'素材库':'Asset Library'], ['kit',zh?'品牌规范':'Brand Kit']
   ];
   const brandProducts = [
-    product || {name:'Weekend Signature Product',category:'Seasonal promotion',image:images.kitchen},
-    {name:'New Customer Trial',category:'Booking product',image:images.patio},
-    {name:'Premium Service Package',category:'Service bundle',image:images.bath}
+    product || {name:zh?'周末主推产品':'Weekend Signature Product',category:zh?'季节促销':'Seasonal promotion',image:images.kitchen},
+    {name:zh?'新客体验':'New Customer Trial',category:zh?'预约产品':'Booking product',image:images.patio},
+    {name:zh?'高端服务套餐':'Premium Service Package',category:zh?'服务组合':'Service bundle',image:images.bath}
   ];
   const brandActors = actors.slice(0, 6);
+  const actorRoleZh = {'Local business host':'本地商家主持人','Beauty & wellness advisor':'美业顾问','Restaurant owner':'餐厅老板','Retail presenter':'零售讲解员','Business owner':'企业老板','Lifestyle creator':'生活方式创作者'};
+  const localizeLanguages = value => zh ? value.replace('English','英语').replace('Spanish','西班牙语').replace('French','法语').replace('Portuguese','葡萄牙语').replace('German','德语').replace('Italian','意大利语') : value;
   const brandVoices = [
-    ['Luma Owner · English','Warm, practical and confident','US English'],
-    ['Luma Owner · Spanish','Clear local consultation','Latin American Spanish'],
-    ['Sofia · English','Friendly service educator','US English'],
-    ['Daniel · Portuguese','Experienced local business host','Brazilian Portuguese']
+    [zh?'Luma 老板 · 英语':'Luma Owner · English',zh?'温暖、务实、自信':'Warm, practical and confident',zh?'美式英语':'US English'],
+    [zh?'Luma 老板 · 西班牙语':'Luma Owner · Spanish',zh?'清晰的本地咨询表达':'Clear local consultation',zh?'拉美西班牙语':'Latin American Spanish'],
+    [zh?'Sofia · 英语':'Sofia · English',zh?'友好的服务讲解':'Friendly service educator',zh?'美式英语':'US English'],
+    [zh?'Daniel · 葡萄牙语':'Daniel · Portuguese',zh?'经验丰富的本地商家主持人':'Experienced local business host',zh?'巴西葡萄牙语':'Brazilian Portuguese']
   ];
   const brandAssets = [
-    [images.kitchen,'Weekend product hero','Campaign image'],
-    [images.presenter,'Owner introduction footage','Source video'],
-    [images.patio,'Customer experience proof','Product image'],
-    [images.bath,'Premium service detail','Campaign image'],
-    [images.avatar,'Lifestyle presenter','Avatar reference'],
-    [images.sofia,'Sofia UGC presenter','Avatar reference']
+    [images.kitchen,zh?'周末主推产品主图':'Weekend product hero',zh?'营销图片':'Campaign image'],
+    [images.presenter,zh?'老板介绍实拍素材':'Owner introduction footage',zh?'原始视频':'Source video'],
+    [images.patio,zh?'客户体验证明':'Customer experience proof',zh?'产品图片':'Product image'],
+    [images.bath,zh?'高端服务细节':'Premium service detail',zh?'营销图片':'Campaign image'],
+    [images.avatar,zh?'生活方式数字人':'Lifestyle presenter',zh?'数字人参考':'Avatar reference'],
+    [images.sofia,zh?'Sofia UGC 数字人':'Sofia UGC presenter',zh?'数字人参考':'Avatar reference']
   ];
   const stats = [
-    ['products','3','Products',Package], ['avatars','6','Avatars',UserCircle],
-    ['voices','4','Voices',Microphone], ['assets','18','Assets',ImageIcon],
-    ['kit','Ready','Brand Kit',MagicWand]
+    ['products','3',zh?'产品':'Products',Package], ['avatars','6',zh?'数字人':'Avatars',UserCircle],
+    ['voices','4',zh?'声音':'Voices',Microphone], ['assets','18',zh?'素材':'Assets',ImageIcon],
+    ['kit',zh?'已设置':'Ready',zh?'品牌规范':'Brand Kit',MagicWand]
   ];
-  const openAdd = label => notify(`${label} workflow opened.`);
+  const openAdd = label => notify(zh?`${label}流程已打开。`:`${label} workflow opened.`);
 
   const sectionHead = (title, copy, actionLabel) => <div className="brand-section-head"><div><h3>{title}</h3><p>{copy}</p></div>{actionLabel && <button onClick={() => openAdd(actionLabel)}><Plus/> {actionLabel}</button>}</div>;
-  const productGrid = <div className="my-brand-product-grid">{brandProducts.map(item => <article key={item.name}><img src={item.image}/><div><span>{item.category}</span><b>{item.name}</b><button onClick={() => notify(`${item.name} selected.`)}><ArrowRight/></button></div></article>)}</div>;
-  const avatarGrid = <div className="my-brand-avatar-grid"><button className="owner-clone-card" onClick={() => openAdd('Clone store owner')}><div><Users/><span><b>Clone the store owner</b><small>Create a consent-based presenter for every market.</small></span></div><ArrowRight/></button>{brandActors.map(([name,role,languages,image]) => <article key={name}><img src={image}/><div><b>{name}</b><small>{role}</small><span>{languages}</span></div></article>)}</div>;
-  const voiceList = <div className="my-brand-voice-list">{brandVoices.map(([name,copy,language],index) => <article key={name}><button className="voice-play" onClick={() => notify(`Playing ${name} sample.`)}><Play weight="fill"/></button><div><b>{name}</b><small>{copy}</small></div><span>{language}</span><button onClick={() => notify(`${name} is now the default voice.`)}>Use voice</button></article>)}</div>;
-  const assetGrid = <div className="my-brand-asset-grid"><button className="brand-upload" onClick={() => openAdd('Upload assets')}><UploadSimple/><b>Upload brand assets</b><small>Images, video, logos or documents</small></button>{brandAssets.map(([image,name,type]) => <article key={name}><img src={image}/><div><b>{name}</b><small>{type}</small></div></article>)}</div>;
+  const productGrid = <div className="my-brand-product-grid">{brandProducts.map(item => <article key={item.name}><img src={item.image}/><div><span>{item.category}</span><b>{item.name}</b><button aria-label={zh?'选择产品':'Select product'} onClick={() => notify(zh?`已选择 ${item.name}。`:`${item.name} selected.`)}><ArrowRight/></button></div></article>)}</div>;
+  const avatarGrid = <div className="my-brand-avatar-grid"><button className="owner-clone-card" onClick={() => openAdd(zh?'克隆老板本人':'Clone store owner')}><div><Users/><span><b>{zh?'克隆老板本人':'Clone the store owner'}</b><small>{zh?'经本人授权，为不同市场创建可复用的数字分身。':'Create a consent-based presenter for every market.'}</small></span></div><ArrowRight/></button>{brandActors.map(([name,role,languages,image]) => <article key={name}><img src={image}/><div><b>{name}</b><small>{zh?(actorRoleZh[role]||role):role}</small><span>{localizeLanguages(languages)}</span></div></article>)}</div>;
+  const voiceList = <div className="my-brand-voice-list">{brandVoices.map(([name,copy,voiceLanguage]) => <article key={name}><button className="voice-play" aria-label={zh?'播放声音样本':'Play voice sample'} onClick={() => notify(zh?`正在播放 ${name} 的声音样本。`:`Playing ${name} sample.`)}><Play weight="fill"/></button><div><b>{name}</b><small>{copy}</small></div><span>{voiceLanguage}</span><button onClick={() => notify(zh?`${name} 已设为默认声音。`:`${name} is now the default voice.`)}>{zh?'使用声音':'Use voice'}</button></article>)}</div>;
+  const assetGrid = <div className="my-brand-asset-grid"><button className="brand-upload" onClick={() => openAdd(zh?'上传品牌素材':'Upload assets')}><UploadSimple/><b>{zh?'上传品牌素材':'Upload brand assets'}</b><small>{zh?'图片、视频、Logo 或文档':'Images, video, logos or documents'}</small></button>{brandAssets.map(([image,name,type]) => <article key={name}><img src={image}/><div><b>{name}</b><small>{type}</small></div></article>)}</div>;
 
   return <div className="page my-brand-page">
-    <PageTitle eyebrow="WORKSPACE" title={zh?'我的品牌':'My Brand'} copy={zh?'让每条广告都使用同一套品牌资料。':'The source of truth behind every VertensAI creative.'} action={<button className="primary" onClick={() => {setImportOpen(true);setImportedSource(null);}}><LinkSimple/>{zh?'导入社媒主页':'Import social profile'}</button>}/>
+    <PageTitle eyebrow={zh?'品牌中心':'WORKSPACE'} title={zh?'我的品牌':'My Brand'} copy={zh?'让每条广告都使用同一套品牌资料。':'The source of truth behind every VertensAI creative.'} action={<button className="primary" onClick={() => {setImportOpen(true);setImportedSource(null);}}><LinkSimple/>{zh?'导入社媒主页':'Import social profile'}</button>}/>
     <section className="brand-space-card">
       <div className="brand-space-avatar">LL</div>
-      <div className="brand-space-copy"><span>BRAND WORKSPACE</span><h2>{brandInfo.name} Brand Space</h2><p><Users/> 3 team members <i></i><MapPin/> {brandInfo.market} <i></i><Globe/> {brandInfo.languages}</p></div>
-      <button className="brand-edit" onClick={() => setEditOpen(true)}><FileText/> Edit brand info</button>
+      <div className="brand-space-copy"><span>{zh?'品牌工作区':'BRAND WORKSPACE'}</span><h2>{zh?`${brandInfo.name} 品牌空间`:`${brandInfo.name} Brand Space`}</h2><p><Users/> {zh?'3 位团队成员':'3 team members'} <i></i><MapPin/> {brandInfo.market} <i></i><Globe/> {brandInfo.languages}</p></div>
+      <button className="brand-edit" onClick={() => setEditOpen(true)}><FileText/> {zh?'编辑品牌资料':'Edit brand info'}</button>
     </section>
 
     <div className="brand-stats">{stats.map(([id,value,label,Icon]) => <button key={id} onClick={() => setActiveTab(id)} className={activeTab === id ? 'active' : ''}><Icon/><span><b>{value}</b><small>{label}</small></span><ArrowRight/></button>)}</div>
 
-    <nav className="brand-tabs" aria-label="Brand workspace sections">{tabs.map(([id,label]) => <button key={id} className={activeTab === id ? 'active' : ''} onClick={() => setActiveTab(id)}>{label}</button>)}</nav>
+    <nav className="brand-tabs" aria-label={zh?'品牌工作区分类':'Brand workspace sections'}>{tabs.map(([id,label]) => <button key={id} className={activeTab === id ? 'active' : ''} onClick={() => setActiveTab(id)}>{label}</button>)}</nav>
 
     <section className="brand-tab-content">
       {activeTab === 'overview' && <>
-        {sectionHead('Products & services','Products, services and promotions available to every VertensAI workflow.','Add product')}
+        {sectionHead(zh?'产品与服务':'Products & services',zh?'供所有 VertensAI 创作流程调用的产品、服务和促销信息。':'Products, services and promotions available to every VertensAI workflow.',zh?'添加产品':'Add product')}
         {productGrid}
         <div className="brand-overview-split">
-          <section>{sectionHead('Brand Kit','The rules VertensAI uses to keep every creative consistent.')}
-            <div className="brand-kit-summary"><div><Storefront/><span><b>Trusted local business positioning</b><small>Clear expertise, convenient booking and fast WhatsApp response.</small></span></div><div className="brand-colors"><i></i><i></i><i></i><span>3 brand colors</span></div><button onClick={() => setActiveTab('kit')}>Open Brand Kit <ArrowRight/></button></div>
+          <section>{sectionHead(zh?'品牌规范':'Brand Kit',zh?'VertensAI 用这些规则确保所有广告风格一致。':'The rules VertensAI uses to keep every creative consistent.')}
+            <div className="brand-kit-summary"><div><Storefront/><span><b>{zh?'可信赖的本地商家定位':'Trusted local business positioning'}</b><small>{zh?'专业清晰、预约方便，并快速响应 WhatsApp 咨询。':'Clear expertise, convenient booking and fast WhatsApp response.'}</small></span></div><div className="brand-colors"><i></i><i></i><i></i><span>{zh?'3 个品牌色':'3 brand colors'}</span></div><button onClick={() => setActiveTab('kit')}>{zh?'打开品牌规范':'Open Brand Kit'} <ArrowRight/></button></div>
           </section>
-          <section>{sectionHead('Presenters & voices','The people and voices approved to represent the brand.')}
-            <div className="brand-people-summary"><div className="people-stack">{brandActors.slice(0,3).map(actor => <img key={actor[0]} src={actor[3]}/>)}</div><div><b>6 approved avatars</b><small>Including an owner-clone workflow</small></div><button onClick={() => setActiveTab('avatars')}>Manage <ArrowRight/></button></div>
-            <div className="brand-people-summary"><div className="voice-summary-icon"><Microphone/></div><div><b>4 approved voices</b><small>English, Spanish and Portuguese</small></div><button onClick={() => setActiveTab('voices')}>Manage <ArrowRight/></button></div>
+          <section>{sectionHead(zh?'数字人与声音':'Presenters & voices',zh?'经过批准、可代表品牌出镜的人物和声音。':'The people and voices approved to represent the brand.')}
+            <div className="brand-people-summary"><div className="people-stack">{brandActors.slice(0,3).map(actor => <img key={actor[0]} src={actor[3]}/>)}</div><div><b>{zh?'6 个已批准数字人':'6 approved avatars'}</b><small>{zh?'包含老板本人克隆流程':'Including an owner-clone workflow'}</small></div><button onClick={() => setActiveTab('avatars')}>{zh?'管理':'Manage'} <ArrowRight/></button></div>
+            <div className="brand-people-summary"><div className="voice-summary-icon"><Microphone/></div><div><b>{zh?'4 个已批准声音':'4 approved voices'}</b><small>{zh?'英语、西班牙语和葡萄牙语':'English, Spanish and Portuguese'}</small></div><button onClick={() => setActiveTab('voices')}>{zh?'管理':'Manage'} <ArrowRight/></button></div>
           </section>
         </div>
       </>}
-      {activeTab === 'products' && <>{sectionHead('Products & services','Import products, services, promotions and proof points for accurate creative.','Add product')}{productGrid}</>}
-      {activeTab === 'avatars' && <>{sectionHead('Avatars','Approved AI actors and the store-owner digital twin.','Add avatar')}{avatarGrid}</>}
-      {activeTab === 'voices' && <>{sectionHead('Voices','Approved voices, languages and brand delivery styles.','Add voice')}{voiceList}</>}
-      {activeTab === 'assets' && <>{sectionHead('Asset Library','Reusable product photography, footage, logos and campaign files.')}{assetGrid}</>}
+      {activeTab === 'products' && <>{sectionHead(zh?'产品与服务':'Products & services',zh?'导入产品、服务、促销和效果证明，让广告生成更准确。':'Import products, services, promotions and proof points for accurate creative.',zh?'添加产品':'Add product')}{productGrid}</>}
+      {activeTab === 'avatars' && <>{sectionHead(zh?'数字人':'Avatars',zh?'已批准的 AI 角色和老板本人数字分身。':'Approved AI actors and the store-owner digital twin.',zh?'添加数字人':'Add avatar')}{avatarGrid}</>}
+      {activeTab === 'voices' && <>{sectionHead(zh?'声音':'Voices',zh?'已批准的声音、语言和品牌表达方式。':'Approved voices, languages and brand delivery styles.',zh?'添加声音':'Add voice')}{voiceList}</>}
+      {activeTab === 'assets' && <>{sectionHead(zh?'素材库':'Asset Library',zh?'可重复使用的产品图片、实拍视频、Logo 和营销文件。':'Reusable product photography, footage, logos and campaign files.')}{assetGrid}</>}
       {activeTab === 'kit' && <>
-        {sectionHead('Brand Kit','Define the visual and verbal system behind every generated ad.','Edit Brand Kit')}
+        {sectionHead(zh?'品牌规范':'Brand Kit',zh?'定义所有生成广告遵循的视觉和语言体系。':'Define the visual and verbal system behind every generated ad.',zh?'编辑品牌规范':'Edit Brand Kit')}
         <div className="brand-kit-grid">
-          <article><span>LOGO</span><div className="brand-logo-preview"><div className="brand-space-avatar">LL</div><b>Luma Local</b></div><button onClick={() => openAdd('Upload logo')}>Replace logo</button></article>
-          <article><span>COLORS</span><div className="brand-palette"><i>#1769FF</i><i>#101114</i><i>#F4F6F8</i></div><button onClick={() => openAdd('Edit colors')}>Edit colors</button></article>
-          <article><span>TYPOGRAPHY</span><div className="brand-type-preview"><b>Inter Bold</b><small>Inter Regular · Aa Bb Cc 123</small></div><button onClick={() => openAdd('Edit typography')}>Edit typography</button></article>
-          <article><span>BRAND VOICE</span><div className="brand-tone-tags"><b>Clear</b><b>Practical</b><b>Trustworthy</b><b>Local expert</b></div><button onClick={() => openAdd('Edit brand voice')}>Edit voice</button></article>
+          <article><span>{zh?'LOGO 标识':'LOGO'}</span><div className="brand-logo-preview"><div className="brand-space-avatar">LL</div><b>Luma Local</b></div><button onClick={() => openAdd(zh?'上传 Logo':'Upload logo')}>{zh?'替换 Logo':'Replace logo'}</button></article>
+          <article><span>{zh?'品牌色':'COLORS'}</span><div className="brand-palette"><i>#1769FF</i><i>#101114</i><i>#F4F6F8</i></div><button onClick={() => openAdd(zh?'编辑颜色':'Edit colors')}>{zh?'编辑颜色':'Edit colors'}</button></article>
+          <article><span>{zh?'字体':'TYPOGRAPHY'}</span><div className="brand-type-preview"><b>Inter Bold</b><small>Inter Regular · Aa Bb Cc 123</small></div><button onClick={() => openAdd(zh?'编辑字体':'Edit typography')}>{zh?'编辑字体':'Edit typography'}</button></article>
+          <article><span>{zh?'品牌语气':'BRAND VOICE'}</span><div className="brand-tone-tags"><b>{zh?'清晰':'Clear'}</b><b>{zh?'务实':'Practical'}</b><b>{zh?'可信赖':'Trustworthy'}</b><b>{zh?'本地专家':'Local expert'}</b></div><button onClick={() => openAdd(zh?'编辑品牌语气':'Edit brand voice')}>{zh?'编辑语气':'Edit voice'}</button></article>
         </div>
       </>}
     </section>
 
     {importOpen && <div className="brand-import-scrim" onMouseDown={() => setImportOpen(false)}><section className="brand-import-modal" onMouseDown={event => event.stopPropagation()}>
-      <header><div><span>SOCIAL PROFILE IMPORT</span><h3>{hasMarketingCalendar ? (zh?'导入品牌，同时生成首月营销日历。':'Import your brand. Get your first month planned.') : (zh?'导入品牌，建立统一的内容基础。':'Import your brand. Build your creative foundation.')}</h3></div><button onClick={() => setImportOpen(false)}><X/></button></header>
+      <header><div><span>{zh?'社媒主页导入':'SOCIAL PROFILE IMPORT'}</span><h3>{hasMarketingCalendar ? (zh?'导入品牌，同时生成首月营销日历。':'Import your brand. Get your first month planned.') : (zh?'导入品牌，建立统一的内容基础。':'Import your brand. Build your creative foundation.')}</h3></div><button aria-label={zh?'关闭':'Close'} onClick={() => setImportOpen(false)}><X/></button></header>
       {!importedSource ? <>
         <div className="supported-socials"><FacebookLogo/><InstagramLogo/><TiktokLogo/><span>{zh?'企业主页':'Business profiles'}</span></div>
         <label className="brand-profile-url"><LinkSimple/><input value={socialUrl} onChange={event => setSocialUrl(event.target.value)} onKeyDown={event => event.key === 'Enter' && importSocialProfile()} placeholder={zh?'粘贴 Facebook、Instagram 或 TikTok 主页链接':'Paste a Facebook, Instagram or TikTok profile URL'}/><button disabled={importing || !socialUrl.trim()} onClick={importSocialProfile}>{importing?<SpinnerGap className="spin"/>:<MagicWand/>}{zh?'导入':'Import'}</button></label>
@@ -1266,7 +1274,7 @@ function MyBrandPage({ product, notify, language, tier, setPage, importRequest, 
       </>}
     </section></div>}
 
-    {editOpen && <div className="brand-modal-backdrop" onMouseDown={() => setEditOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setEditOpen(false);notify('Brand information saved.');}}><div><span>MY BRAND</span><h3>Edit brand information</h3><button type="button" onClick={() => setEditOpen(false)}><X/></button></div><label>Brand name<input value={brandInfo.name} onChange={event => setBrandInfo({...brandInfo,name:event.target.value})}/></label><label>Primary market<input value={brandInfo.market} onChange={event => setBrandInfo({...brandInfo,market:event.target.value})}/></label><label>Languages<input value={brandInfo.languages} onChange={event => setBrandInfo({...brandInfo,languages:event.target.value})}/></label><label>Business category<input value={brandInfo.category} onChange={event => setBrandInfo({...brandInfo,category:event.target.value})}/></label><label>Primary conversion goal<input defaultValue="Book a visit or appointment on WhatsApp"/></label><footer><button type="button" onClick={() => setEditOpen(false)}>Cancel</button><button className="primary" type="submit">Save brand</button></footer></form></div>}
+    {editOpen && <div className="brand-modal-backdrop" onMouseDown={() => setEditOpen(false)}><form className="brand-modal" onMouseDown={event => event.stopPropagation()} onSubmit={event => {event.preventDefault();setEditOpen(false);notify(zh?'品牌资料已保存。':'Brand information saved.');}}><div><span>{zh?'我的品牌':'MY BRAND'}</span><h3>{zh?'编辑品牌资料':'Edit brand information'}</h3><button type="button" aria-label={zh?'关闭':'Close'} onClick={() => setEditOpen(false)}><X/></button></div><label>{zh?'品牌名称':'Brand name'}<input value={brandInfo.name} onChange={event => setBrandInfo({...brandInfo,name:event.target.value})}/></label><label>{zh?'主要市场':'Primary market'}<input value={brandInfo.market} onChange={event => setBrandInfo({...brandInfo,market:event.target.value})}/></label><label>{zh?'使用语言':'Languages'}<input value={brandInfo.languages} onChange={event => setBrandInfo({...brandInfo,languages:event.target.value})}/></label><label>{zh?'业务类型':'Business category'}<input value={brandInfo.category} onChange={event => setBrandInfo({...brandInfo,category:event.target.value})}/></label><label>{zh?'主要转化目标':'Primary conversion goal'}<input defaultValue={zh?'引导到店或通过 WhatsApp 预约':'Book a visit or appointment on WhatsApp'}/></label><footer><button type="button" onClick={() => setEditOpen(false)}>{zh?'取消':'Cancel'}</button><button className="primary" type="submit">{zh?'保存品牌资料':'Save brand'}</button></footer></form></div>}
   </div>;
 }
 
@@ -1381,7 +1389,7 @@ export function App() {
     if (page === 'channels') return <SocialAccountsPage notify={notify} language={language}/>;
     if (page === 'assets') return <AssetsPage product={product} setPage={setPage} setPublishAsset={setPublishAsset} language={language} notify={notify}/>;
     if (page === 'team') return <TeamPage notify={notify} language={language}/>;
-    if (page === 'performance') return <PerformancePage notify={notify}/>;
+    if (page === 'performance') return <PerformancePage notify={notify} language={language}/>;
     if (page === 'leads') return <LeadsPage notify={notify} tier={tier} setPage={setPage} language={language}/>;
     if (page === 'service') return <ServicePage notify={notify} language={language}/>;
     if (page === 'help') return <HelpCenterPage language={language}/>;
