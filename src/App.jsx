@@ -13,6 +13,7 @@ import {
   useEdgesState, useNodesState
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import HelpCenterPage from './helpCenter.jsx';
 
 const images = {
   kitchen: '/assets/calacatta-kitchen.png',
@@ -145,7 +146,7 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
         <button className="upgrade-plan-entry" onClick={() => { setPage('plan'); setAccountOpen(false); }}><ArrowCircleUp/><span><b>{copy.account.plan}</b></span></button>
         <button className="appearance-row" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}><span><b>{copy.account.theme}</b></span><i className="appearance-icon" aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? <Sun weight="fill"/> : <Moon weight="fill"/>}</i></button>
         <label className="language-row"><Globe/><b>{copy.account.language}</b><select aria-label={copy.account.language} value={language} onChange={event => setLanguage(event.target.value)}><option value="en">English</option><option value="zh">中文</option></select></label>
-        <button><BookOpen/><span><b>{copy.account.help}</b><small>VertensAI Guide</small></span></button>
+        <button className={page === 'help' ? 'active' : ''} onClick={() => { setPage('help'); setAccountOpen(false); }}><BookOpen/><span><b>{copy.account.help}</b><small>VertensAI Guide</small></span></button>
         <button><ArrowRight/><span><b>{copy.account.logout}</b></span></button>
       </div></>}
       <button className="account-trigger" aria-expanded={accountOpen} onClick={() => setAccountOpen(open => !open)}>
@@ -261,6 +262,22 @@ function PlanPage({ tier, setTier, language, notify }) {
   </div>;
 }
 
+// 体检开出的行动计划：id / 周次 / 中英标题 / 中英说明 / 中英按钮 / 目标页
+const checkupMoves = [
+  {id:'store-info',week:'1',zhTitle:'给每条内容加上门店信息',enTitle:'Put store info on every post',
+   zhBody:'18 条内容没有地址或电话。模板改一次，之后每条都自动带上。',enBody:'18 posts have neither. Fix the template once and every future post carries it.',
+   zhCta:'去设置模板',enCta:'Open templates',page:'templates'},
+  {id:'owner-video',week:'2',zhTitle:'发 3 条老板出镜的短视频',enTitle:'Publish 3 owner-led videos',
+   zhBody:'先拍你被问得最多的那几个问题，这类内容最容易带来到店咨询。',enBody:'Start with the questions you answer most. They convert into store enquiries fastest.',
+   zhCta:'创建数字人',enCta:'Create avatar',page:'avatars'},
+  {id:'employees',week:'3',zhTitle:'让 3 个店员一起发',enTitle:'Turn on 3 employee accounts',
+   zhBody:'所有内容都压在一个号上，触达面被卡死。员工账号不额外收费。',enBody:'Everything sits on one handle today. Employee seats cost nothing.',
+   zhCta:'邀请店员',enCta:'Invite employees',page:'team',pro:true}
+];
+
+// Lite 用户点 Pro 专属行动项时，导到套餐页而不是打不开的页面
+const resolveMovePage = (move, tier) => (move.pro && tierOrder[tier] < tierOrder.pro) ? 'plan' : move.page;
+
 const checkupFindingLibrary = [
   ['critical','门店信息缺失','Posts without store info'],
   ['critical','发布频次不足与断更','Low posting frequency and gaps'],
@@ -322,7 +339,7 @@ function CheckupHistoryModal({ language, checkups, onClose }) {
   </section></div>;
 }
 
-function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, setPage }) {
+function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, setPage, tier }) {
   const zh = language === 'zh';
   const [step, setStep] = useState(0);
   const [phase, setPhase] = useState('running');
@@ -348,12 +365,6 @@ function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, set
     const id = setInterval(()=>{ value += 2; if (value >= 42) { value = 42; clearInterval(id); } setScore(value); }, 22);
     return ()=>clearInterval(id);
   }, [phase]);
-  // 顺序: 周次 / 中文标题 / 英文标题 / 中文说明 / 英文说明 / 中文按钮 / 英文按钮 / 目标页
-  const moves = [
-    ['1','给每条内容加上门店信息','Put store info on every post','18 条内容没有地址或电话。模板改一次，之后每条都自动带上。','18 posts have neither. Fix the template once and every future post carries it.','去设置模板','Open templates','templates'],
-    ['2','发 3 条老板出镜的短视频','Publish 3 owner-led videos','先拍你被问得最多的那几个问题，这类内容最容易带来到店咨询。','Start with the questions you answer most. They convert into store enquiries fastest.','创建数字人','Create avatar','avatars'],
-    ['3','让 3 个店员一起发','Turn on 3 employee accounts','所有内容都压在一个号上，触达面被卡死。员工账号不额外收费。','Everything sits on one handle today. Employee seats cost nothing.','邀请店员','Invite employees','team']
-  ];
   const goto = target => { onClose(); setPage(target); };
   return <div className="avatar-entry-scrim" onMouseDown={onClose}><section className="checkup-modal" onMouseDown={event=>event.stopPropagation()}>
     {phase==='running' ? <>
@@ -385,10 +396,10 @@ function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, set
       </div>
       <div className="checkup-moves">
         <header><span>{zh?'下一步行动':'YOUR NEXT MOVES'}</span><b>{zh?'按这个顺序做，三周把主要问题补上':'Do them in this order and the main gaps are closed in three weeks'}</b></header>
-        {moves.map(([week,zhTitle,enTitle,zhBody,enBody,zhCta,enCta,target])=><article key={enTitle}>
-          <i>{zh?`第 ${week} 周`:`WEEK ${week}`}</i>
-          <div><b>{zh?zhTitle:enTitle}</b><small>{zh?zhBody:enBody}</small></div>
-          <button onClick={()=>goto(target)}>{zh?zhCta:enCta}<ArrowRight/></button>
+        {checkupMoves.map(move=><article key={move.id}>
+          <i>{zh?`第 ${move.week} 周`:`WEEK ${move.week}`}</i>
+          <div><b>{zh?move.zhTitle:move.enTitle}</b><small>{zh?move.zhBody:move.enBody}</small></div>
+          <button onClick={()=>goto(resolveMovePage(move,tier))}>{zh?move.zhCta:move.enCta}{move.pro&&tierOrder[tier]<tierOrder.pro&&<em className="pro-tag">PRO</em>}<ArrowRight/></button>
         </article>)}
       </div>
       <footer className="checkup-modal-foot">
@@ -399,7 +410,7 @@ function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, set
   </section></div>;
 }
 
-function HomePage({ setPage, notify, language, tier, startBrandImport, checkups, addCheckup, onBuildCalendar }) {
+function HomePage({ setPage, notify, language, tier, startBrandImport, checkups, addCheckup, onBuildCalendar, doneMoves, toggleMove }) {
   const zh = language === 'zh';
   const hasMarketingCalendar = tierOrder[tier] >= tierOrder.pro;
   const [profileUrl, setProfileUrl] = useState('');
@@ -460,11 +471,6 @@ function HomePage({ setPage, notify, language, tier, startBrandImport, checkups,
   ];
   // 顺序: 日期 / 分数 / 问题数 / 是否本次
   const trend = [...checkups].reverse().map((item,index,list)=>[item.date,item.score,item.issues,index===list.length-1]);
-  const moves = [
-    ['1','给每条内容加上门店信息','Put store info on every post','18 条内容没有地址或电话。模板改一次，之后每条都自动带上。','18 posts have neither. Fix the template once and every future post carries it.','去设置模板','Open templates','templates'],
-    ['2','发 3 条老板出镜的短视频','Publish 3 owner-led videos','先拍你被问得最多的那几个问题，这类内容最容易带来到店咨询。','Start with the questions you answer most. They convert into store enquiries fastest.','创建数字人','Create avatar','avatars'],
-    ['3','让 3 个店员一起发','Turn on 3 employee accounts','所有内容都压在一个号上，触达面被卡死。员工账号不额外收费。','Everything sits on one handle today. Employee seats cost nothing.','邀请店员','Invite employees','team']
-  ];
   const path = [
     [MagnifyingGlass,zh?'账号体检':'Run the checkup',zh?'看清差距在哪':'See where the gaps are'],
     [Buildings,zh?'提取品牌资产':'Extract brand assets',zh?'产品、市场、语气':'Products, market, voice'],
@@ -527,6 +533,24 @@ function HomePage({ setPage, notify, language, tier, startBrandImport, checkups,
         <small className="due-cost"><Sparkle weight="fill"/>{zh?'本次体检消耗 50 credits':'This checkup uses 50 credits'}</small>
       </section>
     </>}
+    {!onboarding && latest && <section className="plan-followup">
+      <header>
+        <div><span>{zh?`上次体检开的方子 · ${latest.date}`:`FROM YOUR CHECKUP · ${latest.date}`}</span><h2>{zh?`3 件要做的事，已完成 ${doneMoves.length}`:`3 things to fix — ${doneMoves.length} done`}</h2></div>
+        <button onClick={onBuildCalendar}><CalendarCheck weight="bold"/>{zh?'排进 30 天日历':'Add to 30-day calendar'}<ArrowRight/></button>
+      </header>
+      <div className="followup-progress"><i style={{width:`${Math.round(doneMoves.length/checkupMoves.length*100)}%`}}/></div>
+      <div className="followup-list">{checkupMoves.map(move=>{
+        const done = doneMoves.includes(move.id);
+        return <article key={move.id} className={done?'done':''}>
+          <button className="followup-check" onClick={()=>toggleMove(move.id)} aria-pressed={done} aria-label={zh?'标记完成':'Mark done'}>{done?<Check weight="bold"/>:<i/>}</button>
+          <i className="followup-week">{zh?`第 ${move.week} 周`:`WEEK ${move.week}`}</i>
+          <div><b>{zh?move.zhTitle:move.enTitle}</b><small>{zh?move.zhBody:move.enBody}</small></div>
+          <button className="followup-go" onClick={()=>setPage(resolveMovePage(move,tier))}>{zh?move.zhCta:move.enCta}{move.pro&&tierOrder[tier]<tierOrder.pro&&<em className="pro-tag">PRO</em>}<ArrowRight/></button>
+        </article>;
+      })}</div>
+      {doneMoves.length===checkupMoves.length && <footer className="followup-done"><CheckCircle weight="fill"/><span>{zh?'三件都做完了。下次体检就能看出分数有没有拉回来。':'All three are done. Your next checkup will show whether the score turned.'}</span></footer>}
+    </section>}
+
     {onboarding && <section className="owner-ad-steps">{path.map(([Icon,title,copy],index)=><article key={title}><i>{index+1}</i><Icon/><div><b>{title}</b><small>{copy}</small></div>{index<path.length-1&&<ArrowRight/>}</article>)}</section>}
 
     {!onboarding && stage==='done' && <>
@@ -555,16 +579,16 @@ function HomePage({ setPage, notify, language, tier, startBrandImport, checkups,
           <button className="primary" onClick={()=>onBuildCalendar?.()}><CalendarCheck weight="bold"/>{zh?'生成 30 天日历':'Generate 30-day calendar'}<ArrowRight/></button>
         </div>
         <header><span>{zh?'下一步行动':'YOUR NEXT MOVES'}</span><b>{zh?'按这个顺序做，三周把主要问题补上':'Do them in this order and the main gaps are closed in three weeks'}</b></header>
-        {moves.map(([week,zhTitle,enTitle,zhBody,enBody,zhCta,enCta,target])=><article key={enTitle}>
-          <i>{zh?`第 ${week} 周`:`WEEK ${week}`}</i>
-          <div><b>{zh?zhTitle:enTitle}</b><small>{zh?zhBody:enBody}</small></div>
-          <button onClick={()=>setPage(target)}>{zh?zhCta:enCta}<ArrowRight/></button>
+        {checkupMoves.map(move=><article key={move.id}>
+          <i>{zh?`第 ${move.week} 周`:`WEEK ${move.week}`}</i>
+          <div><b>{zh?move.zhTitle:move.enTitle}</b><small>{zh?move.zhBody:move.enBody}</small></div>
+          <button onClick={()=>setPage(resolveMovePage(move,tier))}>{zh?move.zhCta:move.enCta}{move.pro&&tierOrder[tier]<tierOrder.pro&&<em className="pro-tag">PRO</em>}<ArrowRight/></button>
         </article>)}
       </section>
     </>}
 
     {historyOpen&&<CheckupHistoryModal language={language} checkups={checkups} onClose={()=>setHistoryOpen(false)} />}
-    {stage==='running'&&<CheckupModal language={language} source={source} profileUrl={profileUrl} onClose={()=>setStage('idle')} onOpenReport={openReport} setPage={setPage}/>}
+    {stage==='running'&&<CheckupModal language={language} source={source} profileUrl={profileUrl} tier={tier} onClose={()=>setStage('idle')} onOpenReport={openReport} setPage={setPage}/>}
   </div>;
 }
 
@@ -1320,6 +1344,8 @@ export function App() {
     {id:'chk-jun',source:'Instagram',handle:'instagram.com/casalumainteriors',score:55,issues:4,date:'Jun 18',daysAgo:64}
   ]);
   const addCheckup = entry => setCheckups(current => [entry, ...current].slice(0, 6));
+  const [doneMoves, setDoneMoves] = useState([]);
+  const toggleMove = id => setDoneMoves(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
   const [calendarFromCheckup, setCalendarFromCheckup] = useState(false);
   const buildCalendarFromCheckup = () => {
     const canPlan = tierOrder[tier] >= tierOrder.pro;
@@ -1342,7 +1368,7 @@ export function App() {
   const addPersonalAvatar = avatar => setPersonalAvatars(current => current.some(item => item.id === avatar.id) ? current : [avatar, ...current]);
   const openAgentWithDraft = draft => { setAgentDraft(draft || ''); setActiveProject(null); setPage('agent'); };
   const content = useMemo(() => {
-    if (page === 'home') return <HomePage setPage={setPage} notify={notify} language={language} tier={tier} startBrandImport={startBrandImport} checkups={checkups} addCheckup={addCheckup} onBuildCalendar={buildCalendarFromCheckup}/>;
+    if (page === 'home') return <HomePage setPage={setPage} notify={notify} language={language} tier={tier} startBrandImport={startBrandImport} checkups={checkups} addCheckup={addCheckup} onBuildCalendar={buildCalendarFromCheckup} doneMoves={doneMoves} toggleMove={toggleMove}/>;
     if (page === 'profile') return <ProfilePage tier={tier} language={language} setPage={setPage}/>;
     if (page === 'plan') return <PlanPage tier={tier} setTier={setTier} language={language} notify={notify}/>;
     if (page === 'agent') return <AgentPage product={product} setPage={setPage} notify={notify} language={language} tier={tier} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} activeProject={activeProject} setActiveProject={setActiveProject} initialDraft={agentDraft} clearInitialDraft={() => setAgentDraft('')}/>;
@@ -1358,7 +1384,8 @@ export function App() {
     if (page === 'performance') return <PerformancePage notify={notify}/>;
     if (page === 'leads') return <LeadsPage notify={notify} tier={tier} setPage={setPage} language={language}/>;
     if (page === 'service') return <ServicePage notify={notify} language={language}/>;
+    if (page === 'help') return <HelpCenterPage language={language}/>;
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
-  }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest, checkups, calendarFromCheckup]);
+  }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest, checkups, calendarFromCheckup, doneMoves]);
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
