@@ -4,7 +4,7 @@ import {
   CaretDown, CaretUp, CirclesFour, Clock, Code, Copy, CursorClick, Database, DotsThree,
   Coffee, Confetti, Eye, FacebookLogo, FileText, Fire, FolderSimple, ForkKnife, Globe, GraduationCap, Heart, Heartbeat, House, Image as ImageIcon,
   Funnel, InstagramLogo, LinkSimple, Lock, MagicWand, MagnifyingGlass, MapPin, Microphone,
-  Moon, Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle, Sun,
+  Minus, Moon, Package, PaperPlaneTilt, PawPrint, Play, Plus, Robot, Scissors, ShareNetwork, ShoppingBag, Sparkle, Sun,
   ArrowCircleUp, ShieldCheck, SpinnerGap, Storefront, Strategy, Target, TiktokLogo, TrendUp, UploadSimple, UserPlus,
   SidebarSimple, TShirt, UserCircle, Users, VideoCamera, WhatsappLogo, X
 } from '@phosphor-icons/react';
@@ -14,6 +14,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import HelpCenterPage from './helpCenter.jsx';
+import StudioSite from './studio.jsx';
 
 const images = {
   kitchen: '/assets/calacatta-kitchen.png',
@@ -47,12 +48,12 @@ const uiCopy = {
   en: {
     sections:{workspace:'Workspace',create:'Create',operate:'Operate',growth:'Growth'},
     nav:{home:'Home',projects:'Projects',brand:'My Brand',assets:'Assets',team:'Team',agent:'AI Agent',templates:'Templates',canvas:'Viral Canvas',avatars:'AI Avatars',service:'Human Admaker',calendar:'Marketing Calendar',publishing:'Publishing',channels:'Social Accounts',performance:'Performance',leads:'Leads'},
-    account:{help:'Help center',theme:'Appearance',language:'Language',usage:'Credits',plan:'Upgrade plan',logout:'Log out',remaining:'credits remaining'}
+    account:{help:'Help center',theme:'Appearance',language:'Language',usage:'This month',plan:'Plan and billing',logout:'Log out',remaining:'pieces delivered'}
   },
   zh: {
     sections:{workspace:'工作台',create:'创作',operate:'运营',growth:'增长'},
     nav:{home:'首页',projects:'项目',brand:'我的品牌',assets:'素材',team:'团队',agent:'AI 智能体',templates:'爆款模板',canvas:'爆款画布',avatars:'数字人',service:'人工广告服务',calendar:'营销日历',publishing:'发布',channels:'社媒账号',performance:'效果分析',leads:'线索'},
-    account:{help:'帮助中心',theme:'显示模式',language:'语言',usage:'Credits',plan:'升级套餐',logout:'退出登录',remaining:'剩余额度'}
+    account:{help:'帮助中心',theme:'显示模式',language:'语言',usage:'本月用量',plan:'套餐与账单',logout:'退出登录',remaining:'条成品已交付'}
   }
 };
 
@@ -116,6 +117,7 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
     const currentItem = navigation.flatMap(group => group.items).find(item => item[0] === page);
     if (currentItem && tierOrder[currentItem[3]] > tierOrder[nextTier]) setPage('home');
   };
+  const goStudio = () => { window.location.href = `${import.meta.env.BASE_URL || '/'}studio.html`; };
   return <aside className={`sidebar ${expanded ? 'expanded' : ''} ${expanded && !pinned ? 'hover-expanded' : ''}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <Logo />
     <div className="tier-switch" aria-label="Prototype product stage">
@@ -128,21 +130,21 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
         if (!visibleItems.length) return null;
         return <div className="nav-group" key={group.section}>
         <span>{copy.sections[group.section]}</span>
-        {visibleItems.map(([id, label, Icon]) => <button key={id} aria-label={copy.nav[id] || label} title={copy.nav[id] || label} className={page === id ? 'active' : ''} onClick={() => setPage(id)}>
+        {visibleItems.map(([id, label, Icon]) => <button key={id} aria-label={copy.nav[id] || label} title={copy.nav[id] || label} className={page === id ? 'active' : ''} onClick={() => id === 'service' ? goStudio() : setPage(id)}>
           <Icon size={20} weight={page === id ? 'fill' : 'regular'} /><b>{copy.nav[id] || label}</b>
           {id === 'performance' && <i>Beta</i>}
         </button>)}
       </div>})}
-      <button className={`human-admaker-banner ${page === 'service' ? 'active' : ''}`} aria-label={language === 'zh' ? '查看人工广告制作服务' : 'View Human Admaker service'} onClick={() => setPage('service')}>
+      <button className="human-admaker-banner" aria-label={language === 'zh' ? '进入 Vertens Storefront Ad Studio' : 'Open Vertens Storefront Ad Studio'} onClick={goStudio}>
         <VideoCamera weight="fill" />
-        <b>{language === 'zh' ? '人工广告制作' : 'Human Admaker'}</b>
+        <b>{language === 'zh' ? '人工广告服务' : 'Human Admaker'}</b>
         <ArrowRight />
       </button>
     </nav>
     <div className="sidebar-footer">
       {accountOpen && <><div className="account-menu-scrim" onMouseDown={() => setAccountOpen(false)}></div><div className="account-popover">
         <button className="account-profile-entry" onClick={() => { setPage('profile'); setAccountOpen(false); }}><span>WZ</span><div><b>wen zy</b><small>wenzy@vertens.ai</small></div><ArrowRight/></button>
-        <button><ChartLineUp/><span><b>{copy.account.usage}</b><small>{tier === 'lite' ? `620 ${copy.account.remaining}` : `3,480 ${copy.account.remaining}`}</small></span></button>
+        <button><ChartLineUp/><span><b>{copy.account.usage}</b><small>{tier === 'lite' ? `4 ${copy.account.remaining}` : `12 ${copy.account.remaining}`}</small></span></button>
         <button className="upgrade-plan-entry" onClick={() => { setPage('plan'); setAccountOpen(false); }}><ArrowCircleUp/><span><b>{copy.account.plan}</b></span></button>
         <button className="appearance-row" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}><span><b>{copy.account.theme}</b></span><i className="appearance-icon" aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? <Sun weight="fill"/> : <Moon weight="fill"/>}</i></button>
         <label className="language-row"><Globe/><b>{copy.account.language}</b><select aria-label={copy.account.language} value={language} onChange={event => setLanguage(event.target.value)}><option value="en">English</option><option value="zh">中文</option></select></label>
@@ -176,12 +178,12 @@ function AvatarEntryDialog({ language, onClose, onClone, onCustom }) {
 
 function ProfilePage({ tier, language, setPage }) {
   const zh = language === 'zh';
-  const credits = tier === 'lite' ? '620 / 800' : '3,480 / 4,000';
+  const credits = tier === 'lite' ? '4' : '12';
   return <div className="page profile-page">
     <PageTitle eyebrow={zh?'个人中心':'ACCOUNT'} title={zh?'个人中心':'Profile'} copy={zh?'管理账号、套餐和使用情况。':'Manage your account, plan and usage.'}/>
     <section className="profile-shell">
       <div className="profile-identity"><span>WZ</span><div><h3>wen zy</h3><p>wenzy@vertens.ai</p></div><button>{zh?'编辑资料':'Edit profile'}</button></div>
-      <div className="profile-stats"><article><span>{zh?'当前套餐':'PLAN'}</span><b>{tierLabels[tier]}</b><small>{zh?'原型功能范围':'Prototype feature scope'}</small></article><article><span>{zh?'积分':'CREDITS'}</span><b>{credits}</b><small>{zh?'本月剩余 / 总额':'remaining / monthly total'}</small></article><article><span>{zh?'工作区':'WORKSPACE'}</span><b>VertensAI</b><small>{zh?'1 位成员':'1 member'}</small></article></div>
+      <div className="profile-stats"><article><span>{zh?'当前套餐':'PLAN'}</span><b>{tierLabels[tier]}</b><small>{zh?'原型功能范围':'Prototype feature scope'}</small></article><article><span>{zh?'本月成品':'THIS MONTH'}</span><b>{credits}<i style={{fontSize:'13px',fontWeight:600,marginLeft:'4px'}}>{zh?'条':'pcs'}</i></b><small>{zh?'已交付成品数':'finished pieces delivered'}</small></article><article><span>{zh?'工作区':'WORKSPACE'}</span><b>VertensAI</b><small>{zh?'1 位成员':'1 member'}</small></article></div>
       <div className="profile-settings"><button><div><b>{zh?'账号信息':'Account details'}</b><small>{zh?'姓名、邮箱和登录方式':'Name, email and sign-in'}</small></div><ArrowRight/></button><button onClick={()=>setPage('plan')}><div><b>{zh?'套餐与账单':'Plan and billing'}</b><small>{zh?'管理订阅和付款方式':'Manage subscription and payment'}</small></div><ArrowRight/></button><button><div><b>{zh?'通知':'Notifications'}</b><small>{zh?'发布和任务提醒':'Publishing and task updates'}</small></div><ArrowRight/></button></div>
     </section>
   </div>;
@@ -191,7 +193,7 @@ function PlanPage({ tier, setTier, language, notify }) {
   const zh = language === 'zh';
   const [billing, setBilling] = useState('annual');
   const plans = [
-    {id:'lite',name:'Lite',audience:zh?'低成本跑通一轮':'Get one full cycle running',annual:120,monthly:20,equivalent:'10',credits:'1,200',avatars:zh?'门店 · 员工 · 账号全不限':'Unlimited shops, employees, accounts',seedance:zh?'Seedance 不设上限':'Seedance with no cap',features:zh?['内容生成、素材、模板与爆款复刻','门店、员工、社媒账号、发布渠道全部不限','Seedance 2.5 / 2.0 按 credits，不设上限','账号体检 50 credits / 次（首次免费）','线索总量（不含明细归因）']:['Creation, assets, templates and viral remix','Unlimited shops, employees, accounts and channels','Seedance 2.5 and 2.0 on credits, no cap','Account checkup at 50 credits (first one free)','Lead totals only, no breakdown']},
+    {id:'lite',name:'Lite',audience:zh?'低成本跑通一轮':'Get one full cycle running',annual:120,monthly:20,equivalent:'10',credits:'1,200',avatars:zh?'门店 · 员工 · 账号全不限':'Unlimited shops, employees, accounts',seedance:zh?'Seedance 不设上限':'Seedance with no cap',features:zh?['内容生成、素材、模板与爆款复刻','门店、员工、社媒账号、发布渠道全部不限','Seedance 2.5 / 2.0 按 credits，不设上限','账号体检免费且不限次数','线索总量（不含明细归因）']:['Creation, assets, templates and viral remix','Unlimited shops, employees, accounts and channels','Seedance 2.5 and 2.0 on credits, no cap','Account checkups free and unlimited','Lead totals only, no breakdown']},
     {id:'pro',name:'Pro',audience:zh?'完整内容增长闭环':'The complete content growth system',annual:300,monthly:50,equivalent:'25',credits:'3,600',avatars:zh?'门店 · 员工 · 账号全不限':'Unlimited shops, employees, accounts',seedance:zh?'Seedance 不设上限':'Seedance with no cap',recommended:true,features:zh?['Lite 全部功能','30 天营销日历，每条文案可编辑','完整归因：内容级 · 员工级 · 跨店','团队协作：门店、成员与账号管理','效果分析看板 · 数据导出 / API','3 倍积分只收 2.5 倍价格 —— credits 便宜 16.7%']:['Everything in Lite','30-day calendar with every script editable','Full attribution: content, employee and cross-shop','Team collaboration: shops, members and account management','Performance dashboard, export and API','3× the credits for 2.5× the price — 16.7% cheaper per credit']}
   ];
   const selectPlan = plan => {
@@ -200,7 +202,7 @@ function PlanPage({ tier, setTier, language, notify }) {
   };
   return <div className="page plan-page">
     <section className="plan-hero">
-      <div><span>{zh?'套餐':'PLAN'}</span><h1>{zh?'从内容生产，到可追踪的到店增长':'From content creation to attributable store growth'}</h1><p>{zh?'只按 credits 收费。门店、员工、社媒账号、发布渠道全部不限 —— 两档只差含多少 credits、多便宜，以及归因看多深。':'Priced on credits only. Shops, employees, accounts and channels are all unlimited — the two plans differ in how many credits you get, how cheap they are, and how deep attribution goes.'}</p></div>
+      <div><span>{zh?'套餐':'PLAN'}</span><h1>{zh?'从内容生产，到可追踪的到店增长':'From content creation to attributable store growth'}</h1><p>{zh?'工具台只按 credits 收费。门店、员工、社媒账号、发布渠道全部不限 —— 两档只差含多少 credits、多便宜，以及归因看多深。需要人工代做成片，去 Creative Studio。':'The tool is priced on credits only. Shops, employees, accounts and channels are all unlimited — the two plans differ in how many credits you get, how cheap they are, and how deep attribution goes. For done-for-you production, visit Creative Studio.'}</p></div>
       <div className="billing-switch" role="group" aria-label={zh?'计费周期':'Billing cycle'}><button className={billing==='monthly'?'active':''} onClick={()=>setBilling('monthly')}>{zh?'月付':'Monthly'}</button><button className={billing==='annual'?'active':''} onClick={()=>setBilling('annual')}>{zh?'年付':'Yearly'}<small>{zh?'省 50%':'Save 50%'}</small></button></div>
     </section>
     <section className="pricing-grid">
@@ -235,7 +237,7 @@ function PlanPage({ tier, setTier, language, notify }) {
       <div className="compare-table">
         <div className="compare-row compare-head"><span>{zh?'能力':'Capability'}</span><b>Lite</b><b>Pro</b></div>
         {[
-          [zh?'账号体检（首次免费，之后 50 credits）':'Account checkup (first free, then 50 credits)',1,1],
+          [zh?'账号体检（免费不限次）':'Account checkup (free, unlimited)',1,1],
           [zh?'品牌资产提取':'Brand asset extraction',1,1],
           [zh?'模板库 · 素材库 · 爆款复刻':'Templates, assets and viral remix',1,1],
           [zh?'AI 渲染图 · 数字人口播 · Seedance 视频':'AI images, avatar videos and Seedance',1,1],
@@ -258,7 +260,7 @@ function PlanPage({ tier, setTier, language, notify }) {
       </div>
       <footer><ArrowCircleUp weight="fill"/><span>{zh?'Lite 能把内容做出来；Pro 让内容变成可管理、可归因的经营动作。':'Lite gets the content made. Pro turns it into a managed, attributable growth operation.'}</span></footer>
     </section>
-    <section className="plan-extras"><div><span>{zh?'灵活扩展':'FLEXIBLE ADD-ONS'}</span><h3>{zh?'不为数量收费，只为用量收费':'You pay for usage, never for headcount'}</h3><p>{zh?'门店、员工、账号越多越好 —— 向它们收费等于向自己的增长收税。纯实拍素材合成不消耗 credits。':'More shops, employees and accounts are exactly what we want. Charging for them would be taxing our own growth. Real-footage composition uses zero credits.'}</p></div><div className="plan-extra-items"><article><b>{zh?'增购 1,000 credits':'Add 1,000 credits'}</b><small>Lite $12 · Pro $10</small></article><article><b>{zh?'账号体检':'Account checkup'}</b><small>{zh?'50 credits / 次 · 首次免费':'50 credits each · first one free'}</small></article><article><b>{zh?'Seedance 视频':'Seedance video'}</b><small>{zh?'2.5 版 45 cr/秒 · 2.0 版 30 cr/秒':'2.5 at 45 cr/sec · 2.0 at 30 cr/sec'}</small></article><article className="custom-plan"><b>{zh?'10+ 门店定制':'Custom for 10+ shops'}</b><small>{zh?'联系销售获取部署方案':'Talk to sales for rollout'}</small></article></div></section>
+    <section className="plan-extras"><div><span>{zh?'灵活扩展':'FLEXIBLE ADD-ONS'}</span><h3>{zh?'不为数量收费，只为用量收费':'You pay for usage, never for headcount'}</h3><p>{zh?'门店、员工、账号越多越好 —— 向它们收费等于向自己的增长收税。纯实拍素材合成不消耗 credits。':'More shops, employees and accounts are exactly what we want. Charging for them would be taxing our own growth. Real-footage composition uses zero credits.'}</p></div><div className="plan-extra-items"><article><b>{zh?'增购 1,000 credits':'Add 1,000 credits'}</b><small>Lite $12 · Pro $10</small></article><article><b>{zh?'账号体检':'Account checkup'}</b><small>{zh?'免费 · 不限次数':'Free · unlimited'}</small></article><article><b>{zh?'Seedance 视频':'Seedance video'}</b><small>{zh?'2.5 版 45 cr/秒 · 2.0 版 30 cr/秒':'2.5 at 45 cr/sec · 2.0 at 30 cr/sec'}</small></article><article className="custom-plan"><b>{zh?'人工代做成片':'Done-for-you production'}</b><small>{zh?'去 Creative Studio 按条下单':'Order per piece at Creative Studio'}</small></article></div></section>
   </div>;
 }
 
@@ -373,7 +375,7 @@ function CheckupModal({ language, source, profileUrl, onClose, onOpenReport, set
         <button onClick={onClose}><X/></button>
       </header>
       <div className="checkup-progress"><i style={{width:`${Math.min(100,Math.round(step/steps.length*100))}%`}}/></div>
-      <small className="checkup-cost-note"><Sparkle weight="fill"/>{zh?'本次体检消耗 50 credits':'This checkup uses 50 credits'}</small>
+      <small className="checkup-cost-note"><Sparkle weight="fill"/>{zh?'账号体检免费，不限次数':'Account checkups are free and unlimited'}</small>
       <ol className="checkup-steps">{steps.map(([Icon,zhLabel,enLabel,zhResult,enResult],index)=>{
         const state = index < step ? 'done' : index === step ? 'active' : 'idle';
         return <li key={enLabel} className={state}>
@@ -494,7 +496,7 @@ function HomePage({ setPage, notify, language, tier, startBrandImport, checkups,
         <p>{zh?'粘贴门店社媒主页，VertensAI 会检查发布节奏、内容结构与获客信息，和你上次体检做对比，再把每个问题变成可执行的 30 天方案。':'Paste your store profile. VertensAI checks your posting rhythm, content structure and local CTAs, compares it with your last checkup, then turns every gap into a 30-day plan.'}</p>
         <div className="checkup-platforms"><FacebookLogo/><InstagramLogo/><TiktokLogo/><small>{zh?'仅读取公开主页数据':'Public profile data only'}</small></div>
         <label className="checkup-input"><MagnifyingGlass/><input ref={inputRef} value={profileUrl} onChange={event=>setProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&runCheckup()} placeholder={zh?'粘贴 Facebook、Instagram 或 TikTok 主页链接':'Paste a Facebook, Instagram or TikTok profile URL'}/><button className="primary" disabled={stage==='running'} onClick={runCheckup}>{zh?'免费体检':'Run free checkup'}<ArrowRight/></button></label>
-        <small className="checkup-note">{zh?'首次体检免费，无需注册，无需交出账号密码。之后每次 50 credits。':'Your first checkup is free — no signup, no passwords. Each later checkup costs 50 credits.'}</small>
+        <small className="checkup-note">{zh?'账号体检免费且不限次数，无需注册，无需交出账号密码。':'Account checkups are free and unlimited — no signup, no passwords.'}</small>
         <button className="checkup-manual" onClick={()=>startBrandImport(profileUrl)}>{zh?'或进入我的品牌手动填写':'Or set up My Brand manually'}<ArrowRight/></button>
       </div>
       {stage==='done' ? <aside className="checkup-scorecard">
@@ -530,7 +532,7 @@ function HomePage({ setPage, notify, language, tier, startBrandImport, checkups,
           <button className="due-history" onClick={()=>setHistoryOpen(true)}><FileText weight="bold"/>{zh?`历史体检报告（${checkups.length}）`:`Checkup reports (${checkups.length})`}<ArrowRight/></button>
         </div>
         <label className="checkup-input"><MagnifyingGlass/><input ref={inputRef} value={profileUrl} onChange={event=>setProfileUrl(event.target.value)} onKeyDown={event=>event.key==='Enter'&&runCheckup()} placeholder={latest?latest.handle:(zh?'粘贴主页链接':'Paste a profile URL')}/><button className="primary" disabled={stage==='running'} onClick={runCheckup}>{overdue?(zh?'立即体检':'Run checkup now'):(zh?'提前体检':'Run early')}<ArrowRight/></button></label>
-        <small className="due-cost"><Sparkle weight="fill"/>{zh?'本次体检消耗 50 credits':'This checkup uses 50 credits'}</small>
+        <small className="due-cost"><Sparkle weight="fill"/>{zh?'账号体检免费，不限次数':'Account checkups are free and unlimited'}</small>
       </section>
     </>}
     {!onboarding && latest && <section className="plan-followup">
@@ -1395,5 +1397,6 @@ export function App() {
     if (page === 'help') return <HelpCenterPage language={language}/>;
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
   }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest, checkups, calendarFromCheckup, doneMoves]);
+  if (page === 'studio') return <><StudioSite language={language} theme={theme} notify={notify} onExit={() => setPage('home')}/>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</>;
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
