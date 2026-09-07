@@ -789,7 +789,6 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 <nav class="nav"><div class="wrap">
   <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Storefront Ad Studio</span></span></div>
   <div class="sp"></div>
-  <a class="pill gh s" id="backapp" style="display:none;padding:6px 14px;font-size:13px" href="./"><span data-i="backapp">← VertensAI tool</span></a>
   <div class="seg" id="route"><button data-go="studio" aria-pressed="true" data-i="nav1">Home</button><button data-go="videos" aria-pressed="false" data-i="nav2">Videos</button><button data-go="ads" aria-pressed="false" data-i="nav3">Ad management</button><button data-go="about" aria-pressed="false" data-i="nav6">About us</button></div>
   <select id="lang" class="langsel" aria-label="Language"></select>
   <button class="pill s" id="signin"><span data-i="navsi">Sign in</span></button>
@@ -2059,7 +2058,7 @@ gsign:"用 Google 账号继续",ckback:"← 回到套餐",ckh:"结账",ckp:"登�
  apromise2:"没花完的预算退回来。",
  sum2:"第一个月",stot2:"今天扣款",aafter:"按月扣费，随时可停。账户信息付款后再填。",
  asubmit_t:"去付款",c6:"还没有片子？先看套餐",
- backapp:"← 回到 VertensAI 工具",fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。Sunvega 集团旗下。",
+fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。Sunvega 集团旗下。",
  fsun:"Sunvega 集团 · 海外社媒营销",
  fc1:"服务","fl-vid":"视频套餐","fl-ads":"广告代投","fl-scr":"十条免费脚本","fl-sam":"免费样片",
  fc2:"关于","fl-abt":"关于我们","fl-wrk":"服务范围","fl-faq":"常见问题","fl-ws":"我的工作台",
@@ -3009,10 +3008,7 @@ if(h==="faq"||h==="work")goto("about");
 renderAuth();
 render();
 hydrateAssets();
-(function(){
-  const b=$("backapp"); if(!b)return;
-  if(/studio\.html$/.test(location.pathname))b.style.display="";
-})();
+
 (function(){
   const tabs=[...document.querySelectorAll(".absub a")]; if(!tabs.length)return;
   const secs=tabs.map(t=>$(t.dataset.sec)).filter(Boolean);

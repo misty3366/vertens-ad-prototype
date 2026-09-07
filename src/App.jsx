@@ -117,7 +117,7 @@ function Sidebar({ page, setPage, expanded, pinned, setPinned, setHovered, theme
     const currentItem = navigation.flatMap(group => group.items).find(item => item[0] === page);
     if (currentItem && tierOrder[currentItem[3]] > tierOrder[nextTier]) setPage('home');
   };
-  const goStudio = () => { window.location.href = `${import.meta.env.BASE_URL || '/'}studio.html`; };
+  const goStudio = () => { window.open(`${import.meta.env.BASE_URL || '/'}studio.html`, '_blank', 'noopener'); };
   return <aside className={`sidebar ${expanded ? 'expanded' : ''} ${expanded && !pinned ? 'hover-expanded' : ''}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <Logo />
     <div className="tier-switch" aria-label="Prototype product stage">
