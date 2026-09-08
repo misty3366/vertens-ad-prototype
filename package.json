@@ -8,7 +8,8 @@
     "build": "vite build && node scripts/prepare-sites-build.mjs",
     "build:vercel": "vite build --outDir dist",
     "preview": "vite preview",
-    "test:sites": "node --test tests/sites-worker.test.mjs"
+    "test:sites": "node --test tests/sites-worker.test.mjs",
+    "sync:studio": "node scripts/sync-studio.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
