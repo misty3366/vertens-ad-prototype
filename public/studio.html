@@ -691,10 +691,10 @@ body.adminmode{background:var(--cream)}
 @media (max-width:640px){.prow{grid-template-columns:1fr}.pnote{grid-template-columns:1fr}}
 
 .dlist{display:grid;gap:8px;margin-top:6px}
-.dl{display:flex;align-items:center;gap:12px;background:var(--cream);border-radius:12px;padding:10px 12px}
+.dl{display:flex;align-items:center;gap:12px;background:var(--cream);border-radius:12px;padding:10px 12px;flex-wrap:wrap}
 .dl .ic{width:26px;height:26px;border-radius:8px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--faint);flex:none}
 .dl .nm{flex:1;min-width:0}
-.dl .nm b{display:block;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl .nm b{display:block;font-size:13.5px;overflow-wrap:anywhere}
 .dl .nm i{font-style:normal;font-size:11.5px;color:var(--faint)}
 .dl .mini{text-decoration:none}
 
@@ -703,6 +703,16 @@ body.adminmode{background:var(--cream)}
 .adwhy b{display:block;font-size:15.5px;margin-bottom:7px}
 .adwhy span{font-size:14px;color:var(--ink2);line-height:1.55}
 @media (max-width:860px){.adwhy{grid-template-columns:1fr}}
+
+.crow{cursor:pointer}
+.crow:hover td{background:var(--orangeSoft)}
+.crow:hover td:first-child b{color:var(--orange)}
+.crow td{transition:background .12s}
+.custhd{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.custhd h2{font-size:28px}
+.custhd p{margin:6px 0 0;font-size:14.5px;color:var(--ink2)}
+.custgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media (max-width:980px){.custgrid{grid-template-columns:1fr}}
 
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
@@ -2590,60 +2600,70 @@ function custMaterial(biz){
   const mine=(BRAND.name&&biz&&BRAND.name.indexOf(biz.split(" ")[0])>=0)||biz==="Casa Luma";
   return mine?ASSETS:[];
 }
-function renderCustModal(){
-  const mo=$("scmodal"), bx=$("scbox");
-  if(!mo||!bx)return;
-  if(!CUSTOPEN){return;}
+function custDetail(){
   const zh=LANG==="zh", L=a=>a[zh?1:0];
-  const c=CUST.find(x=>x.biz===CUSTOPEN); if(!c){CUSTOPEN=null;return;}
+  const c=CUST.find(x=>x.biz===CUSTOPEN);
+  if(!c){CUSTOPEN=null;return "";}
   const mats=custMaterial(c.biz), dl=DELIV[c.biz]||[];
   const row=(a,b)=>`<div class="r"><span>${a}</span><b>${b}</b></div>`;
-  bx.innerHTML=`<div class="schd"><div>
-      <span class="eyebrow">${L(["Customer","客户"])}</span>
-      <h3 style="margin-top:6px">${c.biz}</h3></div>
-    <button class="scx" data-custclose="1">✕</button></div>
-    <div class="scbody">
-      <label class="scl">${L(["Store","门店信息"])}</label>
-      <div class="kv">
-        ${row(L(["Industry","行业"]),c.ind)}
-        ${row(L(["City","城市"]),c.city)}
-        ${row(L(["Plan","套餐"]),PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n)+" · "+money(c.mrr):"—")}
-        ${row(L(["Ad budget","广告预算"]),c.ads?money(c.ads):"—")}
-        ${row(L(["Customer since","合作起始"]),c.since)}
-        ${row(L(["Scripts approved","脚本已确认"]),c.scr+" / 10")}
-        ${row(L(["Videos delivered","已交付成片"]),c.vid)}
+  return `<nav class="crumb" style="margin-bottom:16px">
+      <a data-custback="1">${L(["Customers","客户"])}</a><span>/</span><span>${c.biz}</span></nav>
+
+    <div class="custhd">
+      <div>
+        <h2>${c.biz}</h2>
+        <p>${c.ind} · ${c.city} · ${L(["since ","合作自 "])}${c.since}</p>
+      </div>
+      <span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
+        c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>
+    </div>
+
+    <div class="custgrid">
+      <div class="acard">
+        <h3>${L(["Store","门店信息"])}</h3>
+        <div class="kv">
+          ${row(L(["Plan","套餐"]),PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n)+" · "+money(c.mrr)+(zh?" / 月":" / mo"):"—")}
+          ${row(L(["Ad budget","广告预算"]),c.ads?money(c.ads)+(zh?" / 月":" / mo"):"—")}
+          ${row(L(["Material received","已收素材"]),c.mat+" / 17")}
+          ${row(L(["Scripts approved","脚本已确认"]),c.scr+" / 10")}
+          ${row(L(["Videos delivered","已交付成片"]),c.vid)}
+        </div>
+        <label class="scl">${L(["Owner","负责人"])}</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <select class="inp" id="cust-own" style="max-width:230px">
+            ${STAFF.map(pp=>`<option value="${pp.id}"${pp.id===c.own?" selected":""}>${pp.n} · ${L(pp.role)}</option>`).join("")}</select>
+          <button class="mini dark" data-custclaim="${c.biz}">${L(["Claim / assign","认领 / 指派"])}</button>
+        </div>
       </div>
 
-      <label class="scl">${L(["Owner","负责人"])}</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <select class="sci" id="cust-own" style="max-width:220px">
-          ${STAFF.map(p=>`<option value="${p.id}"${p.id===c.own?" selected":""}>${p.n} · ${L(p.role)}</option>`).join("")}</select>
-        <button class="mini dark" data-custclaim="${c.biz}">${L(["Claim / assign","认领 / 指派"])}</button>
+      <div class="acard">
+        <h3>${L(["Material from the customer","客户上传的素材"])}</h3>
+        <p class="hint">${L(["Everything they sent for this month's videos.","他们为这个月的片子交上来的东西。"])}</p>
+        ${mats.length?`<div class="dlist">${mats.map(m=>`<div class="dl">
+            <span class="ic">${m.img?"▨":"▶"}</span>
+            <span class="nm"><b>${m.name}</b><i>${ACAT[m.cat]?ACAT[m.cat][zh?1:0]:"—"} · ${fsize(m.size)} · ${m.date}</i></span>
+            ${BLOB[m.id]?`<a class="mini" href="${BLOB[m.id]}" download="${m.name}">${L(["Download","下载"])}</a>`
+              :`<span class="sm mut">${L(["not in this browser","本机无文件"])}</span>`}
+          </div>`).join("")}</div>
+          <p class="sm mut" style="margin:10px 0 0">${L(["Downloads come from this browser's copy. On the server these are the customer's uploaded files.","下载的是本浏览器里的副本；正式版是客户上传到服务器的原文件。"])}</p>`
+          :`<div class="empty">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}
       </div>
+    </div>
 
-      <label class="scl">${L(["Material from the customer","客户上传的素材"])}</label>
-      ${mats.length?`<div class="dlist">${mats.map(m=>`<div class="dl">
-          <span class="ic">${m.img?"▨":"▶"}</span>
-          <span class="nm"><b>${m.name}</b><i>${ACAT[m.cat]?ACAT[m.cat][zh?1:0]:"—"} · ${fsize(m.size)} · ${m.date}</i></span>
-          ${BLOB[m.id]?`<a class="mini" href="${BLOB[m.id]}" download="${m.name}">${L(["Download","下载"])}</a>`
-            :`<span class="sm mut">${L(["not in this browser","本机无文件"])}</span>`}
-        </div>`).join("")}
-        <p class="sm mut" style="margin:10px 0 0">${L(["Downloads come from this browser's copy. On the server these are the customer's uploaded files.","下载的是本浏览器里的副本；正式版是客户上传到服务器的原文件。"])}</p></div>`
-        :`<div class="empty" style="margin-top:6px">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}
-
-      <label class="scl">${L(["Deliver finished videos","交付成片"])}</label>
-      <div class="drop" id="delivdrop" style="padding:20px">
+    <div class="acard">
+      <h3>${L(["Deliver finished videos","交付成片"])}</h3>
+      <p class="hint">${L(["They appear in the customer's Videos tab straight away.","上传后立刻出现在客户工作台的「成片」里。"])}</p>
+      <div class="drop" id="delivdrop" style="padding:22px">
         <b>${L(["Drag finished videos here","把成片拖到这里"])}</b>
-        <span>${L(["They appear in the customer's Videos tab straight away.","上传后立刻出现在客户工作台的「成片」里。"])}</span>
+        <span>${L(["Or click to choose files.","也可以点击选择文件。"])}</span>
         <input type="file" id="delivfile" accept="video/*,image/*" multiple hidden>
       </div>
-      ${dl.length?`<div class="dlist" style="margin-top:10px">${dl.map((d,i)=>`<div class="dl">
-        <span class="ic">▶</span><span class="nm"><b>${d.name}</b><i>${d.when}</i></span>
-        <button class="mini del" data-delivdel="${c.biz}|${i}">${L(["Remove","删除"])}</button></div>`).join("")}</div>`:""}
-    </div>
-    <div class="scft"><span class="sm mut">${L(["Changes save as you go.","改动即时保存。"])}</span>
-      <span style="display:flex;gap:8px"><button data-custclose="1">${L(["Close","关闭"])}</button></span></div>`;
-  mo.classList.add("on");
+      ${dl.length?`<div class="dlist" style="margin-top:12px">${dl.map((d,i)=>`<div class="dl">
+        <span class="ic">▶</span><span class="nm"><b>${d.name}</b><i>${d.when} · ${fsize(d.size||0)}</i></span>
+        ${BLOB[d.id]?`<a class="mini" href="${BLOB[d.id]}" download="${d.name}">${L(["Download","下载"])}</a>`:""}
+        <button class="mini del" data-delivdel="${c.biz}|${i}">${L(["Remove","删除"])}</button></div>`).join("")}</div>`
+        :`<p class="sm mut" style="margin-top:12px">${L(["Nothing delivered yet.","还没有交付过成片。"])}</p>`}
+    </div>`;
 }
 function addDeliv(biz,list){
   DELIV[biz]=DELIV[biz]||[];
@@ -2656,7 +2676,7 @@ function addDeliv(biz,list){
   });
   save("vt_deliv",DELIV);
   const c=CUST.find(x=>x.biz===biz); if(c){c.vid=(c.vid||0)+list.length; save("vt_cust",CUST);}
-  renderCustModal(); renderAdmin(); renderWVideos();
+  renderAdmin(); renderWVideos();
 }
 function renderLibAdmin(){
   const pane=$("libpane"); if(!pane)return;
@@ -3678,6 +3698,7 @@ function renderAdmin(){
   }
 
   if(ADMV==="cust"){
+    if(CUSTOPEN){box.innerHTML=custDetail();return;}
     box.innerHTML=admKpi([
       [String(CUST.length),L(["Customers","客户"]),""],
       [money(CUST.reduce((a,c)=>a+c.mrr,0)),L(["Monthly recurring","月经常性收入"]),""],
@@ -3691,8 +3712,10 @@ function renderAdmin(){
         c.mat+" / 17",c.scr+" / 10",c.vid,staffName(c.own),
         `<span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
           c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>`,
-        `<button class="mini" data-cust="${c.biz}">${L(["Open","详情"])}</button>`]));
-  renderCustModal();
+        `<button class="mini" data-cust="${c.biz}">${L(["Detail","详情"])}</button>`]));
+  document.querySelectorAll("#adm-body tbody tr").forEach((tr,i)=>{
+    if(CUST[i]){tr.classList.add("crow");tr.dataset.cust=CUST[i].biz;}
+  });
     return;
   }
 
@@ -3838,18 +3861,18 @@ document.addEventListener("click",e=>{
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
   const cop=e.target.closest("[data-cust]");
-  if(cop){CUSTOPEN=cop.dataset.cust;renderCustModal();return;}
-  if(e.target.closest("[data-custclose]")){CUSTOPEN=null;libClose();return;}
+  if(cop){CUSTOPEN=cop.dataset.cust;ADMV="cust";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
+  if(e.target.closest("[data-custback]")){CUSTOPEN=null;renderAdmin();return;}
   const ccl=e.target.closest("[data-custclaim]");
   if(ccl){const c=CUST.find(x=>x.biz===ccl.dataset.custclaim);
     if(c){c.own=$("cust-own").value;save("vt_cust",CUST);}
-    renderCustModal();renderAdmin();return;}
+    renderAdmin();return;}
   if(e.target.closest("#delivdrop")&&!e.target.closest("input")){$("delivfile").click();return;}
   const ddel=e.target.closest("[data-delivdel]");
   if(ddel){const [biz,i]=ddel.dataset.delivdel.split("|");
     const item=(DELIV[biz]||[])[+i];
     if(item){IDB.del(item.id);delete BLOB[item.id];DELIV[biz].splice(+i,1);save("vt_deliv",DELIV);}
-    renderCustModal();renderWVideos();return;}
+    renderAdmin();renderWVideos();return;}
   const lt=e.target.closest("[data-libtab]");
   if(lt){LIBTAB=lt.dataset.libtab;renderLibAdmin();return;}
   if(e.target.closest("[data-libclose]")){libClose();return;}
