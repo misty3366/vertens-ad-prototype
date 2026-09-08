@@ -194,10 +194,10 @@
     },
     {
      "@type": "Question",
-     "name": "Can the videos be in Chinese, Spanish, Vietnamese or Korean?",
+     "name": "Can the videos be in Chinese?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Yes. We write and caption in English, Chinese, Spanish, Vietnamese and Korean, and most stores run two languages side by side — one for the neighbourhood and one for everyone else."
+      "text": "Yes. We write and caption in English and Chinese, and most stores run both side by side — one for the neighbourhood and one for everyone else."
      }
     },
     {
@@ -798,7 +798,9 @@ body.adminmode{background:var(--cream)}
 
 /* three ways */
 .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.way{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:16px}
+.way{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:11px}
+section#ways{padding:24px 0}
+.way .reel{width:min(100%,168px);align-self:center}
 .way.top{border-color:var(--orange)}
 .way .rank{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 .way h3{font-size:22px;font-family:var(--disp);font-weight:400;letter-spacing:0}
@@ -808,13 +810,15 @@ body.adminmode{background:var(--cream)}
 .reel .cap{font-size:15px;font-weight:600;line-height:1.3}
 .reel .sub{font-size:12px;opacity:.8;margin-top:5px}
 .reel .tg{position:absolute;top:10px;left:10px;font-size:12px;font-weight:600;background:rgba(255,255,255,.92);color:#141414;border-radius:999px;padding:3px 9px}
-.kv{display:flex;flex-direction:column;gap:0}
-.kv .r{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.kv{display:flex;flex-wrap:wrap;gap:6px}
+.kv .r{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+.way .rank{display:flex;align-items:center;gap:8px}
+.way .rank .stars{font-size:13px;letter-spacing:2px}
 .kv .r:last-child{border-bottom:0}
 .kv .r span{color:var(--faint)}
 .tagx{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;white-space:nowrap}
 .tagx.real{background:var(--sand);color:var(--ink2)}
-.tagx.ai{background:var(--sand);color:var(--ink2)}
+.tagx.ai{background:transparent;border:1px solid var(--line2);color:var(--faint)}
 
 /* auth + app */
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--cream);display:grid;place-items:center;font-weight:700;font-size:14px;cursor:pointer;border:0}
@@ -1116,51 +1120,36 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 </div></div>
 
 <section id="ways"><div class="wrap">
-  <div style="max-width:56ch;margin-bottom:38px">
+  <div style="max-width:78ch;margin-bottom:26px">
     <h2 style="margin-top:14px" data-i="h2a">How real do you want it?</h2>
-    <p class="lead" style="margin-top:16px" data-i="p2a">Same price for all three. What you send us decides which one we use.</p>
+    <p class="lead" style="margin-top:12px" data-i="p2a">Same price for all three — what you send decides which we use.</p>
   </div>
   <div class="ways">
     <div class="way top">
-      <div class="rank" data-i="w1r">Way 1 · most real</div>
+      <div class="rank"><span data-i="w1r">Way 1 · most real</span><span class="stars">★★★</span></div>
       <h3 data-i="w1h">You on camera</h3>
-      <div class="stars">★★★</div>
       <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-food-owner)" id="wr0"><span class="tg" data-i="w1t">Way 1</span><div class="cap" data-i="w1c">12 years open.<br>Here's why.</div></div>
-      <div class="kv">
-        <div class="r"><span data-i="kp">Person</span><b class="tagx real" data-i="w1p">You</b></div>
-        <div class="r"><span data-i="ks">Place</span><b class="tagx real" data-i="w1s">Your store</b></div>
-        <div class="r"><span data-i="kv2">Voice</span><b class="tagx ai" data-i="w1v">AI voice + lip-sync</b></div>
-      </div>
-      <p class="sm mut" style="margin:0" data-i="w1n"><b data-i="send">You send:</b> one 30-second clip of yourself talking. Any language, mistakes fine.</p>
+      <div class="kv"><b class="tagx real" data-i="w1p">You</b><b class="tagx real" data-i="w1s">Your store</b><b class="tagx ai" data-i="w1v">AI voice</b></div>
+      <p class="sm mut" style="margin:0" data-i="w1n"><b data-i="send">You send:</b> a 30-second clip of you talking.</p>
     </div>
 
     <div class="way">
-      <div class="rank" data-i="w2r">Way 2</div>
+      <div class="rank"><span data-i="w2r">Way 2</span><span class="stars">★★<s>★</s></span></div>
       <h3 data-i="w2h">Our model, your store</h3>
-      <div class="stars">★★<s>★</s></div>
       <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-beauty-hair-reveal)" id="wr1"><span class="tg" data-i="w2t">Way 2</span><div class="cap" data-i="w2c">Worth the drive.</div></div>
-      <div class="kv">
-        <div class="r"><span data-i="kp2">Person</span><b class="tagx ai" data-i="w2p">Our model</b></div>
-        <div class="r"><span data-i="ks2">Place</span><b class="tagx real" data-i="w2s">Your store</b></div>
-        <div class="r"><span data-i="kv3">Voice</span><b class="tagx ai" data-i="w2v">AI voice + lip-sync</b></div>
-      </div>
-      <p class="sm mut" style="margin:0" data-i="w2n"><b data-i="send2">You send:</b> clips of your store and products. No need to be on camera.</p>
+      <div class="kv"><b class="tagx ai" data-i="w2p">Our model</b><b class="tagx real" data-i="w2s">Your store</b><b class="tagx ai" data-i="w2v">AI voice</b></div>
+      <p class="sm mut" style="margin:0" data-i="w2n"><b data-i="send2">You send:</b> clips of your store and products.</p>
     </div>
 
     <div class="way">
-      <div class="rank" data-i="w3r">Way 3</div>
+      <div class="rank"><span data-i="w3r">Way 3</span><span class="stars">★<s>★★</s></span></div>
       <h3 data-i="w3h">Built from photos</h3>
-      <div class="stars">★<s>★★</s></div>
       <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-tile-kitchen-install)" id="wr2"><span class="tg" data-i="w3t">Way 3</span><div class="cap" data-i="w3c">Now open.<br>Come try us.</div></div>
-      <div class="kv">
-        <div class="r"><span data-i="kp3">Person</span><b class="tagx ai" data-i="w3p">AI</b></div>
-        <div class="r"><span data-i="ks3">Place</span><b class="tagx ai" data-i="w3s">AI, based on your photos</b></div>
-        <div class="r"><span data-i="kv4">Voice</span><b class="tagx ai" data-i="w3v">AI voice + lip-sync</b></div>
-      </div>
+      <div class="kv"><b class="tagx ai" data-i="w3p">AI</b><b class="tagx ai" data-i="w3s">From your photos</b><b class="tagx ai" data-i="w3v">AI voice</b></div>
       <p class="sm mut" style="margin:0" data-i="w3n"><b data-i="send3">You send:</b> 5–10 photos. That's it.</p>
     </div>
   </div>
-  <p class="lead" style="margin-top:28px;max-width:72ch" data-i="wnote">You don't have to choose. Send us whatever you have and we use the most real option it allows — the price is the same either way.</p>
+  <p class="lead" style="margin-top:20px;max-width:78ch" data-i="wnote">Send whatever you have — we use the most real option it allows, same price.</p>
 
 </div></section>
 <section id="work" class="sec-dark"><div class="wrap">
@@ -1618,7 +1607,7 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
   <h2 style="margin:38px 0 4px" data-i="fg-m">Ads and results</h2>
   <details><summary data-i="fq-q9">Can you also run the ads, not just make the videos?</summary><p data-i="fa-q9">Yes, it is a separate order. You pay us the ad spend plus $100 a month for account management, plus 10% of the first $5,000 of spend and 5% of anything above that. Most stores start at $500 a month. We build the campaigns, watch them daily and report spend and leads weekly.</p></details>
   <details><summary data-i="fq-q10">What aspect ratio do I get, and where do these run?</summary><p data-i="fa-q10">Everything is delivered vertical, 9:16 only — that is the shape TikTok and Facebook were built around, and the only one people watch full-screen on a phone. The same 15- and 30-second files work as organic posts and as Meta and TikTok ad creatives. We do not export square or landscape versions.</p></details>
-  <details><summary data-i="fq-q11">Can the videos be in Chinese, Spanish, Vietnamese or Korean?</summary><p data-i="fa-q11">Yes. We write and caption in English, Chinese, Spanish, Vietnamese and Korean, and most stores run two languages side by side — one for the neighbourhood and one for everyone else.</p></details>
+  <details><summary data-i="fq-q11">Can the videos be in Chinese?</summary><p data-i="fa-q11">Yes. We write and caption in English and Chinese, and most stores run both side by side — one for the neighbourhood and one for everyone else.</p></details>
   <h2 style="margin:38px 0 4px" data-i="fg-w">Where we work</h2>
   <details><summary data-i="fq-q12">Do you work with stores in my city?</summary><p data-i="fa-q12">We work wherever your phone does, because nobody flies out to film. Most of our stores are in Los Angeles, Irvine, Rowland Heights, San Gabriel, Flushing, Houston, Toronto, Vancouver and Sydney, and the process is identical anywhere else.</p></details>
   <details><summary data-i="fq-q13">Which kinds of stores is this for?</summary><p data-i="fa-q13">Restaurants and cafés, beauty and nail salons, building materials and furniture showrooms, and auto services — the trades where someone has to walk in the door. We keep ten sample scripts ready for each.</p></details>
@@ -1877,7 +1866,7 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
       <a href="mailto:hello@vertens.ai">hello@vertens.ai</a>
       <a href="https://wa.me/10000000000" rel="noopener">WhatsApp +1 (000) 000-0000</a>
       <span data-i="fhours">Mon–Sat, 9am–7pm Pacific</span>
-      <span data-i="flangs">English · 中文 · Español · Tiếng Việt · 한국어</span>
+      <span data-i="flangs">English · 中文</span>
     </div>
   </div>
   <div class="fbot">
@@ -2063,229 +2052,7 @@ const TXT={
      fee:(f,r)=>"<b>服务费 "+money(f)+"</b> —— 首 "+money(CFG.brk)+" 按 "+CFG.rate1+"%"+(r>0?"，超出的 "+money(r)+" 按 5%":"")+"，另加 $100 账户管理费。",
      feeRow:"服务费",started:"已提交"}};
 
-const LANGS=[["en","English"],["zh","中文"],["es","Español"],["vi","Tiếng Việt"],["ko","한국어"]];
-const ES={nav1:"Resumen",nav2:"Videos",nav3:"Gestión de anuncios",navsi:"Entrar",navcta:"Muestra gratis",
- mnu1:"Mi espacio",mnu2:"Admin",mnu3:"Salir",
- h1:"Dirigido por personas. Asistido por IA.<br>Fiel a tu negocio.",
- lead:"Editores reales convierten tu tienda, tus productos y tu historia en videos cortos que se sienten humanos y generan confianza — usamos IA solo donde ayuda.",
- c1:"Muestra gratis de 15 segundos",c2:"Ver precios",
- n1:"Sin registro",n2:"Solo el enlace de tu página",n3:"Guiones en un día hábil",
- t1:"Tú en cámara",rc1:"12 años abiertos.<br>Por esto.",rs1:"El dueño habla · 30 s",
- t2:"Tu tienda",rc2:"Vale el viaje.",rs2:"Producto de cerca · 15 s",
- b1:"Para ver tu primer video terminado",b1b:"De tu tiempo, una vez al mes",b2:"Hasta tenerlo en tus manos",b4:"Después de eso, y sin contrato",bn2:" min",bn3:" días",bn4:" c/u",
- h2a:"¿Qué tan real lo quieres?",p2a:"Mismo precio para los tres. Lo que nos mandes decide cuál usamos.",
- w1r:"Opción 1 · la más real",w1h:"Tú en cámara",w1n:"<b>Tú mandas:</b> un clip de 30 segundos hablando. Cualquier idioma, los errores no importan.",
- w2r:"Opción 2",w2h:"Nuestro modelo, tu tienda",w2n:"<b>Tú mandas:</b> clips de tu tienda y tus productos. No tienes que salir en cámara.",
- w3r:"Opción 3",w3h:"Hecho con fotos",w3n:"<b>Tú mandas:</b> 5 a 10 fotos. Nada más.",
- kp:"Persona",ks:"Lugar",kv2:"Voz",w1p:"Tú",w1s:"Tu tienda",w1v:"Voz IA + sincronía labial",
- kp2:"Persona",ks2:"Lugar",kv3:"Voz",w2p:"Nuestro modelo",w2s:"Tu tienda",w2v:"Voz IA + sincronía labial",
- kp3:"Persona",ks3:"Lugar",kv4:"Voz",w3p:"IA",w3s:"IA, basada en tus fotos",w3v:"Voz IA + sincronía labial",
- wnote:"No tienes que elegir. Mándanos lo que tengas y usamos la opción más real que permita — el precio es el mismo.",
- 
- whyp:"Porque ninguna de las tres opciones gasta en la parte cara del video. Aquí está a dónde se fue el costo.",
- wc1:"Nadie maneja hasta tu tienda",wc1p:"Un camarógrafo en sitio cuesta $500–1,500 al día. Nunca mandamos uno: el teléfono que ya tienes es la cámara.",
- wc2:"Una grabación, diez videos",wc2p:"Los mismos 90 minutos de material se convierten en diez anuncios distintos. La producción tradicional vuelve a grabar; nosotros no.",
- wc3t:"La IA repite, no actúa",wc3p:"Voz, sincronía labial, subtítulos, veinte versiones: eso lo hace la máquina y casi no cuesta. Tu cara y tu local siguen siendo reales.",
-
-
- h3a:"Dos formas de comprar. Los mismos videos.",
-
- qh:"Diez guiones para tu tienda. Gratis.",qp:"Cuéntanos de tu tienda. Un editor de nuestro equipo lee tu página, escribe diez guiones para tu rubro y revisa cada línea antes de enviártelos. Un día hábil. Sin registro y sin pagar.",qb:"Envíenme los guiones",qs1:"Tu página",qs2:"Tu tienda",qs3:"Adónde te lo enviamos",qf4:"Cuántos locales",qf5:"Teléfono",qf6:"WhatsApp (si es otro)",qn:"Los escribe y los revisa una persona, no un bot. Por eso tarda un día y no un segundo.",qdh:"Recibido. Esto es lo que sigue.",qd1:"Un editor de nuestro equipo lee tu página a mano",qd1v:"Hoy",qd2:"Te damos una lectura breve de qué funciona y qué no",qd2v:"1 día hábil",qd3:"Diez guiones para tu rubro, revisados línea por línea, y la lista de tomas",qd3v:"En el mismo mensaje",qd4:"Te escribimos por WhatsApp y te llamamos si prefieres",qd4v:"Tú decides",qdn:"Sin pagar y sin cuenta. Si te gustan los guiones, grabamos uno gratis.",qeh:"Qué vas a recibir",qep:"Un ejemplo de un restaurante con el que trabajamos. El tuyo será sobre tu tienda.",qen:"Dos de los diez, como ejemplo. Cada uno se graba con el teléfono en menos de diez minutos.",qgb:"Cómo funciona el video gratis",qsh:"Tus diez guiones",navcta:"Guiones gratis",nav1:"Inicio",nav4:"Zonas",c9:"Ver todos",c1:"10 guiones gratis",chh:"¿Tres locales o más?",chb:"Dinos cuántas tiendas tienes",pc1:"15 segundos",pc2:"30 segundos",each:"cada uno",each2:"cada uno",
- minl:"Pedido mínimo",pinc:"Cada video incluye una ronda de cambios, subtítulos y entrega vertical 9:16.",
- h4a:"Manejamos tu Facebook y TikTok",p4a:"Publicamos tus videos, compramos los anuncios y te mandamos un reporte al mes. Solo Facebook y TikTok. Los mensajes de clientes siguen llegándote a ti.",
- af1:"Gestión de cuenta",af2:"Primeros $5,000 de inversión",af3:"Todo lo que pase de $5,000",ah1:"Presupuesto",ah2:"Pagas en total",c4:"Contratar gestión",
-
-
-
-
-c3:"Quiero mi muestra",
- sh:"Un video de 15 segundos, por nuestra cuenta.",sp:"Entra, cuéntanos de tu tienda y sube el material. Recibes el video en 3 días hábiles. Sin pago, sin tarjeta.",
- gsi2:"Continuar con Google",gside:"Toma un segundo. Tu material queda en tu propio espacio.",
- wn1:"Mi tienda",wn2:"Archivos",wn3:"Perfil",wn4:"Video gratis",wn5:"Cerrar sesión",wsh1:"Mi tienda",wsh2:"Archivos",wsh3:"Perfil",dz1:"Arrastra tus archivos aquí",dz2:"Videos y fotos, directo del teléfono. O haz clic para elegir.",dz3:"Todavía no hay nada. Arrastra tus primeros archivos arriba.",qb1:"Clips hablando · 30 s",qb2:"Clips de detalle · 5 s",qb3:"Fotos",pf5:"Guardar perfil",
- smg:"Gestión de cuenta",h7a:"Ejemplos por rubro",p7a:"Cinco de cada rubro, hechos con material de tiendas reales.",c7:"Pide el tuyo gratis",
- adteb:"Segundo producto",adth:"Ya tienes los videos. Ahora que los vean.",adtp:"Publicar solo llega a quien ya te sigue. Los anuncios llegan a la calle. Se contrata aparte de los videos.",
- adt1:"Dinos cuánto puedes invertir",adt1p:"La mayoría de tiendas empieza con $30–50 al día. Te decimos qué compra eso antes de que te comprometas.",
- adt2:"Nosotros armamos y compramos",adt2p:"Tu cuenta, tus datos. Montamos las campañas en Facebook, Instagram y TikTok y las vigilamos a diario.",
- adt3:"Recibes los números cada semana",adt3p:"Inversión, vistas, mensajes, llamadas — y qué video los trajo.",
- adtf1:"$100 / mes",adtf1s:"Gestión de cuenta",adtf2:"10%",adtf2s:"De los primeros $5,000",adtf3:"5%",adtf3s:"De lo que pase de ahí",
- adtc:"Ver qué compra tu presupuesto",adtn:"Estimaciones de Facebook y TikTok, lado a lado.",
- esh:"¿Qué compra realmente un presupuesto?",esp:"Mueve el presupuesto y mira el rango con el que planificamos, por plataforma.",esl:"Presupuesto mensual",
- esn:"Rangos de planificación con referencias públicas, no una promesa. Los números reales van en el reporte mensual.",
- h5a:"Cómo va, de principio a fin",s1h:"Diez guiones gratis",s1p:"Pega el enlace de tu página. Un editor la lee y te envía diez guiones en un día hábil.",
- s2h:"Un video gratis",s2p:"Inicia sesión, graba la lista de tomas con el teléfono y cortamos un video de 15 segundos con tu material.",
- s3h:"Elige un plan",s3p:"Solo si te gustó. Ocho o quince videos al mes, pago mensual, cancelas cuando quieras.",
- s4h:"Todo en tu panel",s4p:"Aprueba guiones, sube material, descarga los archivos 9:16. El primer video en tres días.",
- h6a:"Empieza con diez guiones gratis",p6a:"Pega el enlace de tu página y cuéntanos de tu tienda. Los guiones vuelven en un día; el video gratis después.",ah:"Contratar gestión de anuncios",
- qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", rth:"Precio por video",rtp:"Los planes son solo estas dos tarifas, compradas por mes.",rt15:"Un video de 15 segundos",rt30:"Un video de 30 segundos",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"ahorras $90",rts2:"ahorras $181",rtn:"Los videos sueltos fuera de un plan se cobran a estas mismas tarifas, desde uno.",
- c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — $539 si se compran uno a uno",pk2c:"15 videos al mes — $980 si se compran uno a uno",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", poh:"Pide por video — el primero en 3 días",pop:"Elige cuántos de cada uno. Con uno basta para empezar. El primero en tres días.",pi15:"Video de 15 segundos",pi30:"Video de 30 segundos",pit:"Tu pedido",pihint:"Elige al menos un video",pgo:"Pedir estos",pd1:"3 días hábiles",pd1s:"para el primer video",pd2:"Solo 9:16",pd2s:"TikTok y Facebook",pd3:"Una ronda de cambios",pd3s:"en cada video",plh:"O compra por mes",plp:"Los mismos videos, menor precio por video, y mantenemos el ritmo.",pk1d:"Primer video en 3 días hábiles",pk2d:"Primer video en 3 días hábiles", af4:"Presupuesto mínimo sugerido",whyh:"Por qué un mes cuesta cientos y no miles",whyp:"Eliminamos los tres gastos más caros de la producción. Nada de lo que se ve en pantalla se recorta.",wd1:"3 días hábiles",wd1s:"hasta tu primer video",wd2:"10+ videos",wd2s:"de una sola grabación",wd3:"Tu propia tienda",wd3s:"no la cocina de un creador",wd4:"Nosotros elegimos las tomas",wd4s:"tú solo apuntas el teléfono",whyn:"El mismo material real, los mismos editores, los mismos archivos 9:16. Solo dejamos de pagar lo que nunca llega a la pantalla.",sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
- sbh2:"Los tres son obligatorios. Teléfono en vertical, sin editar, sin filtros. Las tomas malas no importan.",
- sm1:"Clips hablando — 2 videos de 30 s",sm1s:"Mirando a la cámara todo el tiempo. Cada uno en tres partes de 10 segundos.",
- sm1a:"Parte 1 · 10 s — en tu puerta",sm1b:"Parte 2 · 10 s — adentro, en el punto que quieras mostrar",sm1c:"Parte 3 · 10 s — con un producto en la mano",
- sm2:"Clips de detalle — unos 5, de 5 s",sm2s:"Productos y el local. De cerca y firme.",
- sm3:"Fotos — unas 10",sm3s:"Fachada, interior, productos, tu logo.",
- gh:"¿Listo? Entra para subir.",gp:"Tu material queda en tu propio espacio. Entra con Google — toma un segundo.",gb:"Continuar con Google",
- oh:"¿Cuántos quieres?",op:"Pagas primero y empezamos el mismo día. ¿No te gusta el primero? Reembolso completo.",
- ob1:"Elige tus videos",oh1:"Pedido mínimo $450. Una ronda de cambios incluida.",
- v15:"15 segundos",v15s:"Productos, ofertas, novedades",v30:"30 segundos",v30s:"Historia del dueño, antes y después",
- ah:"Deja que manejemos los anuncios",ap:"Aparte de los videos. Mensual, cancelas cuando quieras.",
- ab1:"Tu presupuesto mensual",abh1:"10% sobre los primeros $5,000, 5% sobre lo demás. Más $100 de gestión.",
- ad3:"Presupuesto mensual (USD)",ad4:"Dónde publicarlos",
- dh:"Prepara tu muestra gratis",dp:"Llena tu marca una vez. La reusamos en cada video.",
- db1:"Información de tu marca",db2:"Sube tu material",db3:"Tus solicitudes",
- sr1:"Un video de 15 segundos",sr1v:"Gratis",sr2:"Entrega en",sr2v:"3 días hábiles",
- stot3:"Pagas",safter:"Sin tarjeta. Pides más solo si te gusta.",
- spromise:"<b>No grabamos nada por ti.</b> La muestra se hace con lo que mandes, así se ve tu tienda real.",
- promise:"<b>¿No te gusta el primer video? Reembolso completo.</b> Si paras después, devolvemos lo no producido.",
- mh:"Entra para continuar",mp:"Tu marca y tu material quedan en tu propio espacio.",gsi:"Continuar con Google",
- foot:"Vertens Ad Studio · Anuncios para tiendas locales"};
-const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đăng nhập",navcta:"Video mẫu miễn phí",
- mnu1:"Khu vực của tôi",mnu2:"Quản trị",mnu3:"Đăng xuất",
- h1:"Người dẫn dắt. AI hỗ trợ.<br>Đúng với việc kinh doanh của bạn.",
- lead:"Biên tập viên thật biến cửa hàng, sản phẩm và câu chuyện của bạn thành video ngắn có hơi thở con người và tạo được niềm tin — AI chỉ dùng ở chỗ nó thực sự giúp ích.",
- c1:"Nhận video mẫu 15 giây miễn phí",c2:"Xem giá",
- n1:"Không cần đăng ký",n2:"Chỉ cần link trang của bạn",n3:"Kịch bản về trong một ngày làm việc",
- t1:"Bạn lên hình",rc1:"Mở 12 năm.<br>Đây là lý do.",rs1:"Chủ quán nói · 30 giây",
- t2:"Quán của bạn",rc2:"Đáng để chạy xe tới.",rs2:"Cận cảnh sản phẩm · 15 giây",
- b1:"Để xem video hoàn chỉnh đầu tiên",b1b:"Thời gian của bạn, mỗi tháng một lần",b2:"Đến khi video nằm trong tay bạn",b4:"Sau đó mỗi video, không hợp đồng",bn2:" phút",bn3:" ngày",bn4:" mỗi video",
- h2a:"Bạn muốn thật tới mức nào?",p2a:"Ba cách cùng một giá. Bạn gửi gì quyết định chúng tôi dùng cách nào.",
- w1r:"Cách 1 · thật nhất",w1h:"Bạn lên hình",w1n:"<b>Bạn gửi:</b> một đoạn 30 giây bạn tự quay đang nói. Tiếng nào cũng được, nói vấp cũng không sao.",
- w2r:"Cách 2",w2h:"Người mẫu của chúng tôi, quán của bạn",w2n:"<b>Bạn gửi:</b> clip quay quán và sản phẩm. Bạn không cần lên hình.",
- w3r:"Cách 3",w3h:"Dựng từ hình chụp",w3n:"<b>Bạn gửi:</b> 5–10 tấm hình. Vậy thôi.",
- kp:"Người",ks:"Bối cảnh",kv2:"Giọng",w1p:"Chính bạn",w1s:"Quán của bạn",w1v:"Giọng AI + khớp khẩu hình",
- kp2:"Người",ks2:"Bối cảnh",kv3:"Giọng",w2p:"Người mẫu của chúng tôi",w2s:"Quán của bạn",w2v:"Giọng AI + khớp khẩu hình",
- kp3:"Người",ks3:"Bối cảnh",kv4:"Giọng",w3p:"AI",w3s:"AI, dựa trên hình của bạn",w3v:"Giọng AI + khớp khẩu hình",
- wnote:"Bạn không cần chọn. Có gì gửi nấy, chúng tôi dùng cách thật nhất mà tư liệu cho phép — giá vẫn vậy.",
- 
- whyp:"Vì cả ba cách đều không tốn tiền vào phần đắt nhất của video. Tiền tiết kiệm ở đâu, nói rõ luôn.",
- wc1:"Không ai lái xe tới quán bạn",wc1p:"Thuê quay phim tới nơi ở Mỹ tốn $500–1,500 một ngày. Chúng tôi không cử ai cả — điện thoại của bạn chính là máy quay.",
- wc2:"Quay một lần, ra mười video",wc2p:"Cùng 90 phút tư liệu thành mười video khác nhau. Cách làm truyền thống phải quay lại mỗi lần; chúng tôi thì không.",
- wc3t:"AI làm phần lặp lại, không đóng vai",wc3p:"Giọng, khẩu hình, phụ đề, hai mươi phiên bản — máy làm, gần như không tốn. Mặt bạn và quán bạn vẫn là thật.",
-
-
- h3a:"Hai cách mua. Cùng một loại video.",
-
- qh:"Mười kịch bản cho quán bạn. Miễn phí.",qp:"Kể cho chúng tôi về quán của bạn. Một biên tập viên sẽ đọc trang của bạn, viết mười kịch bản cho ngành của bạn và soát từng câu trước khi gửi. Một ngày làm việc. Không cần đăng ký, không mất phí.",qb:"Gửi kịch bản cho tôi",qs1:"Trang của bạn",qs2:"Quán của bạn",qs3:"Gửi đến đâu",qf4:"Bao nhiêu cửa hàng",qf5:"Số điện thoại",qf6:"WhatsApp (nếu khác)",qn:"Người viết và người duyệt, không phải bot. Vì vậy mất một ngày chứ không phải một giây.",qdh:"Đã nhận. Tiếp theo sẽ thế này.",qd1:"Biên tập viên của chúng tôi đọc trang của bạn",qd1v:"Hôm nay",qd2:"Bạn nhận một nhận xét ngắn: cái gì đang hiệu quả, cái gì không",qd2v:"1 ngày làm việc",qd3:"Mười kịch bản cho ngành của bạn, soát từng câu, kèm danh sách cảnh quay",qd3v:"Cùng một tin nhắn",qd4:"Chúng tôi nhắn WhatsApp trước, gọi điện nếu bạn muốn",qd4v:"Bạn chọn",qdn:"Không mất phí, không cần tài khoản. Nếu bạn thích kịch bản, chúng tôi quay miễn phí một cái.",qeh:"Bạn sẽ nhận được gì",qep:"Ví dụ từ một nhà hàng chúng tôi từng làm. Của bạn sẽ nói về quán bạn.",qen:"Hai trong mười, làm ví dụ. Mỗi cái quay bằng điện thoại dưới mười phút.",qgb:"Xem video mẫu miễn phí hoạt động ra sao",qsh:"Mười kịch bản của bạn",navcta:"Kịch bản miễn phí",nav1:"Trang chủ",nav4:"Khu vực",c9:"Xem tất cả",c1:"Nhận 10 kịch bản miễn phí",chh:"Từ ba cửa hàng trở lên?",chb:"Cho biết bạn có mấy cửa hàng",pc1:"15 giây",pc2:"30 giây",each:"một video",each2:"một video",
- minl:"Đơn tối thiểu",pinc:"Mỗi video gồm một lần chỉnh sửa, phụ đề và xuất dọc 9:16.",
- h4a:"Chúng tôi chạy Facebook và TikTok cho bạn",p4a:"Chúng tôi đăng video, mua quảng cáo và gửi bạn một báo cáo mỗi tháng. Chỉ Facebook và TikTok. Tin nhắn khách vẫn vào hộp thư của bạn.",
- af1:"Phí quản lý tài khoản",af2:"$5,000 tiền quảng cáo đầu tiên",af3:"Phần vượt trên $5,000",ah1:"Ngân sách",ah2:"Bạn trả tổng cộng",c4:"Đặt dịch vụ chạy quảng cáo",
-
-
-
-
-c3:"Nhận video mẫu",
- sh:"Một video 15 giây, chúng tôi mời.",sp:"Đăng nhập, kể về quán của bạn và tải tư liệu lên. Nhận video sau 3 ngày làm việc. Không trả tiền, không cần thẻ.",
- gsi2:"Tiếp tục với Google",gside:"Chỉ một giây. Tư liệu nằm trong khu vực riêng của bạn.",
- wn1:"Cửa hàng của tôi",wn2:"Tư liệu",wn3:"Hồ sơ",wn4:"Video mẫu miễn phí",wn5:"Đăng xuất",wsh1:"Cửa hàng của tôi",wsh2:"Tư liệu",wsh3:"Hồ sơ",dz1:"Kéo tệp vào đây",dz2:"Video và ảnh, ngay từ điện thoại. Hoặc bấm để chọn.",dz3:"Chưa có gì. Kéo tệp đầu tiên vào khung trên.",qb1:"Clip nói · 30 giây",qb2:"Clip chi tiết · 5 giây",qb3:"Ảnh",pf5:"Lưu hồ sơ",
- smg:"Phí quản lý tài khoản",h7a:"Video mẫu theo ngành",p7a:"Năm video cho mỗi ngành, đều làm từ tư liệu của cửa hàng thật.",c7:"Nhận bản của bạn miễn phí",
- adteb:"Sản phẩm thứ hai",adth:"Có video rồi. Giờ là để người ta thấy.",adtp:"Chỉ đăng thì chỉ tới người đã theo dõi bạn. Chạy quảng cáo mới tới được cả con phố. Đặt riêng với video.",
- adt1:"Cho biết bạn chi được bao nhiêu",adt1p:"Phần lớn cửa hàng bắt đầu từ $30–50 mỗi ngày. Chúng tôi nói trước số tiền đó mua được gì.",
- adt2:"Chúng tôi dựng và chạy",adt2p:"Tài khoản của bạn, dữ liệu của bạn. Chúng tôi dựng chiến dịch trên Facebook, Instagram, TikTok và theo dõi hằng ngày.",
- adt3:"Mỗi tuần bạn nhận số liệu",adt3p:"Đã chi bao nhiêu, bao nhiêu lượt xem, tin nhắn, cuộc gọi — và video nào mang lại.",
- adtf1:"$100 / tháng",adtf1s:"Phí quản lý tài khoản",adtf2:"10%",adtf2s:"Cho $5,000 đầu tiên",adtf3:"5%",adtf3s:"Cho phần vượt",
- adtc:"Xem ngân sách mua được gì",adtn:"Ước tính Facebook và TikTok, đặt cạnh nhau.",
- esh:"Ngân sách này thật ra mua được gì?",esp:"Kéo ngân sách để xem khoảng chúng tôi dựa vào khi lên kế hoạch, theo từng nền tảng.",esl:"Ngân sách hằng tháng",
- esn:"Khoảng ước tính dựa trên số liệu công khai, không phải cam kết. Số thật nằm trong báo cáo hằng tháng.",
- h5a:"Từ đầu đến cuối diễn ra thế nào",s1h:"Mười kịch bản miễn phí",s1p:"Dán link trang của bạn. Biên tập viên đọc và gửi mười kịch bản trong một ngày làm việc.",
- s2h:"Một video miễn phí",s2p:"Đăng nhập, quay theo danh sách cảnh bằng điện thoại, chúng tôi dựng một video 15 giây từ tư liệu của bạn.",
- s3h:"Chọn gói",s3p:"Chỉ khi bạn thấy ổn. Tám hoặc mười lăm video mỗi tháng, trả theo tháng, dừng lúc nào cũng được.",
- s4h:"Mọi thứ nằm trong workspace",s4p:"Duyệt kịch bản, tải tư liệu lên, tải file 9:16 về. Video đầu tiên trong ba ngày.",
- h6a:"Bắt đầu với mười kịch bản miễn phí",p6a:"Dán link trang của bạn và kể về quán. Kịch bản về sau một ngày, video miễn phí ngay sau đó.",ah:"Bắt đầu dịch vụ quảng cáo",
- qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", rth:"Tính theo từng video",rtp:"Gói chỉ là hai mức giá này, mua theo tháng.",rt15:"Một video 15 giây",rt30:"Một video 30 giây",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"tiết kiệm $90",rts2:"tiết kiệm $181",rtn:"Video lẻ ngoài gói cũng tính theo hai mức này, từ một video.",
- c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — $539 nếu mua lẻ",pk2c:"15 video mỗi tháng — $980 nếu mua lẻ",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", poh:"Đặt theo từng video — video đầu trong 3 ngày",pop:"Chọn số lượng mỗi loại. Một video cũng bắt đầu được. Video đầu tiên trong ba ngày.",pi15:"Video 15 giây",pi30:"Video 30 giây",pit:"Đơn của bạn",pihint:"Chọn ít nhất một video",pgo:"Đặt những video này",pd1:"3 ngày làm việc",pd1s:"cho video đầu tiên",pd2:"Chỉ 9:16",pd2s:"TikTok và Facebook",pd3:"Một lần chỉnh sửa",pd3s:"cho mỗi video",plh:"Hoặc mua theo tháng",plp:"Cùng loại video, giá mỗi video rẻ hơn, và giữ được nhịp đăng.",pk1d:"Video đầu tiên trong 3 ngày làm việc",pk2d:"Video đầu tiên trong 3 ngày làm việc", af4:"Ngân sách tối thiểu đề xuất",whyh:"Vì sao một tháng tốn vài trăm chứ không phải vài nghìn",whyp:"Chúng tôi cắt ba khoản đắt nhất của khâu sản xuất. Những gì lên hình thì không cắt.",wd1:"3 ngày làm việc",wd1s:"đến video đầu tiên",wd2:"Hơn 10 video",wd2s:"từ một buổi quay",wd3:"Chính quán của bạn",wd3s:"không phải bếp nhà người khác",wd4:"Chúng tôi chọn cảnh",wd4s:"bạn chỉ cần giơ điện thoại",whyn:"Vẫn tư liệu thật, vẫn biên tập viên đó, vẫn file 9:16. Chúng tôi chỉ ngừng trả cho những phần không bao giờ lên hình.",sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
- sbh2:"Cả ba đều bắt buộc. Cầm điện thoại dọc, không cắt ghép, không filter. Quay hỏng cũng không sao.",
- sm1:"Clip nói chuyện — 2 video, mỗi video 30 giây",sm1s:"Nhìn thẳng máy suốt. Mỗi video chia làm ba đoạn 10 giây.",
- sm1a:"Đoạn 1 · 10 giây — trước cửa quán",sm1b:"Đoạn 2 · 10 giây — bên trong, chỗ muốn giới thiệu",sm1c:"Đoạn 3 · 10 giây — cầm sản phẩm trên tay",
- sm2:"Clip chi tiết — khoảng 5, mỗi clip 5 giây",sm2s:"Sản phẩm và không gian quán. Gần và chắc tay.",
- sm3:"Hình chụp — khoảng 10 tấm",sm3s:"Mặt tiền, bên trong, sản phẩm, logo.",
- gh:"Sẵn sàng? Đăng nhập để tải lên.",gp:"Tư liệu nằm trong khu vực riêng của bạn. Đăng nhập bằng Google.",gb:"Tiếp tục với Google",
- oh:"Bạn cần bao nhiêu video?",op:"Thanh toán trước, chúng tôi bắt đầu ngay trong ngày. Video đầu không ưng: hoàn tiền.",
- ob1:"Chọn video",oh1:"Đơn tối thiểu $450. Mỗi video gồm một lần chỉnh sửa.",
- v15:"15 giây",v15s:"Sản phẩm, khuyến mãi, hàng mới",v30:"30 giây",v30s:"Chuyện của chủ quán, trước và sau",
- ah:"Để chúng tôi chạy quảng cáo",ap:"Tách riêng với video. Tính theo tháng, dừng lúc nào cũng được.",
- ab1:"Ngân sách quảng cáo hằng tháng",abh1:"10% cho $5,000 đầu tiên, 5% cho phần vượt. Cộng $100 phí quản lý.",
- ad3:"Ngân sách hằng tháng (USD)",ad4:"Chạy ở đâu",
- dh:"Chuẩn bị video mẫu miễn phí",dp:"Điền thông tin thương hiệu một lần, chúng tôi dùng lại cho mọi video sau.",
- db1:"Thông tin thương hiệu",db2:"Tải tư liệu lên",db3:"Yêu cầu của bạn",
- sr1:"Một video 15 giây",sr1v:"Miễn phí",sr2:"Giao trong",sr2v:"3 ngày làm việc",
- stot3:"Bạn trả",safter:"Không cần thẻ. Thích thì mới đặt thêm.",
- spromise:"<b>Chúng tôi không quay giùm bạn.</b> Video mẫu dựng từ tư liệu bạn gửi, nên nó đúng là quán của bạn.",
- promise:"<b>Video đầu không ưng: hoàn tiền 100%.</b> Dừng giữa chừng thì hoàn phần chưa làm.",
- mh:"Đăng nhập để tiếp tục",mp:"Thông tin và tư liệu nằm trong khu vực riêng của bạn.",gsi:"Tiếp tục với Google",
- foot:"Vertens Ad Studio · Quảng cáo cho cửa hàng địa phương"};
-const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",navcta:"무료 샘플",
- mnu1:"내 작업공간",mnu2:"관리자",mnu3:"로그아웃",
- h1:"사람이 이끌고, AI가 거들고,<br>사장님 장사에 충실하게.",
- lead:"진짜 편집자가 매장과 제품, 사장님의 이야기를 사람 냄새 나는, 신뢰를 주는 짧은 영상으로 만듭니다 — AI는 도움이 되는 곳에만 씁니다.",
- c1:"무료 15초 샘플 받기",c2:"가격 보기",
- n1:"가입 없이",n2:"페이지 링크만",n3:"대본은 영업일 하루 안에",
- t1:"사장님이 직접",rc1:"12년째 영업 중.<br>이유가 있습니다.",rs1:"사장님 인터뷰 · 30초",
- t2:"가게 전경",rc2:"차 타고 올 만합니다.",rs2:"제품 클로즈업 · 15초",
- b1:"첫 완성 영상을 보기까지",b1b:"사장님이 쓰시는 시간, 한 달에 한 번",b2:"영상이 사장님 손에 오기까지",b4:"그 이후 편당, 약정 없음",bn2:"분",bn3:"일",bn4:" 개당",
- h2a:"얼마나 진짜처럼 만들까요?",p2a:"세 방식 모두 같은 가격. 보내주신 소재에 따라 방식이 정해집니다.",
- w1r:"방식 1 · 가장 진짜",w1h:"사장님이 직접 촬영",w1n:"<b>보내실 것:</b> 말하는 모습 30초 영상 하나. 언어 무관, 실수해도 괜찮습니다.",
- w2r:"방식 2",w2h:"모델은 저희가, 매장은 사장님 것",w2n:"<b>보내실 것:</b> 매장과 제품 영상. 직접 나오실 필요 없습니다.",
- w3r:"방식 3",w3h:"사진으로 제작",w3n:"<b>보내실 것:</b> 사진 5~10장. 그게 전부입니다.",
- kp:"인물",ks:"장소",kv2:"음성",w1p:"사장님",w1s:"실제 매장",w1v:"AI 음성 + 입모양 동기화",
- kp2:"인물",ks2:"장소",kv3:"음성",w2p:"저희 모델",w2s:"실제 매장",w2v:"AI 음성 + 입모양 동기화",
- kp3:"인물",ks3:"장소",kv4:"음성",w3p:"AI",w3s:"AI, 사진 기반",w3v:"AI 음성 + 입모양 동기화",
- wnote:"고르지 않으셔도 됩니다. 가지고 계신 것을 보내주시면 가능한 가장 진짜에 가까운 방식으로 만듭니다 — 가격은 같습니다.",
- 
- whyp:"세 방식 모두 영상에서 가장 비싼 부분에 돈을 쓰지 않기 때문입니다. 어디서 아꼈는지 그대로 알려드립니다.",
- wc1:"아무도 매장으로 오지 않습니다",wc1p:"현장 촬영 기사는 하루 $500–1,500입니다. 저희는 보내지 않습니다 — 사장님 주머니 속 휴대폰이 카메라입니다.",
- wc2:"한 번 촬영, 열 편",wc2p:"같은 90분 소재가 열 편의 다른 광고가 됩니다. 전통 방식은 매번 다시 찍지만 저희는 한 번도 다시 찍지 않습니다.",
- wc3t:"AI는 반복 작업을 할 뿐, 연기하지 않습니다",wc3p:"음성, 입모양, 자막, 스무 개 버전 — 기계의 일이라 거의 비용이 들지 않습니다. 얼굴과 매장은 그대로 진짜입니다.",
-
-
- h3a:"사는 방법 두 가지, 같은 영상.",
-
- qh:"매장용 대본 10개, 무료입니다.",qp:"매장에 대해 알려주세요. 저희 편집자가 페이지를 직접 읽고, 업종에 맞는 대본 10개를 쓰고, 보내기 전에 한 줄씩 확인합니다. 영업일 기준 하루. 가입도 결제도 없습니다.",qb:"대본 보내주세요",qs1:"사장님 페이지",qs2:"사장님 매장",qs3:"어디로 보내드릴까요",qf4:"매장 수",qf5:"전화번호",qf6:"WhatsApp (다르면)",qn:"봇이 아니라 사람이 쓰고 확인합니다. 그래서 1초가 아니라 하루가 걸립니다.",qdh:"접수했습니다. 다음 순서입니다.",qd1:"저희 편집자가 페이지를 직접 읽습니다",qd1v:"오늘",qd2:"무엇이 되고 무엇이 안 되는지 짧게 정리해 드립니다",qd2v:"영업일 1일",qd3:"업종에 맞춘 대본 10개, 한 줄씩 확인, 촬영 목록 포함",qd3v:"같은 메시지로",qd4:"WhatsApp으로 먼저 연락드리고, 원하시면 전화드립니다",qd4v:"사장님 선택",qdn:"결제도 계정도 없습니다. 대본이 마음에 드시면 그중 하나를 무료로 찍어드립니다.",qeh:"받으시는 것",qep:"함께 일한 식당의 예시입니다. 사장님 것은 사장님 매장 이야기가 됩니다.",qen:"열 개 중 두 개, 예시입니다. 각각 휴대폰으로 10분 안에 찍을 수 있습니다.",qgb:"무료 샘플 영상 안내",qsh:"대본 10개",navcta:"무료 대본",nav1:"홈",nav4:"서비스 지역",c9:"전체 보기",c1:"무료 대본 10개 받기",chh:"매장이 3곳 이상인가요?",chb:"매장이 몇 곳인지 알려주세요",pc1:"15초",pc2:"30초",each:"개당",each2:"개당",
- minl:"최소 주문",pinc:"모든 영상에 수정 1회, 자막, 9:16 세로 출력이 포함됩니다.",
- h4a:"Facebook과 TikTok을 대신 운영합니다",p4a:"영상을 올리고 광고를 집행하고, 매달 리포트 한 장을 드립니다. Facebook과 TikTok만 합니다. 고객 메시지는 그대로 사장님께 갑니다.",
- af1:"계정 관리비",af2:"광고비 첫 $5,000",af3:"$5,000 초과분",ah1:"광고 예산",ah2:"총 결제액",c4:"광고 대행 신청",
-
-
-
-
-c3:"무료 샘플 받기",
- sh:"15초 영상 한 편, 무료로 만들어 드립니다.",sp:"로그인하고 가게 정보를 알려주신 뒤 소재를 올려주세요. 영업일 기준 3일 안에 받아보십니다.",
- gsi2:"Google로 계속하기",gside:"1초면 됩니다. 소재는 사장님 작업공간에만 저장됩니다.",
- wn1:"내 매장",wn2:"소재",wn3:"프로필",wn4:"무료 샘플",wn5:"로그아웃",wsh1:"내 매장",wsh2:"소재",wsh3:"프로필",dz1:"여기로 파일을 끌어다 놓으세요",dz2:"휴대폰 속 영상과 사진 그대로. 클릭해서 고르셔도 됩니다.",dz3:"아직 비어 있습니다. 위 상자에 파일을 넣어 주세요.",qb1:"말하는 영상 · 30초",qb2:"디테일 영상 · 5초",qb3:"사진",pf5:"프로필 저장",
- smg:"계정 관리비",h7a:"업종별 샘플",p7a:"업종마다 다섯 개씩, 모두 실제 매장의 영상으로 만들었습니다.",c7:"무료로 받아보기",
- adteb:"두 번째 상품",adth:"영상은 만들었고, 이제 보이게 할 차례입니다.",adtp:"그냥 올리면 이미 팔로우한 사람에게만 갑니다. 광고를 돌려야 이 거리 사람들에게 갑니다. 영상과 따로 주문합니다.",
- adt1:"쓸 수 있는 금액을 알려주세요",adt1p:"단일 매장은 보통 하루 $30–50부터 시작합니다. 쓰기 전에 그 돈으로 뭘 살 수 있는지 먼저 알려드립니다.",
- adt2:"저희가 세팅하고 집행합니다",adt2p:"사장님 계정, 사장님 데이터. Facebook·Instagram·TikTok에 캠페인을 세팅하고 매일 봅니다.",
- adt3:"매주 숫자를 드립니다",adt3p:"지출, 조회수, 메시지, 전화 — 그리고 어떤 영상이 가져왔는지까지.",
- adtf1:"$100 / 월",adtf1s:"계정 관리비",adtf2:"10%",adtf2s:"첫 $5,000의",adtf3:"5%",adtf3s:"초과분의",
- adtc:"예산으로 뭘 살 수 있는지 보기",adtn:"Facebook과 TikTok을 나란히 추정합니다.",
- esh:"이 예산으로 실제로 뭘 살 수 있나요?",esp:"예산을 움직여 보세요. 저희가 계획할 때 쓰는 범위를 플랫폼별로 보여드립니다.",esl:"월 광고 예산",
- esn:"공개 벤치마크로 잡은 계획 범위이며 약속이 아닙니다. 실제 숫자는 월간 리포트에 담깁니다.",
- h5a:"처음부터 끝까지 이렇게 갑니다",s1h:"무료 대본 10개",s1p:"페이지 링크만 붙여넣으세요. 편집자가 읽고 영업일 하루 안에 열 개를 보내드립니다.",
- s2h:"무료 영상 한 편",s2p:"로그인하고 촬영 목록대로 휴대폰으로 찍으시면, 그 소재로 15초 영상을 만들어 드립니다.",
- s3h:"플랜 선택",s3p:"마음에 드셨을 때만. 월 8편 또는 15편, 월 단위 결제, 언제든 중단.",
- s4h:"전부 워크스페이스 안에",s4p:"대본 승인, 소재 업로드, 9:16 파일 다운로드. 첫 영상은 3일 안에.",
- h6a:"무료 대본 10개부터 시작하세요",p6a:"페이지 링크를 붙여넣고 매장 이야기를 들려주세요. 대본은 하루 안에, 무료 영상은 그다음에.",ah:"광고 대행 시작하기",
- qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", rth:"영상 단가",rtp:"플랜은 이 두 단가를 월 단위로 묶은 것입니다.",rt15:"15초 영상 1편",rt30:"30초 영상 1편",rtb:"Basic · 30초 3편 + 15초 5편",rts:"Standard · 30초 5편 + 15초 10편",rts1:"$90 절약",rts2:"$181 절약",rtn:"플랜 없이 낱개로 만드실 때도 같은 단가이며, 한 편부터 가능합니다.",
- c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 낱개로 사면 $539",pk2c:"월 15편 — 낱개로 사면 $980",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", poh:"편당 주문 — 첫 편 3일",pop:"각각 몇 편인지 고르세요. 한 편부터 시작하실 수 있습니다. 첫 영상은 3일 안에.",pi15:"15초 영상",pi30:"30초 영상",pit:"주문 내역",pihint:"최소 한 편",pgo:"이대로 주문",pd1:"영업일 3일",pd1s:"첫 영상까지",pd2:"9:16만",pd2s:"TikTok과 Facebook",pd3:"수정 1회",pd3s:"모든 영상에",plh:"또는 월 단위로",plp:"같은 영상, 편당 더 저렴하게, 그리고 리듬이 끊기지 않게.",pk1d:"첫 영상은 영업일 3일 안에",pk2d:"첫 영상은 영업일 3일 안에", af4:"권장 최소 예산",whyh:"왜 한 달에 수천이 아니라 수백인가",whyp:"제작에서 가장 비싼 세 가지를 덜어냈습니다. 화면에 나오는 것은 그대로입니다.",wd1:"영업일 3일",wd1s:"첫 영상까지",wd2:"10편 이상",wd2s:"촬영 한 번으로",wd3:"사장님 매장",wd3s:"남의 집 주방이 아니라",wd4:"컷은 저희가",wd4s:"사장님은 휴대폰만",whyn:"같은 실제 소재, 같은 편집자, 같은 9:16 파일입니다. 화면에 닿지 않는 비용만 없앴습니다.",sb1:"여쭤볼 내용",sb2:"촬영하실 것",
- sbh2:"세 가지 모두 필요합니다. 휴대폰을 세로로, 편집이나 필터 없이. 잘못 찍힌 것도 괜찮습니다.",
- sm1:"인터뷰 영상 — 2개, 각 30초",sm1s:"카메라를 계속 정면으로. 각 영상을 10초씩 세 토막으로 촬영.",
- sm1a:"1번 · 10초 — 가게 입구에서",sm1b:"2번 · 10초 — 매장 안, 보여주고 싶은 곳에서",sm1c:"3번 · 10초 — 제품을 들고 설명하며",
- sm2:"디테일 영상 — 5개 내외, 각 5초",sm2s:"제품과 매장 내부. 가깝게, 흔들리지 않게.",
- sm3:"사진 — 10장 내외",sm3s:"간판, 매장 내부, 제품, 로고.",
- gh:"준비되셨나요? 로그인 후 업로드하세요.",gp:"소재는 사장님 작업공간에만 저장됩니다.",gb:"Google로 계속하기",
- oh:"몇 편 필요하신가요?",op:"결제 후 당일 착수합니다. 첫 영상이 마음에 안 드시면 전액 환불.",
- ob1:"영상 선택",oh1:"최소 주문 $450. 영상마다 수정 1회 포함.",
- v15:"15초",v15s:"제품, 할인, 신메뉴",v30:"30초",v30s:"사장님 이야기, 전후 비교",
- ah:"광고 집행을 맡겨주세요",ap:"영상과 별도. 월 단위, 언제든 중단 가능합니다.",
- ab1:"월 광고 예산",abh1:"첫 $5,000은 10%, 초과분은 5%. 관리비 $100 별도.",
- ad3:"월 광고 예산 (USD)",ad4:"집행 매체",
- dh:"무료 샘플 준비하기",dp:"브랜드 정보는 한 번만 입력하면 이후 모든 영상에 재사용됩니다.",
- db1:"브랜드 정보",db2:"소재 업로드",db3:"신청 내역",
- sr1:"15초 영상 한 편",sr1v:"무료",sr2:"납품 기한",sr2v:"영업일 3일",
- stot3:"결제 금액",safter:"카드 필요 없음. 마음에 드실 때만 추가 주문하세요.",
- spromise:"<b>저희가 대신 촬영하지 않습니다.</b> 보내주신 소재로만 만들기 때문에 실제 가게 그대로 보입니다.",
- promise:"<b>첫 영상이 마음에 안 드시면 전액 환불.</b> 이후 중단하시면 제작하지 않은 분량을 환불합니다.",
- mh:"계속하려면 로그인하세요",mp:"브랜드 정보와 소재는 사장님 작업공간에만 저장됩니다.",gsi:"Google로 계속하기",
- foot:"Vertens Ad Studio · 로컬 매장을 위한 광고"};
+const LANGS=[["en","English"],["zh","中文"]];
 const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投",navcta:"免费样片",
  seb:"免费样片",sh:"先免费做一条 15 秒。",
  sp:"填一下门店情况，把下面的素材发给我们，3 个工作日拿到成片。不用付钱、不用留卡、不用承诺。",
@@ -2311,17 +2078,17 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  t2:"你的门店",rc2:"值得开车来一趟",rs2:"产品特写 · 15 秒",
  b1:"看到第一条成片",b1b:"你要花的时间，一个月一次",b2:"成片交到你手上",b4:"标准套餐单条均价，没有合约",
  bn2:" 分钟",bn3:" 天",bn4:" 一条",b3:"起订额",
- eb2:"三种做法",h2a:"你想要多真？",p2a:"三种同价。你给我们什么，决定我们用哪种。",
+ eb2:"三种做法",h2a:"你想要多真？",p2a:"三种同价 —— 你给什么，决定我们用哪种。",
  w1r:"做法一 · 最真",w1h:"你本人出镜",w1t:"做法一",w1c:"开店 12 年<br>凭什么天天排队",
- kp:"出镜的人",ks:"场景",kv2:"声音",w1p:"你本人",w1s:"你的店",w1v:"AI 配音 + 口型",
- send:"你要给的：",w1n:"<b>你要给的：</b>一段 30 秒的自拍口播。什么语言都行，说错了也没关系。",
+ kp:"出镜的人",ks:"场景",kv2:"声音",w1p:"你本人",w1s:"你的店",w1v:"AI 配音",
+ send:"你要给的：",w1n:"<b>你要给的：</b>一段 30 秒的自拍口播。",
  w2r:"做法二",w2h:"我们的模特，你的店",w2t:"做法二",w2c:"值得开车来一趟",
- kp2:"出镜的人",ks2:"场景",kv3:"声音",w2p:"我们的模特",w2s:"你的店",w2v:"AI 配音 + 口型",
- send2:"你要给的：",w2n:"<b>你要给的：</b>门店和商品的实拍片段。你不用出镜。",
+ kp2:"出镜的人",ks2:"场景",kv3:"声音",w2p:"我们的模特",w2s:"你的店",w2v:"AI 配音",
+ send2:"你要给的：",w2n:"<b>你要给的：</b>门店和商品的实拍片段。",
  w3r:"做法三",w3h:"用照片生成",w3t:"做法三",w3c:"新店开业<br>这周来试试",
- kp3:"出镜的人",ks3:"场景",kv4:"声音",w3p:"AI",w3s:"AI，参考你的照片",w3v:"AI 配音 + 口型",
+ kp3:"出镜的人",ks3:"场景",kv4:"声音",w3p:"AI",w3s:"由你的照片生成",w3v:"AI 配音",
  send3:"你要给的：",w3n:"<b>你要给的：</b>5–10 张照片。就这些。",
- wnote:"你不用选。把手上有的给我们，我们会用素材允许的最真做法 —— 价格都一样。",
+ wnote:"把手上有的给我们 —— 我们用素材允许的最真做法，价格都一样。",
  brandsub:"实体店广告工作室",foot:"Vertens Ad Studio · 实体店广告工作室",
  eb:"免费做一条 15 秒样片 · 不用留卡",
  navcta:"免费脚本",c1:"领 10 条免费脚本",c2:"或者要一条免费样片",
@@ -2361,7 +2128,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  "fg-m":"投放与效果",
  "fq-q9":"你们能帮忙投放，不只是做片子吗？","fa-q9":"可以，这是单独下单的另一个产品。你把广告费加上每月 $100 账户管理费付给我们，再加首 $5,000 广告费的 10%、超出部分的 5%。多数门店从每月 $500 起投。我们负责搭建 campaign、每天盯、每周回报花了多少、来了多少线索。",
  "fq-q10":"成片是什么比例？能发在哪些平台？","fa-q10":"成片只有一种比例：9:16 竖版。TikTok 和 Facebook 都是围绕这个比例做的，也只有竖版能在手机上占满整屏。同一批 15 秒和 30 秒文件，既能当日常内容发，也能直接当 Meta 和 TikTok 的广告素材。我们不出方版和横版。",
- "fq-q11":"片子可以做中文、西语、越南语、韩语吗？","fa-q11":"可以。英文、中文、西班牙语、越南语、韩语都能写、能配字幕。多数门店会同时跑两种语言：一种给本社区，一种给其他客人。",
+ "fq-q11":"片子可以做中文吗？","fa-q11":"可以。英文和中文都能写、能配字幕。多数门店会中英文同时跑：一种给本社区，一种给其他客人。",
  "fg-w":"服务范围",
  "fq-q12":"我们这个城市你们做吗？","fa-q12":"只要你的手机能拍，我们就能做，因为没人需要飞过去。目前门店集中在洛杉矶、尔湾、罗兰岗、圣盖博、法拉盛、休斯顿、多伦多、温哥华和悉尼，其他地方流程完全一样。",
  "fq-q13":"适合什么样的店？","fa-q13":"餐饮咖啡、美业美甲、建材家居展厅、汽车服务——这些都是要靠客人走进门的行业。每个行业我们都备好了十条样板脚本。",
@@ -2413,7 +2180,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  fsun:"Sunvega 集团 · 海外社媒营销",
  fc1:"服务","fl-vid":"视频套餐","fl-ads":"广告代投","fl-scr":"十条免费脚本","fl-sam":"免费样片",
  fc2:"关于","fl-abt":"关于我们","fl-wrk":"服务范围","fl-faq":"常见问题","fl-ws":"我的工作台",
- fc3:"联系我们",fhours:"周一至周六 9:00–19:00（太平洋时间）",flangs:"English · 中文 · Español · Tiếng Việt · 한국어",
+ fc3:"联系我们",fhours:"周一至周六 9:00–19:00（太平洋时间）",flangs:"English · 中文",
  fcopy:"© 2026 Vertens Ad Studio，Sunvega 集团成员企业。保留所有权利。",
  fpriv:"隐私政策",fterm:"服务条款",fref:"退款政策",
  wn9:"广告代投",wsh7:"广告代投",wsp7:"三件事做完就能开投，大约十分钟。",
@@ -2559,7 +2326,7 @@ c3:"领免费样片",
  adonetxt:"<b>收到了。</b>我们会在一个工作日内发开户流程和账户清单。",
  crossvid:"还没有视频？<b>广告得有片子才能投。</b>",c6:"先订视频"};
 const EN={}; document.querySelectorAll("[data-i]").forEach(e=>EN[e.dataset.i]=e.innerHTML);
-const DICT={en:EN,zh:ZH,es:ES,vi:VI,ko:KO};
+const DICT={en:EN,zh:ZH};
 
 /* ---------- 行业样片库（可配置） ---------- */
 const DEFAULT_LIB=[
@@ -3223,7 +2990,7 @@ function monthKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(
 function monthLabel(key){
   const [y,m]=key.split("-").map(Number);
   const d=new Date(y,m-1,1);
-  const loc={zh:"zh-CN",es:"es",vi:"vi",ko:"ko",en:"en-US"}[LANG]||"en-US";
+  const loc={zh:"zh-CN",en:"en-US"}[LANG]||"en-US";
   try{return d.toLocaleDateString(loc,{month:"short",year:"numeric"});}catch(e){return key;}
 }
 function vidList(){
@@ -4123,7 +3890,7 @@ function setLang(l){
     const v=dict[e.dataset.i]!==undefined?dict[e.dataset.i]:EN[e.dataset.i];
     if(v!==undefined)e.innerHTML=v;});
   const sel=$("lang"); if(sel)sel.value=LANG;
-  document.documentElement.lang={zh:"zh-CN",es:"es",vi:"vi",ko:"ko",en:"en"}[LANG];
+  document.documentElement.lang={zh:"zh-CN",en:"en"}[LANG];
   try{localStorage.setItem("vt_lang",LANG)}catch(e){}
   render();
 }
