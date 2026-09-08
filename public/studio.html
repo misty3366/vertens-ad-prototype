@@ -577,6 +577,68 @@ textarea.sci{min-height:58px;resize:vertical;line-height:1.5}
 .waline svg{width:17px;height:17px;flex:none}
 @media (max-width:560px){.wafab{right:14px;bottom:14px;padding:13px;gap:0}.wafab span{display:none}}
 
+/* admin console */
+body.adminmode .nav,body.adminmode .sitefoot{display:none}
+body.adminmode{background:var(--cream)}
+.adm{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh;background:var(--cream)}
+.admnav{background:var(--dark);color:#EDE7DC;padding:20px 14px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.admbrand{display:flex;align-items:center;gap:10px;padding:0 8px 4px}
+.admbrand .logo{width:30px;height:30px;border-radius:9px;background:var(--orange);color:var(--orangeInk);display:flex;align-items:center;justify-content:center;font-weight:700}
+.admbrand b{display:block;font-size:14.5px}
+.admbrand span{font-size:11.5px;color:rgba(237,231,220,.5)}
+.admgrp{display:flex;flex-direction:column;gap:2px}
+.admgrp>span{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,231,220,.38);padding:0 10px 8px}
+.admnav a{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;font-size:14px;font-weight:500;color:rgba(237,231,220,.82);cursor:pointer;text-decoration:none}
+.admnav a i{font-style:normal;width:16px;text-align:center;opacity:.65}
+.admnav a:hover{background:rgba(255,255,255,.06);color:#fff}
+.admnav a.on{background:var(--orange);color:var(--orangeInk)}
+.admnav a.on i{opacity:1}
+.admnav a em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:700;background:rgba(255,255,255,.14);border-radius:999px;padding:1px 8px}
+.admnav a.on em{background:rgba(0,0,0,.18)}
+.admfoot{margin-top:auto;border-top:1px solid rgba(237,231,220,.14);padding-top:12px}
+.admmain{padding:26px 30px 60px;min-width:0}
+.admhd{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.admhd h1{font-size:30px}
+.admhd p{margin:6px 0 0;font-size:14.5px;color:var(--ink2)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+.kpi div{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.kpi b{display:block;font-family:var(--disp);font-size:30px;font-weight:400;line-height:1.1}
+.kpi span{font-size:12.5px;color:var(--faint)}
+.kpi i{font-style:normal;font-size:12px;font-weight:600;color:var(--orange)}
+.acard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-bottom:18px}
+.acard h3{font-size:19px;margin-bottom:4px}
+.acard .hint{margin-bottom:14px}
+.atbl{width:100%;border-collapse:collapse;font-size:14px}
+.atbl th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:0 12px 10px;white-space:nowrap}
+.atbl td{padding:12px;border-top:1px solid var(--line);vertical-align:middle}
+.atbl tr:hover td{background:var(--cream)}
+.atbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.awrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.pill2{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--sand);color:var(--ink2);white-space:nowrap}
+.pill2.ok{background:#E6F4EC;color:var(--green)}
+.pill2.warn{background:var(--orangeSoft);color:var(--orange)}
+.pill2.blue{background:#E8F0FB;color:#1A5FB4}
+.afilter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.afilter button{font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);cursor:pointer}
+.afilter button.on{background:var(--dark);color:#F7F4EE;border-color:var(--dark)}
+.lane{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.lane>div{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px}
+.lane h4{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.job{background:var(--cream);border-radius:12px;padding:11px 12px;margin-bottom:9px}
+.job b{display:block;font-size:14px}
+.job span{font-size:12px;color:var(--faint)}
+.job .due{font-size:11.5px;font-weight:600;color:var(--orange)}
+.cfgform{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+@media (max-width:1000px){
+ .adm{grid-template-columns:1fr}
+ .admnav{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:8px;align-items:center;padding:14px}
+ .admbrand,.admgrp>span,.admfoot{display:none}
+ .admgrp{flex-direction:row;flex-wrap:wrap}
+ .admmain{padding:20px 16px 50px}
+ .lane{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){.lane{grid-template-columns:1fr}}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -1423,50 +1485,61 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 </div>
 
 <div class="page" id="p-admin">
-<div class="wrap" style="padding-top:36px;padding-bottom:70px">
-  <div style="margin-bottom:26px">
-    <h1 style="font-size:40px;margin-top:12px" data-i="ah2">Businesses and samples</h1>
-  </div>
-  <div class="block"><h3 data-i="adord">Orders and after-sales</h3><div id="ordadmin" style="display:grid;gap:8px;margin-top:12px"></div></div>
-  <div class="astat">
-    <div><span data-i="as1">Businesses</span><b id="k-biz">0</b></div>
-    <div><span data-i="as2">Script requests</span><b id="k-req">0</b></div>
-    <div><span data-i="as3">In production</span><b id="k-work">0</b></div>
-    <div><span data-i="as4">Delivered</span><b id="k-done">0</b></div>
-  </div>
-
-  <div class="block" style="padding:0;overflow:hidden">
-    <div style="padding:22px 24px 6px"><h3 style="font-family:var(--disp);font-weight:400;font-size:22px" data-i="ath">Registered businesses</h3></div>
-    <div style="overflow-x:auto;padding:0 12px 12px"><table class="atable" id="biztable"></table></div>
-  </div>
-
-  <div class="block" style="margin-top:18px">
-    <h3 style="font-family:var(--disp);font-weight:400;font-size:22px" data-i="acfgh">Sample library</h3>
-    <p class="hint" data-i="acfgp">Industries shown on the public site, and the samples under each.</p>
-    <div class="libbar" id="libbar2" style="margin-top:14px"></div>
-    <div class="cfg on" id="cfg" style="margin-top:6px">
-      <div class="cfgrow">
-        <div class="f"><label data-i="cf1">Industry name (EN)</label><input class="inp" id="ni-en" placeholder="Pet grooming"></div>
-        <div class="f"><label data-i="cf2">Industry name (中文)</label><input class="inp" id="ni-zh" placeholder="宠物美容"></div>
-        <button class="mini dark" id="addind" data-i="cf3">Add industry</button>
-        <button class="mini del" id="delind" data-i="cf4">Delete current</button>
-        <button class="mini" id="expjson" data-i="cf5">Export JSON</button>
-      </div>
-      <div class="cfgrow">
-        <div class="f"><label data-i="cf6">Sample title (EN)</label><input class="inp" id="ns-en" placeholder="Same day service"></div>
-        <div class="f"><label data-i="cf7">Sample title (中文)</label><input class="inp" id="ns-zh" placeholder="当天取车"></div>
-        <div class="f"><label data-i="cf8">Length</label><select class="inp" id="ns-sec"><option value="15">15s</option><option value="30">30s</option></select></div>
-        <div class="f"><label data-i="cf9">Way</label><select class="inp" id="ns-way"><option value="1">Way 1</option><option value="2">Way 2</option><option value="3">Way 3</option></select></div>
-        <button class="mini dark" id="addsam" data-i="cf10">Add sample</button>
-      </div>
-      <div class="cfglist" id="cfglist"></div>
-      <p class="sm mut" style="margin:14px 0 0" data-i="cfgn">Saved in this browser. Export the JSON and hand it to the developer to make it permanent.</p>
+<div class="adm">
+  <nav class="admnav" id="admnav">
+    <div class="admbrand"><span class="logo">V</span><div><b>Vertens</b><span data-i="adm0">Operations console</span></div></div>
+    <div class="admgrp"><span data-i="admg1">Run the day</span>
+      <a data-adm="overview" class="on"><i>◱</i><span data-i="adm1">Overview</span></a>
+      <a data-adm="leads"><i>◇</i><span data-i="adm2">Leads</span><em id="ac-leads"></em></a>
+      <a data-adm="prod"><i>▤</i><span data-i="adm3">Production</span><em id="ac-prod"></em></a>
+      <a data-adm="support"><i>◐</i><span data-i="adm4">Support</span><em id="ac-sup"></em></a>
     </div>
-  </div>
+    <div class="admgrp"><span data-i="admg2">Business</span>
+      <a data-adm="cust"><i>◈</i><span data-i="adm5">Customers</span></a>
+      <a data-adm="orders"><i>▣</i><span data-i="adm6">Orders</span></a>
+      <a data-adm="ads"><i>◎</i><span data-i="adm7">Ad accounts</span></a>
+    </div>
+    <div class="admgrp"><span data-i="admg3">Setup</span>
+      <a data-adm="lib"><i>▦</i><span data-i="adm8">Sample library</span></a>
+      <a data-adm="geo"><i>◉</i><span data-i="adm9">Coverage</span></a>
+      <a data-adm="team"><i>◒</i><span data-i="adm10">Team</span></a>
+      <a data-adm="cfg"><i>⚙</i><span data-i="adm11">Settings</span></a>
+    </div>
+    <div class="admfoot"><a data-go="studio"><i>↗</i><span data-i="adm12">Open the website</span></a></div>
+  </nav>
+  <main class="admmain">
+    <header class="admhd">
+      <div><h1 id="adm-title">Overview</h1><p id="adm-sub"></p></div>
+      <div class="admtools"><span class="sm mut" id="adm-when"></span></div>
+    </header>
+    <div id="adm-body"></div>
+
+    <!-- 样片库配置（沿用原有控件） -->
+    <div id="adm-lib" style="display:none">
+      <div class="libbar" id="libbar2" style="margin-top:4px"></div>
+      <div class="cfg on" id="cfg" style="margin-top:6px">
+        <div class="cfgrow">
+          <div class="f"><label data-i="cf1">Industry name (EN)</label><input class="inp" id="ni-en" placeholder="Pet grooming"></div>
+          <div class="f"><label data-i="cf2">Industry name (中文)</label><input class="inp" id="ni-zh" placeholder="宠物美容"></div>
+          <button class="mini dark" id="addind" data-i="cf3">Add industry</button>
+          <button class="mini del" id="delind" data-i="cf4">Delete current</button>
+          <button class="mini" id="expjson" data-i="cf5">Export JSON</button>
+        </div>
+        <div class="cfgrow">
+          <div class="f"><label data-i="cf6">Sample title (EN)</label><input class="inp" id="ns-en" placeholder="Same day service"></div>
+          <div class="f"><label data-i="cf7">Sample title (中文)</label><input class="inp" id="ns-zh" placeholder="当天取车"></div>
+          <div class="f"><label data-i="cf8">Length</label><select class="inp" id="ns-sec"><option value="15">15s</option><option value="30">30s</option></select></div>
+          <div class="f"><label data-i="cf9">Way</label><select class="inp" id="ns-way"><option value="1">Way 1</option><option value="2">Way 2</option><option value="3">Way 3</option></select></div>
+          <button class="mini dark" id="addsam" data-i="cf10">Add sample</button>
+        </div>
+        <div class="cfglist" id="cfglist"></div>
+        <p class="sm mut" style="margin:14px 0 0" data-i="cfgn">Saved in this browser. Export the JSON and hand it to the developer to make it permanent.</p>
+      </div>
+    </div>
+  </main>
 </div>
 </div>
 
-<!-- ============ ORDER · VIDEOS ============ -->
 <div class="page" id="p-videos">
 <div class="wrap" style="padding-top:34px;max-width:1000px"><section id="pricing" style="padding-top:16px"><div class="wrap" style="padding:0">
   <div style="max-width:56ch;margin-bottom:38px">
@@ -1475,21 +1548,21 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <div class="two">
     <div class="pcard">
       <h3 style="font-family:var(--disp);font-weight:400;font-size:24px" data-i="pk1">Basic</h3>
-      <div class="amt">$449<small data-i="permo">/ month</small></div>
+      <div class="amt"><span id="pc-basic">$449</span><small data-i="permo">/ month</small></div>
       <ul>
         <li data-i="pk1a"><b>3 × 30-second</b> videos — owner story, before &amp; after, how you work</li>
         <li data-i="pk1b"><b>5 × 15-second</b> videos — products, offers, new arrivals</li>
-        <li data-i="pk1c">8 videos a month — <b>$539</b> at list, <b>$449</b> on the plan</li>
+        <li id="pk1c-li" data-i="pk1c">8 videos a month — <b>$539</b> at list, <b>$449</b> on the plan</li>
       </ul>
       <button class="pill gh" data-pkg="basic" data-go="checkout" style="margin-top:auto" data-i="pkb">Choose Basic</button>
     </div>
     <div class="pcard" style="border-color:var(--orange)">
       <h3 style="font-family:var(--disp);font-weight:400;font-size:24px" data-i="pk2">Standard</h3>
-      <div class="amt">$799<small data-i="permo2">/ month</small></div>
+      <div class="amt"><span id="pc-standard">$799</span><small data-i="permo2">/ month</small></div>
       <ul>
         <li data-i="pk2a"><b>5 × 30-second</b> videos — enough to explain everything you do</li>
         <li data-i="pk2b"><b>10 × 15-second</b> videos — post something new twice a week</li>
-        <li data-i="pk2c">15 videos a month — <b>$980</b> at list, <b>$799</b> on the plan</li>
+        <li id="pk2c-li" data-i="pk2c">15 videos a month — <b>$980</b> at list, <b>$799</b> on the plan</li>
       </ul>
       <button class="pill o" data-pkg="standard" data-go="checkout" style="margin-top:auto"><span data-i="pkb2">Choose Standard</span><span class="arw">→</span></button>
     </div>
@@ -1500,12 +1573,12 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <p data-i="rtp">Plans are just these two rates, bought by the month.</p>
     </div>
     <div class="rg">
-      <div><b>$49</b><span data-i="rt15">One 15-second video</span></div>
-      <div><b>$98</b><span data-i="rt30">One 30-second video</span></div>
+      <div><b id="rt-15">$49</b><span data-i="rt15">One 15-second video</span></div>
+      <div><b id="rt-30">$98</b><span data-i="rt30">One 30-second video</span></div>
     </div>
     <div class="rtab">
-      <div class="rrow"><span data-i="rtb">Basic · 3 × 30s + 5 × 15s</span><span class="was">$539</span><b>$449</b><i data-i="rts1">save $90</i></div>
-      <div class="rrow"><span data-i="rts">Standard · 5 × 30s + 10 × 15s</span><span class="was">$980</span><b>$799</b><i data-i="rts2">save $181</i></div>
+      <div class="rrow"><span data-i="rtb">Basic · 3 × 30s + 5 × 15s</span><span class="was" id="rw-bl">$539</span><b id="rw-bp">$449</b><i id="rw-bs">save $90</i></div>
+      <div class="rrow"><span data-i="rts">Standard · 5 × 30s + 10 × 15s</span><span class="was" id="rw-sl">$980</span><b id="rw-sp">$799</b><i id="rw-ss">save $181</i></div>
     </div>
     <p class="sm mut" style="margin:14px 0 0" data-i="rtn">One-off videos outside a plan are billed at these same rates, minimum two.</p>
   </div>
@@ -1607,10 +1680,10 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     <div class="pcard">
       <h3 style="font-family:var(--disp);font-weight:400;font-size:22px" data-i="afh">The fee</h3>
       <div class="kv" style="margin-top:14px">
-        <div class="r"><span data-i="af1">Account management</span><b>$100 / mo</b></div>
-        <div class="r"><span data-i="af2">First $10,000 of ad spend</span><b>10%</b></div>
-        <div class="r"><span data-i="af3">Everything above $10,000</span><b>5%</b></div>
-        <div class="r"><span data-i="af4">Suggested minimum</span><b>$1,000 / mo</b></div>
+        <div class="r"><span data-i="af1">Account management</span><b id="af-mgmt">$100 / mo</b></div>
+        <div class="r"><span id="af-l1" data-i="af2">First $10,000 of ad spend</span><b id="af-r1">10%</b></div>
+        <div class="r"><span id="af-l2" data-i="af3">Everything above $10,000</span><b id="af-r2">5%</b></div>
+        <div class="r"><span data-i="af4">Suggested minimum</span><b id="af-min">$1,000 / mo</b></div>
       </div>
       <p class="sm mut" style="margin-top:14px;margin-bottom:0" data-i="afn">Marginal, not a cliff: at $12,000 that is 10% on $10,000 and 5% on $2,000.</p>
     </div>
@@ -1690,8 +1763,12 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 </div></div>
 
 <script>
-const PKG={basic:{n:"Basic",zh:"基础",v30:3,v15:5,price:449},standard:{n:"Standard",zh:"标准",v30:5,v15:10,price:799}};
-const MGMT=100;
+const CFG_D={r15:49,r30:98,basic:449,standard:799,mgmt:100,rate1:10,rate2:5,brk:10000,
+  minAd:1000,wa:"10000000000",sla:1,cap:40};
+let CFG=(()=>{try{return Object.assign({},CFG_D,JSON.parse(localStorage.getItem("vt_cfg"))||{})}catch(e){return Object.assign({},CFG_D)}})();
+const PKG={basic:{n:"Basic",zh:"基础",v30:3,v15:5,price:CFG.basic},standard:{n:"Standard",zh:"标准",v30:5,v15:10,price:CFG.standard}};
+function applyCfg(){PKG.basic.price=CFG.basic;PKG.standard.price=CFG.standard;MGMT=CFG.mgmt;}
+let MGMT=CFG.mgmt;
 const $=id=>document.getElementById(id);
 const money=n=>"$"+Math.round(n).toLocaleString("en-US");
 let LANG="en";
@@ -1770,6 +1847,29 @@ const SEED=[
  {biz:"Stonewell Tile",ind:"Tile & home",city:"Irvine, CA",contact:"+1 949 555 0144",st:"new",date:"Sep 3",mat:12},
  {biz:"Golden Wok",ind:"Restaurants & cafés",city:"Flushing, NY",contact:"+1 718 555 0177",st:"done",date:"Aug 25",mat:21},
  {biz:"Pacific Auto Care",ind:"Auto service",city:"San Gabriel, CA",contact:"+1 626 555 0163",st:"work",date:"Sep 1",mat:15}];
+const STAFF=[
+ {id:"mia",n:"Mia Chen",role:["Producer","制片"],load:9},
+ {id:"noah",n:"Noah Park",role:["Editor","剪辑"],load:12},
+ {id:"lena",n:"Lena Ortiz",role:["Scriptwriter","编导"],load:7},
+ {id:"sam",n:"Sam Lee",role:["Ad buyer","投放"],load:5}];
+const CUST=[
+ {biz:"Casa Luma",ind:"Restaurants & cafés",city:"Costa Mesa, CA",plan:"standard",mrr:799,since:"Jun 2026",own:"mia",st:"active",mat:17,scr:10,vid:15,ads:3000},
+ {biz:"Jade Nails & Spa",ind:"Nails & beauty",city:"Rowland Heights, CA",plan:"basic",mrr:449,since:"Jul 2026",own:"lena",st:"active",mat:19,scr:8,vid:8,ads:0},
+ {biz:"Stonewell Tile",ind:"Tile & home",city:"Irvine, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"mia",st:"onboarding",mat:12,scr:4,vid:0,ads:1000},
+ {biz:"Golden Wok",ind:"Restaurants & cafés",city:"Flushing, NY",plan:"basic",mrr:449,since:"May 2026",own:"noah",st:"active",mat:21,scr:10,vid:8,ads:0},
+ {biz:"Pacific Auto Care",ind:"Auto service",city:"San Gabriel, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"noah",st:"at-risk",mat:15,scr:6,vid:10,ads:5000},
+ {biz:"Bella Hair Studio",ind:"Nails & beauty",city:"Houston, TX",plan:"basic",mrr:449,since:"Sep 2026",own:"lena",st:"onboarding",mat:6,scr:0,vid:0,ads:0}];
+const PROD=[
+ {biz:"Casa Luma",stage:"edit",due:"Sep 9",own:"noah",n:"5 × 30s",note:"Batch 2 of 3"},
+ {biz:"Golden Wok",stage:"script",due:"Sep 9",own:"lena",n:"8 videos",note:"Sep cycle"},
+ {biz:"Stonewell Tile",stage:"material",due:"Sep 10",own:"mia",n:"—",note:"Missing 5 detail clips"},
+ {biz:"Jade Nails & Spa",stage:"deliver",due:"Sep 8",own:"noah",n:"3 × 15s",note:"Captions done"},
+ {biz:"Pacific Auto Care",stage:"edit",due:"Sep 11",own:"noah",n:"10 × 15s",note:"Reshoot on 2"},
+ {biz:"Bella Hair Studio",stage:"material",due:"Sep 12",own:"mia",n:"—",note:"Waiting on talking clips"}];
+const ADACC=[
+ {biz:"Casa Luma",plat:"Facebook + TikTok",bud:3000,spent:1840,lead:96,cpl:19.2,rep:"Oct 1",own:"sam"},
+ {biz:"Stonewell Tile",plat:"Facebook",bud:1000,spent:410,lead:18,cpl:22.8,rep:"Oct 1",own:"sam"},
+ {biz:"Pacific Auto Care",plat:"TikTok",bud:5000,spent:3120,lead:131,cpl:23.8,rep:"Oct 1",own:"sam"}];
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const isAdmin=()=>USER&&USER.role==="admin";
 function signIn(role,to){
@@ -2206,6 +2306,9 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  abend:"还在犹豫？想知道我们会怎么做你的店，最快的办法是先拿<a href=\"#\" data-go=\"scripts\">十条免费脚本</a>——一个工作日，不用注册。",
  wafab:"WhatsApp 咨询",wa1:"不想填表？直接 WhatsApp 找我们",wa2:"不确定怎么拍？WhatsApp 问我们",
  wa3:"或者 WhatsApp 问我们",wa4:"预算有疑问？WhatsApp 找我们",
+ adm0:"运营后台",admg1:"每天要做的",admg2:"生意",admg3:"配置",
+ adm1:"总览",adm2:"线索",adm3:"制作队列",adm4:"售后",adm5:"客户",adm6:"订单",adm7:"广告账户",
+ adm8:"样片库",adm9:"服务区域",adm10:"团队",adm11:"设置",adm12:"打开官网",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2385,11 +2488,23 @@ function renderGeo(){
 }
 /* ---------- 免费脚本模块 ---------- */
 const vTotal=()=>PKG[V.pkg].price;
-function adFee(s){const a=Math.min(s,10000)*.10, b=Math.max(s-10000,0)*.05; return {fee:a+b,above:Math.max(s-10000,0)};}
+function adFee(s){const brk=CFG.brk, a=Math.min(s,brk)*(CFG.rate1/100), b=Math.max(s-brk,0)*(CFG.rate2/100); return {fee:a+b,above:Math.max(s-brk,0)};}
 
 function renderV(){
   const zh=LANG==="zh", p=PKG[V.pkg];
   const el=id=>$(id);
+  const set=(id,v)=>{const e=el(id); if(e)e.textContent=v;};
+  const listB=PKG.basic.v30*CFG.r30+PKG.basic.v15*CFG.r15;
+  const listS=PKG.standard.v30*CFG.r30+PKG.standard.v15*CFG.r15;
+  set("pc-basic",money(CFG.basic)); set("pc-standard",money(CFG.standard));
+  set("rt-15",money(CFG.r15)); set("rt-30",money(CFG.r30));
+  set("rw-bl",money(listB)); set("rw-bp",money(CFG.basic)); set("rw-bs",(zh?"省 ":"save ")+money(listB-CFG.basic));
+  set("rw-sl",money(listS)); set("rw-sp",money(CFG.standard)); set("rw-ss",(zh?"省 ":"save ")+money(listS-CFG.standard));
+  const li1=el("pk1c-li"), li2=el("pk2c-li");
+  if(li1)li1.innerHTML=zh?`一个月 ${PKG.basic.v30+PKG.basic.v15} 条 —— 原价 <b>${money(listB)}</b>，套餐 <b>${money(CFG.basic)}</b>`
+                         :`${PKG.basic.v30+PKG.basic.v15} videos a month — <b>${money(listB)}</b> at list, <b>${money(CFG.basic)}</b> on the plan`;
+  if(li2)li2.innerHTML=zh?`一个月 ${PKG.standard.v30+PKG.standard.v15} 条 —— 原价 <b>${money(listS)}</b>，套餐 <b>${money(CFG.standard)}</b>`
+                         :`${PKG.standard.v30+PKG.standard.v15} videos a month — <b>${money(listS)}</b> at list, <b>${money(CFG.standard)}</b> on the plan`;
   if(el("s-plan"))el("s-plan").textContent=(zh?p.zh:p.n)+(zh?" 套餐":" plan");
   if(el("s-planv"))el("s-planv").textContent=money(p.price);
   if(el("s-30n"))el("s-30n").textContent=zh?"30 秒片":"30-second videos";
@@ -2407,7 +2522,13 @@ function renderV(){
     el("submit-t").textContent=zh?"提交订单":(TXT[LANG]||TXT.en).btnOk;}
 }
 function renderA(){
-  const t=TXT[LANG]||TXT.en, f=adFee(A.spend);
+  const t=TXT[LANG]||TXT.en, f=adFee(A.spend), zh=LANG==="zh";
+  const setA=(id,v)=>{const e=$(id); if(e)e.textContent=v;};
+  setA("af-mgmt",money(CFG.mgmt)+(zh?" / 月":" / mo"));
+  setA("af-r1",CFG.rate1+"%"); setA("af-r2",CFG.rate2+"%");
+  setA("af-l1",zh?`首 ${money(CFG.brk)} 广告费`:`First ${money(CFG.brk)} of ad spend`);
+  setA("af-l2",zh?`超出 ${money(CFG.brk)} 的部分`:`Everything above ${money(CFG.brk)}`);
+  setA("af-min",money(CFG.minAd)+(zh?" / 月":" / mo"));
   renderAPlans();
   $("a-spend").textContent=money(A.spend);
   $("a-comm-n").textContent=t.feeRow;
@@ -3050,31 +3171,235 @@ function renderReqs(){
   box.innerHTML=REQS.length?REQS.map(r=>`<div class="cfgitem"><span>${r.biz||"—"} · ${r.date}</span><span class="badge ${r.st}">${L?({new:"待排期",work:"制作中",done:"已交付"})[r.st]:({new:"Queued",work:"In production",done:"Delivered"})[r.st]}</span></div>`).join("")
    :`<p class="sm mut" style="margin:0">${L?"还没有提交过。填好品牌信息、传齐素材就能申请。":"Nothing yet. Fill in your brand, upload the three sets, and request your sample."}</p>`;
 }
+let ADMV="overview", ALEAD="all", AORD="all";
+const ST_STAGE={script:["Scripts","写脚本"],material:["Material","等素材"],edit:["Editing","制作中"],deliver:["Delivering","待交付"]};
+const staffName=id=>{const x=STAFF.find(y=>y.id===id);return x?x.n:"—";};
+function allLeads(){
+  return [...LEADS.map(r=>Object.assign({},r,{type:"script"})),
+          ...REQS.map(r=>Object.assign({},r,{type:"sample"})),
+          ...SEED.map(r=>Object.assign({},r,{type:"sample"}))];
+}
+function allOrders(){
+  const seeded=[
+   {id:"VT20260821",type:"video",pkg:"standard",amount:CFG.standard,pay:"card",when:"Aug 21 · 10:04 AM",st:"paid",biz:"Casa Luma"},
+   {id:"VT20260805",type:"ads",tier:"growth",spend:3000,amount:3000+CFG.mgmt+adFee(3000).fee,pay:"card",when:"Aug 5 · 4:41 PM",st:"paid",biz:"Casa Luma"},
+   {id:"VT20260728",type:"video",pkg:"basic",amount:CFG.basic,pay:"paypal",when:"Jul 28 · 9:12 AM",st:"case",note:"Two clips came back blurry",biz:"Golden Wok"},
+   {id:"VT20260714",type:"video",pkg:"basic",amount:CFG.basic,pay:"invoice",when:"Jul 14 · 2:20 PM",st:"refunded",biz:"Bella Hair Studio"}];
+  return [...ORDERS.map(o=>Object.assign({biz:BRAND.name||(USER&&USER.name)||"—"},o)),...seeded];
+}
+function admKpi(items){return `<div class="kpi">${items.map(([b,l,extra])=>
+  `<div><b>${b}</b><span>${l}</span>${extra?`<i>${extra}</i>`:""}</div>`).join("")}</div>`;}
+function admTable(cols,rows){
+  return `<div class="awrap"><table class="atbl"><thead><tr>${cols.map(c=>`<th${c[1]?' class="num"':''}>${c[0]}</th>`).join("")}</tr></thead>
+    <tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td${cols[i]&&cols[i][1]?' class="num"':''}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
 function renderAdmin(){
-  const t=$("biztable"); if(!t)return;
-  const L=LANG==="zh";
-  const all=[...LEADS.map(r=>Object.assign({},r,{type:"script"})),
-             ...REQS.map(r=>Object.assign({},r,{type:"sample"})),
-             ...SEED.map(r=>Object.assign({},r,{type:"sample"}))];
-  t.innerHTML=`<thead><tr><th>${L?"门店":"Business"}</th><th>${L?"类型":"Request"}</th><th>${L?"行业":"Industry"}</th><th>${L?"联系方式":"Contact"}</th><th>${L?"素材":"Material"}</th><th>${L?"状态":"Status"}</th><th>${L?"提交":"Received"}</th></tr></thead><tbody>`+
-   all.map(r=>`<tr><td><b>${r.biz}</b></td><td><span class="badge ${r.type==="script"?"draft":"work"}">${r.type==="script"?(L?"脚本":"Scripts"):(L?"样片":"Sample")}</span></td><td>${r.ind}</td><td class="mut">${r.contact}</td><td>${r.mat} ${L?"个":"files"}</td>
-    <td><span class="badge ${r.st}">${L?({new:"待排期",work:"制作中",done:"已交付"})[r.st]:({new:"Queued",work:"In production",done:"Delivered"})[r.st]}</span></td><td class="mut">${r.date}</td></tr>`).join("")+"</tbody>";
-  const ob=$("ordadmin");
-  if(ob){
-    ob.innerHTML=ORDERS.length?ORDERS.map(o=>`<div class="cfgitem"><span>${orderTitle(o,L)} · ${money(o.amount||0)} · ${o.when||o.date}</span><span class="badge ${o.st==="refund"?"new":o.st==="case"?"work":"done"}">${L?({paid:"已支付",case:"售后中",refund:"退款申请",refunded:"已退款"})[o.st]:({paid:"Paid",case:"Case open",refund:"Refund asked",refunded:"Refunded"})[o.st]}</span></div>`).join("")
-      :`<p class="sm mut" style="margin:0">${L?"暂无订单":"No orders yet"}</p>`;
+  const nav=$("admnav"); if(!nav)return;
+  const zh=LANG==="zh", L=k=>k[zh?1:0];
+  const leads=allLeads(), orders=allOrders();
+  const openCases=orders.filter(o=>o.st==="case"||o.st==="refund");
+  const newLeads=leads.filter(r=>r.st==="new").length;
+  const dueProd=PROD.filter(p=>p.stage!=="deliver").length;
+  const setc=(id,n)=>{const e=$(id); if(!e)return; e.textContent=n||""; e.style.display=n?"":"none";};
+  setc("ac-leads",newLeads); setc("ac-prod",dueProd); setc("ac-sup",openCases.length);
+  nav.querySelectorAll("[data-adm]").forEach(a=>a.classList.toggle("on",a.dataset.adm===ADMV));
+
+  const TT={overview:["Overview","总览"],leads:["Leads","线索"],prod:["Production","制作队列"],
+    support:["Support","售后"],cust:["Customers","客户"],orders:["Orders","订单"],ads:["Ad accounts","广告账户"],
+    lib:["Sample library","样片库"],geo:["Coverage","服务区域"],team:["Team","团队"],cfg:["Settings","设置"]};
+  const SUB={overview:["What needs a person today.","今天需要人处理的事。"],
+    leads:["Every request that came in, script or sample.","所有进来的申请：脚本与样片。"],
+    prod:["This month's work, by stage.","本月的活儿，按阶段排。"],
+    support:["Cases and refunds, oldest first.","售后与退款，最早的排前面。"],
+    cust:["Who pays us, what they are on, how far along they are.","谁在付钱、买的什么、做到哪一步。"],
+    orders:["Every order, video and ads.","所有订单，视频与广告。"],
+    ads:["Accounts we buy for, and what they cost per lead.","我们代投的账户，以及单个线索成本。"],
+    lib:["Industries and samples shown on the public site.","公开站上的行业与样片。"],
+    geo:["Cities we say we work in.","我们对外声明能做的城市。"],
+    team:["Who does what, and how loaded they are.","谁负责什么，手上有多少活。"],
+    cfg:["Prices and rules the site runs on.","站点运行所依据的价格与规则。"]};
+  $("adm-title").textContent=L(TT[ADMV]||TT.overview);
+  $("adm-sub").textContent=L(SUB[ADMV]||SUB.overview);
+  $("adm-when").textContent=new Date().toLocaleDateString(zh?"zh-CN":"en-US",{weekday:"long",month:"short",day:"numeric"});
+  $("adm-lib").style.display=ADMV==="lib"?"":"none";
+  const box=$("adm-body");
+  if(ADMV==="lib"){box.innerHTML="";renderLib();return;}
+
+  if(ADMV==="overview"){
+    const mrr=CUST.filter(c=>c.st!=="churned").reduce((a,c)=>a+c.mrr,0);
+    const adRev=ADACC.reduce((a,x)=>a+CFG.mgmt+adFee(x.bud).fee,0);
+    box.innerHTML=admKpi([
+      [money(mrr),L(["Video MRR","视频月经常性收入"]),CUST.filter(c=>c.st==="active").length+L([" active"," 家在跑"])],
+      [money(adRev),L(["Ad fees this month","本月广告服务费"]),ADACC.length+L([" accounts"," 个账户"])],
+      [String(newLeads),L(["New leads","新线索"]),L(["reply within 1 day","一个工作日内回复"])],
+      [String(dueProd),L(["Jobs in progress","在制作"]),PROD.filter(p=>p.stage==="material").length+L([" waiting on material"," 卡在素材"])],
+      [String(openCases.length),L(["Open cases","待处理售后"]),""]
+    ])+
+    `<div class="acard"><h3>${L(["Today's queue","今天要做的"])}</h3>
+      <p class="hint">${L(["In the order a person should work through it.","按人该处理的先后顺序排。"])}</p>
+      ${admTable([[L(["What","事项"])],[L(["Who","谁"])],[L(["Count","数量"])],[L(["Action","去处理"])]],[
+        [L(["Answer new leads","回复新线索"]),L(["Sales","销售"]),newLeads,`<button class="mini" data-adm="leads">${L(["Open","打开"])}</button>`],
+        [L(["Write and send scripts","写并发出脚本"]),staffName("lena"),PROD.filter(p=>p.stage==="script").length,`<button class="mini" data-adm="prod">${L(["Open","打开"])}</button>`],
+        [L(["Chase missing material","催缺失素材"]),staffName("mia"),PROD.filter(p=>p.stage==="material").length,`<button class="mini" data-adm="prod">${L(["Open","打开"])}</button>`],
+        [L(["Deliver finished videos","交付成片"]),staffName("noah"),PROD.filter(p=>p.stage==="deliver").length,`<button class="mini" data-adm="prod">${L(["Open","打开"])}</button>`],
+        [L(["Resolve cases and refunds","处理售后与退款"]),L(["Manager","主管"]),openCases.length,`<button class="mini" data-adm="support">${L(["Open","打开"])}</button>`]
+      ])}</div>`+
+    `<div class="acard"><h3>${L(["Watch list","需要盯的"])}</h3>
+      ${admTable([[L(["Business","门店"])],[L(["Why","原因"])],[L(["Owner","负责人"])]],
+        CUST.filter(c=>c.st!=="active").map(c=>[`<b>${c.biz}</b>`,
+          c.st==="at-risk"?L(["At risk — ads underperforming","有流失风险 —— 投放效果差"]):L(["Onboarding — material incomplete","上手中 —— 素材未齐"]),
+          staffName(c.own)]))}</div>`;
+    return;
   }
-  $("k-biz").textContent=all.length; $("k-req").textContent=all.filter(x=>x.type==="script").length;
-  $("k-work").textContent=all.filter(x=>x.st==="work").length;
-  $("k-done").textContent=all.filter(x=>x.st==="done").length;
+
+  if(ADMV==="leads"){
+    const list=ALEAD==="all"?leads:leads.filter(r=>r.type===ALEAD);
+    box.innerHTML=`<div class="afilter">
+      ${[["all",L(["All","全部"])],["script",L(["Script requests","脚本申请"])],["sample",L(["Sample requests","样片申请"])]]
+        .map(([k,t])=>`<button class="${ALEAD===k?"on":""}" data-alead="${k}">${t} <span class="mut">${k==="all"?leads.length:leads.filter(r=>r.type===k).length}</span></button>`).join("")}
+      </div>`+
+      admTable([[L(["Business","门店"])],[L(["Type","类型"])],[L(["Industry","行业"])],[L(["Contact","联系方式"])],
+                [L(["Material","素材"]),1],[L(["Status","状态"])],[L(["Received","提交"])]],
+        list.map(r=>[`<b>${r.biz||"—"}</b>`,
+          `<span class="pill2 ${r.type==="script"?"":"blue"}">${r.type==="script"?L(["Scripts","脚本"]):L(["Sample","样片"])}</span>`,
+          r.ind||"—",`<span class="mut">${r.contact||"—"}</span>`,(r.mat||0),
+          `<span class="badge ${r.st}">${zh?({new:"待排期",work:"制作中",done:"已交付"})[r.st]:({new:"Queued",work:"In production",done:"Delivered"})[r.st]}</span>`,
+          `<span class="mut">${r.date||"—"}</span>`]));
+    return;
+  }
+
+  if(ADMV==="prod"){
+    box.innerHTML=`<div class="lane">${Object.keys(ST_STAGE).map(k=>`<div>
+      <h4>${L(ST_STAGE[k])} · ${PROD.filter(p=>p.stage===k).length}</h4>
+      ${PROD.filter(p=>p.stage===k).map(p=>`<div class="job"><b>${p.biz}</b>
+        <span>${p.n} · ${p.note}</span>
+        <div style="display:flex;justify-content:space-between;margin-top:6px">
+          <span>${staffName(p.own)}</span><span class="due">${L(["due ","截止 "])}${p.due}</span></div></div>`).join("")||`<p class="sm mut" style="margin:0">${L(["Nothing here.","这一栏是空的。"])}</p>`}
+      </div>`).join("")}</div>
+      <p class="sm mut" style="margin-top:14px">${L(["Material is the stage that stalls. Anything sitting there for more than two days gets a call, not another message.","卡在「等素材」是最常见的。超过两天就打电话，别再发消息。"])}</p>`;
+    return;
+  }
+
+  if(ADMV==="support"){
+    box.innerHTML=openCases.length?admTable(
+      [[L(["Order","订单"])],[L(["Business","门店"])],[L(["Amount","金额"]),1],[L(["What they said","客户说明"])],[L(["Status","状态"])],[L(["Action","操作"])]],
+      openCases.map(o=>[o.id,`<b>${o.biz||"—"}</b>`,money(o.amount||0),`<span class="mut">${o.note||"—"}</span>`,
+        `<span class="badge ${o.st==="refund"?"new":"work"}">${o.st==="refund"?L(["Refund asked","退款申请"]):L(["Case open","售后中"])}</span>`,
+        `<a class="mini" href="https://wa.me/${CFG.wa}?text=Order%20${o.id}" target="_blank" rel="noopener">WhatsApp</a>`]))
+      :`<div class="acard"><p style="margin:0">${L(["Nothing open. ","没有待处理的。"])}</p></div>`;
+    return;
+  }
+
+  if(ADMV==="cust"){
+    box.innerHTML=admKpi([
+      [String(CUST.length),L(["Customers","客户"]),""],
+      [money(CUST.reduce((a,c)=>a+c.mrr,0)),L(["Monthly recurring","月经常性收入"]),""],
+      [String(CUST.filter(c=>c.st==="onboarding").length),L(["Onboarding","上手中"]),""],
+      [String(CUST.filter(c=>c.st==="at-risk").length),L(["At risk","有流失风险"]),""]
+    ])+admTable(
+      [[L(["Business","门店"])],[L(["Plan","套餐"])],[L(["MRR","月费"]),1],[L(["Ad budget","广告预算"]),1],
+       [L(["Material","素材"]),1],[L(["Scripts ok","脚本已确认"]),1],[L(["Videos out","已交付"]),1],[L(["Owner","负责人"])],[L(["Status","状态"])]],
+      CUST.map(c=>[`<b>${c.biz}</b><div class="sm mut">${c.city} · ${L(["since ","自 "])}${c.since}</div>`,
+        PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n):"—",money(c.mrr),c.ads?money(c.ads):"—",
+        c.mat+" / 17",c.scr+" / 10",c.vid,staffName(c.own),
+        `<span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
+          c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>`]));
+    return;
+  }
+
+  if(ADMV==="orders"){
+    const list=AORD==="all"?orders:orders.filter(o=>o.type===AORD);
+    const rev=orders.filter(o=>o.st!=="refunded").reduce((a,o)=>a+(o.amount||0),0);
+    box.innerHTML=admKpi([
+      [money(rev),L(["Collected","已收"]),""],
+      [String(orders.filter(o=>o.type==="video").length),L(["Video orders","视频订单"]),""],
+      [String(orders.filter(o=>o.type==="ads").length),L(["Ad orders","广告订单"]),""],
+      [String(orders.filter(o=>o.st==="refunded").length),L(["Refunded","已退款"]),""]
+    ])+`<div class="afilter">${[["all",L(["All","全部"])],["video",L(["Video","视频"])],["ads",L(["Ads","广告"])]]
+      .map(([k,t])=>`<button class="${AORD===k?"on":""}" data-aord="${k}">${t}</button>`).join("")}</div>`+
+      admTable([[L(["Order","订单号"])],[L(["Business","门店"])],[L(["Type","类型"])],[L(["Detail","内容"])],
+                [L(["Amount","金额"]),1],[L(["Paid with","支付"])],[L(["Placed","下单时间"])],[L(["Status","状态"])]],
+        list.map(o=>[o.id||"—",`<b>${o.biz||"—"}</b>`,
+          `<span class="pill2 ${o.type==="ads"?"blue":""}">${o.type==="ads"?L(["Ads","广告"]):L(["Video","视频"])}</span>`,
+          o.type==="ads"?`${money(o.spend||0)} ${L(["budget","预算"])}`:(PKG[o.pkg]?(zh?PKG[o.pkg].zh:PKG[o.pkg].n):"—"),
+          money(o.amount||0),o.pay||"—",`<span class="mut">${o.when||o.date||"—"}</span>`,
+          `<span class="badge ${o.st==="refunded"?"done":o.st==="refund"?"new":o.st==="case"?"work":"done"}">${
+            zh?({paid:"已支付",case:"售后中",refund:"退款申请",refunded:"已退款"})[o.st]:({paid:"Paid",case:"Case open",refund:"Refund asked",refunded:"Refunded"})[o.st]}</span>`]));
+    return;
+  }
+
+  if(ADMV==="ads"){
+    const bud=ADACC.reduce((a,x)=>a+x.bud,0), spent=ADACC.reduce((a,x)=>a+x.spent,0), leadsN=ADACC.reduce((a,x)=>a+x.lead,0);
+    box.innerHTML=admKpi([
+      [money(bud),L(["Budget under management","在管预算"]),""],
+      [money(spent),L(["Spent so far","已消耗"]),Math.round(spent/bud*100)+"%"],
+      [String(leadsN),L(["Leads delivered","带来的线索"]),""],
+      [money(spent/Math.max(1,leadsN)),L(["Blended cost per lead","综合单线索成本"]),""]
+    ])+admTable(
+      [[L(["Business","门店"])],[L(["Platforms","平台"])],[L(["Budget","预算"]),1],[L(["Spent","已花"]),1],
+       [L(["Leads","线索"]),1],[L(["Cost / lead","单线索成本"]),1],[L(["Our fee","我们的服务费"]),1],[L(["Next report","下次报告"])],[L(["Buyer","投放"])]],
+      ADACC.map(x=>[`<b>${x.biz}</b>`,x.plat,money(x.bud),money(x.spent),x.lead,money(x.cpl),
+        money(CFG.mgmt+adFee(x.bud).fee),x.rep,staffName(x.own)]))+
+      `<p class="sm mut" style="margin-top:14px">${L(["Cost per lead here is what we report to the customer. The website's estimator uses public benchmarks until these numbers replace them.","这里的单线索成本是给客户报的真实数据。官网的预估器仍在用公开基准，等这些数字够多就替换掉。"])}</p>`;
+    return;
+  }
+
+  if(ADMV==="geo"){
+    box.innerHTML=`<div class="acard"><h3>${L(["Cities on the public site","公开站上的城市"])}</h3>
+      <p class="hint">${L(["Only claim what we can serve. Each city shows the four industries we keep scripts for.","只写我们能服务的。每个城市下面挂的是我们备好脚本的四个行业。"])}</p>
+      ${admTable([[L(["City","城市"])],[L(["Industries ready","已备好的行业"])],[L(["Status","状态"])]],
+        CITIES.map(c=>[`<b>${zh?c[1]:c[0]}</b>`,LIB.slice(0,4).map(i=>zh?i.zh:i.en).join(" · "),
+          `<span class="pill2 ok">${L(["Live","已上线"])}</span>`]))}</div>`;
+    return;
+  }
+
+  if(ADMV==="team"){
+    box.innerHTML=admTable([[L(["Person","成员"])],[L(["Role","角色"])],[L(["Open jobs","在手任务"]),1],[L(["Customers","负责客户"])]],
+      STAFF.map(p=>[`<b>${p.n}</b>`,L(p.role),PROD.filter(x=>x.own===p.id).length,
+        CUST.filter(c=>c.own===p.id).map(c=>c.biz).join(", ")||"—"]))+
+      `<p class="sm mut" style="margin-top:14px">${L(["One editor can carry about "+CFG.cap+" videos a month. Above that, delivery slips.","一个剪辑一个月大约能扛 "+CFG.cap+" 条。超过就会拖期。"])}</p>`;
+    return;
+  }
+
+  if(ADMV==="cfg"){
+    const f=(id,lab,val,suf)=>`<div class="f"><label>${lab}</label><input class="inp" id="cfg-${id}" value="${val}">${suf?`<span class="sm mut">${suf}</span>`:""}</div>`;
+    box.innerHTML=`<div class="acard"><h3>${L(["Video pricing","视频定价"])}</h3>
+      <p class="hint">${L(["Changing these changes every price shown on the website.","改这里，官网上所有价格同步变。"])}</p>
+      <div class="cfgform">
+        ${f("r15",L(["15-second rate","15 秒单价"]),CFG.r15)}
+        ${f("r30",L(["30-second rate","30 秒单价"]),CFG.r30)}
+        ${f("basic",L(["Basic plan / month","基础套餐月费"]),CFG.basic)}
+        ${f("standard",L(["Standard plan / month","标准套餐月费"]),CFG.standard)}
+      </div></div>
+      <div class="acard"><h3>${L(["Ad management","广告代投"])}</h3>
+      <div class="cfgform">
+        ${f("mgmt",L(["Account management / month","账户管理费"]),CFG.mgmt)}
+        ${f("rate1",L(["Commission below break","分档下佣金 %"]),CFG.rate1)}
+        ${f("rate2",L(["Commission above break","分档上佣金 %"]),CFG.rate2)}
+        ${f("brk",L(["Break point","分档金额"]),CFG.brk)}
+        ${f("minAd",L(["Suggested minimum budget","建议最低预算"]),CFG.minAd)}
+      </div></div>
+      <div class="acard"><h3>${L(["Operations","运营"])}</h3>
+      <div class="cfgform">
+        ${f("wa",L(["WhatsApp number","WhatsApp 号码"]),CFG.wa,L(["digits only, no + or spaces","只填数字，不要 + 和空格"]))}
+        ${f("sla",L(["Reply within (business days)","回复时限（工作日）"]),CFG.sla)}
+        ${f("cap",L(["Videos per editor / month","每位剪辑月产能"]),CFG.cap)}
+      </div>
+      <button class="mini dark" id="cfgsave" style="margin-top:16px">${L(["Save settings","保存设置"])}</button>
+      <span class="sm mut" id="cfgmsg" style="margin-left:10px"></span>
+      <p class="sm mut" style="margin-top:14px">${L(["Saved in this browser for the prototype. In production these live in the database.","原型阶段存在本浏览器里；正式版本应该存数据库。"])}</p></div>`;
+    return;
+  }
 }
 function render(){renderV();renderA();renderEst();renderOrders();renderAds();fillAds();renderCk();renderOrder();renderWizard();renderWScripts();renderWVideos();renderS();renderAssets();fillProf();renderLib();renderGeo();fillBrand();renderReqs();renderAdmin();renderAuth();}
 const WAHIDE=["dashboard","admin","checkout"];
 function goto(p){
   if(p==="faq"||p==="work")p="about";
   const fab=$("wafab"); if(fab)fab.style.display=WAHIDE.indexOf(p)<0?"":"none";
+  document.body.classList.toggle("adminmode",p==="admin");
   document.querySelectorAll(".page").forEach(x=>x.classList.toggle("on",x.id==="p-"+p));
   if(p==="about"){const t=document.querySelectorAll(".absub a");t.forEach((a,i)=>a.classList.toggle("on",i===0));}
+  if(p==="admin"&&typeof ADMV!=="undefined"&&!ADMV)ADMV="overview";
   if(p==="checkout"){const b=$("paybtn"); if(b){delete b.dataset.paid;b.disabled=false;} const d=$("ckdone"); if(d)d.classList.remove("on");}
   try{renderCk();renderOrder();renderOrders();renderAds();fillAds();renderWizard();renderWScripts();renderWVideos();renderAssets();renderS();fillProf();}catch(e){}
   document.querySelectorAll("#route [data-go]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.go===p));
@@ -3123,6 +3448,23 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  const am=e.target.closest("[data-adm]");
+  if(am){ADMV=am.dataset.adm;renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
+  const al=e.target.closest("[data-alead]");
+  if(al){ALEAD=al.dataset.alead;renderAdmin();return;}
+  const ao=e.target.closest("[data-aord]");
+  if(ao){AORD=ao.dataset.aord;renderAdmin();return;}
+  if(e.target.closest("#cfgsave")){
+    ["r15","r30","basic","standard","mgmt","rate1","rate2","brk","minAd","sla","cap"].forEach(k=>{
+      const el=$("cfg-"+k); if(el&&el.value!==""&&!isNaN(+el.value))CFG[k]=+el.value;});
+    const w=$("cfg-wa"); if(w&&w.value.trim())CFG.wa=w.value.replace(/[^0-9]/g,"");
+    save("vt_cfg",CFG); applyCfg();
+    document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
+      a.href=a.href.replace(/wa\.me\/\d+/,"wa.me/"+CFG.wa);});
+    render();
+    $("cfgmsg").textContent=LANG==="zh"?"已保存，全站已更新":"Saved — the site now uses these";
+    setTimeout(()=>{const m=$("cfgmsg"); if(m)m.textContent=""},2500);
+    return;}
   const orow=e.target.closest("[data-ord]");
   if(orow){ORDOPEN=+orow.dataset.ord;TICKET=null;renderOrders();return;}
   if(e.target.closest("[data-ordclose]")){ORDOPEN=null;TICKET=null;renderOrders();return;}
