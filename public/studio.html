@@ -639,6 +639,14 @@ body.adminmode{background:var(--cream)}
 }
 @media (max-width:560px){.lane{grid-template-columns:1fr}}
 
+.hsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.hscard{display:flex;gap:14px;background:var(--cream);border-radius:14px;padding:14px}
+.hscard .prev{flex:none;width:76px;height:100px;border-radius:10px;background-size:cover;background-position:center 40%}
+.hscard .inp{padding:8px 10px;font-size:13.5px}
+.hscard .g2{gap:8px}
+.hscard label{font-size:11px}
+#isedit .inp{padding:8px 10px;font-size:13.5px;min-width:130px}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -955,8 +963,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     </div>
   </div>
   <div class="heroreels">
-    <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.03) 42%,rgba(20,20,20,.82) 100%),var(--i-food-owner)"><span class="tg" data-i="t1">You on camera</span><div class="cap" data-i="rc1">12 years open.<br>Here's why.</div><div class="sub" data-i="rs1">Owner speaks · 30 sec</div></div>
-    <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.03) 42%,rgba(20,20,20,.82) 100%),var(--i-tile-showroom);margin-top:26px"><span class="tg" data-i="t2">Your store</span><div class="cap" data-i="rc2">Worth the drive.</div><div class="sub" data-i="rs2">Product close-up · 15 sec</div></div>
+    <div class="reel" id="hr0"></div>
+    <div class="reel" id="hr1" style="margin-top:26px"></div>
   </div>
 </div></section>
 
@@ -977,7 +985,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <div class="rank" data-i="w1r">Way 1 · most real</div>
       <h3 data-i="w1h">You on camera</h3>
       <div class="stars">★★★</div>
-      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-food-owner)"><span class="tg" data-i="w1t">Way 1</span><div class="cap" data-i="w1c">12 years open.<br>Here's why.</div></div>
+      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-food-owner)" id="wr0"><span class="tg" data-i="w1t">Way 1</span><div class="cap" data-i="w1c">12 years open.<br>Here's why.</div></div>
       <div class="kv">
         <div class="r"><span data-i="kp">Person</span><b class="tagx real" data-i="w1p">You</b></div>
         <div class="r"><span data-i="ks">Place</span><b class="tagx real" data-i="w1s">Your store</b></div>
@@ -990,7 +998,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <div class="rank" data-i="w2r">Way 2</div>
       <h3 data-i="w2h">Our model, your store</h3>
       <div class="stars">★★<s>★</s></div>
-      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-beauty-hair-reveal)"><span class="tg" data-i="w2t">Way 2</span><div class="cap" data-i="w2c">Worth the drive.</div></div>
+      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-beauty-hair-reveal)" id="wr1"><span class="tg" data-i="w2t">Way 2</span><div class="cap" data-i="w2c">Worth the drive.</div></div>
       <div class="kv">
         <div class="r"><span data-i="kp2">Person</span><b class="tagx ai" data-i="w2p">Our model</b></div>
         <div class="r"><span data-i="ks2">Place</span><b class="tagx real" data-i="w2s">Your store</b></div>
@@ -1003,7 +1011,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <div class="rank" data-i="w3r">Way 3</div>
       <h3 data-i="w3h">Built from photos</h3>
       <div class="stars">★<s>★★</s></div>
-      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-tile-kitchen-install)"><span class="tg" data-i="w3t">Way 3</span><div class="cap" data-i="w3c">Now open.<br>Come try us.</div></div>
+      <div class="reel" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-tile-kitchen-install)" id="wr2"><span class="tg" data-i="w3t">Way 3</span><div class="cap" data-i="w3c">Now open.<br>Come try us.</div></div>
       <div class="kv">
         <div class="r"><span data-i="kp3">Person</span><b class="tagx ai" data-i="w3p">AI</b></div>
         <div class="r"><span data-i="ks3">Place</span><b class="tagx ai" data-i="w3s">AI, based on your photos</b></div>
@@ -1516,6 +1524,21 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 
     <!-- 样片库配置（沿用原有控件） -->
     <div id="adm-lib" style="display:none">
+      <div class="acard">
+        <h3 data-i="hsh">Home page samples</h3>
+        <p class="hint" data-i="hsp">The two reels beside the headline, and the three under "How real do you want it".</p>
+        <div id="hsedit"></div>
+        <button class="mini dark" id="hssave" style="margin-top:14px" data-i="hssv">Save home samples</button>
+        <button class="mini" id="hsreset" style="margin-left:8px" data-i="hsrs">Reset</button>
+        <span class="sm mut" id="hsmsg" style="margin-left:10px"></span>
+      </div>
+
+      <div class="acard">
+        <h3 data-i="ish">Industries</h3>
+        <p class="hint" data-i="isp">Shown on the public site and used to pick which photo set a trade's samples use.</p>
+        <div id="isedit"></div>
+      </div>
+
       <div class="libbar" id="libbar2" style="margin-top:4px"></div>
       <div class="cfg on" id="cfg" style="margin-top:6px">
         <div class="cfgrow">
@@ -2309,6 +2332,9 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  adm0:"运营后台",admg1:"每天要做的",admg2:"生意",admg3:"配置",
  adm1:"总览",adm2:"线索",adm3:"制作队列",adm4:"售后",adm5:"客户",adm6:"订单",adm7:"广告账户",
  adm8:"样片库",adm9:"服务区域",adm10:"团队",adm11:"设置",adm12:"打开官网",
+ hsh:"首页样片",hsp:"标题旁的两条竖屏，以及「你想要多真」下面的三张配图。",
+ hssv:"保存首页样片",hsrs:"恢复默认",
+ ish:"行业",isp:"公开站上展示的行业，同时决定该行业样片用哪一组照片。",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2449,12 +2475,80 @@ const SAMPLE_IMAGES={
  tile:["tile-showroom.webp","tile-texture.webp","tile-kitchen-install.webp","tile-floorplan.webp","tile-new-slabs.webp"],
  auto:["auto-mechanic.webp","auto-oil-change.webp","auto-handoff.webp","auto-detailing.webp","auto-diagnostic.webp"]
 };
+const IMGS=["food-owner","food-dumplings","food-signature-dish","food-lunch-table","food-wok-kitchen",
+ "beauty-detail","beauty-owner","beauty-hair-reveal","beauty-clean-tools","beauty-bridal",
+ "tile-showroom","tile-texture","tile-kitchen-install","tile-floorplan","tile-new-slabs",
+ "auto-mechanic","auto-oil-change","auto-handoff","auto-detailing","auto-diagnostic"];
+const HOME_D={
+ hero:[{img:"food-owner",tag:["You on camera","你本人出镜"],cap:["12 years open.<br>Here's why.","开业 12 年，<br>我告诉你为什么"],sub:["Owner speaks · 30 sec","老板口播 · 30 秒"]},
+       {img:"tile-showroom",tag:["Your store","你的门店"],cap:["Worth the drive.","值得开车来一趟"],sub:["Product close-up · 15 sec","产品特写 · 15 秒"]}],
+ ways:[{img:"food-owner"},{img:"beauty-hair-reveal"},{img:"tile-kitchen-install"}]};
 const SAMPLE_POSITIONS=["center 32%","center 48%","center 64%","center 38%","center 56%"];
 const clone=o=>JSON.parse(JSON.stringify(o));
+let HOME=(()=>{try{const st=JSON.parse(localStorage.getItem("vt_home"));
+  return st?Object.assign(clone(HOME_D),st):clone(HOME_D);}catch(e){return clone(HOME_D)}})();
 let LIB=(()=>{try{const r=localStorage.getItem("vt_lib");return r?JSON.parse(r):clone(DEFAULT_LIB)}catch(e){return clone(DEFAULT_LIB)}})();
 let IND=LIB[0]?LIB[0].id:null;
 const saveLib=()=>{try{localStorage.setItem("vt_lib",JSON.stringify(LIB))}catch(e){}};
 const cur=()=>LIB.find(x=>x.id===IND)||LIB[0];
+
+
+function imgOpts(sel){return IMGS.map(n=>`<option value="${n}"${n===sel?" selected":""}>${n.replace(/-/g," ")}</option>`).join("");}
+function renderHomeCfg(){
+  const box=$("hsedit"); if(!box)return;
+  const zh=LANG==="zh", k=zh?1:0;
+  const L=a=>a[zh?1:0];
+  box.innerHTML=`<div class="hsgrid">
+    ${HOME.hero.map((h,i)=>`<div class="hscard">
+      <span class="prev" style="background-image:var(--i-${h.img})"></span>
+      <div>
+        <label class="scl">${L(["Hero reel "+(i+1),"首页竖屏 "+(i+1)])}</label>
+        <select class="inp" data-hs="hero.${i}.img">${imgOpts(h.img)}</select>
+        <div class="g2" style="margin-top:10px">
+          <div class="f"><label>${L(["Tag (EN)","角标 英文"])}</label><input class="inp" data-hs="hero.${i}.tag.0" value="${h.tag[0].replace(/"/g,"&quot;")}"></div>
+          <div class="f"><label>${L(["Tag (中文)","角标 中文"])}</label><input class="inp" data-hs="hero.${i}.tag.1" value="${h.tag[1].replace(/"/g,"&quot;")}"></div>
+          <div class="f"><label>${L(["Caption (EN)","字幕 英文"])}</label><input class="inp" data-hs="hero.${i}.cap.0" value="${h.cap[0].replace(/"/g,"&quot;")}"></div>
+          <div class="f"><label>${L(["Caption (中文)","字幕 中文"])}</label><input class="inp" data-hs="hero.${i}.cap.1" value="${h.cap[1].replace(/"/g,"&quot;")}"></div>
+          <div class="f"><label>${L(["Sub (EN)","副标 英文"])}</label><input class="inp" data-hs="hero.${i}.sub.0" value="${h.sub[0].replace(/"/g,"&quot;")}"></div>
+          <div class="f"><label>${L(["Sub (中文)","副标 中文"])}</label><input class="inp" data-hs="hero.${i}.sub.1" value="${h.sub[1].replace(/"/g,"&quot;")}"></div>
+        </div>
+      </div></div>`).join("")}
+    ${HOME.ways.map((w,i)=>`<div class="hscard">
+      <span class="prev" style="background-image:var(--i-${w.img})"></span>
+      <div><label class="scl">${L(["Way "+(i+1)+" image","做法 "+(i+1)+" 配图"])}</label>
+      <select class="inp" data-hs="ways.${i}.img">${imgOpts(w.img)}</select></div></div>`).join("")}
+  </div>`;
+}
+function renderIndCfg(){
+  const box=$("isedit"); if(!box)return;
+  const zh=LANG==="zh";
+  const groups=Object.keys(SAMPLE_IMAGES);
+  box.innerHTML=`<div class="awrap"><table class="atbl"><thead><tr>
+    <th>${zh?"行业（英文）":"Industry (EN)"}</th><th>${zh?"行业（中文）":"Industry (中文)"}</th>
+    <th>${zh?"配图组":"Photo set"}</th><th class="num">${zh?"样片数":"Samples"}</th><th></th></tr></thead><tbody>
+    ${LIB.map((c,i)=>`<tr>
+      <td><input class="inp" data-is="${i}.en" value="${c.en.replace(/"/g,"&quot;")}"></td>
+      <td><input class="inp" data-is="${i}.zh" value="${c.zh.replace(/"/g,"&quot;")}"></td>
+      <td><select class="inp" data-is="${i}.imgset">${groups.map(g=>`<option value="${g}"${(c.imgset||c.id)===g?" selected":""}>${g}</option>`).join("")}</select></td>
+      <td class="num">${c.s.length}</td>
+      <td><button class="mini" data-isedit="${c.id}">${zh?"编辑样片":"Edit samples"}</button></td></tr>`).join("")}
+  </tbody></table></div>
+  <button class="mini dark" id="issave" style="margin-top:14px">${zh?"保存行业设置":"Save industries"}</button>
+  <span class="sm mut" id="ismsg" style="margin-left:10px"></span>`;
+}
+function renderHomeSamples(){
+  const zh=LANG==="zh", k=zh?1:0;
+  const grad="linear-gradient(180deg,rgba(20,20,20,.03) 42%,rgba(20,20,20,.82) 100%),";
+  (HOME.hero||[]).forEach((h,i)=>{
+    const el=$("hr"+i); if(!el)return;
+    el.style.backgroundImage=grad+"var(--i-"+h.img+")";
+    el.innerHTML=`<span class="tg">${h.tag[k]}</span><div class="cap">${h.cap[k]}</div><div class="sub">${h.sub[k]}</div>`;
+  });
+  (HOME.ways||[]).forEach((w,i)=>{
+    const el=$("wr"+i); if(!el)return;
+    el.style.backgroundImage="linear-gradient(180deg,rgba(20,20,20,.02) 42%,rgba(20,20,20,.82) 100%),var(--i-"+w.img+")";
+  });
+}
 function renderLib(){
   const tz=$("libteaser");
   if(tz){const c0=cur();tz.innerHTML=!c0?"":c0.s.slice(0,5).map((x,k)=>{const h=(c0.hue+k*17)%360;
@@ -2466,7 +2560,7 @@ function renderLib(){
   bar.innerHTML=LIB.map(i=>`<button class="ipill" data-ind="${i.id}" aria-pressed="${i.id===IND}">${LANG==="zh"?i.zh:i.en}</button>`).join("");
   const c=cur(); const grid=$("lib");
   grid.innerHTML=!c?"":c.s.map((x,k)=>{
-    const set=SAMPLE_IMAGES[c.id]||SAMPLE_IMAGES.food;
+    const set=SAMPLE_IMAGES[c.imgset||c.id]||SAMPLE_IMAGES.food;
     const image=set[k%set.length];
     const position=SAMPLE_POSITIONS[k%SAMPLE_POSITIONS.length];
     return `<div class="tile" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 38%,rgba(20,20,20,.86) 100%),var(--i-${image.replace('.webp','')});background-position:${position}">
@@ -3223,7 +3317,7 @@ function renderAdmin(){
   $("adm-when").textContent=new Date().toLocaleDateString(zh?"zh-CN":"en-US",{weekday:"long",month:"short",day:"numeric"});
   $("adm-lib").style.display=ADMV==="lib"?"":"none";
   const box=$("adm-body");
-  if(ADMV==="lib"){box.innerHTML="";renderLib();return;}
+  if(ADMV==="lib"){box.innerHTML="";renderHomeCfg();renderIndCfg();renderLib();return;}
 
   if(ADMV==="overview"){
     const mrr=CUST.filter(c=>c.st!=="churned").reduce((a,c)=>a+c.mrr,0);
@@ -3391,7 +3485,7 @@ function renderAdmin(){
     return;
   }
 }
-function render(){renderV();renderA();renderEst();renderOrders();renderAds();fillAds();renderCk();renderOrder();renderWizard();renderWScripts();renderWVideos();renderS();renderAssets();fillProf();renderLib();renderGeo();fillBrand();renderReqs();renderAdmin();renderAuth();}
+function render(){renderHomeSamples();renderV();renderA();renderEst();renderOrders();renderAds();fillAds();renderCk();renderOrder();renderWizard();renderWScripts();renderWVideos();renderS();renderAssets();fillProf();renderLib();renderGeo();fillBrand();renderReqs();renderAdmin();renderAuth();}
 const WAHIDE=["dashboard","admin","checkout"];
 function goto(p){
   if(p==="faq"||p==="work")p="about";
@@ -3448,6 +3542,26 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  if(e.target.closest("#hssave")){
+    document.querySelectorAll("[data-hs]").forEach(el=>{
+      const p2=el.dataset.hs.split(".");
+      if(p2.length===3)HOME[p2[0]][+p2[1]][p2[2]]=el.value;
+      else HOME[p2[0]][+p2[1]][p2[2]][+p2[3]]=el.value;});
+    save("vt_home",HOME); renderHomeSamples(); renderHomeCfg();
+    $("hsmsg").textContent=LANG==="zh"?"已保存，首页已更新":"Saved — the home page now uses these";
+    setTimeout(()=>{const m=$("hsmsg");if(m)m.textContent=""},2500); return;}
+  if(e.target.closest("#hsreset")){
+    HOME=clone(HOME_D); save("vt_home",HOME); renderHomeSamples(); renderHomeCfg(); return;}
+  if(e.target.closest("#issave")){
+    document.querySelectorAll("[data-is]").forEach(el=>{
+      const [i,f]=el.dataset.is.split(".");
+      if(LIB[+i])LIB[+i][f]=el.value;});
+    saveLib(); renderLib(); renderIndCfg(); render();
+    $("ismsg").textContent=LANG==="zh"?"已保存":"Saved";
+    setTimeout(()=>{const m=$("ismsg");if(m)m.textContent=""},2500); return;}
+  const ise=e.target.closest("[data-isedit]");
+  if(ise){IND=ise.dataset.isedit; renderLib();
+    const c=$("cfg"); if(c)c.scrollIntoView({behavior:"smooth",block:"start"}); return;}
   const am=e.target.closest("[data-adm]");
   if(am){ADMV=am.dataset.adm;renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
   const al=e.target.closest("[data-alead]");
