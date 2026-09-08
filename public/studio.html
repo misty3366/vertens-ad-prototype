@@ -162,7 +162,7 @@
      "name": "How do you get fifteen videos out of one filming session?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "One 30-minute session gives us the raw pieces — you at the door, you inside, you holding the product, plus detail shots and photos. Fifteen scripts recombine those pieces differently, each with its own hook and ending. That is enough to post every three days for about 45 days."
+      "text": "One 30-minute session gives us the raw pieces — you at the door, you inside, you holding the product, plus detail shots and photos. Fifteen scripts recombine those pieces differently, each with its own hook and ending. That is enough to post every other day for a month."
      }
     },
     {
@@ -1076,11 +1076,17 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     </div>
   </div>
 
-  <div class="gate">
+  <div class="gate" id="samplegate">
     <h3 style="font-family:var(--disp);font-weight:400;font-size:24px" data-i="gh">Ready? Sign in to upload.</h3>
     <p class="mut" style="margin:10px 0 18px;font-size:15px" data-i="gp">We keep your footage in your own workspace. Sign in with Google — takes a second.</p>
     <button class="gbtn" id="gsign-bot" style="max-width:340px;margin:0 auto"><svg class="gicon" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.2 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.1 5.3-4.5 6.9l7 5.4c4.1-3.8 6.5-9.4 6.5-16.1z"/><path fill="#FBBC05" d="M10.4 28.7c-.5-1.5-.8-3-.8-4.7s.3-3.2.8-4.7l-7.8-6.1C1 16.4 0 20.1 0 24s1 7.6 2.6 10.8l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.5-2.1 15.3-5.6l-7-5.4c-2 1.3-4.6 2.1-8.3 2.1-6.3 0-11.7-3.7-13.6-9.3l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span data-i="gb">Continue with Google</span></button>
     <p class="sm mut" style="margin-top:14px"><a href="#" data-go="about" data-i="c8">See samples from your industry</a></p>
+  </div>
+  <div class="gate" id="samplein" style="display:none">
+    <h3 style="font-family:var(--disp);font-weight:400;font-size:24px" data-i="gih">You're signed in. Upload in your workspace.</h3>
+    <p class="mut" style="margin:10px 0 18px;font-size:15px" data-i="gip">Drop the three sets into Assets and we start the day they are complete.</p>
+    <a class="pill o" href="#" data-go="dashboard" style="max-width:340px;margin:0 auto"><span data-i="gib">Go to my assets</span><span class="arw">→</span></a>
+    <p class="sm mut" id="samplemat" style="margin-top:14px"></p>
   </div>
 </div>
 </div>
@@ -1381,7 +1387,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <h2 style="font-size:24px;margin:38px 0 4px" data-i="fg-h">How the videos are made</h2>
   <details><summary data-i="fq-q5">Do you send a camera crew to my store?</summary><p data-i="fa-q5">No, and that is why this costs a few hundred dollars instead of a few thousand. You film on your phone with our shot list; we write, cut, caption and deliver. Nobody has to close the store for a shoot day.</p></details>
   <details><summary data-i="fq-q6">Is this AI video? Will my customers be able to tell?</summary><p data-i="fa-q6">We use AI, and we tell you exactly where. In the most common version your store and your face are real footage and only the voice and lip-sync are AI. Food, faces and materials always come from real footage, because AI versions of those look fake to anyone who knows the trade.</p></details>
-  <details><summary data-i="fq-q7">How do you get fifteen videos out of one filming session?</summary><p data-i="fa-q7">One 30-minute session gives us the raw pieces — you at the door, you inside, you holding the product, plus detail shots and photos. Fifteen scripts recombine those pieces differently, each with its own hook and ending. That is enough to post every three days for about 45 days.</p></details>
+  <details><summary data-i="fq-q7">How do you get fifteen videos out of one filming session?</summary><p data-i="fa-q7">One 30-minute session gives us the raw pieces — you at the door, you inside, you holding the product, plus detail shots and photos. Fifteen scripts recombine those pieces differently, each with its own hook and ending. That is enough to post every other day for a month.</p></details>
   <details><summary data-i="fq-q8">What if I don't like the first video?</summary><p data-i="fa-q8">We redo it until it is right, or you get your money back. You also keep the raw footage either way — it is your store and your material.</p></details>
   <h2 style="font-size:24px;margin:38px 0 4px" data-i="fg-m">Ads and results</h2>
   <details><summary data-i="fq-q9">Can you also run the ads, not just make the videos?</summary><p data-i="fa-q9">Yes, it is a separate order. You pay us the ad spend plus $100 a month for account management, plus 10% of the first $10,000 of spend and 5% of anything above that. We build the campaigns, watch them daily and report spend and leads weekly.</p></details>
@@ -1501,7 +1507,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 
   <div class="chain">
     <div><b data-i="chh">Three locations or more?</b><span class="mut" data-i="chp">We package by store and the price per video drops. Tell us how many you run.</span></div>
-    <a class="pill gh" href="#" data-go="scripts" data-i="chb">Talk to us about multi-store</a>
+    <a class="pill gh" href="#" data-go="scripts" data-i="chb">Tell us how many stores you run</a>
   </div>
 
   <h2 style="margin:56px 0 0" data-i="vsh">What you'd pay elsewhere</h2>
@@ -1756,6 +1762,16 @@ function signIn(role,to){
 function signOut(){USER=null;try{localStorage.removeItem("vt_user")}catch(e){}renderAuth();goto("studio");}
 function renderAuth(){
   const on=!!USER;
+  const g1=$("samplegate"), g2=$("samplein");
+  if(g1&&g2){
+    g1.style.display=on?"none":"";
+    g2.style.display=on?"":"none";
+    const m=$("samplemat");
+    if(m){
+      const need=ANEED.c1+ANEED.c2+ANEED.c3, have=Math.min(C.c1,ANEED.c1)+Math.min(C.c2,ANEED.c2)+Math.min(C.c3,ANEED.c3);
+      m.textContent=LANG==="zh"?`已收到 ${have} / ${need} 个文件`:`${have} of ${need} files received`;
+    }
+  }
   $("signin").style.display=on?"none":"";
   $("umenu").style.display=on?"":"none";
   if(on){$("uavatar").textContent=USER.name[0];$("uname").textContent=USER.name;$("uemail").textContent=USER.email;
@@ -1821,7 +1837,7 @@ const ES={nav1:"Resumen",nav2:"Videos",nav3:"Gestión de anuncios",navsi:"Entrar
  lad4:"El mismo material real. Solo dejamos de pagar lo que no aparece en pantalla.",
  h3a:"Dos precios. Ese es todo el menú.",
  vsh:"Lo que pagarías en otro lado",
- qh:"Diez guiones para tu tienda. Gratis.",qp:"Cuéntanos de tu tienda. Un editor de nuestro equipo lee tu página, escribe diez guiones para tu rubro y revisa cada línea antes de enviártelos. Un día hábil. Sin registro y sin pagar.",qb:"Envíenme los guiones",qs1:"Tu página",qs2:"Tu tienda",qs3:"Adónde te lo enviamos",qf4:"Cuántos locales",qf5:"Teléfono",qf6:"WhatsApp (si es otro)",qn:"Los escribe y los revisa una persona, no un bot. Por eso tarda un día y no un segundo.",qdh:"Recibido. Esto es lo que sigue.",qd1:"Un editor de nuestro equipo lee tu página a mano",qd1v:"Hoy",qd2:"Te damos una lectura breve de qué funciona y qué no",qd2v:"1 día hábil",qd3:"Diez guiones para tu rubro, revisados línea por línea, y la lista de tomas",qd3v:"En el mismo mensaje",qd4:"Te escribimos por WhatsApp y te llamamos si prefieres",qd4v:"Tú decides",qdn:"Sin pagar y sin cuenta. Si te gustan los guiones, grabamos uno gratis.",qeh:"Qué vas a recibir",qep:"Un ejemplo de un restaurante con el que trabajamos. El tuyo será sobre tu tienda.",qen:"Dos de los diez, como ejemplo. Cada uno se graba con el teléfono en menos de diez minutos.",qgb:"Cómo funciona el video gratis",qsh:"Tus diez guiones",navcta:"Guiones gratis",nav1:"Inicio",nav4:"Zonas",c9:"Ver todos",c1:"10 guiones gratis",vsp:"El mismo trabajo, cuatro caminos.",chh:"¿Tres locales o más?",chb:"Hablemos de multi-tienda",pc1:"15 segundos",pc2:"30 segundos",each:"cada uno",each2:"cada uno",
+ qh:"Diez guiones para tu tienda. Gratis.",qp:"Cuéntanos de tu tienda. Un editor de nuestro equipo lee tu página, escribe diez guiones para tu rubro y revisa cada línea antes de enviártelos. Un día hábil. Sin registro y sin pagar.",qb:"Envíenme los guiones",qs1:"Tu página",qs2:"Tu tienda",qs3:"Adónde te lo enviamos",qf4:"Cuántos locales",qf5:"Teléfono",qf6:"WhatsApp (si es otro)",qn:"Los escribe y los revisa una persona, no un bot. Por eso tarda un día y no un segundo.",qdh:"Recibido. Esto es lo que sigue.",qd1:"Un editor de nuestro equipo lee tu página a mano",qd1v:"Hoy",qd2:"Te damos una lectura breve de qué funciona y qué no",qd2v:"1 día hábil",qd3:"Diez guiones para tu rubro, revisados línea por línea, y la lista de tomas",qd3v:"En el mismo mensaje",qd4:"Te escribimos por WhatsApp y te llamamos si prefieres",qd4v:"Tú decides",qdn:"Sin pagar y sin cuenta. Si te gustan los guiones, grabamos uno gratis.",qeh:"Qué vas a recibir",qep:"Un ejemplo de un restaurante con el que trabajamos. El tuyo será sobre tu tienda.",qen:"Dos de los diez, como ejemplo. Cada uno se graba con el teléfono en menos de diez minutos.",qgb:"Cómo funciona el video gratis",qsh:"Tus diez guiones",navcta:"Guiones gratis",nav1:"Inicio",nav4:"Zonas",c9:"Ver todos",c1:"10 guiones gratis",vsp:"El mismo trabajo, cuatro caminos.",chh:"¿Tres locales o más?",chb:"Dinos cuántas tiendas tienes",pc1:"15 segundos",pc2:"30 segundos",each:"cada uno",each2:"cada uno",
  minl:"Pedido mínimo",pinc:"Cada video incluye una ronda de cambios, subtítulos y entrega vertical 9:16.",
  h4a:"Manejamos tu Facebook y TikTok",p4a:"Publicamos tus videos, compramos los anuncios y te mandamos un reporte al mes. Solo Facebook y TikTok. Los mensajes de clientes siguen llegándote a ti.",
  af1:"Gestión de cuenta",af2:"Primeros $10,000 de inversión",af3:"Todo lo que pase de $10,000",ah1:"Presupuesto",ah2:"Pagas en total",c4:"Contratar gestión",
@@ -1895,7 +1911,7 @@ const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đă
  lad4:"Vẫn là tư liệu thật. Chúng tôi chỉ ngừng trả tiền cho những thứ không lên hình.",
  h3a:"Hai mức giá. Hết thực đơn.",
  vsh:"Chỗ khác bạn phải trả bao nhiêu",
- qh:"Mười kịch bản cho quán bạn. Miễn phí.",qp:"Kể cho chúng tôi về quán của bạn. Một biên tập viên sẽ đọc trang của bạn, viết mười kịch bản cho ngành của bạn và soát từng câu trước khi gửi. Một ngày làm việc. Không cần đăng ký, không mất phí.",qb:"Gửi kịch bản cho tôi",qs1:"Trang của bạn",qs2:"Quán của bạn",qs3:"Gửi đến đâu",qf4:"Bao nhiêu cửa hàng",qf5:"Số điện thoại",qf6:"WhatsApp (nếu khác)",qn:"Người viết và người duyệt, không phải bot. Vì vậy mất một ngày chứ không phải một giây.",qdh:"Đã nhận. Tiếp theo sẽ thế này.",qd1:"Biên tập viên của chúng tôi đọc trang của bạn",qd1v:"Hôm nay",qd2:"Bạn nhận một nhận xét ngắn: cái gì đang hiệu quả, cái gì không",qd2v:"1 ngày làm việc",qd3:"Mười kịch bản cho ngành của bạn, soát từng câu, kèm danh sách cảnh quay",qd3v:"Cùng một tin nhắn",qd4:"Chúng tôi nhắn WhatsApp trước, gọi điện nếu bạn muốn",qd4v:"Bạn chọn",qdn:"Không mất phí, không cần tài khoản. Nếu bạn thích kịch bản, chúng tôi quay miễn phí một cái.",qeh:"Bạn sẽ nhận được gì",qep:"Ví dụ từ một nhà hàng chúng tôi từng làm. Của bạn sẽ nói về quán bạn.",qen:"Hai trong mười, làm ví dụ. Mỗi cái quay bằng điện thoại dưới mười phút.",qgb:"Xem video mẫu miễn phí hoạt động ra sao",qsh:"Mười kịch bản của bạn",navcta:"Kịch bản miễn phí",nav1:"Trang chủ",nav4:"Khu vực",c9:"Xem tất cả",c1:"Nhận 10 kịch bản miễn phí",vsp:"Cùng một việc, bốn cách làm.",chh:"Từ ba cửa hàng trở lên?",chb:"Trao đổi về gói chuỗi",pc1:"15 giây",pc2:"30 giây",each:"một video",each2:"một video",
+ qh:"Mười kịch bản cho quán bạn. Miễn phí.",qp:"Kể cho chúng tôi về quán của bạn. Một biên tập viên sẽ đọc trang của bạn, viết mười kịch bản cho ngành của bạn và soát từng câu trước khi gửi. Một ngày làm việc. Không cần đăng ký, không mất phí.",qb:"Gửi kịch bản cho tôi",qs1:"Trang của bạn",qs2:"Quán của bạn",qs3:"Gửi đến đâu",qf4:"Bao nhiêu cửa hàng",qf5:"Số điện thoại",qf6:"WhatsApp (nếu khác)",qn:"Người viết và người duyệt, không phải bot. Vì vậy mất một ngày chứ không phải một giây.",qdh:"Đã nhận. Tiếp theo sẽ thế này.",qd1:"Biên tập viên của chúng tôi đọc trang của bạn",qd1v:"Hôm nay",qd2:"Bạn nhận một nhận xét ngắn: cái gì đang hiệu quả, cái gì không",qd2v:"1 ngày làm việc",qd3:"Mười kịch bản cho ngành của bạn, soát từng câu, kèm danh sách cảnh quay",qd3v:"Cùng một tin nhắn",qd4:"Chúng tôi nhắn WhatsApp trước, gọi điện nếu bạn muốn",qd4v:"Bạn chọn",qdn:"Không mất phí, không cần tài khoản. Nếu bạn thích kịch bản, chúng tôi quay miễn phí một cái.",qeh:"Bạn sẽ nhận được gì",qep:"Ví dụ từ một nhà hàng chúng tôi từng làm. Của bạn sẽ nói về quán bạn.",qen:"Hai trong mười, làm ví dụ. Mỗi cái quay bằng điện thoại dưới mười phút.",qgb:"Xem video mẫu miễn phí hoạt động ra sao",qsh:"Mười kịch bản của bạn",navcta:"Kịch bản miễn phí",nav1:"Trang chủ",nav4:"Khu vực",c9:"Xem tất cả",c1:"Nhận 10 kịch bản miễn phí",vsp:"Cùng một việc, bốn cách làm.",chh:"Từ ba cửa hàng trở lên?",chb:"Cho biết bạn có mấy cửa hàng",pc1:"15 giây",pc2:"30 giây",each:"một video",each2:"một video",
  minl:"Đơn tối thiểu",pinc:"Mỗi video gồm một lần chỉnh sửa, phụ đề và xuất dọc 9:16.",
  h4a:"Chúng tôi chạy Facebook và TikTok cho bạn",p4a:"Chúng tôi đăng video, mua quảng cáo và gửi bạn một báo cáo mỗi tháng. Chỉ Facebook và TikTok. Tin nhắn khách vẫn vào hộp thư của bạn.",
  af1:"Phí quản lý tài khoản",af2:"$10,000 tiền quảng cáo đầu tiên",af3:"Phần vượt trên $10,000",ah1:"Ngân sách",ah2:"Bạn trả tổng cộng",c4:"Đặt dịch vụ chạy quảng cáo",
@@ -1969,7 +1985,7 @@ const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",nav
  lad4:"같은 진짜 소재입니다. 화면에 나오지 않는 비용만 없앴습니다.",
  h3a:"가격은 둘뿐입니다.",
  vsh:"다른 곳에서는 얼마일까요",
- qh:"매장용 대본 10개, 무료입니다.",qp:"매장에 대해 알려주세요. 저희 편집자가 페이지를 직접 읽고, 업종에 맞는 대본 10개를 쓰고, 보내기 전에 한 줄씩 확인합니다. 영업일 기준 하루. 가입도 결제도 없습니다.",qb:"대본 보내주세요",qs1:"사장님 페이지",qs2:"사장님 매장",qs3:"어디로 보내드릴까요",qf4:"매장 수",qf5:"전화번호",qf6:"WhatsApp (다르면)",qn:"봇이 아니라 사람이 쓰고 확인합니다. 그래서 1초가 아니라 하루가 걸립니다.",qdh:"접수했습니다. 다음 순서입니다.",qd1:"저희 편집자가 페이지를 직접 읽습니다",qd1v:"오늘",qd2:"무엇이 되고 무엇이 안 되는지 짧게 정리해 드립니다",qd2v:"영업일 1일",qd3:"업종에 맞춘 대본 10개, 한 줄씩 확인, 촬영 목록 포함",qd3v:"같은 메시지로",qd4:"WhatsApp으로 먼저 연락드리고, 원하시면 전화드립니다",qd4v:"사장님 선택",qdn:"결제도 계정도 없습니다. 대본이 마음에 드시면 그중 하나를 무료로 찍어드립니다.",qeh:"받으시는 것",qep:"함께 일한 식당의 예시입니다. 사장님 것은 사장님 매장 이야기가 됩니다.",qen:"열 개 중 두 개, 예시입니다. 각각 휴대폰으로 10분 안에 찍을 수 있습니다.",qgb:"무료 샘플 영상 안내",qsh:"대본 10개",navcta:"무료 대본",nav1:"홈",nav4:"서비스 지역",c9:"전체 보기",c1:"무료 대본 10개 받기",vsp:"같은 일, 네 가지 방법.",chh:"매장이 3곳 이상인가요?",chb:"다점포 상담하기",pc1:"15초",pc2:"30초",each:"개당",each2:"개당",
+ qh:"매장용 대본 10개, 무료입니다.",qp:"매장에 대해 알려주세요. 저희 편집자가 페이지를 직접 읽고, 업종에 맞는 대본 10개를 쓰고, 보내기 전에 한 줄씩 확인합니다. 영업일 기준 하루. 가입도 결제도 없습니다.",qb:"대본 보내주세요",qs1:"사장님 페이지",qs2:"사장님 매장",qs3:"어디로 보내드릴까요",qf4:"매장 수",qf5:"전화번호",qf6:"WhatsApp (다르면)",qn:"봇이 아니라 사람이 쓰고 확인합니다. 그래서 1초가 아니라 하루가 걸립니다.",qdh:"접수했습니다. 다음 순서입니다.",qd1:"저희 편집자가 페이지를 직접 읽습니다",qd1v:"오늘",qd2:"무엇이 되고 무엇이 안 되는지 짧게 정리해 드립니다",qd2v:"영업일 1일",qd3:"업종에 맞춘 대본 10개, 한 줄씩 확인, 촬영 목록 포함",qd3v:"같은 메시지로",qd4:"WhatsApp으로 먼저 연락드리고, 원하시면 전화드립니다",qd4v:"사장님 선택",qdn:"결제도 계정도 없습니다. 대본이 마음에 드시면 그중 하나를 무료로 찍어드립니다.",qeh:"받으시는 것",qep:"함께 일한 식당의 예시입니다. 사장님 것은 사장님 매장 이야기가 됩니다.",qen:"열 개 중 두 개, 예시입니다. 각각 휴대폰으로 10분 안에 찍을 수 있습니다.",qgb:"무료 샘플 영상 안내",qsh:"대본 10개",navcta:"무료 대본",nav1:"홈",nav4:"서비스 지역",c9:"전체 보기",c1:"무료 대본 10개 받기",vsp:"같은 일, 네 가지 방법.",chh:"매장이 3곳 이상인가요?",chb:"매장이 몇 곳인지 알려주세요",pc1:"15초",pc2:"30초",each:"개당",each2:"개당",
  minl:"최소 주문",pinc:"모든 영상에 수정 1회, 자막, 9:16 세로 출력이 포함됩니다.",
  h4a:"Facebook과 TikTok을 대신 운영합니다",p4a:"영상을 올리고 광고를 집행하고, 매달 리포트 한 장을 드립니다. Facebook과 TikTok만 합니다. 고객 메시지는 그대로 사장님께 갑니다.",
  af1:"계정 관리비",af2:"광고비 첫 $10,000",af3:"$10,000 초과분",ah1:"광고 예산",ah2:"총 결제액",c4:"광고 대행 신청",
@@ -2087,7 +2103,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  "fg-h":"片子是怎么做的",
  "fq-q5":"你们会派摄影师上门吗？","fa-q5":"不会，这也是为什么价格是几百美金而不是几千。你按我们的拍摄清单用手机拍，我们负责写、剪、加字幕、交付。不用为了拍摄关店一天。",
  "fq-q6":"这是 AI 视频吗？客人看得出来吗？","fa-q6":"我们用 AI，而且会明确告诉你用在哪。最常见的那种做法里，门店和人都是实拍，只有声音和口型是 AI。食物、人脸、材质一律用实拍，因为这些东西一旦 AI 生成，懂行的一眼就看出来。",
- "fq-q7":"一次拍摄怎么能出 15 条片子？","fa-q7":"一次 30 分钟的拍摄，我们拿到的是零件：你在门口、你在店内、你拿着产品，再加细节镜头和照片。15 条脚本把这些零件按不同方式重新组合，各有各的开头和结尾。够你每三天发一条，发大约 45 天。",
+ "fq-q7":"一次拍摄怎么能出 15 条片子？","fa-q7":"一次 30 分钟的拍摄，我们拿到的是零件：你在门口、你在店内、你拿着产品，再加细节镜头和照片。15 条脚本把这些零件按不同方式重新组合，各有各的开头和结尾。够你隔一天发一条，发满一个月。",
  "fq-q8":"第一条不满意怎么办？","fa-q8":"我们改到你满意为止，或者全额退款。素材原片无论如何都归你——那是你的店、你的东西。",
  "fg-m":"投放与效果",
  "fq-q9":"你们能帮忙投放，不只是做片子吗？","fa-q9":"可以，这是单独下单的另一个产品。你把广告费加上每月 $100 账户管理费付给我们，再加首 $10,000 广告费的 10%、超出部分的 5%。我们负责搭建 campaign、每天盯、每周回报花了多少、来了多少线索。",
@@ -2163,6 +2179,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  adtool:"在 VertensAI 里看实时数据",adtooln:"每天的花费、播放和线索在工具里看。这一页只跟订单进度。",
  adl0:"你的投放",
  wsp7:"基本信息填一次就好。之后这一页跟订单进度，实时数据在 VertensAI 工具里。",
+ gih:"你已经登录了，去工作台上传。",gip:"把三样素材放进「素材库」，齐了我们当天开工。",gib:"去我的素材库",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2220,7 +2237,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  inc2:"<b>所有东西都归你。</b>成片、工程文件、原始素材 —— 永久归你。",
  inc3:"<b>双语字幕。</b>英文 + 中文 / 西班牙语 / 越南语 / 韩语任选一种。",
  inc4:"<b>所有比例都送。</b>9:16 发 Reels 和 TikTok，1:1 和 16:9 发别处。",
- chh:"三家店以上？",chp:"我们按门店打包，单条价格更低。告诉我们你有几家。",chb:"聊聊连锁方案",
+ chh:"三家店以上？",chp:"我们按门店打包，单条价格更低。告诉我们你有几家。",chb:"告诉我们你有几家店",
  vsh:"在别处你要花多少",vsp:"同一件事，四种做法。",
  vs1:"本地剪辑师",vs2:"UGC 平台",vs3:"自己拍",vs4:"我们",
  vr1:"每条价格",vr1c:"免费 —— 如果真拍得出来",
@@ -3218,9 +3235,11 @@ document.addEventListener("click",e=>{
   const g=e.target.closest("[data-go]");
   if(g){const to=g.dataset.go;
     if((to==="dashboard"||to==="admin")&&!needAuth(to)){if(g.tagName==="A")e.preventDefault();return;}
+    const toAssets=(to==="dashboard"&&!!g.closest("#samplein"));
     if(to==="admin"&&!isAdmin()){$("udrop").classList.remove("on");return;}
     $("udrop").classList.remove("on");
-    goto(to); if(g.tagName==="A")e.preventDefault(); return;}
+    goto(to); if(typeof toAssets!=="undefined"&&toAssets)wsGo("assets");
+    if(g.tagName==="A")e.preventDefault(); return;}
   if(e.target.closest("#asubmit")){CKTYPE="ads";goto("checkout");return;}
   if(e.target.closest("#ssubmit")&&!$("ssubmit").disabled){
     if(!needAuth("dashboard"))return;
