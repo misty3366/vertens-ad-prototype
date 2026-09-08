@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Storefront Ad Studio</title>
+<title>Vertens Ad Studio</title>
 <!-- SEO · 上线到自有域名时把这一段放进 <head> -->
-<meta name="description" content="Vertens Storefront Ad Studio — human-led, AI-assisted short video ads for local stores. Real editors turn your store, products and story into 9:16 vertical ads for TikTok and Facebook. Ten free scripts, then a free 15-second sample. Monthly plans from $449. Ad management from $100/mo plus 10% of ad spend.">
-<meta property="og:title" content="Vertens Storefront Ad Studio — real ads filmed in your real store">
+<meta name="description" content="Vertens Ad Studio — human-led, AI-assisted short video ads for local stores. Real editors turn your store, products and story into 9:16 vertical ads for TikTok and Facebook. Ten free scripts, then a free 15-second sample. Monthly plans from $449. Ad management from $100/mo plus 10% of ad spend.">
+<meta property="og:title" content="Vertens Ad Studio — real ads filmed in your real store">
 <meta property="og:description" content="Free 15-second sample. Made from your real store footage, not stock.">
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
@@ -34,7 +34,7 @@
   },
   {
    "@type": "Service",
-   "name": "Vertens Storefront Ad Studio",
+   "name": "Vertens Ad Studio",
    "serviceType": "Local store marketing — video ad production and ad management",
    "provider": {
     "@id": "https://vertens.ai/#org"
@@ -660,6 +660,38 @@ body.adminmode{background:var(--cream)}
 .samc .act button:hover{border-color:var(--ink2)}
 .samc .act button.del:hover{border-color:var(--orange);color:var(--orange)}
 
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.pitem{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--cream);border-radius:14px;padding:16px 18px}
+.pitem b{display:block;font-size:15.5px}
+.pitem span{font-size:13px;color:var(--faint)}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:var(--paper);
+ color:var(--ink);font-size:17px;line-height:1;cursor:pointer}
+.qty button:hover{border-color:var(--orange);color:var(--orange)}
+.qty b{font-family:var(--disp);font-size:22px;min-width:26px;text-align:center}
+.ptot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+ border-top:1px solid var(--line);padding-top:16px}
+.ptot span{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block}
+.ptot b{font-family:var(--disp);font-size:30px;font-weight:400;display:block;line-height:1.15}
+.ptot i{font-style:normal;font-size:13px;color:var(--ink2)}
+.ptot .pill.o[disabled]{opacity:.45;pointer-events:none}
+.pnote{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.pnote span{display:block}
+.pnote b{display:block;font-size:14.5px}
+.pnote i{font-style:normal;font-size:12.5px;color:var(--faint)}
+.plansec{margin:38px 0 16px}
+.plansec h3{font-family:var(--disp);font-weight:400;font-size:24px}
+.plansec p{margin:8px 0 0;font-size:14.5px;color:var(--ink2)}
+@media (max-width:640px){.prow{grid-template-columns:1fr}.pnote{grid-template-columns:1fr}}
+
+.dlist{display:grid;gap:8px;margin-top:6px}
+.dl{display:flex;align-items:center;gap:12px;background:var(--cream);border-radius:12px;padding:10px 12px}
+.dl .ic{width:26px;height:26px;border-radius:8px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--faint);flex:none}
+.dl .nm{flex:1;min-width:0}
+.dl .nm b{display:block;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl .nm i{font-style:normal;font-size:11.5px;color:var(--faint)}
+.dl .mini{text-decoration:none}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -944,7 +976,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 </head>
 <body>
 <nav class="nav"><div class="wrap">
-  <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Storefront Ad Studio</span></span></div>
+  <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Ad Studio</span></span></div>
   <div class="sp"></div>
   <div class="seg" id="route"><button data-go="studio" aria-pressed="true" data-i="nav1">Home</button><button data-go="videos" aria-pressed="false" data-i="nav2">Videos</button><button data-go="ads" aria-pressed="false" data-i="nav3">Ad management</button><button data-go="about" aria-pressed="false" data-i="nav6">About us</button></div>
   <select id="lang" class="langsel" aria-label="Language"></select>
@@ -1442,11 +1474,11 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <section id="ab-who">
     <div style="max-width:60ch">
       <h1 style="font-size:40px" data-i="abh">The team behind the videos</h1>
-      <p class="lead" style="margin-top:14px" data-i="abp1">Vertens Storefront Ad Studio is the short-video team of the Sunvega Group. We do overseas social media marketing, and what we are best at is marketing for physical stores abroad — the restaurants, salons, showrooms and garages that live on people walking through the door.</p>
+      <p class="lead" style="margin-top:14px" data-i="abp1">Vertens Ad Studio is the short-video team of the Sunvega Group. We do overseas social media marketing, and what we are best at is marketing for physical stores abroad — the restaurants, salons, showrooms and garages that live on people walking through the door.</p>
     </div>
 
     <figure class="teamfig">
-      <img src="team.jpg" alt="The Vertens Storefront Ad Studio team, part of Sunvega Group" id="teamimg" onerror="this.style.display='none';this.parentNode.classList.add('ph')">
+      <img src="team.jpg" alt="The Vertens Ad Studio team, part of Sunvega Group" id="teamimg" onerror="this.style.display='none';this.parentNode.classList.add('ph')">
       <div class="phbox"><b data-i="abph">Team photo</b><span data-i="abphn">Drop a file named team.jpg next to this page to replace this.</span></div>
       <figcaption data-i="abcap">Our writers, editors and ad buyers. Sunvega Group.</figcaption>
     </figure>
@@ -1552,7 +1584,37 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 <div class="page" id="p-videos">
 <div class="wrap" style="padding-top:34px;max-width:1000px"><section id="pricing" style="padding-top:16px"><div class="wrap" style="padding:0">
   <div style="max-width:56ch;margin-bottom:38px">
-    <h2 style="margin-top:14px" data-i="h3a">Two prices. That's the whole menu.</h2>
+    <h2 style="margin-top:14px" data-i="h3a">Two ways to buy. Same videos.</h2>
+  </div>
+  <div class="rate" id="pieceorder">
+    <div class="rh">
+      <h3 data-i="poh">Order by the video</h3>
+      <p data-i="pop">Pick how many of each. Minimum two. First one back in three days.</p>
+    </div>
+    <div class="prow">
+      <div class="pitem">
+        <div><b data-i="pi15">15-second video</b><span id="p15rate">$49 each</span></div>
+        <div class="qty"><button data-q="v15" data-d="-1">−</button><b id="q15">0</b><button data-q="v15" data-d="1">+</button></div>
+      </div>
+      <div class="pitem">
+        <div><b data-i="pi30">30-second video</b><span id="p30rate">$98 each</span></div>
+        <div class="qty"><button data-q="v30" data-d="-1">−</button><b id="q30">0</b><button data-q="v30" data-d="1">+</button></div>
+      </div>
+    </div>
+    <div class="ptot">
+      <div><span data-i="pit">Your order</span><b id="ptotal">$0</b><i id="phint" data-i="pihint">Add at least two videos</i></div>
+      <button class="pill o" id="pgo" disabled><span data-i="pgo">Order these</span><span class="arw">→</span></button>
+    </div>
+    <div class="pnote">
+      <span><b data-i="pd1">3 business days</b><i data-i="pd1s">for the first video</i></span>
+      <span><b data-i="pd2">9:16 only</b><i data-i="pd2s">TikTok and Facebook</i></span>
+      <span><b data-i="pd3">One revision</b><i data-i="pd3s">on every video</i></span>
+    </div>
+  </div>
+
+  <div class="plansec">
+    <h3 data-i="plh">Or buy by the month</h3>
+    <p data-i="plp">Same videos, lower price per video, and we keep a rhythm going.</p>
   </div>
   <div class="two">
     <div class="pcard">
@@ -1561,6 +1623,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <ul>
         <li data-i="pk1a"><b>3 × 30-second</b> videos — owner story, before &amp; after, how you work</li>
         <li data-i="pk1b"><b>5 × 15-second</b> videos — products, offers, new arrivals</li>
+        <li data-i="pk1d">First video in 3 business days</li>
         <li id="pk1c-li" data-i="pk1c">8 videos a month — <b>$539</b> at list, <b>$449</b> on the plan</li>
       </ul>
       <button class="pill gh" data-pkg="basic" data-go="checkout" style="margin-top:auto" data-i="pkb">Choose Basic</button>
@@ -1571,27 +1634,12 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <ul>
         <li data-i="pk2a"><b>5 × 30-second</b> videos — enough to explain everything you do</li>
         <li data-i="pk2b"><b>10 × 15-second</b> videos — post something new twice a week</li>
+        <li data-i="pk2d">First video in 3 business days</li>
         <li id="pk2c-li" data-i="pk2c">15 videos a month — <b>$980</b> at list, <b>$799</b> on the plan</li>
       </ul>
       <button class="pill o" data-pkg="standard" data-go="checkout" style="margin-top:auto"><span data-i="pkb2">Choose Standard</span><span class="arw">→</span></button>
     </div>
   </div>
-  <div class="rate">
-    <div class="rh">
-      <h3 data-i="rth">Priced per video</h3>
-      <p data-i="rtp">Plans are just these two rates, bought by the month.</p>
-    </div>
-    <div class="rg">
-      <div><b id="rt-15">$49</b><span data-i="rt15">One 15-second video</span></div>
-      <div><b id="rt-30">$98</b><span data-i="rt30">One 30-second video</span></div>
-    </div>
-    <div class="rtab">
-      <div class="rrow"><span data-i="rtb">Basic · 3 × 30s + 5 × 15s</span><span class="was" id="rw-bl">$539</span><b id="rw-bp">$449</b><i id="rw-bs">save $90</i></div>
-      <div class="rrow"><span data-i="rts">Standard · 5 × 30s + 10 × 15s</span><span class="was" id="rw-sl">$980</span><b id="rw-sp">$799</b><i id="rw-ss">save $181</i></div>
-    </div>
-    <p class="sm mut" style="margin:14px 0 0" data-i="rtn">One-off videos outside a plan are billed at these same rates, minimum two.</p>
-  </div>
-
   <div class="minbox">
     <div><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,244,238,.6)" data-i="mnl">Which one</span><b data-i="mnb">Standard, for most stores</b></div>
     <div class="ex" style="max-width:52ch"><div data-i="mnp">Ad platforms need 15–50 live videos to work properly. Basic keeps a page alive; Standard is the one that feeds ads. Monthly, cancel any time.</div></div>
@@ -1731,7 +1779,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 <footer class="sitefoot"><div class="wrap">
   <div class="fgrid">
     <div class="fbrand">
-      <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Storefront Ad Studio</span></span></div>
+      <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Ad Studio</span></span></div>
       <p data-i="fdesc">Human-led, AI-assisted short video ads for local stores. Part of the Sunvega Group.</p>
       <p class="fsun" data-i="fsun">Sunvega Group · Overseas social media marketing</p>
     </div>
@@ -1757,7 +1805,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     </div>
   </div>
   <div class="fbot">
-    <span data-i="fcopy">© 2026 Vertens Storefront Ad Studio, a Sunvega Group company. All rights reserved.</span>
+    <span data-i="fcopy">© 2026 Vertens Ad Studio, a Sunvega Group company. All rights reserved.</span>
     <span class="flinks"><a data-go="about" data-i="fpriv">Privacy</a><a data-go="about" data-i="fterm">Terms</a><a data-go="about" data-i="fref">Refunds</a></span>
   </div>
 </div></footer>
@@ -1781,7 +1829,8 @@ let MGMT=CFG.mgmt;
 const $=id=>document.getElementById(id);
 const money=n=>"$"+Math.round(n).toLocaleString("en-US");
 let LANG="en";
-let V={pkg:"standard"};   // videos order
+let V={pkg:"standard"};
+let P={v15:0,v30:0};   // videos order
 let C=(()=>{try{return JSON.parse(localStorage.getItem("vt_mat"))||{c1:0,c2:0,c3:0}}catch(e){return{c1:0,c2:0,c3:0}}})();
 let USER=(()=>{try{return JSON.parse(localStorage.getItem("vt_user"))}catch(e){return null}})();
 let BRAND=(()=>{try{return JSON.parse(localStorage.getItem("vt_brand"))||{}}catch(e){return{}}})();
@@ -1861,7 +1910,7 @@ const STAFF=[
  {id:"noah",n:"Noah Park",role:["Editor","剪辑"],load:12},
  {id:"lena",n:"Lena Ortiz",role:["Scriptwriter","编导"],load:7},
  {id:"sam",n:"Sam Lee",role:["Ad buyer","投放"],load:5}];
-const CUST=[
+const CUST_D=[
  {biz:"Casa Luma",ind:"Restaurants & cafés",city:"Costa Mesa, CA",plan:"standard",mrr:799,since:"Jun 2026",own:"mia",st:"active",mat:17,scr:10,vid:15,ads:3000},
  {biz:"Jade Nails & Spa",ind:"Nails & beauty",city:"Rowland Heights, CA",plan:"basic",mrr:449,since:"Jul 2026",own:"lena",st:"active",mat:19,scr:8,vid:8,ads:0},
  {biz:"Stonewell Tile",ind:"Tile & home",city:"Irvine, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"mia",st:"onboarding",mat:12,scr:4,vid:0,ads:1000},
@@ -1963,7 +2012,7 @@ const ES={nav1:"Resumen",nav2:"Videos",nav3:"Gestión de anuncios",navsi:"Entrar
  wc3t:"La IA repite, no actúa",wc3p:"Voz, sincronía labial, subtítulos, veinte versiones: eso lo hace la máquina y casi no cuesta. Tu cara y tu local siguen siendo reales.",
  lad1:"Agencia: $500+ por video",lad2:"Plataformas UGC: $99–167",lad3:"Nosotros: $49",
  lad4:"El mismo material real. Solo dejamos de pagar lo que no aparece en pantalla.",
- h3a:"Dos precios. Ese es todo el menú.",
+ h3a:"Dos formas de comprar. Los mismos videos.",
  vsh:"Lo que pagarías en otro lado",
  qh:"Diez guiones para tu tienda. Gratis.",qp:"Cuéntanos de tu tienda. Un editor de nuestro equipo lee tu página, escribe diez guiones para tu rubro y revisa cada línea antes de enviártelos. Un día hábil. Sin registro y sin pagar.",qb:"Envíenme los guiones",qs1:"Tu página",qs2:"Tu tienda",qs3:"Adónde te lo enviamos",qf4:"Cuántos locales",qf5:"Teléfono",qf6:"WhatsApp (si es otro)",qn:"Los escribe y los revisa una persona, no un bot. Por eso tarda un día y no un segundo.",qdh:"Recibido. Esto es lo que sigue.",qd1:"Un editor de nuestro equipo lee tu página a mano",qd1v:"Hoy",qd2:"Te damos una lectura breve de qué funciona y qué no",qd2v:"1 día hábil",qd3:"Diez guiones para tu rubro, revisados línea por línea, y la lista de tomas",qd3v:"En el mismo mensaje",qd4:"Te escribimos por WhatsApp y te llamamos si prefieres",qd4v:"Tú decides",qdn:"Sin pagar y sin cuenta. Si te gustan los guiones, grabamos uno gratis.",qeh:"Qué vas a recibir",qep:"Un ejemplo de un restaurante con el que trabajamos. El tuyo será sobre tu tienda.",qen:"Dos de los diez, como ejemplo. Cada uno se graba con el teléfono en menos de diez minutos.",qgb:"Cómo funciona el video gratis",qsh:"Tus diez guiones",navcta:"Guiones gratis",nav1:"Inicio",nav4:"Zonas",c9:"Ver todos",c1:"10 guiones gratis",vsp:"El mismo trabajo, cuatro caminos.",chh:"¿Tres locales o más?",chb:"Dinos cuántas tiendas tienes",pc1:"15 segundos",pc2:"30 segundos",each:"cada uno",each2:"cada uno",
  minl:"Pedido mínimo",pinc:"Cada video incluye una ronda de cambios, subtítulos y entrega vertical 9:16.",
@@ -1992,7 +2041,7 @@ c3:"Quiero mi muestra",
  s4h:"Todo en tu panel",s4p:"Aprueba guiones, sube material, descarga los archivos 9:16. El primer video en tres días.",
  h6a:"Empieza con diez guiones gratis",p6a:"Pega el enlace de tu página y cuéntanos de tu tienda. Los guiones vuelven en un día; el video gratis después.",ah:"Contratar gestión de anuncios",
  qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", rth:"Precio por video",rtp:"Los planes son solo estas dos tarifas, compradas por mes.",rt15:"Un video de 15 segundos",rt30:"Un video de 30 segundos",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"ahorras $90",rts2:"ahorras $181",rtn:"Los videos sueltos fuera de un plan se cobran a estas mismas tarifas, mínimo dos.",
- c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — <b>$539</b> de lista, <b>$449</b> en el plan",pk2c:"15 videos al mes — <b>$980</b> de lista, <b>$799</b> en el plan",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
+ c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — <b>$539</b> de lista, <b>$449</b> en el plan",pk2c:"15 videos al mes — <b>$980</b> de lista, <b>$799</b> en el plan",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", poh:"Pide por video",pop:"Elige cuántos de cada uno. Mínimo dos. El primero en tres días.",pi15:"Video de 15 segundos",pi30:"Video de 30 segundos",pit:"Tu pedido",pihint:"Añade al menos dos videos",pgo:"Pedir estos",pd1:"3 días hábiles",pd1s:"para el primer video",pd2:"Solo 9:16",pd2s:"TikTok y Facebook",pd3:"Una ronda de cambios",pd3s:"en cada video",plh:"O compra por mes",plp:"Los mismos videos, menor precio por video, y mantenemos el ritmo.",pk1d:"Primer video en 3 días hábiles",pk2d:"Primer video en 3 días hábiles", sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
  sbh2:"Los tres son obligatorios. Teléfono en vertical, sin editar, sin filtros. Las tomas malas no importan.",
  sm1:"Clips hablando — 2 videos de 30 s",sm1s:"Mirando a la cámara todo el tiempo. Cada uno en tres partes de 10 segundos.",
  sm1a:"Parte 1 · 10 s — en tu puerta",sm1b:"Parte 2 · 10 s — adentro, en el punto que quieras mostrar",sm1c:"Parte 3 · 10 s — con un producto en la mano",
@@ -2012,7 +2061,7 @@ c3:"Quiero mi muestra",
  spromise:"<b>No grabamos nada por ti.</b> La muestra se hace con lo que mandes, así se ve tu tienda real.",
  promise:"<b>¿No te gusta el primer video? Reembolso completo.</b> Si paras después, devolvemos lo no producido.",
  mh:"Entra para continuar",mp:"Tu marca y tu material quedan en tu propio espacio.",gsi:"Continuar con Google",
- foot:"Vertens Storefront Ad Studio · Anuncios para tiendas locales"};
+ foot:"Vertens Ad Studio · Anuncios para tiendas locales"};
 const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đăng nhập",navcta:"Video mẫu miễn phí",
  mnu1:"Khu vực của tôi",mnu2:"Quản trị",mnu3:"Đăng xuất",
  h1:"Người dẫn dắt. AI hỗ trợ.<br>Đúng với việc kinh doanh của bạn.",
@@ -2037,7 +2086,7 @@ const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đă
  wc3t:"AI làm phần lặp lại, không đóng vai",wc3p:"Giọng, khẩu hình, phụ đề, hai mươi phiên bản — máy làm, gần như không tốn. Mặt bạn và quán bạn vẫn là thật.",
  lad1:"Công ty quảng cáo: $500+/video",lad2:"Nền tảng UGC: $99–167",lad3:"Chúng tôi: $49",
  lad4:"Vẫn là tư liệu thật. Chúng tôi chỉ ngừng trả tiền cho những thứ không lên hình.",
- h3a:"Hai mức giá. Hết thực đơn.",
+ h3a:"Hai cách mua. Cùng một loại video.",
  vsh:"Chỗ khác bạn phải trả bao nhiêu",
  qh:"Mười kịch bản cho quán bạn. Miễn phí.",qp:"Kể cho chúng tôi về quán của bạn. Một biên tập viên sẽ đọc trang của bạn, viết mười kịch bản cho ngành của bạn và soát từng câu trước khi gửi. Một ngày làm việc. Không cần đăng ký, không mất phí.",qb:"Gửi kịch bản cho tôi",qs1:"Trang của bạn",qs2:"Quán của bạn",qs3:"Gửi đến đâu",qf4:"Bao nhiêu cửa hàng",qf5:"Số điện thoại",qf6:"WhatsApp (nếu khác)",qn:"Người viết và người duyệt, không phải bot. Vì vậy mất một ngày chứ không phải một giây.",qdh:"Đã nhận. Tiếp theo sẽ thế này.",qd1:"Biên tập viên của chúng tôi đọc trang của bạn",qd1v:"Hôm nay",qd2:"Bạn nhận một nhận xét ngắn: cái gì đang hiệu quả, cái gì không",qd2v:"1 ngày làm việc",qd3:"Mười kịch bản cho ngành của bạn, soát từng câu, kèm danh sách cảnh quay",qd3v:"Cùng một tin nhắn",qd4:"Chúng tôi nhắn WhatsApp trước, gọi điện nếu bạn muốn",qd4v:"Bạn chọn",qdn:"Không mất phí, không cần tài khoản. Nếu bạn thích kịch bản, chúng tôi quay miễn phí một cái.",qeh:"Bạn sẽ nhận được gì",qep:"Ví dụ từ một nhà hàng chúng tôi từng làm. Của bạn sẽ nói về quán bạn.",qen:"Hai trong mười, làm ví dụ. Mỗi cái quay bằng điện thoại dưới mười phút.",qgb:"Xem video mẫu miễn phí hoạt động ra sao",qsh:"Mười kịch bản của bạn",navcta:"Kịch bản miễn phí",nav1:"Trang chủ",nav4:"Khu vực",c9:"Xem tất cả",c1:"Nhận 10 kịch bản miễn phí",vsp:"Cùng một việc, bốn cách làm.",chh:"Từ ba cửa hàng trở lên?",chb:"Cho biết bạn có mấy cửa hàng",pc1:"15 giây",pc2:"30 giây",each:"một video",each2:"một video",
  minl:"Đơn tối thiểu",pinc:"Mỗi video gồm một lần chỉnh sửa, phụ đề và xuất dọc 9:16.",
@@ -2066,7 +2115,7 @@ c3:"Nhận video mẫu",
  s4h:"Mọi thứ nằm trong workspace",s4p:"Duyệt kịch bản, tải tư liệu lên, tải file 9:16 về. Video đầu tiên trong ba ngày.",
  h6a:"Bắt đầu với mười kịch bản miễn phí",p6a:"Dán link trang của bạn và kể về quán. Kịch bản về sau một ngày, video miễn phí ngay sau đó.",ah:"Bắt đầu dịch vụ quảng cáo",
  qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", rth:"Tính theo từng video",rtp:"Gói chỉ là hai mức giá này, mua theo tháng.",rt15:"Một video 15 giây",rt30:"Một video 30 giây",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"tiết kiệm $90",rts2:"tiết kiệm $181",rtn:"Video lẻ ngoài gói cũng tính theo hai mức này, tối thiểu hai video.",
- c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — <b>$539</b> giá lẻ, <b>$449</b> theo gói",pk2c:"15 video mỗi tháng — <b>$980</b> giá lẻ, <b>$799</b> theo gói",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
+ c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — <b>$539</b> giá lẻ, <b>$449</b> theo gói",pk2c:"15 video mỗi tháng — <b>$980</b> giá lẻ, <b>$799</b> theo gói",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", poh:"Đặt theo từng video",pop:"Chọn số lượng mỗi loại. Tối thiểu hai. Video đầu tiên trong ba ngày.",pi15:"Video 15 giây",pi30:"Video 30 giây",pit:"Đơn của bạn",pihint:"Cần ít nhất hai video",pgo:"Đặt những video này",pd1:"3 ngày làm việc",pd1s:"cho video đầu tiên",pd2:"Chỉ 9:16",pd2s:"TikTok và Facebook",pd3:"Một lần chỉnh sửa",pd3s:"cho mỗi video",plh:"Hoặc mua theo tháng",plp:"Cùng loại video, giá mỗi video rẻ hơn, và giữ được nhịp đăng.",pk1d:"Video đầu tiên trong 3 ngày làm việc",pk2d:"Video đầu tiên trong 3 ngày làm việc", sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
  sbh2:"Cả ba đều bắt buộc. Cầm điện thoại dọc, không cắt ghép, không filter. Quay hỏng cũng không sao.",
  sm1:"Clip nói chuyện — 2 video, mỗi video 30 giây",sm1s:"Nhìn thẳng máy suốt. Mỗi video chia làm ba đoạn 10 giây.",
  sm1a:"Đoạn 1 · 10 giây — trước cửa quán",sm1b:"Đoạn 2 · 10 giây — bên trong, chỗ muốn giới thiệu",sm1c:"Đoạn 3 · 10 giây — cầm sản phẩm trên tay",
@@ -2086,7 +2135,7 @@ c3:"Nhận video mẫu",
  spromise:"<b>Chúng tôi không quay giùm bạn.</b> Video mẫu dựng từ tư liệu bạn gửi, nên nó đúng là quán của bạn.",
  promise:"<b>Video đầu không ưng: hoàn tiền 100%.</b> Dừng giữa chừng thì hoàn phần chưa làm.",
  mh:"Đăng nhập để tiếp tục",mp:"Thông tin và tư liệu nằm trong khu vực riêng của bạn.",gsi:"Tiếp tục với Google",
- foot:"Vertens Storefront Ad Studio · Quảng cáo cho cửa hàng địa phương"};
+ foot:"Vertens Ad Studio · Quảng cáo cho cửa hàng địa phương"};
 const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",navcta:"무료 샘플",
  mnu1:"내 작업공간",mnu2:"관리자",mnu3:"로그아웃",
  h1:"사람이 이끌고, AI가 거들고,<br>사장님 장사에 충실하게.",
@@ -2111,7 +2160,7 @@ const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",nav
  wc3t:"AI는 반복 작업을 할 뿐, 연기하지 않습니다",wc3p:"음성, 입모양, 자막, 스무 개 버전 — 기계의 일이라 거의 비용이 들지 않습니다. 얼굴과 매장은 그대로 진짜입니다.",
  lad1:"광고 대행사: 편당 $500 이상",lad2:"UGC 플랫폼: 편당 $99–167",lad3:"저희: $49",
  lad4:"같은 진짜 소재입니다. 화면에 나오지 않는 비용만 없앴습니다.",
- h3a:"가격은 둘뿐입니다.",
+ h3a:"사는 방법 두 가지, 같은 영상.",
  vsh:"다른 곳에서는 얼마일까요",
  qh:"매장용 대본 10개, 무료입니다.",qp:"매장에 대해 알려주세요. 저희 편집자가 페이지를 직접 읽고, 업종에 맞는 대본 10개를 쓰고, 보내기 전에 한 줄씩 확인합니다. 영업일 기준 하루. 가입도 결제도 없습니다.",qb:"대본 보내주세요",qs1:"사장님 페이지",qs2:"사장님 매장",qs3:"어디로 보내드릴까요",qf4:"매장 수",qf5:"전화번호",qf6:"WhatsApp (다르면)",qn:"봇이 아니라 사람이 쓰고 확인합니다. 그래서 1초가 아니라 하루가 걸립니다.",qdh:"접수했습니다. 다음 순서입니다.",qd1:"저희 편집자가 페이지를 직접 읽습니다",qd1v:"오늘",qd2:"무엇이 되고 무엇이 안 되는지 짧게 정리해 드립니다",qd2v:"영업일 1일",qd3:"업종에 맞춘 대본 10개, 한 줄씩 확인, 촬영 목록 포함",qd3v:"같은 메시지로",qd4:"WhatsApp으로 먼저 연락드리고, 원하시면 전화드립니다",qd4v:"사장님 선택",qdn:"결제도 계정도 없습니다. 대본이 마음에 드시면 그중 하나를 무료로 찍어드립니다.",qeh:"받으시는 것",qep:"함께 일한 식당의 예시입니다. 사장님 것은 사장님 매장 이야기가 됩니다.",qen:"열 개 중 두 개, 예시입니다. 각각 휴대폰으로 10분 안에 찍을 수 있습니다.",qgb:"무료 샘플 영상 안내",qsh:"대본 10개",navcta:"무료 대본",nav1:"홈",nav4:"서비스 지역",c9:"전체 보기",c1:"무료 대본 10개 받기",vsp:"같은 일, 네 가지 방법.",chh:"매장이 3곳 이상인가요?",chb:"매장이 몇 곳인지 알려주세요",pc1:"15초",pc2:"30초",each:"개당",each2:"개당",
  minl:"최소 주문",pinc:"모든 영상에 수정 1회, 자막, 9:16 세로 출력이 포함됩니다.",
@@ -2140,7 +2189,7 @@ c3:"무료 샘플 받기",
  s4h:"전부 워크스페이스 안에",s4p:"대본 승인, 소재 업로드, 9:16 파일 다운로드. 첫 영상은 3일 안에.",
  h6a:"무료 대본 10개부터 시작하세요",p6a:"페이지 링크를 붙여넣고 매장 이야기를 들려주세요. 대본은 하루 안에, 무료 영상은 그다음에.",ah:"광고 대행 시작하기",
  qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", rth:"영상 단가",rtp:"플랜은 이 두 단가를 월 단위로 묶은 것입니다.",rt15:"15초 영상 1편",rt30:"30초 영상 1편",rtb:"Basic · 30초 3편 + 15초 5편",rts:"Standard · 30초 5편 + 15초 10편",rts1:"$90 절약",rts2:"$181 절약",rtn:"플랜 없이 낱개로 만드실 때도 같은 단가이며, 최소 2편부터입니다.",
- c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 정가 <b>$539</b>, 플랜 <b>$449</b>",pk2c:"월 15편 — 정가 <b>$980</b>, 플랜 <b>$799</b>",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", sb1:"여쭤볼 내용",sb2:"촬영하실 것",
+ c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 정가 <b>$539</b>, 플랜 <b>$449</b>",pk2c:"월 15편 — 정가 <b>$980</b>, 플랜 <b>$799</b>",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", poh:"편당 주문",pop:"각각 몇 편인지 고르세요. 최소 두 편. 첫 영상은 3일 안에.",pi15:"15초 영상",pi30:"30초 영상",pit:"주문 내역",pihint:"최소 두 편부터",pgo:"이대로 주문",pd1:"영업일 3일",pd1s:"첫 영상까지",pd2:"9:16만",pd2s:"TikTok과 Facebook",pd3:"수정 1회",pd3s:"모든 영상에",plh:"또는 월 단위로",plp:"같은 영상, 편당 더 저렴하게, 그리고 리듬이 끊기지 않게.",pk1d:"첫 영상은 영업일 3일 안에",pk2d:"첫 영상은 영업일 3일 안에", sb1:"여쭤볼 내용",sb2:"촬영하실 것",
  sbh2:"세 가지 모두 필요합니다. 휴대폰을 세로로, 편집이나 필터 없이. 잘못 찍힌 것도 괜찮습니다.",
  sm1:"인터뷰 영상 — 2개, 각 30초",sm1s:"카메라를 계속 정면으로. 각 영상을 10초씩 세 토막으로 촬영.",
  sm1a:"1번 · 10초 — 가게 입구에서",sm1b:"2번 · 10초 — 매장 안, 보여주고 싶은 곳에서",sm1c:"3번 · 10초 — 제품을 들고 설명하며",
@@ -2160,7 +2209,7 @@ c3:"무료 샘플 받기",
  spromise:"<b>저희가 대신 촬영하지 않습니다.</b> 보내주신 소재로만 만들기 때문에 실제 가게 그대로 보입니다.",
  promise:"<b>첫 영상이 마음에 안 드시면 전액 환불.</b> 이후 중단하시면 제작하지 않은 분량을 환불합니다.",
  mh:"계속하려면 로그인하세요",mp:"브랜드 정보와 소재는 사장님 작업공간에만 저장됩니다.",gsi:"Google로 계속하기",
- foot:"Vertens Storefront Ad Studio · 로컬 매장을 위한 광고"};
+ foot:"Vertens Ad Studio · 로컬 매장을 위한 광고"};
 const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投",navcta:"免费样片",
  seb:"免费样片",sh:"先免费做一条 15 秒。",
  sp:"填一下门店情况，把下面的素材发给我们，3 个工作日拿到成片。不用付钱、不用留卡、不用承诺。",
@@ -2197,7 +2246,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  kp3:"出镜的人",ks3:"场景",kv4:"声音",w3p:"AI",w3s:"AI，参考你的照片",w3v:"AI 配音 + 口型",
  send3:"你要给的：",w3n:"<b>你要给的：</b>5–10 张照片。就这些。",
  wnote:"你不用选。把手上有的给我们，我们会用素材允许的最真做法 —— 价格都一样。",
- brandsub:"实体店广告工作室",foot:"Vertens Storefront Ad Studio · 实体店广告工作室",
+ brandsub:"实体店广告工作室",foot:"Vertens Ad Studio · 实体店广告工作室",
  eb:"免费做一条 15 秒样片 · 不用留卡",
  navcta:"免费脚本",c1:"领 10 条免费脚本",c2:"或者要一条免费样片",
  n1:"脚本不用注册",n2:"贴一个主页链接就行",n3:"之后想要免费样片再说",c3:"领我的 10 条脚本",
@@ -2289,7 +2338,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  fc1:"服务","fl-vid":"视频套餐","fl-ads":"广告代投","fl-scr":"十条免费脚本","fl-sam":"免费样片",
  fc2:"关于","fl-abt":"关于我们","fl-wrk":"服务范围","fl-faq":"常见问题","fl-ws":"我的工作台",
  fc3:"联系我们",fhours:"周一至周六 9:00–19:00（太平洋时间）",flangs:"English · 中文 · Español · Tiếng Việt · 한국어",
- fcopy:"© 2026 Vertens Storefront Ad Studio，Sunvega 集团成员企业。保留所有权利。",
+ fcopy:"© 2026 Vertens Ad Studio，Sunvega 集团成员企业。保留所有权利。",
  fpriv:"隐私政策",fterm:"服务条款",fref:"退款政策",
  wn9:"广告代投",wsh7:"广告代投",wsp7:"三件事做完就能开投，大约十分钟。",
  adf0:"账户信息",adf0h:"用来开户和圈人群。",
@@ -2322,9 +2371,15 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  hssv:"保存首页样片",hsrs:"恢复默认",
  ish:"行业",isp:"公开站上展示的行业，同时决定该行业样片用哪一组照片。",
  lt1:"首页样片",lt2:"行业",lt3:"样片",
+ poh:"按条下单",pop:"各要几条自己选，最少两条。第一条 3 个工作日交付。",
+ pi15:"15 秒片",pi30:"30 秒片",pit:"你的订单",pihint:"至少两条起",pgo:"就下这些",
+ pd1:"3 个工作日",pd1s:"第一条交付",pd2:"只出 9:16",pd2s:"TikTok 与 Facebook",
+ pd3:"含一次修改",pd3s:"每条都含",
+ plh:"或者按月买",plp:"一样的片子，单条更便宜，而且能保持更新节奏。",
+ pk1d:"第一条 3 个工作日交付",pk2d:"第一条 3 个工作日交付",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
- abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
+ abh:"做这些片子的团队",abp1:"Vertens Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
  abph:"团队照片",abphn:"把一张名为 team.jpg 的照片放在本页同目录下即可替换。",abcap:"我们的编导、剪辑与投放团队。Sunvega 集团。",
  ab1h:"Sunvega 集团旗下",ab1p:"我们是 Sunvega 集团内部的短视频团队，与集团的海外营销和供应链业务并行。",
  ab2h:"海外社媒",ab2p:"TikTok、Instagram、Facebook、YouTube Shorts——五种语言的撰稿、剪辑和付费投放。",
@@ -2374,7 +2429,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  wc3p:"配音、口型、字幕、改尺寸、出二十个版本 —— 这些是机器的活，几乎不花钱。你的脸和你的店还是真的，而那才是真正卖货的部分。",
  lad1:"代理公司拍片：每条 $500 起",lad2:"UGC 平台：每条 $99–167",lad3:"我们：约 $53",
  lad4:"同样是真实画面。我们只是不再为那些不出现在屏幕上的成本买单。",
- h3a:"两个价格，就是全部菜单。",
+ h3a:"两种买法，同样的片子。",
  inc1:"<b>第一条改到你满意为止。</b>之后每条含 1 次免费修改，额外修改 $25 一次。",
  inc2:"<b>所有东西都归你。</b>成片、工程文件、原始素材 —— 永久归你。",
  inc3:"<b>双语字幕。</b>英文 + 中文 / 西班牙语 / 越南语 / 韩语任选一种。",
@@ -2472,6 +2527,9 @@ const HOME_D={
  ways:[{img:"food-owner"},{img:"beauty-hair-reveal"},{img:"tile-kitchen-install"}]};
 const SAMPLE_POSITIONS=["center 32%","center 48%","center 64%","center 38%","center 56%"];
 const clone=o=>JSON.parse(JSON.stringify(o));
+let CUST=(()=>{try{const r=JSON.parse(localStorage.getItem("vt_cust"));return r&&r.length?r:clone(CUST_D)}catch(e){return clone(CUST_D)}})();
+let DELIV=(()=>{try{return JSON.parse(localStorage.getItem("vt_deliv"))||{}}catch(e){return{}}})();
+let CUSTOPEN=null;
 let HOME=(()=>{try{const st=JSON.parse(localStorage.getItem("vt_home"));
   return st?Object.assign(clone(HOME_D),st):clone(HOME_D);}catch(e){return clone(HOME_D)}})();
 function normSample(x){
@@ -2511,6 +2569,80 @@ function hydrateSamples(){
       renderLib(); if($("samgrid"))renderSamGrid();
     }).catch(()=>{});
   }));
+}
+
+function custMaterial(biz){
+  /* 原型：真实素材来自当前登录客户的素材库；其余为演示数据 */
+  const mine=(BRAND.name&&biz&&BRAND.name.indexOf(biz.split(" ")[0])>=0)||biz==="Casa Luma";
+  return mine?ASSETS:[];
+}
+function renderCustModal(){
+  const mo=$("scmodal"), bx=$("scbox");
+  if(!mo||!bx)return;
+  if(!CUSTOPEN){return;}
+  const zh=LANG==="zh", L=a=>a[zh?1:0];
+  const c=CUST.find(x=>x.biz===CUSTOPEN); if(!c){CUSTOPEN=null;return;}
+  const mats=custMaterial(c.biz), dl=DELIV[c.biz]||[];
+  const row=(a,b)=>`<div class="r"><span>${a}</span><b>${b}</b></div>`;
+  bx.innerHTML=`<div class="schd"><div>
+      <span class="eyebrow">${L(["Customer","客户"])}</span>
+      <h3 style="margin-top:6px">${c.biz}</h3></div>
+    <button class="scx" data-custclose="1">✕</button></div>
+    <div class="scbody">
+      <label class="scl">${L(["Store","门店信息"])}</label>
+      <div class="kv">
+        ${row(L(["Industry","行业"]),c.ind)}
+        ${row(L(["City","城市"]),c.city)}
+        ${row(L(["Plan","套餐"]),PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n)+" · "+money(c.mrr):"—")}
+        ${row(L(["Ad budget","广告预算"]),c.ads?money(c.ads):"—")}
+        ${row(L(["Customer since","合作起始"]),c.since)}
+        ${row(L(["Scripts approved","脚本已确认"]),c.scr+" / 10")}
+        ${row(L(["Videos delivered","已交付成片"]),c.vid)}
+      </div>
+
+      <label class="scl">${L(["Owner","负责人"])}</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <select class="sci" id="cust-own" style="max-width:220px">
+          ${STAFF.map(p=>`<option value="${p.id}"${p.id===c.own?" selected":""}>${p.n} · ${L(p.role)}</option>`).join("")}</select>
+        <button class="mini dark" data-custclaim="${c.biz}">${L(["Claim / assign","认领 / 指派"])}</button>
+      </div>
+
+      <label class="scl">${L(["Material from the customer","客户上传的素材"])}</label>
+      ${mats.length?`<div class="dlist">${mats.map(m=>`<div class="dl">
+          <span class="ic">${m.img?"▨":"▶"}</span>
+          <span class="nm"><b>${m.name}</b><i>${ACAT[m.cat]?ACAT[m.cat][zh?1:0]:"—"} · ${fsize(m.size)} · ${m.date}</i></span>
+          ${BLOB[m.id]?`<a class="mini" href="${BLOB[m.id]}" download="${m.name}">${L(["Download","下载"])}</a>`
+            :`<span class="sm mut">${L(["not in this browser","本机无文件"])}</span>`}
+        </div>`).join("")}
+        <p class="sm mut" style="margin:10px 0 0">${L(["Downloads come from this browser's copy. On the server these are the customer's uploaded files.","下载的是本浏览器里的副本；正式版是客户上传到服务器的原文件。"])}</p></div>`
+        :`<div class="empty" style="margin-top:6px">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}
+
+      <label class="scl">${L(["Deliver finished videos","交付成片"])}</label>
+      <div class="drop" id="delivdrop" style="padding:20px">
+        <b>${L(["Drag finished videos here","把成片拖到这里"])}</b>
+        <span>${L(["They appear in the customer's Videos tab straight away.","上传后立刻出现在客户工作台的「成片」里。"])}</span>
+        <input type="file" id="delivfile" accept="video/*,image/*" multiple hidden>
+      </div>
+      ${dl.length?`<div class="dlist" style="margin-top:10px">${dl.map((d,i)=>`<div class="dl">
+        <span class="ic">▶</span><span class="nm"><b>${d.name}</b><i>${d.when}</i></span>
+        <button class="mini del" data-delivdel="${c.biz}|${i}">${L(["Remove","删除"])}</button></div>`).join("")}</div>`:""}
+    </div>
+    <div class="scft"><span class="sm mut">${L(["Changes save as you go.","改动即时保存。"])}</span>
+      <span style="display:flex;gap:8px"><button data-custclose="1">${L(["Close","关闭"])}</button></span></div>`;
+  mo.classList.add("on");
+}
+function addDeliv(biz,list){
+  DELIV[biz]=DELIV[biz]||[];
+  [...list].forEach(f=>{
+    const id="d"+Date.now()+Math.random().toString(36).slice(2,7);
+    try{BLOB[id]=URL.createObjectURL(f)}catch(e){}
+    IDB.put(id,{blob:f,poster:null}).catch(()=>{});
+    DELIV[biz].unshift({id,name:f.name||"video.mp4",size:f.size||0,
+      when:new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"})});
+  });
+  save("vt_deliv",DELIV);
+  const c=CUST.find(x=>x.biz===biz); if(c){c.vid=(c.vid||0)+list.length; save("vt_cust",CUST);}
+  renderCustModal(); renderAdmin(); renderWVideos();
 }
 function renderLibAdmin(){
   const pane=$("libpane"); if(!pane)return;
@@ -2694,7 +2826,24 @@ function renderGeo(){
 const vTotal=()=>PKG[V.pkg].price;
 function adFee(s){const brk=CFG.brk, a=Math.min(s,brk)*(CFG.rate1/100), b=Math.max(s-brk,0)*(CFG.rate2/100); return {fee:a+b,above:Math.max(s-brk,0)};}
 
+
+function pieceTotal(){return P.v15*CFG.r15+P.v30*CFG.r30;}
+function pieceCount(){return P.v15+P.v30;}
+function renderPieces(){
+  const zh=LANG==="zh", el=id=>$(id);
+  if(!el("ptotal"))return;
+  el("p15rate").textContent=money(CFG.r15)+(zh?" 一条":" each");
+  el("p30rate").textContent=money(CFG.r30)+(zh?" 一条":" each");
+  el("q15").textContent=P.v15; el("q30").textContent=P.v30;
+  el("ptotal").textContent=money(pieceTotal());
+  const ok=pieceCount()>=2;
+  el("phint").textContent=ok
+    ? (zh?`${pieceCount()} 条 · 第一条 3 个工作日交付`:`${pieceCount()} videos · first one in 3 business days`)
+    : (zh?"至少两条起":"Add at least two videos");
+  el("pgo").disabled=!ok;
+}
 function renderV(){
+  renderPieces();
   const zh=LANG==="zh", p=PKG[V.pkg];
   const el=id=>$(id);
   const set=(id,v)=>{const e=el(id); if(e)e.textContent=v;};
@@ -2940,6 +3089,10 @@ function monthLabel(key){
 }
 function vidList(){
   const zh=LANG==="zh", vo=ORDERS.find(x=>x.type!=="ads"&&PKG[x.pkg]), o=vo||null, out=[];
+  const mine=DELIV[BRAND.name]||DELIV["Casa Luma"]||[];
+  const nowM=monthKey(new Date());
+  mine.forEach(d=>out.push({k:d.id,m:nowM,t:d.name,st:"ready",file:d.id,
+    cap:zh?"我们刚交付的成片。":"Just delivered by our team."}));
   const done=C.c1>=ANEED.c1&&C.c2>=ANEED.c2&&C.c3>=ANEED.c3;
   const now=new Date(), thisM=monthKey(now);
   out.push({k:"sample",m:thisM,t:zh?"免费样片 · 15 秒":"Free sample · 15 sec",
@@ -2987,7 +3140,7 @@ function renderWVideos(){
     <div><h4>${x.t}</h4><div class="mt">${monthLabel(x.m)} · 9:16 · 1080×1920 · MP4 · <span class="badge ${x.st==="ready"?"done":x.st==="work"?"work":"draft"}">${L[x.st]}</span></div>
       <div class="cap"><b>${L.cap}:</b> ${x.cap}</div></div>
     <div class="btns">${x.st==="ready"
-      ?`<button class="pri" data-dl="${x.k}">${L.dl}</button><button data-cp="${x.k}">${L.cp}</button>`
+      ?`${x.file&&BLOB[x.file]?`<a class="pri" style="text-align:center;text-decoration:none;padding:8px 16px;border-radius:999px;background:var(--orange);color:var(--orangeInk);font-weight:600;font-size:13px" href="${BLOB[x.file]}" download="${x.t}">${L.dl}</a>`:`<button class="pri" data-dl="${x.k}">${L.dl}</button>`}<button data-cp="${x.k}">${L.cp}</button>`
       :`<button disabled style="opacity:.5">${L[x.st]}</button>`}</div></div>`).join("")
     :`<div class="empty">${L.none}</div>`;
   box.innerHTML=`<p class="sm mut" style="margin:0 0 4px">${L.note}</p>`+bar+rows;
@@ -3040,6 +3193,7 @@ function renderWizard(){
 }
 function ckAmount(){
   if(CKTYPE==="ads"){const f=adFee(A.spend); return A.spend+MGMT+f.fee;}
+  if(CKTYPE==="pieces")return pieceTotal();
   return PKG[V.pkg].price;
 }
 function renderCk(){
@@ -3053,6 +3207,12 @@ function renderCk(){
       row(zh?"账户管理费":"Account management",money(MGMT))+
       row(zh?"服务佣金":"Our commission",money(f.fee))+
       row(zh?"投放平台":"Platforms",zh?"Facebook 与 TikTok":"Facebook and TikTok");
+  }else if(CKTYPE==="pieces"){
+    el("cklines").innerHTML=
+      (P.v30?row((zh?"30 秒片 × ":"30-second videos × ")+P.v30,money(P.v30*CFG.r30)):"")+
+      (P.v15?row((zh?"15 秒片 × ":"15-second videos × ")+P.v15,money(P.v15*CFG.r15)):"")+
+      row(zh?"首条交付":"First delivery",zh?"3 个工作日":"3 business days")+
+      row(zh?"成片比例":"Aspect ratio","9:16");
   }else{
     el("cklines").innerHTML=
       row((zh?pk.zh:pk.n)+(zh?" 套餐":" plan"),money(pk.price))+
@@ -3090,6 +3250,7 @@ function renderCk(){
 }
 
 function orderTitle(o,zh){
+  if(o.type==="pieces")return (zh?"单条下单":"Videos by the piece")+" · "+((o.v30||0)+(o.v15||0))+(zh?" 条":" videos");
   if(o.type==="ads"){
     const t=ATIERS.find(x=>x.id===o.tier);
     return (zh?"广告代投":"Ad management")+" · "+(t?(zh?t.n[1]:t.n[0]):money(o.spend||0));
@@ -3160,6 +3321,10 @@ function orderRows(o,zh,L){
     const f=adFee(o.spend||0);
     lines=r(L.bud,money(o.spend||0))+r(zh?"账户管理费":"Account management",money(MGMT))+
       r(zh?"服务佣金":"Our commission",money(f.fee))+r(L.plat,"Facebook + TikTok");
+  }else if(o.type==="pieces"){
+    lines=(o.v30?r((zh?"30 秒片 × ":"30-second × ")+o.v30,money(o.v30*CFG.r30)):"")+
+      (o.v15?r((zh?"15 秒片 × ":"15-second × ")+o.v15,money(o.v15*CFG.r15)):"")+
+      r(zh?"首条交付":"First delivery",zh?"3 个工作日":"3 business days");
   }else{
     const pk=PKG[o.pkg];
     lines=r(zh?"套餐":"Plan",pk?(zh?pk.zh:pk.n):"—")+
@@ -3502,12 +3667,14 @@ function renderAdmin(){
       [String(CUST.filter(c=>c.st==="at-risk").length),L(["At risk","有流失风险"]),""]
     ])+admTable(
       [[L(["Business","门店"])],[L(["Plan","套餐"])],[L(["MRR","月费"]),1],[L(["Ad budget","广告预算"]),1],
-       [L(["Material","素材"]),1],[L(["Scripts ok","脚本已确认"]),1],[L(["Videos out","已交付"]),1],[L(["Owner","负责人"])],[L(["Status","状态"])]],
+       [L(["Material","素材"]),1],[L(["Scripts ok","脚本已确认"]),1],[L(["Videos out","已交付"]),1],[L(["Owner","负责人"])],[L(["Status","状态"])],[""]],
       CUST.map(c=>[`<b>${c.biz}</b><div class="sm mut">${c.city} · ${L(["since ","自 "])}${c.since}</div>`,
         PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n):"—",money(c.mrr),c.ads?money(c.ads):"—",
         c.mat+" / 17",c.scr+" / 10",c.vid,staffName(c.own),
         `<span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
-          c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>`]));
+          c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>`,
+        `<button class="mini" data-cust="${c.biz}">${L(["Open","详情"])}</button>`]));
+  renderCustModal();
     return;
   }
 
@@ -3652,6 +3819,19 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  const cop=e.target.closest("[data-cust]");
+  if(cop){CUSTOPEN=cop.dataset.cust;renderCustModal();return;}
+  if(e.target.closest("[data-custclose]")){CUSTOPEN=null;libClose();return;}
+  const ccl=e.target.closest("[data-custclaim]");
+  if(ccl){const c=CUST.find(x=>x.biz===ccl.dataset.custclaim);
+    if(c){c.own=$("cust-own").value;save("vt_cust",CUST);}
+    renderCustModal();renderAdmin();return;}
+  if(e.target.closest("#delivdrop")&&!e.target.closest("input")){$("delivfile").click();return;}
+  const ddel=e.target.closest("[data-delivdel]");
+  if(ddel){const [biz,i]=ddel.dataset.delivdel.split("|");
+    const item=(DELIV[biz]||[])[+i];
+    if(item){IDB.del(item.id);delete BLOB[item.id];DELIV[biz].splice(+i,1);save("vt_deliv",DELIV);}
+    renderCustModal();renderWVideos();return;}
   const lt=e.target.closest("[data-libtab]");
   if(lt){LIBTAB=lt.dataset.libtab;renderLibAdmin();return;}
   if(e.target.closest("[data-libclose]")){libClose();return;}
@@ -3769,6 +3949,7 @@ document.addEventListener("click",e=>{
       now.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
     ORDERS.unshift({id:"VT"+String(Date.now()).slice(-8),type:CKTYPE,
       pkg:CKTYPE==="video"?V.pkg:null, tier:CKTYPE==="ads"?ATIER:null,
+      v15:CKTYPE==="pieces"?P.v15:null, v30:CKTYPE==="pieces"?P.v30:null,
       spend:CKTYPE==="ads"?A.spend:null, amount:amt, pay:PAY, when:stamp,
       date:now.toLocaleDateString("en-US",{month:"short",day:"numeric"}), st:"paid"});
     save("vt_orders",ORDERS);
@@ -3876,6 +4057,9 @@ document.addEventListener("click",e=>{
     const w=window.open("","_blank");
     if(w){w.document.write("<pre style=\"font:13px ui-monospace;padding:20px;white-space:pre-wrap\">"+JSON.stringify(LIB,null,2).replace(/</g,"&lt;")+"</pre>");w.document.close();}
     return;}
+  const qb=e.target.closest("[data-q]");
+  if(qb){P[qb.dataset.q]=Math.max(0,Math.min(50,P[qb.dataset.q]+(+qb.dataset.d)));renderPieces();return;}
+  if(e.target.closest("#pgo")&&!$("pgo").disabled){CKTYPE="pieces";goto("checkout");return;}
   const pk=e.target.closest("[data-pkg]");
   if(pk){V.pkg=pk.dataset.pkg;const r=document.querySelector('input[name=pkg][value="'+V.pkg+'"]');if(r)r.checked=true;CKTYPE="video";renderV();renderCk();}
   const g=e.target.closest("[data-go]");
@@ -3896,14 +4080,17 @@ document.addEventListener("click",e=>{
     renderReqs();renderAdmin();return;}
 });
 document.addEventListener("change",e=>{
+  if(e.target&&e.target.id==="delivfile"&&e.target.files&&e.target.files.length){addDeliv(CUSTOPEN,e.target.files);e.target.value="";return;}
   if(e.target&&e.target.id==="samfile"&&e.target.files&&e.target.files.length){addSamples(e.target.files);e.target.value="";}
 });
 ["dragenter","dragover","dragleave","drop"].forEach(t=>document.addEventListener(t,e=>{
-  const dz=e.target.closest?e.target.closest("#samdrop"):null;
+  const dz=e.target.closest?e.target.closest("#samdrop,#delivdrop"):null;
   if(!dz)return;
   e.preventDefault();
   dz.classList.toggle("hot",t==="dragenter"||t==="dragover");
-  if(t==="drop"&&e.dataTransfer&&e.dataTransfer.files.length)addSamples(e.dataTransfer.files);
+  if(t==="drop"&&e.dataTransfer&&e.dataTransfer.files.length){
+    if(dz.id==="delivdrop")addDeliv(CUSTOPEN,e.dataTransfer.files);
+    else addSamples(e.dataTransfer.files);}
 }));
 (function(){
   const fi=$("afile"), dz=$("drop"); if(!fi||!dz)return;
