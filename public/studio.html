@@ -331,11 +331,11 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 
 /* hero */
 .hero{padding:72px 0 64px}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:64px;align-items:start}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .notes{margin:12px 0 0;font-size:14px;color:var(--faint);display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.5}
 .notes i{font-style:normal;opacity:.45}
-.heroreels{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:460px;margin-top:8px}
+.heroreels{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:100%;margin-top:8px}
 .heroreels .reel:first-child{aspect-ratio:9/16}
 .heroreels .reel:last-child{aspect-ratio:9/13}
 
@@ -596,10 +596,10 @@ body.adminmode{background:var(--cream)}
 .admgrp{display:flex;flex-direction:column;gap:2px}
 .admgrp>span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,231,220,.38);padding:0 10px 8px}
 .admnav a{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;font-size:14px;font-weight:500;color:rgba(237,231,220,.82);cursor:pointer;text-decoration:none}
-.admnav a i{font-style:normal;width:16px;text-align:center;opacity:.65}
+.admnav a .ic{width:17px;height:17px;flex:none;opacity:.7}
 .admnav a:hover{background:rgba(255,255,255,.06);color:#fff}
 .admnav a.on{background:var(--orange);color:var(--orangeInk)}
-.admnav a.on i{opacity:1}
+.admnav a.on .ic{opacity:1}
 .admnav a em{margin-left:auto;font-style:normal;font-size:12px;font-weight:700;background:rgba(255,255,255,.14);border-radius:999px;padding:1px 8px}
 .admnav a.on em{background:rgba(0,0,0,.18)}
 .admfoot{margin-top:auto;border-top:1px solid rgba(237,231,220,.14);padding-top:12px}
@@ -732,7 +732,7 @@ body.adminmode{background:var(--cream)}
 .wsn .who b{display:block;font-size:14px}
 .wsn .who span{font-size:12px;color:var(--faint);word-break:break-all}
 .wsn a{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:12px;font-size:14px;font-weight:500;color:var(--ink2);cursor:pointer;border:1px solid transparent}
-.wsn a .ic{width:20px;text-align:center;opacity:.6}
+.wsn a .ic{width:18px;height:18px;flex:none;opacity:.62}
 .wsn a:hover{background:var(--sand)}
 .wsn a.on{background:var(--dark);color:#F7F4EE;border-color:var(--dark)}
 .wsn a.on .ic{opacity:1}
@@ -836,6 +836,8 @@ body.adminmode{background:var(--cream)}
 .ipill:hover{border-color:var(--ink)}
 .ipill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
 .lib{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media (max-width:900px){.lib{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:600px){.lib{grid-template-columns:repeat(2,1fr)}}
 .tile{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;color:#fff;border:0;text-align:left;cursor:default;background-size:cover;background-position:center}
 .tile .ttl{font-size:14px;font-weight:600;line-height:1.3}
 .tile .met{position:absolute;top:9px;left:9px;display:flex;gap:5px}
@@ -1018,6 +1020,30 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 .measure,.lead,.hint,.page>.wrap>div>p{max-width:64ch}
 
 .tile:hover .play,.tile:focus-within .play{opacity:1;transform:scale(1)}
+
+/* ── 进场动效 ── */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+.pill,.ipill,.mini,.mini2,.vchip,.aplc,.pcard,.samc,.ord,.backai,.waline{transition:all .22s cubic-bezier(.16,1,.3,1)}
+
+/* ── 深色出血段 ── */
+.sec-dark{background:var(--dark);color:#F2EDE4}
+.sec-dark h1,.sec-dark h2,.sec-dark h3{color:#F7F4EE}
+.sec-dark .lead,.sec-dark p{color:rgba(242,237,228,.72)}
+.sec-dark .ipill{background:transparent;border-color:rgba(242,237,228,.24);color:rgba(242,237,228,.78)}
+.sec-dark .ipill:hover{border-color:rgba(242,237,228,.6);color:#fff}
+.sec-dark .ipill[aria-pressed="true"]{background:#F7F4EE;border-color:#F7F4EE;color:var(--dark)}
+.sec-dark .pill.gh{border-color:rgba(242,237,228,.3);color:#F7F4EE}
+.sec-dark .pill.gh:hover{border-color:#F7F4EE}
+.sec-dark .sm.mut{color:rgba(242,237,228,.5)}
+
+/* ── 媒体的圆角与调色统一（作品 ≠ 组件） ── */
+.tile,.reel,.teamfig img{border-radius:6px}
+.tile,.reel{filter:saturate(.94) contrast(1.03)}
+.tile{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.tile:hover{transform:translateY(-2px)}
+.tile>span.bgz{position:absolute;inset:0;background:inherit}
 </style>
 </head>
 <body>
@@ -1115,10 +1141,10 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
   <p class="lead" style="margin-top:28px;max-width:72ch" data-i="wnote">You don't have to choose. Send us whatever you have and we use the most real option it allows — the price is the same either way.</p>
 
 </div></section>
-<section id="work"><div class="wrap">
+<section id="work" class="sec-dark"><div class="wrap">
   <div style="max-width:56ch;margin-bottom:26px">
     <h2 style="margin-top:14px" data-i="h7a">Samples by industry</h2>
-    <p class="lead" style="margin-top:16px" data-i="p7a">Ten examples from each trade. Every one was made from a real store's own footage.</p>
+    <p class="lead" style="margin-top:16px" data-i="p7a">Five from each trade. Every one was made from a real store's own footage.</p>
   </div>
   <div class="libbar" id="libbar"></div>
   <div class="lib" id="lib"></div>
@@ -1276,16 +1302,16 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 
   <nav class="wsn" id="wsnav">
     <div class="who"><b id="w-name">—</b><span id="w-mail">—</span></div>
-    <a data-ws="home" class="on"><span class="ic">⌂</span><span data-i="wn0">Home</span></a>
-    <a data-ws="store"><span class="ic">◈</span><span data-i="wn1">My Store</span></a>
-    <a data-ws="assets"><span class="ic">▤</span><span data-i="wn2">Assets</span></a>
-    <a data-ws="scripts"><span class="ic">✎</span><span data-i="wn6">Scripts</span><span class="dot" id="wd-sc"></span></a>
-    <a data-ws="videos"><span class="ic">▷</span><span data-i="wn7">Videos</span><span class="dot" id="wd-vd"></span></a>
-    <a data-ws="ads"><span class="ic">◎</span><span data-i="wn9">Ad management</span><span class="dot" id="wd-ad"></span></a>
-    <a data-ws="orders"><span class="ic">▣</span><span data-i="wn8">Orders</span></a>
-    <a data-ws="profile"><span class="ic">◉</span><span data-i="wn3">Profile</span></a>
+    <a data-ws="home" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span data-i="wn0">Home</span></a>
+    <a data-ws="store"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16M5 9V6h14v3M5 9v10h14V9M9 19v-6h6v6"/></svg><span data-i="wn1">My Store</span></a>
+    <a data-ws="assets"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h6l2 2h8v9H4zM4 8V5h6l2 2"/></svg><span data-i="wn2">Assets</span></a>
+    <a data-ws="scripts"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h7l4 4v12H7zM14 4v4h4M10 12h5M10 16h5"/></svg><span data-i="wn6">Scripts</span><span class="dot" id="wd-sc"></span></a>
+    <a data-ws="videos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11v12H4zM15 10l5-3v10l-5-3"/></svg><span data-i="wn7">Videos</span><span class="dot" id="wd-vd"></span></a>
+    <a data-ws="ads"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M4 12h16M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/></svg><span data-i="wn9">Ad management</span><span class="dot" id="wd-ad"></span></a>
+    <a data-ws="orders"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12v16l-3-2-3 2-3-2-3 2zM9 9h6M9 13h6"/></svg><span data-i="wn8">Orders</span></a>
+    <a data-ws="profile"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M5 20a7 7 0 0 1 14 0"/></svg><span data-i="wn3">Profile</span></a>
     <div class="sep"></div>
-    <a id="wsout"><span class="ic">↪</span><span data-i="wn5">Sign out</span></a>
+    <a id="wsout"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h9"/></svg><span data-i="wn5">Sign out</span></a>
   </nav>
 
   <div>
@@ -1590,23 +1616,23 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
   <nav class="admnav" id="admnav">
     <div class="admbrand"><span class="logo">V</span><div><b>Vertens</b><span data-i="adm0">Operations console</span></div></div>
     <div class="admgrp"><span data-i="admg1">Run the day</span>
-      <a data-adm="overview" class="on"><i>◱</i><span data-i="adm1">Overview</span></a>
-      <a data-adm="leads"><i>◇</i><span data-i="adm2">Leads</span><em id="ac-leads"></em></a>
-      <a data-adm="prod"><i>▤</i><span data-i="adm3">Production</span><em id="ac-prod"></em></a>
-      <a data-adm="support"><i>◐</i><span data-i="adm4">Support</span><em id="ac-sup"></em></a>
+      <a data-adm="overview" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v4h-7zM13 10h7v10h-7zM4 13h7v7H4z"/></svg><span data-i="adm1">Overview</span></a>
+      <a data-adm="leads"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg><span data-i="adm2">Leads</span><em id="ac-leads"></em></a>
+      <a data-adm="prod"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4-8 4zM4 12l8 4 8-4M4 16l8 4 8-4"/></svg><span data-i="adm3">Production</span><em id="ac-prod"></em></a>
+      <a data-adm="support"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8M5.6 5.6l3.2 3.2M18.4 5.6l-3.2 3.2M5.6 18.4l3.2-3.2M18.4 18.4l-3.2-3.2"/></svg><span data-i="adm4">Support</span><em id="ac-sup"></em></a>
     </div>
     <div class="admgrp"><span data-i="admg2">Business</span>
-      <a data-adm="cust"><i>◈</i><span data-i="adm5">Customers</span></a>
-      <a data-adm="orders"><i>▣</i><span data-i="adm6">Orders</span></a>
-      <a data-adm="ads"><i>◎</i><span data-i="adm7">Ad accounts</span></a>
+      <a data-adm="cust"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M21 20a5 5 0 0 0-4-4.9"/></svg><span data-i="adm5">Customers</span></a>
+      <a data-adm="orders"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12v16l-3-2-3 2-3-2-3 2zM9 9h6M9 13h6"/></svg><span data-i="adm6">Orders</span></a>
+      <a data-adm="ads"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M4 12h16M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/></svg><span data-i="adm7">Ad accounts</span></a>
     </div>
     <div class="admgrp"><span data-i="admg3">Setup</span>
-      <a data-adm="lib"><i>▦</i><span data-i="adm8">Sample library</span></a>
-      <a data-adm="geo"><i>◉</i><span data-i="adm9">Coverage</span></a>
-      <a data-adm="team"><i>◒</i><span data-i="adm10">Team</span></a>
-      <a data-adm="cfg"><i>⚙</i><span data-i="adm11">Settings</span></a>
+      <a data-adm="lib"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H4zM8 20h8M4 12l4-4 3 3 3-3 6 6"/></svg><span data-i="adm8">Sample library</span></a>
+      <a data-adm="geo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/></svg><span data-i="adm9">Coverage</span></a>
+      <a data-adm="team"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M21 20a5 5 0 0 0-4-4.9"/></svg><span data-i="adm10">Team</span></a>
+      <a data-adm="cfg"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14M9 7v0M15 12v0M11 17v0"/></svg><span data-i="adm11">Settings</span></a>
     </div>
-    <div class="admfoot"><a data-go="studio"><i>↗</i><span data-i="adm12">Open the website</span></a></div>
+    <div class="admfoot"><a data-go="studio"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span data-i="adm12">Open the website</span></a></div>
   </nav>
   <main class="admmain">
     <header class="admhd">
@@ -2074,7 +2100,7 @@ c3:"Quiero mi muestra",
  sh:"Un video de 15 segundos, por nuestra cuenta.",sp:"Entra, cuéntanos de tu tienda y sube el material. Recibes el video en 3 días hábiles. Sin pago, sin tarjeta.",
  gsi2:"Continuar con Google",gside:"Toma un segundo. Tu material queda en tu propio espacio.",
  wn1:"Mi tienda",wn2:"Archivos",wn3:"Perfil",wn4:"Video gratis",wn5:"Cerrar sesión",wsh1:"Mi tienda",wsh2:"Archivos",wsh3:"Perfil",dz1:"Arrastra tus archivos aquí",dz2:"Videos y fotos, directo del teléfono. O haz clic para elegir.",dz3:"Todavía no hay nada. Arrastra tus primeros archivos arriba.",qb1:"Clips hablando · 30 s",qb2:"Clips de detalle · 5 s",qb3:"Fotos",pf5:"Guardar perfil",
- smg:"Gestión de cuenta",h7a:"Ejemplos por rubro",p7a:"Diez ejemplos de cada rubro, hechos con material de tiendas reales.",c7:"Pide el tuyo gratis",
+ smg:"Gestión de cuenta",h7a:"Ejemplos por rubro",p7a:"Cinco de cada rubro, hechos con material de tiendas reales.",c7:"Pide el tuyo gratis",
  adteb:"Segundo producto",adth:"Ya tienes los videos. Ahora que los vean.",adtp:"Publicar solo llega a quien ya te sigue. Los anuncios llegan a la calle. Se contrata aparte de los videos.",
  adt1:"Dinos cuánto puedes invertir",adt1p:"La mayoría de tiendas empieza con $30–50 al día. Te decimos qué compra eso antes de que te comprometas.",
  adt2:"Nosotros armamos y compramos",adt2p:"Tu cuenta, tus datos. Montamos las campañas en Facebook, Instagram y TikTok y las vigilamos a diario.",
@@ -2148,7 +2174,7 @@ c3:"Nhận video mẫu",
  sh:"Một video 15 giây, chúng tôi mời.",sp:"Đăng nhập, kể về quán của bạn và tải tư liệu lên. Nhận video sau 3 ngày làm việc. Không trả tiền, không cần thẻ.",
  gsi2:"Tiếp tục với Google",gside:"Chỉ một giây. Tư liệu nằm trong khu vực riêng của bạn.",
  wn1:"Cửa hàng của tôi",wn2:"Tư liệu",wn3:"Hồ sơ",wn4:"Video mẫu miễn phí",wn5:"Đăng xuất",wsh1:"Cửa hàng của tôi",wsh2:"Tư liệu",wsh3:"Hồ sơ",dz1:"Kéo tệp vào đây",dz2:"Video và ảnh, ngay từ điện thoại. Hoặc bấm để chọn.",dz3:"Chưa có gì. Kéo tệp đầu tiên vào khung trên.",qb1:"Clip nói · 30 giây",qb2:"Clip chi tiết · 5 giây",qb3:"Ảnh",pf5:"Lưu hồ sơ",
- smg:"Phí quản lý tài khoản",h7a:"Video mẫu theo ngành",p7a:"Mười ví dụ cho mỗi ngành, đều làm từ tư liệu của cửa hàng thật.",c7:"Nhận bản của bạn miễn phí",
+ smg:"Phí quản lý tài khoản",h7a:"Video mẫu theo ngành",p7a:"Năm video cho mỗi ngành, đều làm từ tư liệu của cửa hàng thật.",c7:"Nhận bản của bạn miễn phí",
  adteb:"Sản phẩm thứ hai",adth:"Có video rồi. Giờ là để người ta thấy.",adtp:"Chỉ đăng thì chỉ tới người đã theo dõi bạn. Chạy quảng cáo mới tới được cả con phố. Đặt riêng với video.",
  adt1:"Cho biết bạn chi được bao nhiêu",adt1p:"Phần lớn cửa hàng bắt đầu từ $30–50 mỗi ngày. Chúng tôi nói trước số tiền đó mua được gì.",
  adt2:"Chúng tôi dựng và chạy",adt2p:"Tài khoản của bạn, dữ liệu của bạn. Chúng tôi dựng chiến dịch trên Facebook, Instagram, TikTok và theo dõi hằng ngày.",
@@ -2222,7 +2248,7 @@ c3:"무료 샘플 받기",
  sh:"15초 영상 한 편, 무료로 만들어 드립니다.",sp:"로그인하고 가게 정보를 알려주신 뒤 소재를 올려주세요. 영업일 기준 3일 안에 받아보십니다.",
  gsi2:"Google로 계속하기",gside:"1초면 됩니다. 소재는 사장님 작업공간에만 저장됩니다.",
  wn1:"내 매장",wn2:"소재",wn3:"프로필",wn4:"무료 샘플",wn5:"로그아웃",wsh1:"내 매장",wsh2:"소재",wsh3:"프로필",dz1:"여기로 파일을 끌어다 놓으세요",dz2:"휴대폰 속 영상과 사진 그대로. 클릭해서 고르셔도 됩니다.",dz3:"아직 비어 있습니다. 위 상자에 파일을 넣어 주세요.",qb1:"말하는 영상 · 30초",qb2:"디테일 영상 · 5초",qb3:"사진",pf5:"프로필 저장",
- smg:"계정 관리비",h7a:"업종별 샘플",p7a:"업종마다 열 개씩. 모두 실제 매장의 영상으로 만들었습니다.",c7:"무료로 받아보기",
+ smg:"계정 관리비",h7a:"업종별 샘플",p7a:"업종마다 다섯 개씩, 모두 실제 매장의 영상으로 만들었습니다.",c7:"무료로 받아보기",
  adteb:"두 번째 상품",adth:"영상은 만들었고, 이제 보이게 할 차례입니다.",adtp:"그냥 올리면 이미 팔로우한 사람에게만 갑니다. 광고를 돌려야 이 거리 사람들에게 갑니다. 영상과 따로 주문합니다.",
  adt1:"쓸 수 있는 금액을 알려주세요",adt1p:"단일 매장은 보통 하루 $30–50부터 시작합니다. 쓰기 전에 그 돈으로 뭘 살 수 있는지 먼저 알려드립니다.",
  adt2:"저희가 세팅하고 집행합니다",adt2p:"사장님 계정, 사장님 데이터. Facebook·Instagram·TikTok에 캠페인을 세팅하고 매일 봅니다.",
@@ -2461,7 +2487,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  ath:"注册企业",acfgh:"样片库",acfgp:"公开站上显示的行业，以及每个行业下的样片。",
  eb8:"服务区域",h8a:"我们能做的区域",p8a:"我们不派人上门拍摄，所以只要你能用手机拍，我们就能做。下面是我们已经铺开的区域——每个下面列的行业，是我们已经备好脚本和样片库的行业。",
  p8b:"你的城市不在上面？做法完全一样，告诉我们在哪就行。",
- eb7:"我们做过的",h7a:"分行业样片",p7a:"每个行业十条。全部用真实门店自己的素材做的。",c7:"免费领一条",
+ eb7:"我们做过的",h7a:"分行业样片",p7a:"每个行业五条，全部用真实门店自己的素材做的。",c7:"免费领一条",
  cfgb:"管理行业",cfgh:"内部 · 行业与样片配置",
  cf1:"行业名称（英文）",cf2:"行业名称（中文）",cf3:"新增行业",cf4:"删除当前行业",cf5:"导出 JSON",
  cf6:"样片标题（英文）",cf7:"样片标题（中文）",cf8:"时长",cf9:"做法",cf10:"新增样片",
@@ -2862,7 +2888,7 @@ function renderLib(){
   const bar=$("libbar"); if(!bar)return;
   bar.innerHTML=LIB.map(i=>`<button class="ipill" data-ind="${i.id}" aria-pressed="${i.id===IND}">${LANG==="zh"?i.zh:i.en}</button>`).join("");
   const c=cur(); const grid=$("lib");
-  grid.innerHTML=!c?"":c.s.map((x,k)=>{
+  grid.innerHTML=!c?"":c.s.slice(0,5).map((x,k)=>{
     const set=SAMPLE_IMAGES[c.imgset||c.id]||SAMPLE_IMAGES.food;
     const image=x.img||set[k%set.length];
     const position=SAMPLE_POSITIONS[k%SAMPLE_POSITIONS.length];
@@ -4187,9 +4213,24 @@ try{const sv=localStorage.getItem("vt_lang"); if(sv&&DICT[sv])setLang(sv);}catch
     renderA();renderEst();}));})();
 const h=location.hash.slice(1); if(["videos","ads","sample","scripts","about","checkout","dashboard","admin"].includes(h)&&(["videos","ads","sample","scripts","about","checkout"].includes(h)||USER))goto(h);
 if(h==="faq"||h==="work")goto("about");
+function armReveal(){
+  if(!("IntersectionObserver" in window))return;
+  const sel="#p-studio section > .wrap > *, #p-studio .hero .wrap > div, #p-videos .rate, #p-videos .pcard, #p-ads .aplc, #p-ads .est, #p-about section > *";
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  let n=0;
+  document.querySelectorAll(sel).forEach(el=>{
+    if(el.classList.contains("rv"))return;
+    el.classList.add("rv");
+    el.style.transitionDelay=((n++%6)*60)+"ms";
+    io.observe(el);
+  });
+}
 renderAuth();
 render();
 hydrateAssets();
+armReveal();
 hydrateSamples();
 
 (function(){
