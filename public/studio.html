@@ -722,6 +722,22 @@ body.adminmode{background:var(--cream)}
 .tlx b{display:block;font-size:14.5px;font-weight:600}
 .tlx span{display:block;font-size:12px;color:var(--faint);margin-top:2px}
 
+.psave{display:flex;align-items:baseline;gap:10px;margin-top:8px;font-size:13.5px;color:var(--faint)}
+.psave s{color:var(--faint)}
+.psave .save{font-weight:700;color:var(--orange)}
+.cmpsave{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:center;
+ background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}
+.cmprow{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.cmprow:first-of-type{border-top:0}
+.cmprow b{font-variant-numeric:tabular-nums}
+.cmprow.now{color:var(--ink);font-weight:600}
+.cmprow.now b{color:var(--orange)}
+.cmpbig{text-align:right}
+.cmpbig span{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.cmpbig b{display:block;font-family:var(--disp);font-size:44px;font-weight:400;line-height:1.1;margin:4px 0}
+.cmpbig i{font-style:normal;font-size:13px;color:var(--ink2)}
+@media (max-width:760px){.cmpsave{grid-template-columns:1fr}.cmpbig{text-align:left}}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -1683,7 +1699,11 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
       </div>
     </div>
     <div class="ptot">
-      <div><span data-i="pit">Your order</span><b id="ptotal">$0</b><i id="phint" data-i="pihint">Add at least two videos</i></div>
+      <div><span data-i="pit">Your order</span><b id="ptotal">$0</b>
+        <i id="phint" data-i="pihint">Pick at least one video</i>
+        <div class="psave" id="psave" style="display:none">
+          <span data-i="pwas">Agency price</span><s id="pwasv">$0</s><span class="save" id="psavev"></span>
+        </div></div>
       <button class="pill o" id="pgo" disabled><span data-i="pgo">Order these</span><span class="arw">→</span></button>
     </div>
     <div class="pnote">
@@ -1721,6 +1741,20 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
       <button class="pill o" data-pkg="standard" data-go="checkout" style="margin-top:auto"><span data-i="pkb2">Choose Standard</span><span class="arw">→</span></button>
     </div>
   </div>
+  <div class="cmpsave">
+    <div>
+      <span class="eyebrow" data-i="cs0">What the same month costs elsewhere</span>
+      <div class="cmprow"><span data-i="cs1">Agency, 15 videos</span><b>$7,500</b></div>
+      <div class="cmprow"><span data-i="cs2">UGC marketplace, 15 videos</span><b>$1,995</b></div>
+      <div class="cmprow now"><span data-i="cs3">Standard plan, 15 videos</span><b>$799</b></div>
+    </div>
+    <div class="cmpbig">
+      <span data-i="cs4">You keep</span>
+      <b id="cmpsave">$1,196</b>
+      <i data-i="cs5">every month, against the marketplace price</i>
+    </div>
+  </div>
+
   <div class="minbox">
     <div><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,244,238,.6)" data-i="mnl">Which one</span><b data-i="mnb">Standard, for most stores</b></div>
     <div class="ex" style="max-width:52ch"><div data-i="mnp">Ad platforms need 15–50 live videos to work properly. Basic keeps a page alive; Standard is the one that feeds ads. Monthly, cancel any time.</div></div>
@@ -2122,7 +2156,7 @@ c3:"Quiero mi muestra",
  s4h:"Todo en tu panel",s4p:"Aprueba guiones, sube material, descarga los archivos 9:16. El primer video en tres días.",
  h6a:"Empieza con diez guiones gratis",p6a:"Pega el enlace de tu página y cuéntanos de tu tienda. Los guiones vuelven en un día; el video gratis después.",ah:"Contratar gestión de anuncios",
  qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", rth:"Precio por video",rtp:"Los planes son solo estas dos tarifas, compradas por mes.",rt15:"Un video de 15 segundos",rt30:"Un video de 30 segundos",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"ahorras $90",rts2:"ahorras $181",rtn:"Los videos sueltos fuera de un plan se cobran a estas mismas tarifas, desde uno.",
- c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — <b>$539</b> de lista, <b>$449</b> en el plan",pk2c:"15 videos al mes — <b>$980</b> de lista, <b>$799</b> en el plan",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", poh:"Pide por video",pop:"Elige cuántos de cada uno. Con uno basta para empezar. El primero en tres días.",pi15:"Video de 15 segundos",pi30:"Video de 30 segundos",pit:"Tu pedido",pihint:"Elige al menos un video",pgo:"Pedir estos",pd1:"3 días hábiles",pd1s:"para el primer video",pd2:"Solo 9:16",pd2s:"TikTok y Facebook",pd3:"Una ronda de cambios",pd3s:"en cada video",plh:"O compra por mes",plp:"Los mismos videos, menor precio por video, y mantenemos el ritmo.",pk1d:"Primer video en 3 días hábiles",pk2d:"Primer video en 3 días hábiles", af4:"Presupuesto mínimo sugerido", sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
+ c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — <b>$539</b> de lista, <b>$449</b> en el plan",pk2c:"15 videos al mes — <b>$980</b> de lista, <b>$799</b> en el plan",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", poh:"Pide por video",pop:"Elige cuántos de cada uno. Con uno basta para empezar. El primero en tres días.",pi15:"Video de 15 segundos",pi30:"Video de 30 segundos",pit:"Tu pedido",pihint:"Elige al menos un video",pgo:"Pedir estos",pd1:"3 días hábiles",pd1s:"para el primer video",pd2:"Solo 9:16",pd2s:"TikTok y Facebook",pd3:"Una ronda de cambios",pd3s:"en cada video",plh:"O compra por mes",plp:"Los mismos videos, menor precio por video, y mantenemos el ritmo.",pk1d:"Primer video en 3 días hábiles",pk2d:"Primer video en 3 días hábiles", af4:"Presupuesto mínimo sugerido", pwas:"Precio de agencia",cs0:"Lo que cuesta el mismo mes en otro lado",cs1:"Agencia, 15 videos",cs2:"Marketplace UGC, 15 videos",cs3:"Plan Standard, 15 videos",cs4:"Te quedas con",cs5:"cada mes, frente al precio del marketplace",sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
  sbh2:"Los tres son obligatorios. Teléfono en vertical, sin editar, sin filtros. Las tomas malas no importan.",
  sm1:"Clips hablando — 2 videos de 30 s",sm1s:"Mirando a la cámara todo el tiempo. Cada uno en tres partes de 10 segundos.",
  sm1a:"Parte 1 · 10 s — en tu puerta",sm1b:"Parte 2 · 10 s — adentro, en el punto que quieras mostrar",sm1c:"Parte 3 · 10 s — con un producto en la mano",
@@ -2196,7 +2230,7 @@ c3:"Nhận video mẫu",
  s4h:"Mọi thứ nằm trong workspace",s4p:"Duyệt kịch bản, tải tư liệu lên, tải file 9:16 về. Video đầu tiên trong ba ngày.",
  h6a:"Bắt đầu với mười kịch bản miễn phí",p6a:"Dán link trang của bạn và kể về quán. Kịch bản về sau một ngày, video miễn phí ngay sau đó.",ah:"Bắt đầu dịch vụ quảng cáo",
  qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", rth:"Tính theo từng video",rtp:"Gói chỉ là hai mức giá này, mua theo tháng.",rt15:"Một video 15 giây",rt30:"Một video 30 giây",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"tiết kiệm $90",rts2:"tiết kiệm $181",rtn:"Video lẻ ngoài gói cũng tính theo hai mức này, từ một video.",
- c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — <b>$539</b> giá lẻ, <b>$449</b> theo gói",pk2c:"15 video mỗi tháng — <b>$980</b> giá lẻ, <b>$799</b> theo gói",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", poh:"Đặt theo từng video",pop:"Chọn số lượng mỗi loại. Một video cũng bắt đầu được. Video đầu tiên trong ba ngày.",pi15:"Video 15 giây",pi30:"Video 30 giây",pit:"Đơn của bạn",pihint:"Chọn ít nhất một video",pgo:"Đặt những video này",pd1:"3 ngày làm việc",pd1s:"cho video đầu tiên",pd2:"Chỉ 9:16",pd2s:"TikTok và Facebook",pd3:"Một lần chỉnh sửa",pd3s:"cho mỗi video",plh:"Hoặc mua theo tháng",plp:"Cùng loại video, giá mỗi video rẻ hơn, và giữ được nhịp đăng.",pk1d:"Video đầu tiên trong 3 ngày làm việc",pk2d:"Video đầu tiên trong 3 ngày làm việc", af4:"Ngân sách tối thiểu đề xuất", sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
+ c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — <b>$539</b> giá lẻ, <b>$449</b> theo gói",pk2c:"15 video mỗi tháng — <b>$980</b> giá lẻ, <b>$799</b> theo gói",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", poh:"Đặt theo từng video",pop:"Chọn số lượng mỗi loại. Một video cũng bắt đầu được. Video đầu tiên trong ba ngày.",pi15:"Video 15 giây",pi30:"Video 30 giây",pit:"Đơn của bạn",pihint:"Chọn ít nhất một video",pgo:"Đặt những video này",pd1:"3 ngày làm việc",pd1s:"cho video đầu tiên",pd2:"Chỉ 9:16",pd2s:"TikTok và Facebook",pd3:"Một lần chỉnh sửa",pd3s:"cho mỗi video",plh:"Hoặc mua theo tháng",plp:"Cùng loại video, giá mỗi video rẻ hơn, và giữ được nhịp đăng.",pk1d:"Video đầu tiên trong 3 ngày làm việc",pk2d:"Video đầu tiên trong 3 ngày làm việc", af4:"Ngân sách tối thiểu đề xuất", pwas:"Giá agency",cs0:"Cùng một tháng, nơi khác tính bao nhiêu",cs1:"Agency, 15 video",cs2:"Sàn UGC, 15 video",cs3:"Gói Standard, 15 video",cs4:"Bạn giữ lại",cs5:"mỗi tháng, so với giá trên sàn UGC",sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
  sbh2:"Cả ba đều bắt buộc. Cầm điện thoại dọc, không cắt ghép, không filter. Quay hỏng cũng không sao.",
  sm1:"Clip nói chuyện — 2 video, mỗi video 30 giây",sm1s:"Nhìn thẳng máy suốt. Mỗi video chia làm ba đoạn 10 giây.",
  sm1a:"Đoạn 1 · 10 giây — trước cửa quán",sm1b:"Đoạn 2 · 10 giây — bên trong, chỗ muốn giới thiệu",sm1c:"Đoạn 3 · 10 giây — cầm sản phẩm trên tay",
@@ -2270,7 +2304,7 @@ c3:"무료 샘플 받기",
  s4h:"전부 워크스페이스 안에",s4p:"대본 승인, 소재 업로드, 9:16 파일 다운로드. 첫 영상은 3일 안에.",
  h6a:"무료 대본 10개부터 시작하세요",p6a:"페이지 링크를 붙여넣고 매장 이야기를 들려주세요. 대본은 하루 안에, 무료 영상은 그다음에.",ah:"광고 대행 시작하기",
  qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", rth:"영상 단가",rtp:"플랜은 이 두 단가를 월 단위로 묶은 것입니다.",rt15:"15초 영상 1편",rt30:"30초 영상 1편",rtb:"Basic · 30초 3편 + 15초 5편",rts:"Standard · 30초 5편 + 15초 10편",rts1:"$90 절약",rts2:"$181 절약",rtn:"플랜 없이 낱개로 만드실 때도 같은 단가이며, 한 편부터 가능합니다.",
- c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 정가 <b>$539</b>, 플랜 <b>$449</b>",pk2c:"월 15편 — 정가 <b>$980</b>, 플랜 <b>$799</b>",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", poh:"편당 주문",pop:"각각 몇 편인지 고르세요. 한 편부터 시작하실 수 있습니다. 첫 영상은 3일 안에.",pi15:"15초 영상",pi30:"30초 영상",pit:"주문 내역",pihint:"최소 한 편",pgo:"이대로 주문",pd1:"영업일 3일",pd1s:"첫 영상까지",pd2:"9:16만",pd2s:"TikTok과 Facebook",pd3:"수정 1회",pd3s:"모든 영상에",plh:"또는 월 단위로",plp:"같은 영상, 편당 더 저렴하게, 그리고 리듬이 끊기지 않게.",pk1d:"첫 영상은 영업일 3일 안에",pk2d:"첫 영상은 영업일 3일 안에", af4:"권장 최소 예산", sb1:"여쭤볼 내용",sb2:"촬영하실 것",
+ c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 정가 <b>$539</b>, 플랜 <b>$449</b>",pk2c:"월 15편 — 정가 <b>$980</b>, 플랜 <b>$799</b>",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", poh:"편당 주문",pop:"각각 몇 편인지 고르세요. 한 편부터 시작하실 수 있습니다. 첫 영상은 3일 안에.",pi15:"15초 영상",pi30:"30초 영상",pit:"주문 내역",pihint:"최소 한 편",pgo:"이대로 주문",pd1:"영업일 3일",pd1s:"첫 영상까지",pd2:"9:16만",pd2s:"TikTok과 Facebook",pd3:"수정 1회",pd3s:"모든 영상에",plh:"또는 월 단위로",plp:"같은 영상, 편당 더 저렴하게, 그리고 리듬이 끊기지 않게.",pk1d:"첫 영상은 영업일 3일 안에",pk2d:"첫 영상은 영업일 3일 안에", af4:"권장 최소 예산", pwas:"에이전시 가격",cs0:"같은 한 달, 다른 곳에서는 얼마",cs1:"에이전시, 15편",cs2:"UGC 마켓, 15편",cs3:"Standard 플랜, 15편",cs4:"아끼시는 금액",cs5:"매달, UGC 마켓 가격 대비",sb1:"여쭤볼 내용",sb2:"촬영하실 것",
  sbh2:"세 가지 모두 필요합니다. 휴대폰을 세로로, 편집이나 필터 없이. 잘못 찍힌 것도 괜찮습니다.",
  sm1:"인터뷰 영상 — 2개, 각 30초",sm1s:"카메라를 계속 정면으로. 각 영상을 10초씩 세 토막으로 촬영.",
  sm1a:"1번 · 10초 — 가게 입구에서",sm1b:"2번 · 10초 — 매장 안, 보여주고 싶은 곳에서",sm1c:"3번 · 10초 — 제품을 들고 설명하며",
@@ -2458,7 +2492,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  pd3:"含一次修改",pd3s:"每条都含",
  plh:"或者按月买",plp:"一样的片子，单条更便宜，而且能保持更新节奏。",
  pk1d:"第一条 3 个工作日交付",pk2d:"第一条 3 个工作日交付",
- backai:"VertensAI 工具",nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
+ backai:"VertensAI 工具",pwas:"外面的报价",cs0:"同样一个月，在外面要花多少",cs1:"广告公司，15 条",cs2:"UGC 平台，15 条",cs3:"标准套餐，15 条",cs4:"你省下",cs5:"每个月，对比 UGC 平台的价格",nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
  abph:"团队照片",abphn:"把一张名为 team.jpg 的照片放在本页同目录下即可替换。",abcap:"我们的编导、剪辑与投放团队。Sunvega 集团。",
@@ -2610,7 +2644,7 @@ const SAMPLE_POSITIONS=["center 32%","center 48%","center 64%","center 38%","cen
 const clone=o=>JSON.parse(JSON.stringify(o));
 let CUST=(()=>{try{const r=JSON.parse(localStorage.getItem("vt_cust"));return r&&r.length?r:clone(CUST_D)}catch(e){return clone(CUST_D)}})();
 let DELIV=(()=>{try{return JSON.parse(localStorage.getItem("vt_deliv"))||{}}catch(e){return{}}})();
-let CUSTOPEN=null, LEADOPEN=null, ACCOPEN=null;
+let CUSTOPEN=null, CUSTTAB="info", LEADOPEN=null, ACCOPEN=null;
 let LEADM=(()=>{try{return JSON.parse(localStorage.getItem("vt_leadm"))||{}}catch(e){return{}}})();
 let CASES=(()=>{try{return JSON.parse(localStorage.getItem("vt_cases"))||{}}catch(e){return{}}})();
 let LOG=(()=>{try{return JSON.parse(localStorage.getItem("vt_log"))||[]}catch(e){return[]}})();
@@ -2679,21 +2713,17 @@ function custDetail(){
   if(!c){CUSTOPEN=null;return "";}
   const mats=custMaterial(c.biz), dl=DELIV[c.biz]||[];
   const row=(a,b)=>`<div class="r"><span>${a}</span><b>${b}</b></div>`;
-  return `<nav class="crumb" style="margin-bottom:16px">
-      <a data-custback="1">${L(["Customers","客户"])}</a><span>/</span><span>${c.biz}</span></nav>
-
-    <div class="custhd">
-      <div>
-        <h2>${c.biz}</h2>
-        <p>${c.ind} · ${c.city} · ${L(["since ","合作自 "])}${c.since}</p>
-      </div>
-      <span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
-        c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>
-    </div>
-
-    <div class="custgrid">
-      <div class="acard">
-        <h3>${L(["Store","门店信息"])}</h3>
+  const hasScr=(BRAND.name&&c.biz&&BRAND.name.indexOf(c.biz.split(" ")[0])>=0)||c.biz==="Casa Luma";
+  const TABS=[["info",L(["Overview","概览"]),""],
+              ["material",L(["Material","素材"]),mats.length||""],
+              ["scripts",L(["Scripts","脚本"]),hasScr&&SCR?SCR.filter(x=>x.st==="note").length||"":""],
+              ["deliver",L(["Delivery","交付"]),dl.length||""],
+              ["log",L(["Activity","记录"]),""]];
+  if(!TABS.some(t=>t[0]===CUSTTAB))CUSTTAB="info";
+  let pane="";
+  if(CUSTTAB==="info"){
+    pane=`<div class="custgrid">
+      <div class="acard"><h3>${L(["Store","门店信息"])}</h3>
         <div class="kv">
           ${row(L(["Plan","套餐"]),PKG[c.plan]?(zh?PKG[c.plan].zh:PKG[c.plan].n)+" · "+money(c.mrr)+(zh?" / 月":" / mo"):"—")}
           ${row(L(["Ad budget","广告预算"]),c.ads?money(c.ads)+(zh?" / 月":" / mo"):"—")}
@@ -2702,54 +2732,53 @@ function custDetail(){
           ${row(L(["Videos delivered","已交付成片"]),c.vid)}
           ${row(L(["WhatsApp","WhatsApp"]),c.wa?`<a href="https://wa.me/${(c.wa||"").replace(/[^0-9]/g,"")}" target="_blank" rel="noopener" data-custcontact="${c.biz}">${c.wa}</a>`:"—")}
           ${row(L(["Email","邮箱"]),c.email?`<a href="mailto:${c.email}">${c.email}</a>`:"—")}
-        </div>
-        <label class="scl">${L(["Owner","负责人"])}</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <select class="inp" id="cust-own" style="max-width:230px">
-            ${STAFF.map(pp=>`<option value="${pp.id}"${pp.id===c.own?" selected":""}>${pp.n} · ${L(pp.role)}</option>`).join("")}</select>
-          <button class="mini dark" data-custclaim="${c.biz}">${L(["Claim / assign","认领 / 指派"])}</button>
-        </div>
-      </div>
-
-      <div class="acard">
-        <h3>${L(["Material from the customer","客户上传的素材"])}</h3>
-        <p class="hint">${L(["Everything they sent for this month's videos.","他们为这个月的片子交上来的东西。"])}</p>
-        ${mats.length?`<div class="dlist">${mats.map(m=>`<div class="dl">
-            <span class="ic">${m.img?"▨":"▶"}</span>
-            <span class="nm"><b>${m.name}</b><i>${ACAT[m.cat]?ACAT[m.cat][zh?1:0]:"—"} · ${fsize(m.size)} · ${m.date}</i></span>
-            ${BLOB[m.id]?`<a class="mini" href="${BLOB[m.id]}" download="${m.name}">${L(["Download","下载"])}</a>`
-              :`<span class="sm mut">${L(["not in this browser","本机无文件"])}</span>`}
-          </div>`).join("")}</div>
-          <p class="sm mut" style="margin:10px 0 0">${L(["Downloads come from this browser's copy. On the server these are the customer's uploaded files.","下载的是本浏览器里的副本；正式版是客户上传到服务器的原文件。"])}</p>`
-          :`<div class="empty">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}
-      </div>
-    </div>
-
-    <div class="acard">
-      <h3>${L(["Scripts","脚本"])}</h3>
+        </div></div>
+      <div class="acard"><h3>${L(["Owner","负责人"])}</h3>
+        <p class="hint">${L(["Whoever is on this account answers for it.","谁负责这个客户，谁对结果负责。"])}</p>
+        <select class="inp" id="cust-own" style="max-width:260px">
+          ${STAFF.map(pp=>`<option value="${pp.id}"${pp.id===c.own?" selected":""}>${pp.n} · ${L(pp.role)}</option>`).join("")}</select>
+        <div style="margin-top:14px"><button class="mini dark" data-custclaim="${c.biz}">${L(["Claim / assign","认领 / 指派"])}</button></div>
+        <h3 style="margin-top:22px">${L(["Latest","最近"])}</h3>${actHtml(c.biz,zh)}</div>
+    </div>`;
+  }else if(CUSTTAB==="material"){
+    pane=`<div class="acard"><h3>${L(["Material from the customer","客户上传的素材"])}</h3>
+      <p class="hint">${L(["Everything they sent for this month's videos.","他们为这个月的片子交上来的东西。"])}</p>
+      ${mats.length?`<div class="dlist">${mats.map(m=>`<div class="dl">
+          <span class="ic">${m.img?"▨":"▶"}</span>
+          <span class="nm"><b>${m.name}</b><i>${ACAT[m.cat]?ACAT[m.cat][zh?1:0]:"—"} · ${fsize(m.size)} · ${m.date}</i></span>
+          ${BLOB[m.id]?`<a class="mini" href="${BLOB[m.id]}" download="${m.name}">${L(["Download","下载"])}</a>`
+            :`<span class="sm mut">${L(["not in this browser","本机无文件"])}</span>`}</div>`).join("")}</div>`
+        :`<div class="empty">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}</div>`;
+  }else if(CUSTTAB==="scripts"){
+    pane=`<div class="acard"><h3>${L(["Scripts","脚本"])}</h3>
       <p class="hint">${L(["What the customer approved, and what they asked to change.","客户确认了哪些、要求改哪些。"])}</p>
-      ${custScripts(c,zh,L)}
-    </div>
-
-    <div class="acard">
-      <h3>${L(["Activity","跟进记录"])}</h3>
-      ${actHtml(c.biz,zh)}
-    </div>
-
-    <div class="acard">
-      <h3>${L(["Deliver finished videos","交付成片"])}</h3>
+      ${custScripts(c,zh,L)}</div>`;
+  }else if(CUSTTAB==="deliver"){
+    pane=`<div class="acard"><h3>${L(["Deliver finished videos","交付成片"])}</h3>
       <p class="hint">${L(["They appear in the customer's Videos tab straight away.","上传后立刻出现在客户工作台的「成片」里。"])}</p>
       <div class="drop" id="delivdrop" style="padding:22px">
         <b>${L(["Drag finished videos here","把成片拖到这里"])}</b>
         <span>${L(["Or click to choose files.","也可以点击选择文件。"])}</span>
-        <input type="file" id="delivfile" accept="video/*,image/*" multiple hidden>
-      </div>
+        <input type="file" id="delivfile" accept="video/*,image/*" multiple hidden></div>
       ${dl.length?`<div class="dlist" style="margin-top:12px">${dl.map((d,i)=>`<div class="dl">
         <span class="ic">▶</span><span class="nm"><b>${d.name}</b><i>${d.when} · ${fsize(d.size||0)}</i></span>
         ${BLOB[d.id]?`<a class="mini" href="${BLOB[d.id]}" download="${d.name}">${L(["Download","下载"])}</a>`:""}
         <button class="mini del" data-delivdel="${c.biz}|${i}">${L(["Remove","删除"])}</button></div>`).join("")}</div>`
-        :`<p class="sm mut" style="margin-top:12px">${L(["Nothing delivered yet.","还没有交付过成片。"])}</p>`}
-    </div>`;
+        :`<p class="sm mut" style="margin-top:12px">${L(["Nothing delivered yet.","还没有交付过成片。"])}</p>`}</div>`;
+  }else{
+    pane=`<div class="acard"><h3>${L(["Activity","跟进记录"])}</h3>${actHtml(c.biz,zh)}</div>`;
+  }
+  return `<nav class="crumb" style="margin-bottom:16px">
+      <a data-custback="1">${L(["Customers","客户"])}</a><span>/</span><span>${c.biz}</span></nav>
+    <div class="custhd">
+      <div><h2>${c.biz}</h2><p>${c.ind} · ${c.city} · ${L(["since ","合作自 "])}${c.since}</p></div>
+      <span class="pill2 ${c.st==="active"?"ok":c.st==="at-risk"?"warn":""}">${
+        c.st==="active"?L(["Active","进行中"]):c.st==="at-risk"?L(["At risk","有风险"]):L(["Onboarding","上手中"])}</span>
+    </div>
+    <div class="afilter" style="margin-bottom:18px">
+      ${TABS.map(([k,t,n])=>`<button class="${CUSTTAB===k?"on":""}" data-custtab="${k}">${t}${n?` <span class="mut">${n}</span>`:""}</button>`).join("")}
+    </div>
+    ${pane}`;
 }
 function addDeliv(biz,list){
   DELIV[biz]=DELIV[biz]||[];
@@ -2952,12 +2981,23 @@ function pieceTotal(){return P.v15*CFG.r15+P.v30*CFG.r30;}
 function pieceCount(){return P.v15+P.v30;}
 function renderPieces(){
   const zh=LANG==="zh", el=id=>$(id);
+  const cs=$("cmpsave");
+  if(cs)cs.textContent=money(1995-CFG.standard);
   if(!el("ptotal"))return;
   el("p15rate").textContent=money(CFG.r15)+(zh?" 一条":" each");
   el("p30rate").textContent=money(CFG.r30)+(zh?" 一条":" each");
   el("q15").textContent=P.v15; el("q30").textContent=P.v30;
   el("ptotal").textContent=money(pieceTotal());
   const ok=pieceCount()>=1;
+  const agency=P.v15*167+P.v30*167;   /* UGC 市场价：约 $167 一条 */
+  const sv=el("psave");
+  if(sv){
+    if(pieceCount()>0&&agency>pieceTotal()){
+      sv.style.display="";
+      el("pwasv").textContent=money(agency);
+      el("psavev").textContent=(zh?"省 ":"You save ")+money(agency-pieceTotal());
+    }else sv.style.display="none";
+  }
   el("phint").textContent=ok
     ? (zh?`${pieceCount()} 条 · 第一条 3 个工作日交付`:`${pieceCount()} video${pieceCount()>1?"s":""} · first one in 3 business days`)
     : (zh?"至少两条起":"Pick at least one video");
@@ -4207,7 +4247,9 @@ document.addEventListener("click",e=>{
   if(lct){logAct(lct.dataset.leadcontact.split("|")[1],LANG==="zh"?"通过 WhatsApp 联系":"Contacted on WhatsApp","contact");
     setTimeout(renderAdmin,80);return;}
   const cop=e.target.closest("[data-cust]");
-  if(cop){CUSTOPEN=cop.dataset.cust;ADMV="cust";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
+  const ctb=e.target.closest("[data-custtab]");
+  if(ctb){CUSTTAB=ctb.dataset.custtab;renderAdmin();return;}
+  if(cop){CUSTOPEN=cop.dataset.cust;CUSTTAB="info";ADMV="cust";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
   if(e.target.closest("[data-custback]")){CUSTOPEN=null;renderAdmin();return;}
   const ccl=e.target.closest("[data-custclaim]");
   if(ccl){const c=CUST.find(x=>x.biz===ccl.dataset.custclaim);
