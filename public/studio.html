@@ -715,6 +715,13 @@ body.adminmode{background:var(--cream)}
 .custgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 @media (max-width:980px){.custgrid{grid-template-columns:1fr}}
 
+.tl{display:grid;gap:0;margin-top:4px}
+.tlx{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.tlx:first-child{border-top:0}
+.tlx .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex:none;margin-top:7px}
+.tlx b{display:block;font-size:14.5px;font-weight:600}
+.tlx span{display:block;font-size:12px;color:var(--faint);margin-top:2px}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -1974,23 +1981,23 @@ function hydrateAssets(){
 let REQS=(()=>{try{return JSON.parse(localStorage.getItem("vt_reqs"))||[]}catch(e){return[]}})();
 let LEADS=(()=>{try{return JSON.parse(localStorage.getItem("vt_leads"))||[]}catch(e){return[]}})();
 const SEED=[
- {biz:"Casa Luma",ind:"Restaurants & cafés",city:"Costa Mesa, CA",contact:"+1 714 555 0182",st:"work",date:"Sep 2",mat:17},
- {biz:"Jade Nails & Spa",ind:"Nails & beauty",city:"Rowland Heights, CA",contact:"+1 626 555 0119",st:"done",date:"Aug 29",mat:19},
- {biz:"Stonewell Tile",ind:"Tile & home",city:"Irvine, CA",contact:"+1 949 555 0144",st:"new",date:"Sep 3",mat:12},
- {biz:"Golden Wok",ind:"Restaurants & cafés",city:"Flushing, NY",contact:"+1 718 555 0177",st:"done",date:"Aug 25",mat:21},
- {biz:"Pacific Auto Care",ind:"Auto service",city:"San Gabriel, CA",contact:"+1 626 555 0163",st:"work",date:"Sep 1",mat:15}];
+ {biz:"Casa Luma",wa:"+1 714 555 0182",email:"ken@casaluma.com",ind:"Restaurants & cafés",city:"Costa Mesa, CA",contact:"+1 714 555 0182",st:"work",date:"Sep 2",mat:17},
+ {biz:"Jade Nails & Spa",wa:"+1 626 555 0119",email:"hi@jadenails.com",ind:"Nails & beauty",city:"Rowland Heights, CA",contact:"+1 626 555 0119",st:"done",date:"Aug 29",mat:19},
+ {biz:"Stonewell Tile",wa:"+1 949 555 0144",email:"sales@stonewell.com",ind:"Tile & home",city:"Irvine, CA",contact:"+1 949 555 0144",st:"new",date:"Sep 3",mat:12},
+ {biz:"Golden Wok",wa:"+1 718 555 0177",email:"info@goldenwok.nyc",ind:"Restaurants & cafés",city:"Flushing, NY",contact:"+1 718 555 0177",st:"done",date:"Aug 25",mat:21},
+ {biz:"Pacific Auto Care",wa:"+1 626 555 0163",email:"shop@pacificauto.com",ind:"Auto service",city:"San Gabriel, CA",contact:"+1 626 555 0163",st:"work",date:"Sep 1",mat:15}];
 const STAFF=[
  {id:"mia",n:"Mia Chen",role:["Producer","制片"],load:9},
  {id:"noah",n:"Noah Park",role:["Editor","剪辑"],load:12},
  {id:"lena",n:"Lena Ortiz",role:["Scriptwriter","编导"],load:7},
  {id:"sam",n:"Sam Lee",role:["Ad buyer","投放"],load:5}];
 const CUST_D=[
- {biz:"Casa Luma",ind:"Restaurants & cafés",city:"Costa Mesa, CA",plan:"standard",mrr:799,since:"Jun 2026",own:"mia",st:"active",mat:17,scr:10,vid:15,ads:3000},
- {biz:"Jade Nails & Spa",ind:"Nails & beauty",city:"Rowland Heights, CA",plan:"basic",mrr:449,since:"Jul 2026",own:"lena",st:"active",mat:19,scr:8,vid:8,ads:0},
- {biz:"Stonewell Tile",ind:"Tile & home",city:"Irvine, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"mia",st:"onboarding",mat:12,scr:4,vid:0,ads:1000},
- {biz:"Golden Wok",ind:"Restaurants & cafés",city:"Flushing, NY",plan:"basic",mrr:449,since:"May 2026",own:"noah",st:"active",mat:21,scr:10,vid:8,ads:0},
- {biz:"Pacific Auto Care",ind:"Auto service",city:"San Gabriel, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"noah",st:"at-risk",mat:15,scr:6,vid:10,ads:5000},
- {biz:"Bella Hair Studio",ind:"Nails & beauty",city:"Houston, TX",plan:"basic",mrr:449,since:"Sep 2026",own:"lena",st:"onboarding",mat:6,scr:0,vid:0,ads:0}];
+ {biz:"Casa Luma",wa:"+1 714 555 0182",email:"ken@casaluma.com",ind:"Restaurants & cafés",city:"Costa Mesa, CA",plan:"standard",mrr:799,since:"Jun 2026",own:"mia",st:"active",mat:17,scr:10,vid:15,ads:3000},
+ {biz:"Jade Nails & Spa",wa:"+1 626 555 0119",email:"hi@jadenails.com",ind:"Nails & beauty",city:"Rowland Heights, CA",plan:"basic",mrr:449,since:"Jul 2026",own:"lena",st:"active",mat:19,scr:8,vid:8,ads:0},
+ {biz:"Stonewell Tile",wa:"+1 949 555 0144",email:"sales@stonewell.com",ind:"Tile & home",city:"Irvine, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"mia",st:"onboarding",mat:12,scr:4,vid:0,ads:1000},
+ {biz:"Golden Wok",wa:"+1 718 555 0177",email:"info@goldenwok.nyc",ind:"Restaurants & cafés",city:"Flushing, NY",plan:"basic",mrr:449,since:"May 2026",own:"noah",st:"active",mat:21,scr:10,vid:8,ads:0},
+ {biz:"Pacific Auto Care",wa:"+1 626 555 0163",email:"shop@pacificauto.com",ind:"Auto service",city:"San Gabriel, CA",plan:"standard",mrr:799,since:"Aug 2026",own:"noah",st:"at-risk",mat:15,scr:6,vid:10,ads:5000},
+ {biz:"Bella Hair Studio",wa:"+1 713 555 0140",email:"bella@bellahair.com",ind:"Nails & beauty",city:"Houston, TX",plan:"basic",mrr:449,since:"Sep 2026",own:"lena",st:"onboarding",mat:6,scr:0,vid:0,ads:0}];
 const PROD=[
  {biz:"Casa Luma",stage:"edit",due:"Sep 9",own:"noah",n:"5 × 30s",note:"Batch 2 of 3"},
  {biz:"Golden Wok",stage:"script",due:"Sep 9",own:"lena",n:"8 videos",note:"Sep cycle"},
@@ -2603,7 +2610,23 @@ const SAMPLE_POSITIONS=["center 32%","center 48%","center 64%","center 38%","cen
 const clone=o=>JSON.parse(JSON.stringify(o));
 let CUST=(()=>{try{const r=JSON.parse(localStorage.getItem("vt_cust"));return r&&r.length?r:clone(CUST_D)}catch(e){return clone(CUST_D)}})();
 let DELIV=(()=>{try{return JSON.parse(localStorage.getItem("vt_deliv"))||{}}catch(e){return{}}})();
-let CUSTOPEN=null;
+let CUSTOPEN=null, LEADOPEN=null, ACCOPEN=null;
+let LEADM=(()=>{try{return JSON.parse(localStorage.getItem("vt_leadm"))||{}}catch(e){return{}}})();
+let CASES=(()=>{try{return JSON.parse(localStorage.getItem("vt_cases"))||{}}catch(e){return{}}})();
+let LOG=(()=>{try{return JSON.parse(localStorage.getItem("vt_log"))||[]}catch(e){return[]}})();
+let REPORTS=(()=>{try{return JSON.parse(localStorage.getItem("vt_reports"))||{}}catch(e){return{}}})();
+let SCRSENT=(()=>{try{return JSON.parse(localStorage.getItem("vt_scrsent"))||{}}catch(e){return{}}})();
+const nowStamp=()=>new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"})+" · "+
+  new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+function logAct(who,what,kind){
+  LOG.unshift({who:who||"—",what,kind:kind||"note",when:nowStamp(),by:(USER&&USER.name)||"Admin"});
+  if(LOG.length>200)LOG.length=200;
+  save("vt_log",LOG);
+}
+const leadKey=r=>[r.type||"sample",r.biz||"—",r.date||""].join("|");
+const leadMeta=r=>{const k=leadKey(r);return LEADM[k]||(LEADM[k]={own:"",st:"new",note:"",next:""});};
+const LEADST=[["new",["To contact","待联系"]],["contacted",["Contacted","已联系"]],
+  ["sent",["Scripts sent","已发脚本"]],["won",["Converted","已转化"]],["lost",["Dropped","已放弃"]]];
 let HOME=(()=>{try{const st=JSON.parse(localStorage.getItem("vt_home"));
   return st?Object.assign(clone(HOME_D),st):clone(HOME_D);}catch(e){return clone(HOME_D)}})();
 function normSample(x){
@@ -2677,6 +2700,8 @@ function custDetail(){
           ${row(L(["Material received","已收素材"]),c.mat+" / 17")}
           ${row(L(["Scripts approved","脚本已确认"]),c.scr+" / 10")}
           ${row(L(["Videos delivered","已交付成片"]),c.vid)}
+          ${row(L(["WhatsApp","WhatsApp"]),c.wa?`<a href="https://wa.me/${(c.wa||"").replace(/[^0-9]/g,"")}" target="_blank" rel="noopener" data-custcontact="${c.biz}">${c.wa}</a>`:"—")}
+          ${row(L(["Email","邮箱"]),c.email?`<a href="mailto:${c.email}">${c.email}</a>`:"—")}
         </div>
         <label class="scl">${L(["Owner","负责人"])}</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
@@ -2698,6 +2723,17 @@ function custDetail(){
           <p class="sm mut" style="margin:10px 0 0">${L(["Downloads come from this browser's copy. On the server these are the customer's uploaded files.","下载的是本浏览器里的副本；正式版是客户上传到服务器的原文件。"])}</p>`
           :`<div class="empty">${L(["No files from this customer in this browser.","本浏览器里没有这个客户的文件。"])}</div>`}
       </div>
+    </div>
+
+    <div class="acard">
+      <h3>${L(["Scripts","脚本"])}</h3>
+      <p class="hint">${L(["What the customer approved, and what they asked to change.","客户确认了哪些、要求改哪些。"])}</p>
+      ${custScripts(c,zh,L)}
+    </div>
+
+    <div class="acard">
+      <h3>${L(["Activity","跟进记录"])}</h3>
+      ${actHtml(c.biz,zh)}
     </div>
 
     <div class="acard">
@@ -2726,6 +2762,7 @@ function addDeliv(biz,list){
   });
   save("vt_deliv",DELIV);
   const c=CUST.find(x=>x.biz===biz); if(c){c.vid=(c.vid||0)+list.length; save("vt_cust",CUST);}
+  logAct(biz,(LANG==="zh"?"交付了 ":"Delivered ")+list.length+(LANG==="zh"?" 条成片":" video(s)"),"deliver");
   renderAdmin(); renderWVideos();
 }
 function renderLibAdmin(){
@@ -3403,7 +3440,9 @@ function renderAds(){
       `<div class="r"><span>${zh?"月度预算":"Monthly budget"}</span><b>${money((o&&o.spend)||0)}</b></div>`+
       `<div class="r"><span>${zh?"投放平台":"Platforms"}</span><b>${plat}</b></div>`+
       `<div class="r"><span>${zh?"进度":"Progress"}</span><b>${zh?"搭建中，48 小时内上线":"Building — live within 48 hours"}</b></div>`+
-      `<div class="r"><span>${zh?"下一份报告":"Next report"}</span><b>${zh?"下月 1 号":"1st of next month"}</b></div>`;
+      `<div class="r"><span>${zh?"下一份报告":"Next report"}</span><b>${zh?"下月 1 号":"1st of next month"}</b></div>`+
+      ((REPORTS[BRAND.name]||REPORTS["Casa Luma"]||[]).map(r=>
+        `<div class="r"><span>${zh?"月度报告":"Monthly report"} · ${r.when}</span><b>${BLOB[r.id]?`<a href="${BLOB[r.id]}" download="${r.name}">${zh?"下载":"Download"}</a>`:r.name}</b></div>`).join(""));
   }
   const dt=$("wd-ad");
   if(dt){const left=d.formOk?0:1; dt.textContent=left; dt.classList.toggle("on",left>0);}
@@ -3649,13 +3688,167 @@ function allOrders(){
    {id:"VT20260805",type:"ads",tier:"growth",spend:3000,amount:3000+CFG.mgmt+adFee(3000).fee,pay:"card",when:"Aug 5 · 4:41 PM",st:"paid",biz:"Casa Luma"},
    {id:"VT20260728",type:"video",pkg:"basic",amount:CFG.basic,pay:"paypal",when:"Jul 28 · 9:12 AM",st:"case",note:"Two clips came back blurry",biz:"Golden Wok"},
    {id:"VT20260714",type:"video",pkg:"basic",amount:CFG.basic,pay:"invoice",when:"Jul 14 · 2:20 PM",st:"refunded",biz:"Bella Hair Studio"}];
-  return [...ORDERS.map(o=>Object.assign({biz:BRAND.name||(USER&&USER.name)||"—"},o)),...seeded];
+  return [...ORDERS.map(o=>Object.assign({biz:"—"},o)),...seeded];
 }
 function admKpi(items){return `<div class="kpi">${items.map(([b,l,extra])=>
   `<div><b>${b}</b><span>${l}</span>${extra?`<i>${extra}</i>`:""}</div>`).join("")}</div>`;}
 function admTable(cols,rows){
   return `<div class="awrap"><table class="atbl"><thead><tr>${cols.map(c=>`<th${c[1]?' class="num"':''}>${c[0]}</th>`).join("")}</tr></thead>
     <tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td${cols[i]&&cols[i][1]?' class="num"':''}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
+
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function fmtDay(d){return d.toLocaleDateString("en-US",{month:"short",day:"numeric"});}
+
+function accDetail(){
+  const zh=LANG==="zh", L=a=>a[zh?1:0];
+  const x=ADACC.find(a=>a.biz===ACCOPEN);
+  if(!x){ACCOPEN=null;return "";}
+  const reps=REPORTS[x.biz]||[];
+  const row=(a,b)=>`<div class="r"><span>${a}</span><b>${b}</b></div>`;
+  return `<nav class="crumb" style="margin-bottom:16px">
+      <a data-accback="1">${L(["Ad accounts","广告账户"])}</a><span>/</span><span>${x.biz}</span></nav>
+    <div class="custhd"><div><h2>${x.biz}</h2><p>${x.plat} · ${staffName(x.own)}</p></div>
+      <span class="pill2 ${reps.length?"ok":"warn"}">${reps.length?L(["Report sent","月报已发"]):L(["Report due","月报待发"])}</span></div>
+    <div class="custgrid">
+      <div class="acard"><h3>${L(["This month","本月"])}</h3>
+        <div class="kv">
+          ${row(L(["Budget","预算"]),money(x.bud))}
+          ${row(L(["Spent","已花"]),money(x.spent))}
+          ${row(L(["Leads","线索"]),x.lead)}
+          ${row(L(["Cost per lead","单线索成本"]),money(x.cpl))}
+          ${row(L(["Our fee","我们的服务费"]),money(CFG.mgmt+adFee(x.bud).fee))}
+          ${row(L(["Next report","下次报告"]),x.rep)}
+        </div>
+      </div>
+      <div class="acard"><h3>${L(["Monthly report","月度报告"])}</h3>
+        <p class="hint">${L(["Upload the written report; the customer sees it in Ad management.","上传书面报告，客户在「广告代投」里就能看到。"])}</p>
+        <div class="drop" id="repdrop" style="padding:20px">
+          <b>${L(["Drag the report here","把报告拖到这里"])}</b>
+          <span>${L(["PDF or image. Or click to choose.","PDF 或图片，也可以点击选择。"])}</span>
+          <input type="file" id="repfile" accept="application/pdf,image/*" multiple hidden>
+        </div>
+        ${reps.length?`<div class="dlist" style="margin-top:12px">${reps.map((r,i)=>`<div class="dl">
+          <span class="ic">▤</span><span class="nm"><b>${r.name}</b><i>${r.when}</i></span>
+          ${BLOB[r.id]?`<a class="mini" href="${BLOB[r.id]}" download="${r.name}">${L(["Download","下载"])}</a>`:""}
+          <button class="mini del" data-repdel="${x.biz}|${i}">${L(["Remove","删除"])}</button></div>`).join("")}</div>`
+          :`<p class="sm mut" style="margin-top:12px">${L(["No report uploaded for this month.","本月还没有上传报告。"])}</p>`}
+      </div>
+    </div>`;
+}
+function addReport(biz,list){
+  REPORTS[biz]=REPORTS[biz]||[];
+  [...list].forEach(f=>{
+    const id="r"+Date.now()+Math.random().toString(36).slice(2,7);
+    try{BLOB[id]=URL.createObjectURL(f)}catch(e){}
+    IDB.put(id,{blob:f,poster:null}).catch(()=>{});
+    REPORTS[biz].unshift({id,name:f.name||"report.pdf",when:nowStamp()});
+  });
+  save("vt_reports",REPORTS);
+  logAct(biz,LANG==="zh"?"上传了月度报告":"Uploaded the monthly report","report");
+  renderAdmin();
+}
+function liveJobs(){
+  /* 从真实订单 + 素材完成度 + 脚本状态推出当前该做什么 */
+  const out=[], zh=LANG==="zh";
+  const matDone=C.c1>=ANEED.c1&&C.c2>=ANEED.c2&&C.c3>=ANEED.c3;
+  const sc=(SCR&&SCR.length)?SCR:[];
+  const approved=sc.filter(x=>x.st==="ok").length;
+  ORDERS.filter(o=>o.type!=="ads"&&o.st!=="refunded").forEach(o=>{
+    const biz=o.biz||"—";
+    const due=fmtDay(addDays(new Date(),3));
+    let stage="script", note=zh?"等编导写脚本":"Scripts to write";
+    if(SCRSENT[biz]&&approved<1){stage="script";note=zh?"已发脚本，等确认":"Sent — waiting on approval";}
+    else if(approved>=1&&!matDone){stage="material";note=zh?`素材 ${C.c1+C.c2+C.c3} / 17`:`Material ${C.c1+C.c2+C.c3} / 17`;}
+    else if(matDone&&(DELIV[biz]||[]).length===0){stage="edit";note=zh?"素材已齐，可以开剪":"Material complete — start editing";}
+    else if((DELIV[biz]||[]).length>0){stage="deliver";note=zh?`已交付 ${(DELIV[biz]||[]).length} 条`:`${(DELIV[biz]||[]).length} delivered`;}
+    out.push({biz,stage,due,own:(CUST.find(c=>c.biz===biz)||{}).own||"mia",
+      n:o.type==="pieces"?((o.v30||0)+(o.v15||0))+(zh?" 条":" videos"):(PKG[o.pkg]?(zh?PKG[o.pkg].zh:PKG[o.pkg].n):"—"),note});
+  });
+  return out;
+}
+function isOverdue(dateStr,days){
+  if(!dateStr)return false;
+  const d=new Date(dateStr+" "+new Date().getFullYear());
+  if(isNaN(d))return false;
+  return (Date.now()-d.getTime())/86400000 > (days||1);
+}
+function actList(biz,n){
+  return LOG.filter(x=>!biz||x.who===biz).slice(0,n||8);
+}
+function actHtml(biz,zh){
+  const rows=actList(biz,8);
+  if(!rows.length)return `<p class="sm mut" style="margin:0">${zh?"还没有记录。":"Nothing logged yet."}</p>`;
+  return `<div class="tl">${rows.map(x=>`<div class="tlx">
+    <span class="dot"></span>
+    <div><b>${x.what}</b><span>${x.when} · ${x.by}</span></div></div>`).join("")}</div>`;
+}
+
+function custScripts(c,zh,L){
+  /* 原型：脚本存在客户浏览器里，同机可读。正式版应按客户 id 从服务端取。 */
+  const mine=(BRAND.name&&c.biz&&BRAND.name.indexOf(c.biz.split(" ")[0])>=0)||c.biz==="Casa Luma";
+  const list=mine&&SCR&&SCR.length?SCR:null;
+  const sent=SCRSENT[c.biz];
+  const head=`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+      <button class="mini dark" data-scrsend="${c.biz}">${sent?L(["Resend scripts","重新发送"]):L(["Send scripts to customer","把脚本发给客户"])}</button>
+      ${sent?`<span class="sm mut">${L(["Sent ","已发送 "])}${sent}</span>`:`<span class="sm mut">${L(["Not sent yet","尚未发送"])}</span>`}</div>`;
+  if(!list)return head+`<div class="empty">${L(["This customer's scripts are not in this browser.","本浏览器里没有这个客户的脚本。"])}</div>`;
+  const badge=x=>x.st==="ok"?`<span class="pill2 ok">${L(["Approved","已确认"])}</span>`
+    :x.st==="note"?`<span class="pill2 warn">${L(["Changes asked","要求修改"])}</span>`
+    :`<span class="pill2">${L(["Waiting","待确认"])}</span>`;
+  return head+`<div class="dlist">${list.map((x,k)=>`<div class="dl" style="align-items:flex-start">
+      <span class="ic">${String(k+1).padStart(2,"0")}</span>
+      <span class="nm"><b>${x.det&&x.edited?x.det.title:(zh?x.zh:x.en)}</b>
+        <i>${x.sec}s${x.note?` · <b style="color:var(--orange)">${L(["Their note","客户意见"])}:</b> ${x.note}`:""}</i></span>
+      ${badge(x)}</div>`).join("")}</div>
+    <p class="sm mut" style="margin-top:10px">${L(["Notes in orange need a rewrite before filming.","橙色的意见需要改完再拍。"])}</p>`;
+}
+function caseOf(id){return CASES[id]||(CASES[id]={st:"open",msgs:[]});}
+function leadDetail(leads){
+  const zh=LANG==="zh", L=a=>a[zh?1:0];
+  const r=leads.find(x=>leadKey(x)===LEADOPEN);
+  if(!r){LEADOPEN=null;return "";}
+  const m=leadMeta(r);
+  const wa=(r.contact||"").replace(/[^0-9]/g,"");
+  return `<nav class="crumb" style="margin-bottom:16px">
+      <a data-leadback="1">${L(["Leads","线索"])}</a><span>/</span><span>${r.biz||"—"}</span></nav>
+    <div class="custhd">
+      <div><h2>${r.biz||"—"}</h2>
+        <p>${r.ind||"—"} · ${r.type==="script"?L(["Script request","脚本申请"]):L(["Sample request","样片申请"])} · ${r.date||"—"}</p></div>
+      ${isOverdue(r.date,CFG.sla)&&m.st==="new"?`<span class="pill2 warn">${L(["Past the 1-day promise","已超过一个工作日"])}</span>`:""}
+    </div>
+    <div class="custgrid">
+      <div class="acard">
+        <h3>${L(["Follow-up","跟进"])}</h3>
+        <label class="scl">${L(["Owner","负责人"])}</label>
+        <select class="inp" id="ld-own">
+          <option value="">${L(["Unassigned","未指派"])}</option>
+          ${STAFF.map(p=>`<option value="${p.id}"${p.id===m.own?" selected":""}>${p.n} · ${L(p.role)}</option>`).join("")}</select>
+        <label class="scl">${L(["Status","状态"])}</label>
+        <select class="inp" id="ld-st">${LEADST.map(([k,t])=>`<option value="${k}"${k===m.st?" selected":""}>${L(t)}</option>`).join("")}</select>
+        <label class="scl">${L(["Next follow-up","下次跟进"])}</label>
+        <input class="inp" id="ld-next" type="date" value="${m.next||""}">
+        <label class="scl">${L(["Notes","备注"])}</label>
+        <textarea class="inp" id="ld-note" style="min-height:80px">${m.note||""}</textarea>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <button class="mini dark" data-leadsave="${LEADOPEN}">${L(["Save","保存"])}</button>
+          ${wa?`<a class="mini" href="https://wa.me/${wa}" target="_blank" rel="noopener" data-leadcontact="${LEADOPEN}">${L(["WhatsApp them","WhatsApp 联系"])}</a>`:""}
+        </div>
+      </div>
+      <div class="acard">
+        <h3>${L(["What they told us","他们填的信息"])}</h3>
+        <div class="kv">
+          <div class="r"><span>${L(["Contact","联系方式"])}</span><b>${r.contact||"—"}</b></div>
+          <div class="r"><span>${L(["Industry","行业"])}</span><b>${r.ind||"—"}</b></div>
+          <div class="r"><span>${L(["Locations","门店数"])}</span><b>${r.size||"—"}</b></div>
+          <div class="r"><span>${L(["Page link","主页链接"])}</span><b>${r.link?`<a href="${/^https?:/.test(r.link)?r.link:"https://"+r.link}" target="_blank" rel="noopener">${r.link}</a>`:"—"}</b></div>
+          <div class="r"><span>${L(["Material sent","已交素材"])}</span><b>${r.mat||0}</b></div>
+        </div>
+        <h3 style="margin-top:20px">${L(["Activity","跟进记录"])}</h3>
+        ${actHtml(r.biz,zh)}
+      </div>
+    </div>`;
 }
 function renderAdmin(){
   const nav=$("admnav"); if(!nav)return;
@@ -3708,6 +3901,16 @@ function renderAdmin(){
         [L(["Deliver finished videos","交付成片"]),staffName("noah"),PROD.filter(p=>p.stage==="deliver").length,`<button class="mini" data-adm="prod">${L(["Open","打开"])}</button>`],
         [L(["Resolve cases and refunds","处理售后与退款"]),L(["Manager","主管"]),openCases.length,`<button class="mini" data-adm="support">${L(["Open","打开"])}</button>`]
       ])}</div>`+
+    `<div class="acard"><h3>${L(["Promises running late","已经超时的承诺"])}</h3>
+      <p class="hint">${L(["Measured against what the website promises: scripts in one business day, first video in three.","按官网上的承诺算：脚本一个工作日，首条成片三个工作日。"])}</p>
+      ${(()=>{const late=leads.filter(r=>leadMeta(r).st==="new"&&isOverdue(r.date,CFG.sla));
+        const lateOrd=ORDERS.filter(o=>o.type!=="ads"&&o.st!=="refunded"&&!(DELIV[o.biz]||[]).length&&isOverdue((o.when||o.date||"").split(" · ")[0],3));
+        if(!late.length&&!lateOrd.length)return `<p style="margin:0">${L(["Nothing is late.","没有超时的。"])}</p>`;
+        return admTable([[L(["What","事项"])],[L(["Who","门店"])],[L(["Since","起算"])],[L(["Action","去处理"])]],
+          [...late.map(r=>[L(["Scripts not sent","脚本还没发出"]),`<b>${r.biz}</b>`,r.date||"—",`<button class="mini" data-lead="${leadKey(r)}">${L(["Open","打开"])}</button>`]),
+           ...lateOrd.map(o=>[L(["First video not delivered","首条成片未交付"]),`<b>${o.biz||"—"}</b>`,(o.when||o.date||"—"),`<button class="mini" data-adm="prod">${L(["Open","打开"])}</button>`])]);
+      })()}</div>`+
+    `<div class="acard"><h3>${L(["Recent activity","最近动态"])}</h3>${actHtml(null,zh)}</div>`+
     `<div class="acard"><h3>${L(["Watch list","需要盯的"])}</h3>
       ${admTable([[L(["Business","门店"])],[L(["Why","原因"])],[L(["Owner","负责人"])]],
         CUST.filter(c=>c.st!=="active").map(c=>[`<b>${c.biz}</b>`,
@@ -3717,25 +3920,36 @@ function renderAdmin(){
   }
 
   if(ADMV==="leads"){
+    if(LEADOPEN){box.innerHTML=leadDetail(leads);return;}
     const list=ALEAD==="all"?leads:leads.filter(r=>r.type===ALEAD);
+    const stName=k=>L((LEADST.find(x=>x[0]===k)||LEADST[0])[1]);
     box.innerHTML=`<div class="afilter">
       ${[["all",L(["All","全部"])],["script",L(["Script requests","脚本申请"])],["sample",L(["Sample requests","样片申请"])]]
         .map(([k,t])=>`<button class="${ALEAD===k?"on":""}" data-alead="${k}">${t} <span class="mut">${k==="all"?leads.length:leads.filter(r=>r.type===k).length}</span></button>`).join("")}
       </div>`+
-      admTable([[L(["Business","门店"])],[L(["Type","类型"])],[L(["Industry","行业"])],[L(["Contact","联系方式"])],
-                [L(["Material","素材"]),1],[L(["Status","状态"])],[L(["Received","提交"])]],
-        list.map(r=>[`<b>${r.biz||"—"}</b>`,
+      admTable([[L(["Business","门店"])],[L(["Type","类型"])],[L(["Contact","联系方式"])],[L(["Owner","负责人"])],
+                [L(["Follow-up","跟进状态"])],[L(["Next","下次跟进"])],[L(["Received","提交"])],[""]],
+        list.map(r=>{const m=leadMeta(r);
+          const over=m.st==="new"&&isOverdue(r.date,CFG.sla);
+          return [`<b>${r.biz||"—"}</b>`,
           `<span class="pill2 ${r.type==="script"?"":"blue"}">${r.type==="script"?L(["Scripts","脚本"]):L(["Sample","样片"])}</span>`,
-          r.ind||"—",`<span class="mut">${r.contact||"—"}</span>`,(r.mat||0),
-          `<span class="badge ${r.st}">${zh?({new:"待排期",work:"制作中",done:"已交付"})[r.st]:({new:"Queued",work:"In production",done:"Delivered"})[r.st]}</span>`,
-          `<span class="mut">${r.date||"—"}</span>`]));
+          `<span class="mut">${r.contact||"—"}</span>`,
+          m.own?staffName(m.own):`<span class="mut">${L(["Unassigned","未指派"])}</span>`,
+          `<span class="pill2 ${m.st==="won"?"ok":m.st==="lost"?"":m.st==="new"?"warn":"blue"}">${stName(m.st)}</span>${over?` <span class="pill2 warn">${L(["Overdue","已逾期"])}</span>`:""}`,
+          m.next||`<span class="mut">—</span>`,
+          `<span class="mut">${r.date||"—"}</span>`,
+          `<button class="mini" data-lead="${leadKey(r)}">${L(["Detail","详情"])}</button>`];}));
+    document.querySelectorAll("#adm-body tbody tr").forEach((tr,i)=>{
+      if(list[i]){tr.classList.add("crow");tr.dataset.lead=leadKey(list[i]);}
+    });
     return;
   }
-
   if(ADMV==="prod"){
+    const live=liveJobs();
+    const jobs=live.length?live:PROD;
     box.innerHTML=`<div class="lane">${Object.keys(ST_STAGE).map(k=>`<div>
-      <h4>${L(ST_STAGE[k])} · ${PROD.filter(p=>p.stage===k).length}</h4>
-      ${PROD.filter(p=>p.stage===k).map(p=>`<div class="job"><b>${p.biz}</b>
+      <h4>${L(ST_STAGE[k])} · ${jobs.filter(p=>p.stage===k).length}</h4>
+      ${jobs.filter(p=>p.stage===k).map(p=>`<div class="job"><b>${p.biz}</b>
         <span>${p.n} · ${p.note}</span>
         <div style="display:flex;justify-content:space-between;margin-top:6px">
           <span>${staffName(p.own)}</span><span class="due">${L(["due ","截止 "])}${p.due}</span></div></div>`).join("")||`<p class="sm mut" style="margin:0">${L(["Nothing here.","这一栏是空的。"])}</p>`}
@@ -3745,15 +3959,31 @@ function renderAdmin(){
   }
 
   if(ADMV==="support"){
-    box.innerHTML=openCases.length?admTable(
-      [[L(["Order","订单"])],[L(["Business","门店"])],[L(["Amount","金额"]),1],[L(["What they said","客户说明"])],[L(["Status","状态"])],[L(["Action","操作"])]],
-      openCases.map(o=>[o.id,`<b>${o.biz||"—"}</b>`,money(o.amount||0),`<span class="mut">${o.note||"—"}</span>`,
-        `<span class="badge ${o.st==="refund"?"new":"work"}">${o.st==="refund"?L(["Refund asked","退款申请"]):L(["Case open","售后中"])}</span>`,
-        `<a class="mini" href="https://wa.me/${CFG.wa}?text=Order%20${o.id}" target="_blank" rel="noopener">WhatsApp</a>`]))
-      :`<div class="acard"><p style="margin:0">${L(["Nothing open. ","没有待处理的。"])}</p></div>`;
+    if(!openCases.length){box.innerHTML=`<div class="acard"><p style="margin:0">${L(["Nothing open.","没有待处理的。"])}</p></div>`;return;}
+    box.innerHTML=openCases.map(o=>{
+      const cs=caseOf(o.id), wa=(CFG.wa||"").replace(/[^0-9]/g,"");
+      return `<div class="acard">
+        <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+          <div><h3>${o.biz||"—"} · ${o.id}</h3>
+            <p class="hint">${money(o.amount||0)} · ${o.when||o.date||"—"} · ${o.st==="refund"?L(["Refund requested","退款申请"]):L(["Case open","售后"])}</p></div>
+          <span class="pill2 ${cs.st==="resolved"?"ok":cs.st==="working"?"blue":"warn"}">${
+            cs.st==="resolved"?L(["Resolved","已解决"]):cs.st==="working"?L(["In progress","处理中"]):L(["New","待处理"])}</span>
+        </div>
+        <div class="kv" style="margin-top:6px"><div class="r"><span>${L(["What they said","客户说明"])}</span><b>${o.note||"—"}</b></div></div>
+        ${cs.msgs.length?`<div class="tl" style="margin-top:12px">${cs.msgs.map(m=>`<div class="tlx"><span class="dot"></span>
+          <div><b>${m.txt}</b><span>${m.when} · ${m.by}</span></div></div>`).join("")}</div>`:""}
+        <label class="scl">${L(["Reply / internal note","回复 / 内部记录"])}</label>
+        <textarea class="inp" id="cs-${o.id}" style="min-height:70px" placeholder="${L(["What did you tell them?","你怎么答复的？"])}"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <button class="mini dark" data-casereply="${o.id}">${L(["Log reply","记录答复"])}</button>
+          <button class="mini" data-casest="${o.id}|working">${L(["Mark in progress","标记处理中"])}</button>
+          <button class="mini" data-casest="${o.id}|resolved">${L(["Resolve","标记已解决"])}</button>
+          ${o.st==="refund"?`<button class="mini del" data-refund="${o.id}">${L(["Approve refund","批准退款"])}</button>`:""}
+          <a class="mini" href="https://wa.me/${wa}?text=Order%20${o.id}" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>`;}).join("");
     return;
   }
-
   if(ADMV==="cust"){
     if(CUSTOPEN){box.innerHTML=custDetail();return;}
     box.innerHTML=admKpi([
@@ -3798,6 +4028,7 @@ function renderAdmin(){
   }
 
   if(ADMV==="ads"){
+    if(ACCOPEN){box.innerHTML=accDetail();return;}
     const bud=ADACC.reduce((a,x)=>a+x.bud,0), spent=ADACC.reduce((a,x)=>a+x.spent,0), leadsN=ADACC.reduce((a,x)=>a+x.lead,0);
     box.innerHTML=admKpi([
       [money(bud),L(["Budget under management","在管预算"]),""],
@@ -3806,9 +4037,11 @@ function renderAdmin(){
       [money(spent/Math.max(1,leadsN)),L(["Blended cost per lead","综合单线索成本"]),""]
     ])+admTable(
       [[L(["Business","门店"])],[L(["Platforms","平台"])],[L(["Budget","预算"]),1],[L(["Spent","已花"]),1],
-       [L(["Leads","线索"]),1],[L(["Cost / lead","单线索成本"]),1],[L(["Our fee","我们的服务费"]),1],[L(["Next report","下次报告"])],[L(["Buyer","投放"])]],
+       [L(["Leads","线索"]),1],[L(["Cost / lead","单线索成本"]),1],[L(["Our fee","我们的服务费"]),1],[L(["Next report","下次报告"])],[L(["Buyer","投放"])],[""]],
       ADACC.map(x=>[`<b>${x.biz}</b>`,x.plat,money(x.bud),money(x.spent),x.lead,money(x.cpl),
-        money(CFG.mgmt+adFee(x.bud).fee),x.rep,staffName(x.own)]))+
+        money(CFG.mgmt+adFee(x.bud).fee),
+        `${x.rep}${(REPORTS[x.biz]||[]).length?` <span class="pill2 ok">${L(["Sent","已发"])}</span>`:` <span class="pill2 warn">${L(["Due","待发"])}</span>`}`,
+        staffName(x.own),`<button class="mini" data-acc="${x.biz}">${L(["Detail","详情"])}</button>`]))+
       `<p class="sm mut" style="margin-top:14px">${L(["Cost per lead here is what we report to the customer. The website's estimator uses public benchmarks until these numbers replace them.","这里的单线索成本是给客户报的真实数据。官网的预估器仍在用公开基准，等这些数字够多就替换掉。"])}</p>`;
     return;
   }
@@ -3917,12 +4150,69 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  const acc=e.target.closest("[data-acc]");
+  if(acc){ACCOPEN=acc.dataset.acc;ADMV="ads";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
+  if(e.target.closest("[data-accback]")){ACCOPEN=null;renderAdmin();return;}
+  if(e.target.closest("#repdrop")&&!e.target.closest("input")){$("repfile").click();return;}
+  const rpd=e.target.closest("[data-repdel]");
+  if(rpd){const [biz,i]=rpd.dataset.repdel.split("|");
+    const it=(REPORTS[biz]||[])[+i];
+    if(it){IDB.del(it.id);delete BLOB[it.id];REPORTS[biz].splice(+i,1);save("vt_reports",REPORTS);}
+    renderAdmin();return;}
+  const scs=e.target.closest("[data-scrsend]");
+  if(scs){const biz=scs.dataset.scrsend;SCRSENT[biz]=nowStamp();save("vt_scrsent",SCRSENT);
+    logAct(biz,LANG==="zh"?"已把十条脚本发给客户":"Sent the ten scripts","script");
+    renderAdmin();return;}
+  const crp=e.target.closest("[data-casereply]");
+  if(crp){const id=crp.dataset.casereply, t=$("cs-"+id);
+    const txt=t&&t.value.trim(); if(!txt)return;
+    const cs=caseOf(id); cs.msgs.unshift({txt,when:nowStamp(),by:(USER&&USER.name)||"Admin"});
+    if(cs.st==="open")cs.st="working";
+    save("vt_cases",CASES);
+    const o=allOrders().find(x=>x.id===id);
+    logAct(o&&o.biz,(LANG==="zh"?"售后答复：":"Replied on case: ")+txt.slice(0,40),"case");
+    renderAdmin();return;}
+  const cst=e.target.closest("[data-casest]");
+  if(cst){const [id,st]=cst.dataset.casest.split("|");
+    const cs=caseOf(id); cs.st=st; save("vt_cases",CASES);
+    if(st==="resolved"){const ord=ORDERS.find(x=>x.id===id); if(ord){ord.st="paid";ord.note="";save("vt_orders",ORDERS);}}
+    const o=allOrders().find(x=>x.id===id);
+    logAct(o&&o.biz,st==="resolved"?(LANG==="zh"?"售后已解决":"Case resolved"):(LANG==="zh"?"售后处理中":"Case in progress"),"case");
+    renderAdmin();renderOrders();return;}
+  const rfd=e.target.closest("[data-refund]");
+  if(rfd){const id=rfd.dataset.refund;
+    if(!confirm(LANG==="zh"?"确认批准这笔退款？":"Approve this refund?"))return;
+    const ord=ORDERS.find(x=>x.id===id);
+    if(ord){ord.st="refunded";save("vt_orders",ORDERS);}
+    const cs=caseOf(id); cs.st="resolved"; cs.msgs.unshift({txt:LANG==="zh"?"退款已批准":"Refund approved",when:nowStamp(),by:(USER&&USER.name)||"Admin"});
+    save("vt_cases",CASES);
+    const o=allOrders().find(x=>x.id===id);
+    logAct(o&&o.biz,LANG==="zh"?"已批准退款":"Refund approved","refund");
+    renderAdmin();renderOrders();return;}
+  const cct=e.target.closest("[data-custcontact]");
+  if(cct){logAct(cct.dataset.custcontact,LANG==="zh"?"通过 WhatsApp 联系":"Contacted on WhatsApp","contact");return;}
+  const lrow=e.target.closest("[data-lead]");
+  if(lrow){LEADOPEN=lrow.dataset.lead;ADMV="leads";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
+  if(e.target.closest("[data-leadback]")){LEADOPEN=null;renderAdmin();return;}
+  const lsv=e.target.closest("[data-leadsave]");
+  if(lsv){
+    const k=lsv.dataset.leadsave, m=LEADM[k]||(LEADM[k]={});
+    const before=m.st;
+    m.own=$("ld-own").value; m.st=$("ld-st").value; m.next=$("ld-next").value; m.note=$("ld-note").value;
+    save("vt_leadm",LEADM);
+    const biz=k.split("|")[1];
+    if(before!==m.st)logAct(biz,(LANG==="zh"?"线索状态改为 ":"Lead moved to ")+(LEADST.find(x=>x[0]===m.st)||[])[1][LANG==="zh"?1:0],"lead");
+    renderAdmin();return;}
+  const lct=e.target.closest("[data-leadcontact]");
+  if(lct){logAct(lct.dataset.leadcontact.split("|")[1],LANG==="zh"?"通过 WhatsApp 联系":"Contacted on WhatsApp","contact");
+    setTimeout(renderAdmin,80);return;}
   const cop=e.target.closest("[data-cust]");
   if(cop){CUSTOPEN=cop.dataset.cust;ADMV="cust";renderAdmin();window.scrollTo({top:0,behavior:"instant"});return;}
   if(e.target.closest("[data-custback]")){CUSTOPEN=null;renderAdmin();return;}
   const ccl=e.target.closest("[data-custclaim]");
   if(ccl){const c=CUST.find(x=>x.biz===ccl.dataset.custclaim);
-    if(c){c.own=$("cust-own").value;save("vt_cust",CUST);}
+    if(c){c.own=$("cust-own").value;save("vt_cust",CUST);
+      logAct(c.biz,(LANG==="zh"?"负责人改为 ":"Owner set to ")+staffName(c.own),"assign");}
     renderAdmin();return;}
   if(e.target.closest("#delivdrop")&&!e.target.closest("input")){$("delivfile").click();return;}
   const ddel=e.target.closest("[data-delivdel]");
@@ -4046,6 +4336,7 @@ document.addEventListener("click",e=>{
     const stamp=now.toLocaleDateString("en-US",{month:"short",day:"numeric"})+" · "+
       now.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
     ORDERS.unshift({id:"VT"+String(Date.now()).slice(-8),type:CKTYPE,
+      biz:BRAND.name||PROF.name||(USER&&USER.name)||"—",
       pkg:CKTYPE==="video"?V.pkg:null, tier:CKTYPE==="ads"?ATIER:null,
       v15:CKTYPE==="pieces"?P.v15:null, v30:CKTYPE==="pieces"?P.v30:null,
       spend:CKTYPE==="ads"?A.spend:null, amount:amt, pay:PAY, when:stamp,
@@ -4179,15 +4470,17 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("change",e=>{
   if(e.target&&e.target.id==="delivfile"&&e.target.files&&e.target.files.length){addDeliv(CUSTOPEN,e.target.files);e.target.value="";return;}
+  if(e.target&&e.target.id==="repfile"&&e.target.files&&e.target.files.length){addReport(ACCOPEN,e.target.files);e.target.value="";return;}
   if(e.target&&e.target.id==="samfile"&&e.target.files&&e.target.files.length){addSamples(e.target.files);e.target.value="";}
 });
 ["dragenter","dragover","dragleave","drop"].forEach(t=>document.addEventListener(t,e=>{
-  const dz=e.target.closest?e.target.closest("#samdrop,#delivdrop"):null;
+  const dz=e.target.closest?e.target.closest("#samdrop,#delivdrop,#repdrop"):null;
   if(!dz)return;
   e.preventDefault();
   dz.classList.toggle("hot",t==="dragenter"||t==="dragover");
   if(t==="drop"&&e.dataTransfer&&e.dataTransfer.files.length){
     if(dz.id==="delivdrop")addDeliv(CUSTOPEN,e.dataTransfer.files);
+    else if(dz.id==="repdrop")addReport(ACCOPEN,e.dataTransfer.files);
     else addSamples(e.dataTransfer.files);}
 }));
 (function(){
