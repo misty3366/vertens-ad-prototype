@@ -565,6 +565,13 @@ textarea.sci{min-height:58px;resize:vertical;line-height:1.5}
 .rrow i{font-style:normal;font-size:12.5px;font-weight:600;color:var(--orange);white-space:nowrap}
 @media (max-width:640px){.rg{grid-template-columns:1fr}.rrow{grid-template-columns:minmax(0,1fr) auto;row-gap:4px}.rrow i{grid-column:2}}
 
+.heronext{margin:14px 0 0;font-size:14.5px;color:var(--faint)}
+.heronext a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.heronext a:hover{color:var(--orange)}
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--faint);margin-bottom:18px}
+.crumb a{color:var(--ink2);text-decoration:none;cursor:pointer}
+.crumb a:hover{color:var(--orange)}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -876,8 +883,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     <p class="lead" style="margin-top:22px" data-i="lead">Real editors turn your store, products, and story into short videos that feel human and build trust — using AI only where it helps.</p>
     <div class="cta">
       <a class="pill o" href="#" data-go="scripts"><span data-i="c1">Get 10 free scripts</span><span class="arw">→</span></a>
-      <a class="pill gh" href="#" data-go="sample" data-i="c2">Or a free sample video</a>
     </div>
+    <p class="heronext"><span data-i="c2a">Already know what to film?</span> <a href="#" data-go="sample" data-i="c2">Skip to the free sample video</a></p>
     <div class="notes">
       <span data-i="n1">No sign-up for scripts</span><span data-i="n2">Paste your page link, that's it</span><span data-i="n3">Free sample video after, if you want one</span>
     </div>
@@ -892,7 +899,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <div class="s"><b><em>$0</em></b><span data-i="b1">To see your first finished video</span></div>
   <div class="s"><b>30<span class="bu" data-i="bn2"> min</span></b><span data-i="b1b">Of your time, once a month</span></div>
   <div class="s"><b>3<span class="bu" data-i="bn3"> days</span></b><span data-i="b2">Until that video is in your hands</span></div>
-  <div class="s"><b>$53<span class="bu" data-i="bn4"> each</span></b><span data-i="b4">After that, and no contract</span></div>
+  <div class="s"><b>$53<span class="bu" data-i="bn4"> a video</span></b><span data-i="b4">On the Standard plan, no contract</span></div>
 </div></div>
 
 <section id="ways"><div class="wrap">
@@ -992,7 +999,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 
 <!-- ============ FREE SCRIPTS (no login) ============ -->
 <div class="page" id="p-scripts">
-<div class="wrap" style="padding-top:40px;padding-bottom:70px;max-width:920px">
+<div class="wrap" style="padding-top:26px;padding-bottom:70px;max-width:920px">
+  <nav class="crumb"><a href="#" data-go="studio" data-i="cr0">Home</a><span>/</span><span data-i="cr1">Free scripts</span></nav>
   <div style="margin-bottom:26px">
     <h1 style="font-size:44px" data-i="qh">Ten scripts for your store. Free.</h1>
     <p class="lead" style="margin-top:14px;max-width:58ch" data-i="qp">An editor reads your page and writes ten scripts for your trade. One business day. No account, nothing to pay.</p>
@@ -1051,7 +1059,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 
 <!-- ============ FREE SAMPLE ============ -->
 <div class="page" id="p-sample">
-<div class="wrap" style="padding-top:40px;padding-bottom:70px;max-width:920px">
+<div class="wrap" style="padding-top:26px;padding-bottom:70px;max-width:920px">
+  <nav class="crumb"><a href="#" data-go="studio" data-i="cr0">Home</a><span>/</span><span data-i="cr2">Free sample video</span></nav>
   <div style="margin-bottom:26px">
     <h1 style="font-size:44px" data-i="sh">One 15-second video, on us.</h1>
     <p class="lead" style="margin-top:14px;max-width:58ch" data-i="sp">Made from your own footage, so it looks like your real store. Film the three sets below on your phone, sign in to upload them, and it is with you in three business days.</p>
@@ -1401,6 +1410,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <details><summary data-i="fq-q15">Do I have to sign a contract?</summary><p data-i="fa-q15">No. Videos are ordered by the month and you can stop after any month. Ad management is also monthly and can be stopped any time.</p></details>
   <details><summary data-i="fq-q16">Who owns the videos?</summary><p data-i="fa-q16">You do. Finished videos, raw footage and scripts are yours to use anywhere, including on channels we do not run for you.</p></details>
   <details><summary data-i="fq-q17">How do I actually start?</summary><p data-i="fa-q17">Paste your page link and leave your WhatsApp. Within one business day an editor sends the page read and ten scripts. If they look right, we make the free sample next.</p></details>
+    <p class="lead" style="margin-top:28px;max-width:56ch" data-i="abend">Still deciding? The quickest way to see what we would do with your store is <a href="#" data-go="scripts">ten free scripts</a> — one business day, no account.</p>
   </section>
 
 </div>
@@ -1463,7 +1473,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <ul>
         <li data-i="pk1a"><b>3 × 30-second</b> videos — owner story, before &amp; after, how you work</li>
         <li data-i="pk1b"><b>5 × 15-second</b> videos — products, offers, new arrivals</li>
-        <li data-i="pk1c">8 videos a month, about $56 each</li>
+        <li data-i="pk1c">8 videos a month — <b>$539</b> at list, <b>$449</b> on the plan</li>
       </ul>
       <button class="pill gh" data-pkg="basic" data-go="checkout" style="margin-top:auto" data-i="pkb">Choose Basic</button>
     </div>
@@ -1473,7 +1483,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <ul>
         <li data-i="pk2a"><b>5 × 30-second</b> videos — enough to explain everything you do</li>
         <li data-i="pk2b"><b>10 × 15-second</b> videos — post something new twice a week</li>
-        <li data-i="pk2c">15 videos a month, about $53 each</li>
+        <li data-i="pk2c">15 videos a month — <b>$980</b> at list, <b>$799</b> on the plan</li>
       </ul>
       <button class="pill o" data-pkg="standard" data-go="checkout" style="margin-top:auto"><span data-i="pkb2">Choose Standard</span><span class="arw">→</span></button>
     </div>
@@ -1864,7 +1874,7 @@ c3:"Quiero mi muestra",
  s4h:"Todo en tu panel",s4p:"Aprueba guiones, sube material, descarga los archivos 9:16. El primer video en tres días.",
  h6a:"Empieza con diez guiones gratis",p6a:"Pega el enlace de tu página y cuéntanos de tu tienda. Los guiones vuelven en un día; el video gratis después.",ah:"Contratar gestión de anuncios",
  qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", rth:"Precio por video",rtp:"Los planes son solo estas dos tarifas, compradas por mes.",rt15:"Un video de 15 segundos",rt30:"Un video de 30 segundos",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"ahorras $90",rts2:"ahorras $181",rtn:"Los videos sueltos fuera de un plan se cobran a estas mismas tarifas, mínimo dos.",
- sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
+ c2a:"¿Ya sabes qué grabar?",c2:"Ir directo al video de muestra gratis",cr0:"Inicio",cr1:"Guiones gratis",cr2:"Video de muestra",pk1c:"8 videos al mes — <b>$539</b> de lista, <b>$449</b> en el plan",pk2c:"15 videos al mes — <b>$980</b> de lista, <b>$799</b> en el plan",abend:"¿Aún lo estás pensando? La forma más rápida de ver qué haríamos con tu tienda son <a href=\"#\" data-go=\"scripts\">diez guiones gratis</a> — un día hábil, sin registro.", sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
  sbh2:"Los tres son obligatorios. Teléfono en vertical, sin editar, sin filtros. Las tomas malas no importan.",
  sm1:"Clips hablando — 2 videos de 30 s",sm1s:"Mirando a la cámara todo el tiempo. Cada uno en tres partes de 10 segundos.",
  sm1a:"Parte 1 · 10 s — en tu puerta",sm1b:"Parte 2 · 10 s — adentro, en el punto que quieras mostrar",sm1c:"Parte 3 · 10 s — con un producto en la mano",
@@ -1938,7 +1948,7 @@ c3:"Nhận video mẫu",
  s4h:"Mọi thứ nằm trong workspace",s4p:"Duyệt kịch bản, tải tư liệu lên, tải file 9:16 về. Video đầu tiên trong ba ngày.",
  h6a:"Bắt đầu với mười kịch bản miễn phí",p6a:"Dán link trang của bạn và kể về quán. Kịch bản về sau một ngày, video miễn phí ngay sau đó.",ah:"Bắt đầu dịch vụ quảng cáo",
  qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", rth:"Tính theo từng video",rtp:"Gói chỉ là hai mức giá này, mua theo tháng.",rt15:"Một video 15 giây",rt30:"Một video 30 giây",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"tiết kiệm $90",rts2:"tiết kiệm $181",rtn:"Video lẻ ngoài gói cũng tính theo hai mức này, tối thiểu hai video.",
- sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
+ c2a:"Đã biết cần quay gì rồi?",c2:"Vào thẳng video mẫu miễn phí",cr0:"Trang chủ",cr1:"Kịch bản miễn phí",cr2:"Video mẫu miễn phí",pk1c:"8 video mỗi tháng — <b>$539</b> giá lẻ, <b>$449</b> theo gói",pk2c:"15 video mỗi tháng — <b>$980</b> giá lẻ, <b>$799</b> theo gói",abend:"Vẫn đang cân nhắc? Cách nhanh nhất để thấy chúng tôi sẽ làm gì cho quán bạn là <a href=\"#\" data-go=\"scripts\">mười kịch bản miễn phí</a> — một ngày làm việc, không cần đăng ký.", sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
  sbh2:"Cả ba đều bắt buộc. Cầm điện thoại dọc, không cắt ghép, không filter. Quay hỏng cũng không sao.",
  sm1:"Clip nói chuyện — 2 video, mỗi video 30 giây",sm1s:"Nhìn thẳng máy suốt. Mỗi video chia làm ba đoạn 10 giây.",
  sm1a:"Đoạn 1 · 10 giây — trước cửa quán",sm1b:"Đoạn 2 · 10 giây — bên trong, chỗ muốn giới thiệu",sm1c:"Đoạn 3 · 10 giây — cầm sản phẩm trên tay",
@@ -2012,7 +2022,7 @@ c3:"무료 샘플 받기",
  s4h:"전부 워크스페이스 안에",s4p:"대본 승인, 소재 업로드, 9:16 파일 다운로드. 첫 영상은 3일 안에.",
  h6a:"무료 대본 10개부터 시작하세요",p6a:"페이지 링크를 붙여넣고 매장 이야기를 들려주세요. 대본은 하루 안에, 무료 영상은 그다음에.",ah:"광고 대행 시작하기",
  qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", rth:"영상 단가",rtp:"플랜은 이 두 단가를 월 단위로 묶은 것입니다.",rt15:"15초 영상 1편",rt30:"30초 영상 1편",rtb:"Basic · 30초 3편 + 15초 5편",rts:"Standard · 30초 5편 + 15초 10편",rts1:"$90 절약",rts2:"$181 절약",rtn:"플랜 없이 낱개로 만드실 때도 같은 단가이며, 최소 2편부터입니다.",
- sb1:"여쭤볼 내용",sb2:"촬영하실 것",
+ c2a:"무엇을 찍을지 이미 아신다면",c2:"무료 샘플 영상으로 바로 가기",cr0:"홈",cr1:"무료 대본",cr2:"무료 샘플 영상",pk1c:"월 8편 — 정가 <b>$539</b>, 플랜 <b>$449</b>",pk2c:"월 15편 — 정가 <b>$980</b>, 플랜 <b>$799</b>",abend:"아직 고민 중이신가요? 저희가 사장님 매장을 어떻게 다룰지 가장 빨리 보는 방법은 <a href=\"#\" data-go=\"scripts\">무료 대본 10개</a>입니다 — 영업일 하루, 가입 없이.", sb1:"여쭤볼 내용",sb2:"촬영하실 것",
  sbh2:"세 가지 모두 필요합니다. 휴대폰을 세로로, 편집이나 필터 없이. 잘못 찍힌 것도 괜찮습니다.",
  sm1:"인터뷰 영상 — 2개, 각 30초",sm1s:"카메라를 계속 정면으로. 각 영상을 10초씩 세 토막으로 촬영.",
  sm1a:"1번 · 10초 — 가게 입구에서",sm1b:"2번 · 10초 — 매장 안, 보여주고 싶은 곳에서",sm1c:"3번 · 10초 — 제품을 들고 설명하며",
@@ -2056,7 +2066,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  c1:"免费做一条 15 秒样片",c2:"看价格",n1:"10 秒 $49 · 30 秒 $99",n2:"3 天出第一条",n3:"不满意全额退款",
  t1:"你本人出镜",rc1:"开店 12 年<br>凭什么天天排队",rs1:"老板出镜 · 30 秒",
  t2:"你的门店",rc2:"值得开车来一趟",rs2:"产品特写 · 15 秒",
- b1:"看到第一条成片",b1b:"你要花的时间，一个月一次",b2:"成片交到你手上",b4:"之后每条，且没有合约",
+ b1:"看到第一条成片",b1b:"你要花的时间，一个月一次",b2:"成片交到你手上",b4:"标准套餐单条均价，没有合约",
  bn2:" 分钟",bn3:" 天",bn4:" 一条",b3:"起订额",
  eb2:"三种做法",h2a:"你想要多真？",p2a:"三种同价。你给我们什么，决定我们用哪种。",
  w1r:"做法一 · 最真",w1h:"你本人出镜",w1t:"做法一",w1c:"开店 12 年<br>凭什么天天排队",
@@ -2180,6 +2190,11 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  adl0:"你的投放",
  wsp7:"基本信息填一次就好。之后这一页跟订单进度，实时数据在 VertensAI 工具里。",
  gih:"你已经登录了，去工作台上传。",gip:"把三样素材放进「素材库」，齐了我们当天开工。",gib:"去我的素材库",
+ c2a:"已经知道要拍什么了？",c2:"直接做免费样片",
+ cr0:"首页",cr1:"免费脚本",cr2:"免费样片",
+ pk1c:"一个月 8 条 —— 原价 <b>$539</b>，套餐 <b>$449</b>",
+ pk2c:"一个月 15 条 —— 原价 <b>$980</b>，套餐 <b>$799</b>",
+ abend:"还在犹豫？想知道我们会怎么做你的店，最快的办法是先拿<a href=\"#\" data-go=\"scripts\">十条免费脚本</a>——一个工作日，不用注册。",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
