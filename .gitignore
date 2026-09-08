@@ -12,3 +12,5 @@ design-qa.md
 design-qa/
 implementation-*.png
 qa-*.png
+.claude/
+design-audit/
