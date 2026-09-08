@@ -330,10 +330,11 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .lead{font-size:18px;color:var(--ink2);max-width:46ch;margin:0}
 
 /* hero */
-.hero{padding:76px 0 60px}
+.hero{padding:72px 0 64px}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.notes{margin-top:26px;font-size:15px;color:var(--faint);display:flex;gap:18px;flex-wrap:wrap}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.notes{margin:12px 0 0;font-size:14px;color:var(--faint);display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.5}
+.notes i{font-style:normal;opacity:.45}
 .heroreels{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:430px}
 .heroreels .reel{aspect-ratio:9/14}
 
@@ -559,7 +560,12 @@ textarea.sci{min-height:58px;resize:vertical;line-height:1.5}
 .rrow i{font-style:normal;font-size:12.5px;font-weight:600;color:var(--orange);white-space:nowrap}
 @media (max-width:640px){.rg{grid-template-columns:1fr}.rrow{grid-template-columns:minmax(0,1fr) auto;row-gap:4px}.rrow i{grid-column:2}}
 
-.heronext{margin:14px 0 0;font-size:14.5px;color:var(--faint)}
+.backai{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink2);
+ text-decoration:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 13px;white-space:nowrap}
+.backai:hover{border-color:var(--orange);color:var(--orange)}
+.backai svg{width:15px;height:15px;flex:none}
+@media (max-width:640px){.backai span{display:none}.backai{padding:0;width:40px;height:40px;justify-content:center}.backai svg{width:17px;height:17px}}
+.heronext{margin:18px 0 0;font-size:14.5px;color:var(--faint)}
 .heronext a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .heronext a:hover{color:var(--orange)}
 .crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--faint);margin-bottom:18px}
@@ -691,6 +697,12 @@ body.adminmode{background:var(--cream)}
 .dl .nm b{display:block;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dl .nm i{font-style:normal;font-size:11.5px;color:var(--faint)}
 .dl .mini{text-decoration:none}
+
+.adwhy{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.adwhy div{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.adwhy b{display:block;font-size:15.5px;margin-bottom:7px}
+.adwhy span{font-size:14px;color:var(--ink2);line-height:1.55}
+@media (max-width:860px){.adwhy{grid-template-columns:1fr}}
 
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
@@ -980,6 +992,9 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   <div class="sp"></div>
   <div class="seg" id="route"><button data-go="studio" aria-pressed="true" data-i="nav1">Home</button><button data-go="videos" aria-pressed="false" data-i="nav2">Videos</button><button data-go="ads" aria-pressed="false" data-i="nav3">Ad management</button><button data-go="about" aria-pressed="false" data-i="nav6">About us</button></div>
   <select id="lang" class="langsel" aria-label="Language"></select>
+  <a class="backai" id="backai" href="./" title="VertensAI">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 6 4 12l6 6M4 12h10a6 6 0 0 1 6 6v1"/></svg>
+    <span data-i="backai">VertensAI</span></a>
   <button class="pill s" id="signin"><span data-i="navsi">Sign in</span></button>
   <div class="umenu" id="umenu" style="display:none">
     <button class="avatar" id="uavatar">K</button>
@@ -1003,9 +1018,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <a class="pill o" href="#" data-go="scripts"><span data-i="c1">Get 10 free scripts</span><span class="arw">→</span></a>
     </div>
     <p class="heronext"><span data-i="c2a">Already know what to film?</span> <a href="#" data-go="sample" data-i="c2">Skip to the free sample video</a></p>
-    <div class="notes">
-      <span data-i="n1">No sign-up for scripts</span><span data-i="n2">Paste your page link, that's it</span><span data-i="n3">Free sample video after, if you want one</span>
-    </div>
+    <p class="notes"><span data-i="n1">No sign-up</span><i>·</i><span data-i="n2">Just your page link</span><i>·</i><span data-i="n3">Scripts back in one business day</span></p>
   </div>
   <div class="heroreels">
     <div class="reel" id="hr0"></div>
@@ -1095,11 +1108,12 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     <h2 style="margin-top:14px" data-i="adth">Made the videos. Now get them seen.</h2>
     <p class="lead" style="margin-top:14px" data-i="adtp">Posting reaches your followers. Ads reach the street.</p>
   </div>
-  <div class="adtfee">
-    <div><b data-i="adtf1">$100 / month</b><span data-i="adtf1s">Account management</span></div>
-    <div><b data-i="adtf2">10%</b><span data-i="adtf2s">Of the first $10,000 of spend</span></div>
-    <div><b data-i="adtf3">5%</b><span data-i="adtf3s">Of anything above that</span></div>
+  <div class="adwhy">
+    <div><b data-i="aw1">Only the streets around you</b><span data-i="aw1s">We draw a radius around your door — a few miles, not a whole state. Nobody outside it sees your ad.</span></div>
+    <div><b data-i="aw2">Only people who might walk in</b><span data-i="aw2s">Narrowed by what they search, what they follow and what language they read — not everyone in the city.</span></div>
+    <div><b data-i="aw3">Made to be run, not just posted</b><span data-i="aw3s">These are ad creatives. Posting alone reaches your followers; paid placement is what puts you in front of new neighbours.</span></div>
   </div>
+
   <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
     <a class="pill o" href="#" data-go="ads"><span data-i="adtc">See what a budget buys</span><span class="arw">→</span></a>
     <span class="sm mut" data-i="adtn">Facebook and TikTok estimates, side by side.</span>
@@ -1993,7 +2007,7 @@ const ES={nav1:"Resumen",nav2:"Videos",nav3:"Gestión de anuncios",navsi:"Entrar
  h1:"Dirigido por personas. Asistido por IA.<br>Fiel a tu negocio.",
  lead:"Editores reales convierten tu tienda, tus productos y tu historia en videos cortos que se sienten humanos y generan confianza — usamos IA solo donde ayuda.",
  c1:"Muestra gratis de 15 segundos",c2:"Ver precios",
- n1:"Sin pago, sin tarjeta",n2:"Muestra en 3 días",n3:"Luego $49 por video si te gusta",
+ n1:"Sin registro",n2:"Solo el enlace de tu página",n3:"Guiones en un día hábil",
  t1:"Tú en cámara",rc1:"12 años abiertos.<br>Por esto.",rs1:"El dueño habla · 30 s",
  t2:"Tu tienda",rc2:"Vale el viaje.",rs2:"Producto de cerca · 15 s",
  b1:"Para ver tu primer video terminado",b1b:"De tu tiempo, una vez al mes",b2:"Hasta tenerlo en tus manos",b4:"Después de eso, y sin contrato",bn2:" min",bn3:" días",bn4:" c/u",
@@ -2067,7 +2081,7 @@ const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đă
  h1:"Người dẫn dắt. AI hỗ trợ.<br>Đúng với việc kinh doanh của bạn.",
  lead:"Biên tập viên thật biến cửa hàng, sản phẩm và câu chuyện của bạn thành video ngắn có hơi thở con người và tạo được niềm tin — AI chỉ dùng ở chỗ nó thực sự giúp ích.",
  c1:"Nhận video mẫu 15 giây miễn phí",c2:"Xem giá",
- n1:"Không trả tiền, không cần thẻ",n2:"Có mẫu trong 3 ngày",n3:"Thích thì $49 một video",
+ n1:"Không cần đăng ký",n2:"Chỉ cần link trang của bạn",n3:"Kịch bản về trong một ngày làm việc",
  t1:"Bạn lên hình",rc1:"Mở 12 năm.<br>Đây là lý do.",rs1:"Chủ quán nói · 30 giây",
  t2:"Quán của bạn",rc2:"Đáng để chạy xe tới.",rs2:"Cận cảnh sản phẩm · 15 giây",
  b1:"Để xem video hoàn chỉnh đầu tiên",b1b:"Thời gian của bạn, mỗi tháng một lần",b2:"Đến khi video nằm trong tay bạn",b4:"Sau đó mỗi video, không hợp đồng",bn2:" phút",bn3:" ngày",bn4:" mỗi video",
@@ -2141,7 +2155,7 @@ const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",nav
  h1:"사람이 이끌고, AI가 거들고,<br>사장님 장사에 충실하게.",
  lead:"진짜 편집자가 매장과 제품, 사장님의 이야기를 사람 냄새 나는, 신뢰를 주는 짧은 영상으로 만듭니다 — AI는 도움이 되는 곳에만 씁니다.",
  c1:"무료 15초 샘플 받기",c2:"가격 보기",
- n1:"결제도 카드도 없음",n2:"3일 안에 샘플",n3:"마음에 들면 영상당 $49",
+ n1:"가입 없이",n2:"페이지 링크만",n3:"대본은 영업일 하루 안에",
  t1:"사장님이 직접",rc1:"12년째 영업 중.<br>이유가 있습니다.",rs1:"사장님 인터뷰 · 30초",
  t2:"가게 전경",rc2:"차 타고 올 만합니다.",rs2:"제품 클로즈업 · 15초",
  b1:"첫 완성 영상을 보기까지",b1b:"사장님이 쓰시는 시간, 한 달에 한 번",b2:"영상이 사장님 손에 오기까지",b4:"그 이후 편당, 약정 없음",bn2:"분",bn3:"일",bn4:" 개당",
@@ -2249,7 +2263,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  brandsub:"实体店广告工作室",foot:"Vertens Ad Studio · 实体店广告工作室",
  eb:"免费做一条 15 秒样片 · 不用留卡",
  navcta:"免费脚本",c1:"领 10 条免费脚本",c2:"或者要一条免费样片",
- n1:"脚本不用注册",n2:"贴一个主页链接就行",n3:"之后想要免费样片再说",c3:"领我的 10 条脚本",
+ n1:"不用注册",n2:"只要一个主页链接",n3:"脚本一个工作日回",c3:"领我的 10 条脚本",
  qh:"给你的店写十条脚本，免费。",
  qs1:"你的主页",qs2:"你的门店",qs3:"发到哪里",
  qf4:"有几家门店",qf5:"电话",qf6:"WhatsApp（如果不同）",
@@ -2377,7 +2391,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  pd3:"含一次修改",pd3s:"每条都含",
  plh:"或者按月买",plp:"一样的片子，单条更便宜，而且能保持更新节奏。",
  pk1d:"第一条 3 个工作日交付",pk2d:"第一条 3 个工作日交付",
- nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
+ backai:"VertensAI 工具",nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
  abph:"团队照片",abphn:"把一张名为 team.jpg 的照片放在本页同目录下即可替换。",abcap:"我们的编导、剪辑与投放团队。Sunvega 集团。",
@@ -2958,9 +2972,13 @@ function fillProf(){
 function seedScripts(){
   const ind=LIB.find(x=>x.id===(BRAND.ind||""))||LIB[0];
   if(!ind)return [];
-  return ind.s.slice(0,10).map((x,i)=>({i,en:x[0],zh:x[1],sec:x[2],st:"wait",note:""}));
+  return ind.s.slice(0,10).map((x,i)=>({i,en:x.en,zh:x.zh,sec:x.sec||15,st:"wait",note:""}));
 }
-function scripts(){ if(!SCR||!SCR.length){SCR=seedScripts();save("vt_scr",SCR);} return SCR; }
+function scripts(){
+  const broken=SCR&&SCR.length&&SCR.some(x=>x.en===undefined&&x.zh===undefined);
+  if(!SCR||!SCR.length||broken){SCR=seedScripts();save("vt_scr",SCR);}
+  return SCR;
+}
 
 /* 每条脚本的分镜详情：首次展开时按行业与时长生成，之后跟着编辑走 */
 const SHOTLIB={
@@ -4120,6 +4138,11 @@ render();
 hydrateAssets();
 hydrateSamples();
 
+(function(){
+  const b=$("backai"); if(b){
+    b.href=/studio\.html$/.test(location.pathname)?"./":"https://sunadsai.vercel.app/";
+  }
+})();
 (function(){
   const tabs=[...document.querySelectorAll(".absub a")]; if(!tabs.length)return;
   const secs=tabs.map(t=>$(t.dataset.sec)).filter(Boolean);
