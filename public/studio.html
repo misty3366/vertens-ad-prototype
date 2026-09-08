@@ -502,6 +502,23 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
  display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:15px}
 
 .scr.open{border-color:var(--line2)}
+.scmodal{position:fixed;inset:0;background:rgba(20,18,15,.5);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+ z-index:60;display:none;align-items:center;justify-content:center;padding:24px}
+.scmodal.on{display:flex}
+.scbox{background:var(--paper);border:1px solid var(--line2);border-radius:20px;width:min(620px,100%);
+ max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.45)}
+.schd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 16px;border-bottom:1px solid var(--line)}
+.scx{border:0;background:transparent;font-size:17px;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:8px}
+.scx:hover{color:var(--ink);background:var(--sand)}
+.scbody{padding:18px 24px 22px;overflow-y:auto;display:grid;gap:2px}
+.scft{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+ padding:16px 24px;border-top:1px solid var(--line);background:var(--cream)}
+.scft button{font-size:14px;font-weight:600;padding:9px 20px;border-radius:999px;border:1px solid var(--line2);
+ background:var(--paper);color:var(--ink2);cursor:pointer}
+.scft button.pri{background:var(--dark);color:#F7F4EE;border-color:var(--dark)}
+.scft button:hover{border-color:var(--orange);color:var(--orange)}
+.scft button.pri:hover{color:#F7F4EE}
+@media (max-width:560px){.scmodal{padding:0}.scbox{max-height:100vh;border-radius:0;width:100%}}
 .scd{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:12px}
 .scseg{background:var(--cream);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--ink2)}
 .scseg .tm{display:inline-block;font-family:var(--disp);font-size:13px;color:var(--orange);margin-bottom:6px}
@@ -515,6 +532,21 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
  background:var(--paper);color:var(--ink)}
 textarea.sci{min-height:58px;resize:vertical;line-height:1.5}
 .sci:focus{outline:none;border-color:var(--orange)}
+
+.rate{border:1px solid var(--line);border-radius:20px;background:var(--paper);padding:26px;margin-top:26px}
+.rate .rh h3{font-size:22px}
+.rate .rh p{margin:8px 0 0;font-size:14.5px;color:var(--ink2)}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 20px}
+.rg div{background:var(--cream);border-radius:14px;padding:16px 18px}
+.rg b{display:block;font-family:var(--disp);font-size:32px;font-weight:400}
+.rg span{font-size:13px;color:var(--faint)}
+.rtab{display:grid;gap:0}
+.rrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:14px;align-items:baseline;
+ padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.rrow .was{color:var(--faint);text-decoration:line-through;font-size:14px}
+.rrow b{font-family:var(--disp);font-size:20px;font-weight:400}
+.rrow i{font-style:normal;font-size:12.5px;font-weight:600;color:var(--orange);white-space:nowrap}
+@media (max-width:640px){.rg{grid-template-columns:1fr}.rrow{grid-template-columns:minmax(0,1fr) auto;row-gap:4px}.rrow i{grid-column:2}}
 
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
@@ -840,10 +872,10 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 </div></section>
 
 <div class="band"><div class="wrap">
-  <div class="s"><b><em>15</em><span class="bu" data-i="bn1"> videos</span></b><span data-i="b1">Out of one 30-minute shoot</span></div>
-  <div class="s"><b>45<span class="bu" data-i="bn2"> days</span></b><span data-i="b1b">Of posting, from that one shoot</span></div>
-  <div class="s"><b>3<span class="bu" data-i="bn3"> days</span></b><span data-i="b2">Until your first video is live</span></div>
-  <div class="s"><b>$53<span class="bu" data-i="bn4"> each</span></b><span data-i="b4">Script, filming plan, edit, captions</span></div>
+  <div class="s"><b><em>$0</em></b><span data-i="b1">To see your first finished video</span></div>
+  <div class="s"><b>30<span class="bu" data-i="bn2"> min</span></b><span data-i="b1b">Of your time, once a month</span></div>
+  <div class="s"><b>3<span class="bu" data-i="bn3"> days</span></b><span data-i="b2">Until that video is in your hands</span></div>
+  <div class="s"><b>$53<span class="bu" data-i="bn4"> each</span></b><span data-i="b4">After that, and no contract</span></div>
 </div></div>
 
 <section id="ways"><div class="wrap">
@@ -1045,8 +1077,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     <div class="who"><b id="w-name">—</b><span id="w-mail">—</span></div>
     <a data-ws="home" class="on"><span class="ic">⌂</span><span data-i="wn0">Home</span></a>
     <a data-ws="store"><span class="ic">◈</span><span data-i="wn1">My Store</span></a>
-    <a data-ws="scripts"><span class="ic">✎</span><span data-i="wn6">Scripts</span><span class="dot" id="wd-sc"></span></a>
     <a data-ws="assets"><span class="ic">▤</span><span data-i="wn2">Assets</span></a>
+    <a data-ws="scripts"><span class="ic">✎</span><span data-i="wn6">Scripts</span><span class="dot" id="wd-sc"></span></a>
     <a data-ws="videos"><span class="ic">▷</span><span data-i="wn7">Videos</span><span class="dot" id="wd-vd"></span></a>
     <a data-ws="ads"><span class="ic">◎</span><span data-i="wn9">Ad management</span><span class="dot" id="wd-ad"></span></a>
     <a data-ws="orders"><span class="ic">▣</span><span data-i="wn8">Orders</span></a>
@@ -1181,6 +1213,8 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
         <div class="kv" id="adlivekv"></div>
       </div>
     </section>
+
+    <div class="scmodal" id="scmodal"><div class="scbox" id="scbox"></div></div>
 
     <!-- ---------- ORDERS ---------- -->
     <section class="wsec" id="ws-orders">
@@ -1424,6 +1458,22 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <button class="pill o" data-pkg="standard" data-go="checkout" style="margin-top:auto"><span data-i="pkb2">Choose Standard</span><span class="arw">→</span></button>
     </div>
   </div>
+  <div class="rate">
+    <div class="rh">
+      <h3 data-i="rth">Priced per video</h3>
+      <p data-i="rtp">Plans are just these two rates, bought by the month.</p>
+    </div>
+    <div class="rg">
+      <div><b>$49</b><span data-i="rt15">One 15-second video</span></div>
+      <div><b>$98</b><span data-i="rt30">One 30-second video</span></div>
+    </div>
+    <div class="rtab">
+      <div class="rrow"><span data-i="rtb">Basic · 3 × 30s + 5 × 15s</span><span class="was">$539</span><b>$449</b><i data-i="rts1">save $90</i></div>
+      <div class="rrow"><span data-i="rts">Standard · 5 × 30s + 10 × 15s</span><span class="was">$980</span><b>$799</b><i data-i="rts2">save $181</i></div>
+    </div>
+    <p class="sm mut" style="margin:14px 0 0" data-i="rtn">One-off videos outside a plan are billed at these same rates, minimum two.</p>
+  </div>
+
   <div class="minbox">
     <div><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,244,238,.6)" data-i="mnl">Which one</span><b data-i="mnb">Standard, for most stores</b></div>
     <div class="ex" style="max-width:52ch"><div data-i="mnp">Ad platforms need 15–50 live videos to work properly. Basic keeps a page alive; Standard is the one that feeds ads. Monthly, cancel any time.</div></div>
@@ -1739,7 +1789,7 @@ const ES={nav1:"Resumen",nav2:"Videos",nav3:"Gestión de anuncios",navsi:"Entrar
  n1:"Sin pago, sin tarjeta",n2:"Muestra en 3 días",n3:"Luego $49 por video si te gusta",
  t1:"Tú en cámara",rc1:"12 años abiertos.<br>Por esto.",rs1:"El dueño habla · 30 s",
  t2:"Tu tienda",rc2:"Vale el viaje.",rs2:"Producto de cerca · 15 s",
- b1:"De una sola grabación de 30 minutos",b1b:"Publicando, con esa única grabación",b2:"Hasta tu primer video publicado",b4:"Guion, plan de rodaje, edición y subtítulos",bn1:" videos",bn2:" días",bn3:" días",bn4:" c/u",
+ b1:"Para ver tu primer video terminado",b1b:"De tu tiempo, una vez al mes",b2:"Hasta tenerlo en tus manos",b4:"Después de eso, y sin contrato",bn2:" min",bn3:" días",bn4:" c/u",
  h2a:"¿Qué tan real lo quieres?",p2a:"Mismo precio para los tres. Lo que nos mandes decide cuál usamos.",
  w1r:"Opción 1 · la más real",w1h:"Tú en cámara",w1n:"<b>Tú mandas:</b> un clip de 30 segundos hablando. Cualquier idioma, los errores no importan.",
  w2r:"Opción 2",w2h:"Nuestro modelo, tu tienda",w2n:"<b>Tú mandas:</b> clips de tu tienda y tus productos. No tienes que salir en cámara.",
@@ -1783,7 +1833,8 @@ c3:"Quiero mi muestra",
  s3h:"Elige un plan",s3p:"Solo si te gustó. Ocho o quince videos al mes, pago mensual, cancelas cuando quieras.",
  s4h:"Todo en tu panel",s4p:"Aprueba guiones, sube material, descarga los archivos 9:16. El primer video en tres días.",
  h6a:"Empieza con diez guiones gratis",p6a:"Pega el enlace de tu página y cuéntanos de tu tienda. Los guiones vuelven en un día; el video gratis después.",ah:"Contratar gestión de anuncios",
- qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
+ qr1:"Una lectura de tu página — qué funciona y qué no",qr2:"Diez guiones escritos para tu rubro",qr3:"La lista de tomas de cada uno",qeh:"Qué vas a recibir", h8a:"Dónde podemos trabajar",p8a:"No mandamos equipo de grabación, así que podemos trabajar donde tú puedas grabar con el teléfono. Estas son las zonas que ya tenemos listas.",p8b:"¿Tu ciudad no está? No cambia nada — dinos dónde estás y empezamos igual.", rth:"Precio por video",rtp:"Los planes son solo estas dos tarifas, compradas por mes.",rt15:"Un video de 15 segundos",rt30:"Un video de 30 segundos",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"ahorras $90",rts2:"ahorras $181",rtn:"Los videos sueltos fuera de un plan se cobran a estas mismas tarifas, mínimo dos.",
+ sb1:"Lo que te preguntaremos",sb2:"Qué grabar",
  sbh2:"Los tres son obligatorios. Teléfono en vertical, sin editar, sin filtros. Las tomas malas no importan.",
  sm1:"Clips hablando — 2 videos de 30 s",sm1s:"Mirando a la cámara todo el tiempo. Cada uno en tres partes de 10 segundos.",
  sm1a:"Parte 1 · 10 s — en tu puerta",sm1b:"Parte 2 · 10 s — adentro, en el punto que quieras mostrar",sm1c:"Parte 3 · 10 s — con un producto en la mano",
@@ -1812,7 +1863,7 @@ const VI={nav1:"Tổng quan",nav2:"Video",nav3:"Chạy quảng cáo",navsi:"Đă
  n1:"Không trả tiền, không cần thẻ",n2:"Có mẫu trong 3 ngày",n3:"Thích thì $49 một video",
  t1:"Bạn lên hình",rc1:"Mở 12 năm.<br>Đây là lý do.",rs1:"Chủ quán nói · 30 giây",
  t2:"Quán của bạn",rc2:"Đáng để chạy xe tới.",rs2:"Cận cảnh sản phẩm · 15 giây",
- b1:"Từ một buổi quay 30 phút",b1b:"Đăng bài, chỉ từ buổi quay đó",b2:"Đến khi video đầu tiên lên sóng",b4:"Kịch bản, kế hoạch quay, dựng, phụ đề",bn1:" video",bn2:" ngày",bn3:" ngày",bn4:" mỗi video",
+ b1:"Để xem video hoàn chỉnh đầu tiên",b1b:"Thời gian của bạn, mỗi tháng một lần",b2:"Đến khi video nằm trong tay bạn",b4:"Sau đó mỗi video, không hợp đồng",bn2:" phút",bn3:" ngày",bn4:" mỗi video",
  h2a:"Bạn muốn thật tới mức nào?",p2a:"Ba cách cùng một giá. Bạn gửi gì quyết định chúng tôi dùng cách nào.",
  w1r:"Cách 1 · thật nhất",w1h:"Bạn lên hình",w1n:"<b>Bạn gửi:</b> một đoạn 30 giây bạn tự quay đang nói. Tiếng nào cũng được, nói vấp cũng không sao.",
  w2r:"Cách 2",w2h:"Người mẫu của chúng tôi, quán của bạn",w2n:"<b>Bạn gửi:</b> clip quay quán và sản phẩm. Bạn không cần lên hình.",
@@ -1856,7 +1907,8 @@ c3:"Nhận video mẫu",
  s3h:"Chọn gói",s3p:"Chỉ khi bạn thấy ổn. Tám hoặc mười lăm video mỗi tháng, trả theo tháng, dừng lúc nào cũng được.",
  s4h:"Mọi thứ nằm trong workspace",s4p:"Duyệt kịch bản, tải tư liệu lên, tải file 9:16 về. Video đầu tiên trong ba ngày.",
  h6a:"Bắt đầu với mười kịch bản miễn phí",p6a:"Dán link trang của bạn và kể về quán. Kịch bản về sau một ngày, video miễn phí ngay sau đó.",ah:"Bắt đầu dịch vụ quảng cáo",
- qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
+ qr1:"Nhận xét về trang của bạn — cái gì hiệu quả, cái gì không",qr2:"Mười kịch bản viết cho ngành của bạn",qr3:"Danh sách cảnh quay cho từng kịch bản",qeh:"Bạn sẽ nhận được gì", h8a:"Khu vực chúng tôi làm được",p8a:"Chúng tôi không cử ekip tới quay, nên bạn quay được bằng điện thoại ở đâu là chúng tôi làm được ở đó. Đây là những khu vực đã sẵn sàng.",p8b:"Thành phố của bạn chưa có trong danh sách? Không sao — cứ nói bạn ở đâu, cách làm y hệt.", rth:"Tính theo từng video",rtp:"Gói chỉ là hai mức giá này, mua theo tháng.",rt15:"Một video 15 giây",rt30:"Một video 30 giây",rtb:"Basic · 3 × 30s + 5 × 15s",rts:"Standard · 5 × 30s + 10 × 15s",rts1:"tiết kiệm $90",rts2:"tiết kiệm $181",rtn:"Video lẻ ngoài gói cũng tính theo hai mức này, tối thiểu hai video.",
+ sb1:"Chúng tôi sẽ hỏi gì",sb2:"Cần quay những gì",
  sbh2:"Cả ba đều bắt buộc. Cầm điện thoại dọc, không cắt ghép, không filter. Quay hỏng cũng không sao.",
  sm1:"Clip nói chuyện — 2 video, mỗi video 30 giây",sm1s:"Nhìn thẳng máy suốt. Mỗi video chia làm ba đoạn 10 giây.",
  sm1a:"Đoạn 1 · 10 giây — trước cửa quán",sm1b:"Đoạn 2 · 10 giây — bên trong, chỗ muốn giới thiệu",sm1c:"Đoạn 3 · 10 giây — cầm sản phẩm trên tay",
@@ -1885,7 +1937,7 @@ const KO={nav1:"소개",nav2:"영상",nav3:"광고 대행",navsi:"로그인",nav
  n1:"결제도 카드도 없음",n2:"3일 안에 샘플",n3:"마음에 들면 영상당 $49",
  t1:"사장님이 직접",rc1:"12년째 영업 중.<br>이유가 있습니다.",rs1:"사장님 인터뷰 · 30초",
  t2:"가게 전경",rc2:"차 타고 올 만합니다.",rs2:"제품 클로즈업 · 15초",
- b1:"30분 촬영 한 번으로",b1b:"그 한 번의 촬영으로 올릴 수 있는 기간",b2:"첫 영상이 올라가기까지",b4:"대본·촬영안·편집·자막 포함",bn1:"개 영상",bn2:"일",bn3:"일",bn4:" 개당",
+ b1:"첫 완성 영상을 보기까지",b1b:"사장님이 쓰시는 시간, 한 달에 한 번",b2:"영상이 사장님 손에 오기까지",b4:"그 이후 편당, 약정 없음",bn2:"분",bn3:"일",bn4:" 개당",
  h2a:"얼마나 진짜처럼 만들까요?",p2a:"세 방식 모두 같은 가격. 보내주신 소재에 따라 방식이 정해집니다.",
  w1r:"방식 1 · 가장 진짜",w1h:"사장님이 직접 촬영",w1n:"<b>보내실 것:</b> 말하는 모습 30초 영상 하나. 언어 무관, 실수해도 괜찮습니다.",
  w2r:"방식 2",w2h:"모델은 저희가, 매장은 사장님 것",w2n:"<b>보내실 것:</b> 매장과 제품 영상. 직접 나오실 필요 없습니다.",
@@ -1929,7 +1981,8 @@ c3:"무료 샘플 받기",
  s3h:"플랜 선택",s3p:"마음에 드셨을 때만. 월 8편 또는 15편, 월 단위 결제, 언제든 중단.",
  s4h:"전부 워크스페이스 안에",s4p:"대본 승인, 소재 업로드, 9:16 파일 다운로드. 첫 영상은 3일 안에.",
  h6a:"무료 대본 10개부터 시작하세요",p6a:"페이지 링크를 붙여넣고 매장 이야기를 들려주세요. 대본은 하루 안에, 무료 영상은 그다음에.",ah:"광고 대행 시작하기",
- qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", sb1:"여쭤볼 내용",sb2:"촬영하실 것",
+ qr1:"페이지 진단 — 되는 것과 안 되는 것",qr2:"업종에 맞춘 대본 10개",qr3:"각 대본의 촬영 목록",qeh:"받으시는 것", h8a:"작업 가능한 지역",p8a:"촬영팀을 보내지 않기 때문에, 휴대폰으로 찍을 수 있는 곳이면 어디든 됩니다. 아래는 이미 준비된 지역입니다.",p8b:"목록에 없는 도시인가요? 방식은 똑같습니다 — 어디신지만 알려주세요.", rth:"영상 단가",rtp:"플랜은 이 두 단가를 월 단위로 묶은 것입니다.",rt15:"15초 영상 1편",rt30:"30초 영상 1편",rtb:"Basic · 30초 3편 + 15초 5편",rts:"Standard · 30초 5편 + 15초 10편",rts1:"$90 절약",rts2:"$181 절약",rtn:"플랜 없이 낱개로 만드실 때도 같은 단가이며, 최소 2편부터입니다.",
+ sb1:"여쭤볼 내용",sb2:"촬영하실 것",
  sbh2:"세 가지 모두 필요합니다. 휴대폰을 세로로, 편집이나 필터 없이. 잘못 찍힌 것도 괜찮습니다.",
  sm1:"인터뷰 영상 — 2개, 각 30초",sm1s:"카메라를 계속 정면으로. 각 영상을 10초씩 세 토막으로 촬영.",
  sm1a:"1번 · 10초 — 가게 입구에서",sm1b:"2번 · 10초 — 매장 안, 보여주고 싶은 곳에서",sm1c:"3번 · 10초 — 제품을 들고 설명하며",
@@ -1973,8 +2026,8 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  c1:"免费做一条 15 秒样片",c2:"看价格",n1:"10 秒 $49 · 30 秒 $99",n2:"3 天出第一条",n3:"不满意全额退款",
  t1:"你本人出镜",rc1:"开店 12 年<br>凭什么天天排队",rs1:"老板出镜 · 30 秒",
  t2:"你的门店",rc2:"值得开车来一趟",rs2:"产品特写 · 15 秒",
- b1:"来自一次 30 分钟的拍摄",b1b:"就这一次拍摄，够发这么久",b2:"第一条上线",b4:"脚本、拍摄方案、剪辑、字幕全包",
- bn1:" 条视频",bn2:" 天",bn3:" 天",bn4:" 一条",b3:"起订额",
+ b1:"看到第一条成片",b1b:"你要花的时间，一个月一次",b2:"成片交到你手上",b4:"之后每条，且没有合约",
+ bn2:" 分钟",bn3:" 天",bn4:" 一条",b3:"起订额",
  eb2:"三种做法",h2a:"你想要多真？",p2a:"三种同价。你给我们什么，决定我们用哪种。",
  w1r:"做法一 · 最真",w1h:"你本人出镜",w1t:"做法一",w1c:"开店 12 年<br>凭什么天天排队",
  kp:"出镜的人",ks:"场景",kv2:"声音",w1p:"你本人",w1s:"你的店",w1v:"AI 配音 + 口型",
@@ -2088,6 +2141,11 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  adx0:"把权限给我们",adx0h:"只要合作方权限，随时可收回。",
  adx1:"不会弄就先放着，我们带你点。",
  adl0:"投放状态",
+ rth:"按条计价",rtp:"套餐就是这两个单价，按月买。",
+ rt15:"一条 15 秒",rt30:"一条 30 秒",
+ rtb:"基础 · 3 条 30 秒 + 5 条 15 秒",rts:"标准 · 5 条 30 秒 + 10 条 15 秒",
+ rts1:"省 $90",rts2:"省 $181",
+ rtn:"不走套餐的单条也按这两个价，最少两条起。",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2425,44 +2483,63 @@ function renderWScripts(){
             :{det:"View script",hide:"Hide",edit:"Edit script",save:"Save",cancel:"Cancel",
               shot:"Shot",line:"Line",end:"Ends with",tt:"Title",edited:"Edited"};
   box.innerHTML=list.map(x=>{
-    const open=SCOPEN===x.i, editing=SCEDIT===x.i, d=(open||editing)?detOf(x):null;
-    let body="";
-    if(editing){
-      body=`<div class="scd">
-        <label class="scl">${T.tt}</label><input class="sci" id="sc-t" value="${(d.title||"").replace(/"/g,"&quot;")}">
-        ${d.segs.map((g,gi)=>`<div class="scseg">
-          <span class="tm">${g.t}</span>
-          <label class="scl">${T.shot}</label><input class="sci" id="sc-s${gi}" value="${g.shot.replace(/"/g,"&quot;")}">
-          <label class="scl">${T.line}</label><textarea class="sci" id="sc-l${gi}">${g.line}</textarea>
-        </div>`).join("")}
-        <label class="scl">${T.end}</label><input class="sci" id="sc-c" value="${(d.cta||"").replace(/"/g,"&quot;")}">
-      </div>`;
-    }else if(open){
-      body=`<div class="scd">
-        ${d.segs.map(g=>`<div class="scseg read"><span class="tm">${g.t}</span>
-          <div><b>${T.shot}:</b> ${g.shot}</div><div class="ln">“${g.line}”</div></div>`).join("")}
-        <div class="scend"><b>${T.end}:</b> ${d.cta}</div>
-      </div>`;
-    }
-    return `<div class="scr${open||editing?" open":""}">
+    return `<div class="scr">
     <div class="hd"><span class="num">${String(x.i+1).padStart(2,"0")}</span>
-      <h4>${x.det?x.det.title:(zh?x.zh:x.en)}</h4>
+      <h4>${x.det&&x.edited?x.det.title:(zh?x.zh:x.en)}</h4>
       <span class="badge ${x.st==="ok"?"done":x.st==="note"?"new":"draft"}">${L[x.st]}</span></div>
     <div class="bd"><b>${x.sec}${L.sec}</b> · ${zh?"9:16 竖版":"9:16 vertical"}${x.edited?` · ${T.edited}`:""}${x.note?` · <b>${zh?"你的意见":"Your note"}:</b> ${x.note}`:""}</div>
-    ${body}
     ${NOTEON===x.i?`<textarea id="scnote" placeholder="${L.ph}">${x.note||""}</textarea>`:""}
     <div class="act">
-      ${editing
-        ? `<button class="pri" data-scsave="${x.i}">${T.save}</button><button data-sccancele="1">${T.cancel}</button>`
-        : NOTEON===x.i
+      ${NOTEON===x.i
         ? `<button class="pri" data-scsend="${x.i}">${L.send}</button><button data-sccancel="1">${T.cancel}</button>`
-        : `<button data-scopen="${x.i}">${open?T.hide:T.det}</button>
+        : `<button data-scopen="${x.i}">${T.det}</button>
            <button data-scedit="${x.i}">${T.edit}</button>
            ${x.st==="ok"
              ? `<button data-scundo="${x.i}">${L.undo}</button>`
              : `<button class="pri" data-scok="${x.i}">${L.app}</button><button data-scnote="${x.i}">${L.chg}</button>`}`}
     </div></div>`;
   }).join("");
+
+  const mo=$("scmodal"), bx=$("scbox");
+  if(mo&&bx){
+    const idx=(SCEDIT!==null&&SCEDIT!==undefined)?SCEDIT:((SCOPEN!==null&&SCOPEN!==undefined)?SCOPEN:null);
+    if(idx===null){mo.classList.remove("on");bx.innerHTML="";}
+    else{
+      const editing=(SCEDIT!==null&&SCEDIT!==undefined);
+      const x=list.find(y=>y.i===idx)||list[idx], d=detOf(x);
+      const head=`<div class="schd"><div>
+          <span class="eyebrow">${zh?"脚本":"Script"} ${String(x.i+1).padStart(2,"0")} · ${x.sec}${L.sec} · ${zh?"9:16 竖版":"9:16 vertical"}</span>
+          <h3 style="margin-top:6px">${editing?T.edit:(x.edited?d.title:(zh?x.zh:x.en))}</h3></div>
+        <button class="scx" data-scclose="1" aria-label="${T.cancel}">✕</button></div>`;
+      const body=editing
+        ? `<div class="scbody">
+            <label class="scl">${T.tt}</label><input class="sci" id="sc-t" value="${(d.title||"").replace(/"/g,"&quot;")}">
+            ${d.segs.map((g,gi)=>`<div class="scseg">
+              <span class="tm">${g.t}</span>
+              <label class="scl">${T.shot}</label><input class="sci" id="sc-s${gi}" value="${g.shot.replace(/"/g,"&quot;")}">
+              <label class="scl">${T.line}</label><textarea class="sci" id="sc-l${gi}">${g.line}</textarea>
+            </div>`).join("")}
+            <label class="scl">${T.end}</label><input class="sci" id="sc-c" value="${(d.cta||"").replace(/"/g,"&quot;")}">
+          </div>`
+        : `<div class="scbody">
+            ${d.segs.map(g=>`<div class="scseg read"><span class="tm">${g.t}</span>
+              <div><b>${T.shot}:</b> ${g.shot}</div><div class="ln">“${g.line}”</div></div>`).join("")}
+            <div class="scend"><b>${T.end}:</b> ${d.cta}</div>
+            ${x.note?`<div class="scend" style="margin-top:8px"><b>${zh?"你的意见":"Your note"}:</b> ${x.note}</div>`:""}
+          </div>`;
+      const foot=editing
+        ? `<div class="scft"><span class="sm mut">${zh?"改完保存，我们按你保存的版本拍。":"We film the version you save."}</span>
+            <span style="display:flex;gap:8px"><button data-scclose="1">${T.cancel}</button>
+            <button class="pri" data-scsave="${x.i}">${T.save}</button></span></div>`
+        : `<div class="scft"><span class="sm mut">${zh?"确认后我们才会拍这条。":"We only film what you approve."}</span>
+            <span style="display:flex;gap:8px"><button data-scedit="${x.i}">${T.edit}</button>
+            ${x.st==="ok"
+              ? `<button data-scundo="${x.i}">${L.undo}</button>`
+              : `<button class="pri" data-scok="${x.i}">${L.app}</button>`}</span></div>`;
+      bx.innerHTML=head+body+foot;
+      mo.classList.add("on");
+    }
+  }
   const c={ok:0,wait:0,note:0}; list.forEach(x=>c[x.st]++);
   if($("sc-app"))$("sc-app").textContent=c.ok;
   if($("sc-wait"))$("sc-wait").textContent=c.wait;
@@ -2988,11 +3065,12 @@ document.addEventListener("click",e=>{
     setTimeout(()=>{goto("dashboard");wsGo(CKTYPE==="ads"?"ads":"home");},1500);
     return;}
   const sop=e.target.closest("[data-scopen]");
-  if(sop){const i=+sop.dataset.scopen; SCOPEN=SCOPEN===i?null:i; SCEDIT=null; NOTEON=null; renderWScripts(); return;}
+  if(sop){SCOPEN=+sop.dataset.scopen; SCEDIT=null; NOTEON=null; renderWScripts(); return;}
   const sed=e.target.closest("[data-scedit]");
   if(sed){SCEDIT=+sed.dataset.scedit; SCOPEN=null; NOTEON=null; renderWScripts();
-    setTimeout(()=>{const t=$("sc-t"); if(t)t.focus()},40); return;}
-  if(e.target.closest("[data-sccancele]")){SCEDIT=null;renderWScripts();return;}
+    setTimeout(()=>{const t=$("sc-t"); if(t){t.focus();t.select();}},60); return;}
+  if(e.target.id==="scmodal"){SCEDIT=null;SCOPEN=null;renderWScripts();return;}
+  if(e.target.closest("[data-scclose]")){SCEDIT=null;SCOPEN=null;renderWScripts();return;}
   const ssv=e.target.closest("[data-scsave]");
   if(ssv){
     const x=scripts()[+ssv.dataset.scsave], d=detOf(x);
@@ -3000,12 +3078,12 @@ document.addEventListener("click",e=>{
     const t=g("sc-t"); if(t)d.title=t;
     d.segs.forEach((seg,gi)=>{const sh=g("sc-s"+gi), ln=g("sc-l"+gi); if(sh)seg.shot=sh; if(ln)seg.line=ln;});
     const c=g("sc-c"); if(c)d.cta=c;
-    x.det=d; x.edited=true; SCEDIT=null; SCOPEN=x.i;
+    x.det=d; x.edited=true; SCEDIT=null; SCOPEN=null;
     save("vt_scr",SCR); renderWScripts(); return;}
   const so=e.target.closest("[data-scok]");
-  if(so){const x=scripts()[+so.dataset.scok];x.st="ok";x.note="";NOTEON=null;SCEDIT=null;save("vt_scr",SCR);renderWScripts();return;}
+  if(so){const x=scripts()[+so.dataset.scok];x.st="ok";x.note="";NOTEON=null;SCEDIT=null;SCOPEN=null;save("vt_scr",SCR);renderWScripts();return;}
   const su=e.target.closest("[data-scundo]");
-  if(su){scripts()[+su.dataset.scundo].st="wait";save("vt_scr",SCR);renderWScripts();return;}
+  if(su){scripts()[+su.dataset.scundo].st="wait";SCOPEN=null;save("vt_scr",SCR);renderWScripts();return;}
   const sn=e.target.closest("[data-scnote]");
   if(sn){NOTEON=+sn.dataset.scnote;renderWScripts();
     setTimeout(()=>{const t=$("scnote");if(t)t.focus()},30);return;}
@@ -3101,6 +3179,9 @@ document.addEventListener("click",e=>{
   dz.addEventListener("drop",e=>{const d=e.dataTransfer; if(d&&d.files&&d.files.length)addFiles(d.files);});
   ["dragover","drop"].forEach(t=>window.addEventListener(t,e=>{if(!dz.contains(e.target))e.preventDefault();}));
 })();
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&(SCEDIT!==null||SCOPEN!==null)){SCEDIT=null;SCOPEN=null;renderWScripts();}
+});
 $("lang").innerHTML=LANGS.map(([c,n])=>`<option value="${c}">${n}</option>`).join("");
 $("lang").addEventListener("change",e=>setLang(e.target.value));
 try{const sv=localStorage.getItem("vt_lang"); if(sv&&DICT[sv])setLang(sv);}catch(e){}
