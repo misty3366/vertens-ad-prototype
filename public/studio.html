@@ -647,6 +647,19 @@ body.adminmode{background:var(--cream)}
 .hscard label{font-size:11px}
 #isedit .inp{padding:8px 10px;font-size:13.5px;min-width:130px}
 
+.samgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px;margin-top:16px}
+.samc{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.samc .th{display:block;aspect-ratio:9/12;background-size:cover;background-position:center 40%;position:relative}
+.samc .th .own{position:absolute;left:8px;top:8px;font-style:normal;font-size:10.5px;font-weight:700;
+ background:var(--orange);color:var(--orangeInk);border-radius:999px;padding:2px 8px}
+.samc .mt{padding:10px 12px}
+.samc .mt b{display:block;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.samc .mt span{font-size:11.5px;color:var(--faint)}
+.samc .act{display:flex;gap:6px;padding:0 12px 11px}
+.samc .act button{flex:1;font-size:12px;padding:6px 0;border-radius:8px;border:1px solid var(--line);background:var(--cream);color:var(--ink2);cursor:pointer;font-weight:600}
+.samc .act button:hover{border-color:var(--ink2)}
+.samc .act button.del:hover{border-color:var(--orange);color:var(--orange)}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -1087,7 +1100,6 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
       <li><span class="n">3</span><span data-i="qr3">The shot list for each one</span></li>
     </ol>
   </div>
-</div>
 
   <div class="block" id="qform">
     <h3><span class="stepn">1</span><span data-i="qs1">Your page</span></h3>
@@ -1129,6 +1141,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
   </div>
 
 
+</div>
 </div>
 
 <!-- ============ FREE SAMPLE ============ -->
@@ -1524,41 +1537,14 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
 
     <!-- 样片库配置（沿用原有控件） -->
     <div id="adm-lib" style="display:none">
-      <div class="acard">
-        <h3 data-i="hsh">Home page samples</h3>
-        <p class="hint" data-i="hsp">The two reels beside the headline, and the three under "How real do you want it".</p>
-        <div id="hsedit"></div>
-        <button class="mini dark" id="hssave" style="margin-top:14px" data-i="hssv">Save home samples</button>
-        <button class="mini" id="hsreset" style="margin-left:8px" data-i="hsrs">Reset</button>
-        <span class="sm mut" id="hsmsg" style="margin-left:10px"></span>
+      <div class="afilter" id="libtabs">
+        <button data-libtab="home" data-i="lt1">Home samples</button>
+        <button data-libtab="ind" data-i="lt2">Industries</button>
+        <button data-libtab="samples" data-i="lt3">Samples</button>
       </div>
-
-      <div class="acard">
-        <h3 data-i="ish">Industries</h3>
-        <p class="hint" data-i="isp">Shown on the public site and used to pick which photo set a trade's samples use.</p>
-        <div id="isedit"></div>
-      </div>
-
-      <div class="libbar" id="libbar2" style="margin-top:4px"></div>
-      <div class="cfg on" id="cfg" style="margin-top:6px">
-        <div class="cfgrow">
-          <div class="f"><label data-i="cf1">Industry name (EN)</label><input class="inp" id="ni-en" placeholder="Pet grooming"></div>
-          <div class="f"><label data-i="cf2">Industry name (中文)</label><input class="inp" id="ni-zh" placeholder="宠物美容"></div>
-          <button class="mini dark" id="addind" data-i="cf3">Add industry</button>
-          <button class="mini del" id="delind" data-i="cf4">Delete current</button>
-          <button class="mini" id="expjson" data-i="cf5">Export JSON</button>
-        </div>
-        <div class="cfgrow">
-          <div class="f"><label data-i="cf6">Sample title (EN)</label><input class="inp" id="ns-en" placeholder="Same day service"></div>
-          <div class="f"><label data-i="cf7">Sample title (中文)</label><input class="inp" id="ns-zh" placeholder="当天取车"></div>
-          <div class="f"><label data-i="cf8">Length</label><select class="inp" id="ns-sec"><option value="15">15s</option><option value="30">30s</option></select></div>
-          <div class="f"><label data-i="cf9">Way</label><select class="inp" id="ns-way"><option value="1">Way 1</option><option value="2">Way 2</option><option value="3">Way 3</option></select></div>
-          <button class="mini dark" id="addsam" data-i="cf10">Add sample</button>
-        </div>
-        <div class="cfglist" id="cfglist"></div>
-        <p class="sm mut" style="margin:14px 0 0" data-i="cfgn">Saved in this browser. Export the JSON and hand it to the developer to make it permanent.</p>
-      </div>
+      <div id="libpane"></div>
     </div>
+
   </main>
 </div>
 </div>
@@ -2335,6 +2321,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  hsh:"首页样片",hsp:"标题旁的两条竖屏，以及「你想要多真」下面的三张配图。",
  hssv:"保存首页样片",hsrs:"恢复默认",
  ish:"行业",isp:"公开站上展示的行业，同时决定该行业样片用哪一组照片。",
+ lt1:"首页样片",lt2:"行业",lt3:"样片",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2487,13 +2474,156 @@ const SAMPLE_POSITIONS=["center 32%","center 48%","center 64%","center 38%","cen
 const clone=o=>JSON.parse(JSON.stringify(o));
 let HOME=(()=>{try{const st=JSON.parse(localStorage.getItem("vt_home"));
   return st?Object.assign(clone(HOME_D),st):clone(HOME_D);}catch(e){return clone(HOME_D)}})();
-let LIB=(()=>{try{const r=localStorage.getItem("vt_lib");return r?JSON.parse(r):clone(DEFAULT_LIB)}catch(e){return clone(DEFAULT_LIB)}})();
+function normSample(x){
+  if(Array.isArray(x))return {en:x[0],zh:x[1],sec:x[2],way:x[3],img:"",file:""};
+  return Object.assign({en:"",zh:"",sec:15,way:1,img:"",file:""},x);
+}
+function normLib(l){return (l||[]).map(c=>Object.assign({},c,{s:(c.s||[]).map(normSample)}));}
+let LIB=(()=>{try{const r=localStorage.getItem("vt_lib");return normLib(r?JSON.parse(r):clone(DEFAULT_LIB))}catch(e){return normLib(clone(DEFAULT_LIB))}})();
 let IND=LIB[0]?LIB[0].id:null;
 const saveLib=()=>{try{localStorage.setItem("vt_lib",JSON.stringify(LIB))}catch(e){}};
 const cur=()=>LIB.find(x=>x.id===IND)||LIB[0];
 
 
 function imgOpts(sel){return IMGS.map(n=>`<option value="${n}"${n===sel?" selected":""}>${n.replace(/-/g," ")}</option>`).join("");}
+
+let LIBTAB="home";
+
+function addSamples(list){
+  const c=cur(); if(!c)return;
+  [...list].forEach(f=>{
+    const img=/^image\//.test(f.type), id="s"+Date.now()+Math.random().toString(36).slice(2,7);
+    try{BLOB[id]=URL.createObjectURL(f)}catch(e){}
+    IDB.put(id,{blob:f,poster:null}).catch(()=>{});
+    if(!img)posterFor(f).then(pt=>{if(!pt)return;POSTER[id]=pt;IDB.put(id,{blob:f,poster:pt}).catch(()=>{});renderSamGrid();renderLib();});
+    const base=(f.name||"Sample").replace(/\.[a-z0-9]+$/i,"");
+    c.s.push({en:base,zh:base,sec:15,way:1,img:"",file:id});
+  });
+  saveLib(); renderSamGrid(); renderLibAdmin(); renderLib();
+}
+function hydrateSamples(){
+  LIB.forEach(c=>c.s.forEach(x=>{
+    if(!x.file)return;
+    IDB.get(x.file).then(rec=>{
+      if(!rec)return;
+      if(rec.blob){try{BLOB[x.file]=URL.createObjectURL(rec.blob)}catch(e){}}
+      if(rec.poster)POSTER[x.file]=rec.poster;
+      renderLib(); if($("samgrid"))renderSamGrid();
+    }).catch(()=>{});
+  }));
+}
+function renderLibAdmin(){
+  const pane=$("libpane"); if(!pane)return;
+  const zh=LANG==="zh", L=a=>a[zh?1:0];
+  document.querySelectorAll("#libtabs [data-libtab]").forEach(b=>b.classList.toggle("on",b.dataset.libtab===LIBTAB));
+  if(LIBTAB==="home"){
+    pane.innerHTML=`<div class="acard">
+      <h3>${L(["Home page samples","首页样片"])}</h3>
+      <p class="hint">${L(['The two reels beside the headline, and the three under "How real do you want it".','标题旁的两条竖屏，以及「你想要多真」下面的三张配图。'])}</p>
+      <div id="hsedit"></div>
+      <button class="mini dark" id="hssave" style="margin-top:14px">${L(["Save home samples","保存首页样片"])}</button>
+      <button class="mini" id="hsreset" style="margin-left:8px">${L(["Reset","恢复默认"])}</button>
+      <span class="sm mut" id="hsmsg" style="margin-left:10px"></span></div>`;
+    renderHomeCfg(); return;
+  }
+  if(LIBTAB==="ind"){
+    pane.innerHTML=`<div class="acard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div><h3>${L(["Industries","行业"])}</h3>
+          <p class="hint">${L(["Shown on the public site. Each one carries its own samples.","公开站上展示的行业，每个行业下面挂自己的样片。"])}</p></div>
+        <button class="mini dark" data-indnew="1">${L(["+ New industry","+ 新增行业"])}</button>
+      </div>
+      <div class="awrap" style="margin-top:8px"><table class="atbl"><thead><tr>
+        <th>${L(["Industry","行业（英文）"])}</th><th>${L(["Chinese","中文"])}</th><th>${L(["Photo set","配图组"])}</th>
+        <th class="num">${L(["Samples","样片数"])}</th><th></th></tr></thead><tbody>
+        ${LIB.map(c=>`<tr>
+          <td><b>${c.en}</b></td><td>${c.zh}</td><td><span class="pill2">${c.imgset||c.id}</span></td>
+          <td class="num">${c.s.length}</td>
+          <td style="white-space:nowrap">
+            <button class="mini" data-indedit="${c.id}">${L(["Edit","编辑"])}</button>
+            <button class="mini" data-indsam="${c.id}">${L(["Samples","样片"])}</button>
+            <button class="mini del" data-inddel="${c.id}">${L(["Delete","删除"])}</button></td></tr>`).join("")}
+      </tbody></table></div></div>`;
+    return;
+  }
+  const c=cur();
+  pane.innerHTML=`<div class="acard">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div><h3>${L(["Samples","样片"])}</h3>
+        <p class="hint">${L(["Pick an industry, then upload, edit or delete the samples under it.","先选行业，再上传、编辑或删除这个行业下的样片。"])}</p></div>
+      <button class="mini dark" data-samnew="1">${L(["+ Add sample","+ 新增样片"])}</button>
+    </div>
+    <div class="libbar" id="libbar2" style="margin-top:6px"></div>
+    <div class="drop" id="samdrop" style="margin-top:14px;padding:22px">
+      <b>${L(["Drag a video or photo here","把视频或图片拖到这里"])}</b>
+      <span>${L(["It becomes a new sample under this industry.","会作为一条新样片挂到当前行业下面。"])}</span>
+      <input type="file" id="samfile" accept="video/*,image/*" multiple hidden>
+    </div>
+    <div class="samgrid" id="samgrid"></div>
+    <p class="sm mut" style="margin-top:14px">${L(["Uploaded files stay in this browser (IndexedDB). Titles and settings save with the library.","上传的文件存在本浏览器（IndexedDB）里；标题和设置跟样片库一起保存。"])}</p>
+  </div>`;
+  const bar=$("libbar2");
+  if(bar)bar.innerHTML=LIB.map(i=>`<button class="ipill" data-ind="${i.id}" aria-pressed="${i.id===IND}">${zh?i.zh:i.en} <span class="mut">${i.s.length}</span></button>`).join("");
+  renderSamGrid();
+}
+function samThumb(x,c,k){
+  const own=x.file&&(POSTER[x.file]||BLOB[x.file]);
+  if(own)return `background-image:url('${own}')`;
+  const set=SAMPLE_IMAGES[c.imgset||c.id]||SAMPLE_IMAGES.food;
+  return `background-image:var(--i-${String(x.img||set[k%set.length]).replace(".webp","")})`;
+}
+function renderSamGrid(){
+  const g=$("samgrid"); if(!g)return;
+  const zh=LANG==="zh", L=a=>a[zh?1:0], c=cur();
+  if(!c||!c.s.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1">${L(["No samples under this industry yet.","这个行业下面还没有样片。"])}</div>`;return;}
+  g.innerHTML=c.s.map((x,k)=>`<div class="samc">
+    <span class="th" style="${samThumb(x,c,k)}">${x.file?`<em class="own">${L(["Uploaded","已上传"])}</em>`:""}</span>
+    <div class="mt"><b>${zh?x.zh:x.en}</b><span>${x.sec}s · ${L(["Way ","做法 "])}${x.way}</span></div>
+    <div class="act">
+      <button data-samedit="${k}">${L(["Edit","编辑"])}</button>
+      <button class="del" data-samdel="${k}">${L(["Delete","删除"])}</button></div></div>`).join("");
+}
+function libModal(html){const mo=$("scmodal"), bx=$("scbox"); if(!mo||!bx)return; bx.innerHTML=html; mo.classList.add("on");}
+function libClose(){const mo=$("scmodal"); if(mo){mo.classList.remove("on");$("scbox").innerHTML="";}}
+function indForm(c){
+  const zh=LANG==="zh", L=a=>a[zh?1:0], isNew=!c, v=c||{en:"",zh:"",imgset:"food"};
+  return `<div class="schd"><div><span class="eyebrow">${L(["Industry","行业"])}</span>
+    <h3 style="margin-top:6px">${isNew?L(["New industry","新增行业"]):v.en}</h3></div>
+    <button class="scx" data-libclose="1">✕</button></div>
+    <div class="scbody">
+      <label class="scl">${L(["Name (English)","名称（英文）"])}</label><input class="sci" id="in-en" value="${(v.en||"").replace(/"/g,"&quot;")}">
+      <label class="scl">${L(["Name (中文)","名称（中文）"])}</label><input class="sci" id="in-zh" value="${(v.zh||"").replace(/"/g,"&quot;")}">
+      <label class="scl">${L(["Photo set for its samples","样片默认配图组"])}</label>
+      <select class="sci" id="in-set">${Object.keys(SAMPLE_IMAGES).map(g=>`<option value="${g}"${(v.imgset||v.id)===g?" selected":""}>${g}</option>`).join("")}</select>
+    </div>
+    <div class="scft"><span class="sm mut">${L(["Shown on the home page and the public sample grid.","会显示在首页与公开样片栅格上。"])}</span>
+      <span style="display:flex;gap:8px"><button data-libclose="1">${L(["Cancel","取消"])}</button>
+      <button class="pri" data-indsave="${isNew?"new":v.id}">${L(["Save","保存"])}</button></span></div>`;
+}
+function samForm(k){
+  const zh=LANG==="zh", L=a=>a[zh?1:0], c=cur(), isNew=(k===null||k===undefined||k<0);
+  const x=isNew?{en:"",zh:"",sec:15,way:1,img:"",file:""}:c.s[k];
+  return `<div class="schd"><div><span class="eyebrow">${zh?c.zh:c.en}</span>
+    <h3 style="margin-top:6px">${isNew?L(["New sample","新增样片"]):L(["Edit sample","编辑样片"])}</h3></div>
+    <button class="scx" data-libclose="1">✕</button></div>
+    <div class="scbody">
+      <label class="scl">${L(["Title (English)","标题（英文）"])}</label><input class="sci" id="sm-en" value="${(x.en||"").replace(/"/g,"&quot;")}">
+      <label class="scl">${L(["Title (中文)","标题（中文）"])}</label><input class="sci" id="sm-zh" value="${(x.zh||"").replace(/"/g,"&quot;")}">
+      <div class="g2" style="gap:12px">
+        <div><label class="scl">${L(["Length","时长"])}</label>
+          <select class="sci" id="sm-sec"><option value="15"${x.sec==15?" selected":""}>15s</option><option value="30"${x.sec==30?" selected":""}>30s</option></select></div>
+        <div><label class="scl">${L(["Way","做法"])}</label>
+          <select class="sci" id="sm-way">${[1,2,3].map(w=>`<option value="${w}"${x.way==w?" selected":""}>${L(["Way ","做法 "])}${w}</option>`).join("")}</select></div>
+      </div>
+      <label class="scl">${L(["Cover","封面"])}</label>
+      <select class="sci" id="sm-img"><option value="">${L(["Use the industry photo set","跟随行业配图组"])}</option>${imgOpts(x.img)}</select>
+      ${x.file?`<p class="sm mut" style="margin-top:10px">${L(["An uploaded file is in use.","当前用的是上传的文件。"])}
+        <button class="mini del" data-samunfile="${k}" style="margin-left:8px">${L(["Remove file","移除文件"])}</button></p>`:""}
+    </div>
+    <div class="scft"><span class="sm mut">${L(["Shows on the public sample grid.","会出现在公开样片栅格上。"])}</span>
+      <span style="display:flex;gap:8px"><button data-libclose="1">${L(["Cancel","取消"])}</button>
+      <button class="pri" data-samsave="${isNew?"new":k}">${L(["Save","保存"])}</button></span></div>`;
+}
 function renderHomeCfg(){
   const box=$("hsedit"); if(!box)return;
   const zh=LANG==="zh", k=zh?1:0;
@@ -2519,23 +2649,6 @@ function renderHomeCfg(){
       <select class="inp" data-hs="ways.${i}.img">${imgOpts(w.img)}</select></div></div>`).join("")}
   </div>`;
 }
-function renderIndCfg(){
-  const box=$("isedit"); if(!box)return;
-  const zh=LANG==="zh";
-  const groups=Object.keys(SAMPLE_IMAGES);
-  box.innerHTML=`<div class="awrap"><table class="atbl"><thead><tr>
-    <th>${zh?"行业（英文）":"Industry (EN)"}</th><th>${zh?"行业（中文）":"Industry (中文)"}</th>
-    <th>${zh?"配图组":"Photo set"}</th><th class="num">${zh?"样片数":"Samples"}</th><th></th></tr></thead><tbody>
-    ${LIB.map((c,i)=>`<tr>
-      <td><input class="inp" data-is="${i}.en" value="${c.en.replace(/"/g,"&quot;")}"></td>
-      <td><input class="inp" data-is="${i}.zh" value="${c.zh.replace(/"/g,"&quot;")}"></td>
-      <td><select class="inp" data-is="${i}.imgset">${groups.map(g=>`<option value="${g}"${(c.imgset||c.id)===g?" selected":""}>${g}</option>`).join("")}</select></td>
-      <td class="num">${c.s.length}</td>
-      <td><button class="mini" data-isedit="${c.id}">${zh?"编辑样片":"Edit samples"}</button></td></tr>`).join("")}
-  </tbody></table></div>
-  <button class="mini dark" id="issave" style="margin-top:14px">${zh?"保存行业设置":"Save industries"}</button>
-  <span class="sm mut" id="ismsg" style="margin-left:10px"></span>`;
-}
 function renderHomeSamples(){
   const zh=LANG==="zh", k=zh?1:0;
   const grad="linear-gradient(180deg,rgba(20,20,20,.03) 42%,rgba(20,20,20,.82) 100%),";
@@ -2553,24 +2666,21 @@ function renderLib(){
   const tz=$("libteaser");
   if(tz){const c0=cur();tz.innerHTML=!c0?"":c0.s.slice(0,5).map((x,k)=>{const h=(c0.hue+k*17)%360;
     return `<div class="tile" style="background:linear-gradient(165deg,hsl(${h} 45% 34%),hsl(${(h+20)%360} 40% 12%))">
-      <span class="met"><span>${x[2]}s</span></span><span class="play">▶</span><span class="ttl">${LANG==="zh"?x[1]:x[0]}</span></div>`}).join("");}
+      <span class="met"><span>${x.sec}s</span></span><span class="play">▶</span><span class="ttl">${LANG==="zh"?x.zh:x.en}</span></div>`}).join("");}
   const bar2=$("libbar2");
   if(bar2)bar2.innerHTML=LIB.map(i=>`<button class="ipill" data-ind="${i.id}" aria-pressed="${i.id===IND}">${LANG==="zh"?i.zh:i.en}</button>`).join("");
-  const bar=$("libbar"); if(!bar){renderCfgList();return;}
+  const bar=$("libbar"); if(!bar)return;
   bar.innerHTML=LIB.map(i=>`<button class="ipill" data-ind="${i.id}" aria-pressed="${i.id===IND}">${LANG==="zh"?i.zh:i.en}</button>`).join("");
   const c=cur(); const grid=$("lib");
   grid.innerHTML=!c?"":c.s.map((x,k)=>{
     const set=SAMPLE_IMAGES[c.imgset||c.id]||SAMPLE_IMAGES.food;
-    const image=set[k%set.length];
+    const image=x.img||set[k%set.length];
     const position=SAMPLE_POSITIONS[k%SAMPLE_POSITIONS.length];
-    return `<div class="tile" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 38%,rgba(20,20,20,.86) 100%),var(--i-${image.replace('.webp','')});background-position:${position}">
-      <span class="met"><span>${x[2]}s</span><span class="${x[3]===1?"w1":""}">${LANG==="zh"?"做法 "+x[3]:"Way "+x[3]}</span></span>
-      <span class="play">▶</span><span class="ttl">${LANG==="zh"?x[1]:x[0]}</span></div>`}).join("");
-  renderCfgList();
-}
-function renderCfgList(){
-  const c=cur(), list=$("cfglist");
-  if(list)list.innerHTML=!c?"":c.s.map((x,k)=>`<div class="cfgitem"><b>${x[2]}s · ${LANG==="zh"?"做法":"Way"} ${x[3]}</b><span>${LANG==="zh"?x[1]:x[0]}</span><button class="mini del" data-delsam="${k}">✕</button></div>`).join("");
+    const own=x.file&&(POSTER[x.file]||BLOB[x.file]);
+    const bgimg=own?`url('${own}')`:`var(--i-${String(image).replace('.webp','')})`;
+    return `<div class="tile" style="background-image:linear-gradient(180deg,rgba(20,20,20,.02) 38%,rgba(20,20,20,.86) 100%),${bgimg};background-position:${position}">
+      <span class="met"><span>${x.sec}s</span><span class="${x.way===1?"w1":""}">${LANG==="zh"?"做法 "+x.way:"Way "+x.way}</span></span>
+      <span class="play">▶</span><span class="ttl">${LANG==="zh"?x.zh:x.en}</span></div>`}).join("");
 }
 const CITIES=[["Los Angeles","洛杉矶"],["Irvine","尔湾"],["Rowland Heights","罗兰岗"],["San Gabriel","圣盖博"],
  ["Flushing, NY","法拉盛"],["Brooklyn","布鲁克林"],["Houston","休斯顿"],["Toronto","多伦多"],["Vancouver","温哥华"]];
@@ -3317,7 +3427,7 @@ function renderAdmin(){
   $("adm-when").textContent=new Date().toLocaleDateString(zh?"zh-CN":"en-US",{weekday:"long",month:"short",day:"numeric"});
   $("adm-lib").style.display=ADMV==="lib"?"":"none";
   const box=$("adm-body");
-  if(ADMV==="lib"){box.innerHTML="";renderHomeCfg();renderIndCfg();renderLib();return;}
+  if(ADMV==="lib"){box.innerHTML="";renderLibAdmin();return;}
 
   if(ADMV==="overview"){
     const mrr=CUST.filter(c=>c.st!=="churned").reduce((a,c)=>a+c.mrr,0);
@@ -3542,6 +3652,58 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  const lt=e.target.closest("[data-libtab]");
+  if(lt){LIBTAB=lt.dataset.libtab;renderLibAdmin();return;}
+  if(e.target.closest("[data-libclose]")){libClose();return;}
+  if(e.target.closest("[data-indnew]")){libModal(indForm(null));return;}
+  const ie=e.target.closest("[data-indedit]");
+  if(ie){libModal(indForm(LIB.find(x=>x.id===ie.dataset.indedit)));return;}
+  const isam=e.target.closest("[data-indsam]");
+  if(isam){IND=isam.dataset.indsam;LIBTAB="samples";renderLibAdmin();return;}
+  const idel=e.target.closest("[data-inddel]");
+  if(idel){
+    if(LIB.length<2)return;
+    const c=LIB.find(x=>x.id===idel.dataset.inddel);
+    if(!confirm(LANG==="zh"?`删除「${c.zh}」及其 ${c.s.length} 条样片？`:`Delete "${c.en}" and its ${c.s.length} samples?`))return;
+    c.s.forEach(x=>{if(x.file)IDB.del(x.file);});
+    LIB=LIB.filter(x=>x.id!==idel.dataset.inddel);
+    if(IND===idel.dataset.inddel)IND=LIB[0].id;
+    saveLib();renderLibAdmin();renderLib();return;}
+  const isv=e.target.closest("[data-indsave]");
+  if(isv){
+    const en=$("in-en").value.trim(), zh2=$("in-zh").value.trim()||en, set=$("in-set").value;
+    if(!en)return;
+    if(isv.dataset.indsave==="new"){
+      LIB.push({id:"i"+Date.now(),en,zh:zh2,imgset:set,hue:Math.floor(Math.random()*360),s:[]});
+      IND=LIB[LIB.length-1].id;
+    }else{
+      const c=LIB.find(x=>x.id===isv.dataset.indsave);
+      if(c){c.en=en;c.zh=zh2;c.imgset=set;}
+    }
+    saveLib();libClose();renderLibAdmin();renderLib();render();return;}
+
+  if(e.target.closest("[data-samnew]")){libModal(samForm(null));return;}
+  const se=e.target.closest("[data-samedit]");
+  if(se){libModal(samForm(+se.dataset.samedit));return;}
+  const sd=e.target.closest("[data-samdel]");
+  if(sd){
+    const c=cur(), k=+sd.dataset.samdel, x=c.s[k];
+    if(!confirm(LANG==="zh"?`删除样片「${x.zh||x.en}」？`:`Delete "${x.en||x.zh}"?`))return;
+    if(x.file)IDB.del(x.file);
+    c.s.splice(k,1);saveLib();renderSamGrid();renderLibAdmin();renderLib();return;}
+  const suf=e.target.closest("[data-samunfile]");
+  if(suf){const c=cur(), x=c.s[+suf.dataset.samunfile];
+    if(x&&x.file){IDB.del(x.file);delete BLOB[x.file];delete POSTER[x.file];x.file="";}
+    saveLib();libClose();renderSamGrid();renderLib();return;}
+  const smsv=e.target.closest("[data-samsave]");
+  if(smsv){
+    const c=cur(), g=id=>$(id)?$(id).value.trim():"";
+    const rec={en:g("sm-en"),zh:g("sm-zh")||g("sm-en"),sec:+$("sm-sec").value,way:+$("sm-way").value,img:$("sm-img").value};
+    if(!rec.en&&!rec.zh)return;
+    if(smsv.dataset.samsave==="new")c.s.push(Object.assign({file:""},rec));
+    else Object.assign(c.s[+smsv.dataset.samsave],rec);
+    saveLib();libClose();renderSamGrid();renderLibAdmin();renderLib();return;}
+  if(e.target.closest("#samdrop")&&!e.target.closest("input")){$("samfile").click();return;}
   if(e.target.closest("#hssave")){
     document.querySelectorAll("[data-hs]").forEach(el=>{
       const p2=el.dataset.hs.split(".");
@@ -3556,7 +3718,7 @@ document.addEventListener("click",e=>{
     document.querySelectorAll("[data-is]").forEach(el=>{
       const [i,f]=el.dataset.is.split(".");
       if(LIB[+i])LIB[+i][f]=el.value;});
-    saveLib(); renderLib(); renderIndCfg(); render();
+    saveLib(); renderLib(); render();
     $("ismsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("ismsg");if(m)m.textContent=""},2500); return;}
   const ise=e.target.closest("[data-isedit]");
@@ -3733,6 +3895,16 @@ document.addEventListener("click",e=>{
     $("sdone").classList.add("on");$("ssubmit").dataset.sent=1;$("ssubmit").disabled=true;$("ssubmit-t").textContent=(TXT[LANG]||TXT.en).sent;
     renderReqs();renderAdmin();return;}
 });
+document.addEventListener("change",e=>{
+  if(e.target&&e.target.id==="samfile"&&e.target.files&&e.target.files.length){addSamples(e.target.files);e.target.value="";}
+});
+["dragenter","dragover","dragleave","drop"].forEach(t=>document.addEventListener(t,e=>{
+  const dz=e.target.closest?e.target.closest("#samdrop"):null;
+  if(!dz)return;
+  e.preventDefault();
+  dz.classList.toggle("hot",t==="dragenter"||t==="dragover");
+  if(t==="drop"&&e.dataTransfer&&e.dataTransfer.files.length)addSamples(e.dataTransfer.files);
+}));
 (function(){
   const fi=$("afile"), dz=$("drop"); if(!fi||!dz)return;
   fi.addEventListener("change",()=>{if(fi.files&&fi.files.length)addFiles(fi.files);fi.value="";});
@@ -3759,6 +3931,7 @@ if(h==="faq"||h==="work")goto("about");
 renderAuth();
 render();
 hydrateAssets();
+hydrateSamples();
 
 (function(){
   const tabs=[...document.querySelectorAll(".absub a")]; if(!tabs.length)return;
