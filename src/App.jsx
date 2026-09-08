@@ -1329,7 +1329,12 @@ function SimplePage({ page, product, setPage, language, setActiveProject }) {
 }
 
 export function App() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(() => {
+    // /#performance 等锚点可直达对应页面（Storefront Ad Studio 会这样跳回来）
+    const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
+    const known = navigation.flatMap(group => group.items).map(item => item[0]);
+    return known.includes(hash) ? hash : 'home';
+  });
   const [menuPinned, setMenuPinned] = useState(true);
   const [menuHovered, setMenuHovered] = useState(false);
   const menuExpanded = menuPinned || menuHovered;

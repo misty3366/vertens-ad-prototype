@@ -374,6 +374,13 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .scr .act button:hover{border-color:var(--orange);color:var(--orange)}
 .scr .act button.pri:hover{color:#F7F4EE}
 .scr textarea{width:100%;margin-top:12px;font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--cream);color:var(--ink);resize:vertical;min-height:64px}
+.vbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.vchip{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;padding:7px 14px;
+ border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);cursor:pointer}
+.vchip:hover{border-color:var(--ink2)}
+.vchip.on{background:var(--dark);color:#F7F4EE;border-color:var(--dark)}
+.vchip i{font-style:normal;font-size:11.5px;color:var(--faint)}
+.vchip.on i{color:rgba(247,244,238,.6)}
 .vrow{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:14px;margin-top:12px}
 .vrow .pv{aspect-ratio:9/16;background:var(--sand);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--faint)}
 .vrow h4{margin:0;font-size:15.5px;font-weight:600}
@@ -1176,10 +1183,9 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     <section class="wsec" id="ws-ads">
       <div class="wsh">
         <h1 data-i="wsh7">Ad management</h1>
-        <p data-i="wsp7">Three things and we start buying. About ten minutes.</p>
+        <p data-i="wsp7">Fill in the basics once. After that this page tracks your order — the live numbers are in the VertensAI tool.</p>
       </div>
       <div id="adwiz"></div>
-      <div class="note" id="adown" style="display:none"></div>
 
       <div class="block" id="adform" style="display:none">
         <h3 data-i="adf0">Account details</h3>
@@ -1201,16 +1207,13 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
         <span class="sm mut" id="admsg" style="margin-left:10px"></span>
       </div>
 
-      <div class="block" id="adaccess" style="display:none">
-        <h3 data-i="adx0">Give us access</h3>
-        <p class="hint" data-i="adx0h">Partner access only. You stay the owner and can remove it any time.</p>
-        <div id="adacclist"></div>
-        <p class="sm mut" style="margin-top:14px;margin-bottom:0" data-i="adx1">Not sure how? Leave it and we will walk you through it.</p>
-      </div>
-
       <div class="block" id="adlive" style="display:none">
-        <h3 data-i="adl0">Campaigns</h3>
+        <h3 data-i="adl0">Your campaign</h3>
         <div class="kv" id="adlivekv"></div>
+        <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <a class="pill o" id="adtool" href="./#performance" target="_blank" rel="noopener"><span data-i="adtool">See live performance in VertensAI</span><span class="arw">→</span></a>
+          <span class="sm mut" data-i="adtooln">Daily spend, views and leads live in the tool. This page tracks the order.</span>
+        </div>
       </div>
     </section>
 
@@ -1662,7 +1665,7 @@ let USER=(()=>{try{return JSON.parse(localStorage.getItem("vt_user"))}catch(e){r
 let BRAND=(()=>{try{return JSON.parse(localStorage.getItem("vt_brand"))||{}}catch(e){return{}}})();
 let PROF=(()=>{try{return JSON.parse(localStorage.getItem("vt_prof"))||{}}catch(e){return{}}})();
 let ASSETS=(()=>{try{return JSON.parse(localStorage.getItem("vt_assets"))||[]}catch(e){return[]}})();
-let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
+let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, VMONTH="all", PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
 let ORDERS=(()=>{try{return JSON.parse(localStorage.getItem("vt_orders"))||[]}catch(e){return[]}})();
 let SCR=(()=>{try{return JSON.parse(localStorage.getItem("vt_scr"))||null}catch(e){return null}})();
 let ADS=(()=>{try{return JSON.parse(localStorage.getItem("vt_ads"))||{acc:{}}}catch(e){return{acc:{}}}})();
@@ -2140,12 +2143,15 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  adf4:"保存账户信息",afl1a:"有，我已经有账户",afl1b:"没有，帮我开一个",
  adx0:"把权限给我们",adx0h:"只要合作方权限，随时可收回。",
  adx1:"不会弄就先放着，我们带你点。",
- adl0:"投放状态",
+
  rth:"按条计价",rtp:"套餐就是这两个单价，按月买。",
  rt15:"一条 15 秒",rt30:"一条 30 秒",
  rtb:"基础 · 3 条 30 秒 + 5 条 15 秒",rts:"标准 · 5 条 30 秒 + 10 条 15 秒",
  rts1:"省 $90",rts2:"省 $181",
  rtn:"不走套餐的单条也按这两个价，最少两条起。",
+ adtool:"在 VertensAI 里看实时数据",adtooln:"每天的花费、播放和线索在工具里看。这一页只跟订单进度。",
+ adl0:"你的投放",
+ wsp7:"基本信息填一次就好。之后这一页跟订单进度，实时数据在 VertensAI 工具里。",
  nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
  abh:"做这些片子的团队",abp1:"Vertens Storefront Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
@@ -2546,35 +2552,67 @@ function renderWScripts(){
   if($("sc-note"))$("sc-note").textContent=c.note;
   const d=$("wd-sc"); if(d){d.textContent=c.wait;d.classList.toggle("on",c.wait>0);}
 }
+function monthKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");}
+function monthLabel(key){
+  const [y,m]=key.split("-").map(Number);
+  const d=new Date(y,m-1,1);
+  const loc={zh:"zh-CN",es:"es",vi:"vi",ko:"ko",en:"en-US"}[LANG]||"en-US";
+  try{return d.toLocaleDateString(loc,{month:"short",year:"numeric"});}catch(e){return key;}
+}
 function vidList(){
   const zh=LANG==="zh", vo=ORDERS.find(x=>x.type!=="ads"&&PKG[x.pkg]), o=vo||null, out=[];
   const done=C.c1>=ANEED.c1&&C.c2>=ANEED.c2&&C.c3>=ANEED.c3;
-  out.push({k:"sample",t:zh?"免费样片 · 15 秒":"Free sample · 15 sec",
+  const now=new Date(), thisM=monthKey(now);
+  out.push({k:"sample",m:thisM,t:zh?"免费样片 · 15 秒":"Free sample · 15 sec",
     st:done?"ready":"wait",
     cap:zh?"新店开张第一周，这条我们先发。#洛杉矶美食 #新店":"Opening week — post this one first. #LosAngelesEats #NewInTown"});
-  if(o){const pk=PKG[o.pkg];
-    for(let i=0;i<pk.v30;i++)out.push({k:"v30-"+i,t:(zh?"广告片 30 秒 · 第 ":"Ad · 30 sec · No. ")+(i+1),
-      st:i<2?"ready":"work",cap:zh?"完整介绍版，适合投放。":"Full story cut — the one to run as an ad."});
-    for(let i=0;i<pk.v15;i++)out.push({k:"v15-"+i,t:(zh?"广告片 15 秒 · 第 ":"Ad · 15 sec · No. ")+(i+1),
-      st:i<3?"ready":"work",cap:zh?"短钩子版，适合日常更新。":"Short hook — for everyday posting."});
+  if(o){
+    const pk=PKG[o.pkg];
+    /* 每个自然月一轮交付：本月在做，往前的月份已交付 */
+    const cycles=[0,1,2].map(back=>{
+      const d=new Date(now.getFullYear(),now.getMonth()-back,1);
+      return {key:monthKey(d),back};
+    });
+    cycles.forEach(c=>{
+      for(let i=0;i<pk.v30;i++)out.push({k:"v30-"+c.key+"-"+i,m:c.key,
+        t:(zh?"广告片 30 秒 · 第 ":"Ad · 30 sec · No. ")+(i+1),
+        st:c.back>0?"ready":(i<2?"ready":"work"),
+        cap:zh?"完整介绍版，适合投放。":"Full story cut — the one to run as an ad."});
+      for(let i=0;i<pk.v15;i++)out.push({k:"v15-"+c.key+"-"+i,m:c.key,
+        t:(zh?"广告片 15 秒 · 第 ":"Ad · 15 sec · No. ")+(i+1),
+        st:c.back>0?"ready":(i<3?"ready":"work"),
+        cap:zh?"短钩子版，适合日常更新。":"Short hook — for everyday posting."});
+    });
   }
   return out;
 }
 function renderWVideos(){
   const box=$("wsvids"); if(!box)return;
-  const zh=LANG==="zh", list=vidList();
+  const zh=LANG==="zh", all=vidList();
   const L=zh?{ready:"可下载",work:"制作中",wait:"等你的素材",dl:"下载 9:16",cp:"复制文案",cap:"配文",
-              empty:"素材齐了之后，成片会出现在这里。",note:"下载的是 MP4，1080×1920，可直接上传 TikTok 和 Facebook。"}
+              empty:"素材齐了之后，成片会出现在这里。",note:"下载的是 MP4，1080×1920，可直接上传 TikTok 和 Facebook。",
+              all:"全部",none:"这个月还没有成片。",cnt:"条"}
            :{ready:"Ready",work:"In production",wait:"Waiting on your material",dl:"Download 9:16",cp:"Copy caption",cap:"Caption",
-              empty:"Finished videos show up here once your material is complete.",note:"Files are MP4, 1080×1920 — upload straight to TikTok and Facebook."};
-  const ready=list.filter(x=>x.st==="ready").length;
-  box.innerHTML=`<p class="sm mut" style="margin:0 0 4px">${L.note}</p>`+list.map(x=>`<div class="vrow">
+              empty:"Finished videos show up here once your material is complete.",note:"Files are MP4, 1080×1920 — upload straight to TikTok and Facebook.",
+              all:"All",none:"Nothing delivered in this month yet.",cnt:""};
+  L.all={zh:"全部",es:"Todos",vi:"Tất cả",ko:"전체"}[LANG]||"All";
+  L.none={zh:"这个月还没有成片。",es:"Todavía no hay nada entregado en este mes.",
+          vi:"Tháng này chưa có video nào.",ko:"이 달에는 아직 없습니다."}[LANG]||L.none;
+  const months=[...new Set(all.map(x=>x.m))].sort().reverse();
+  if(VMONTH!=="all"&&months.indexOf(VMONTH)<0)VMONTH="all";
+  const list=VMONTH==="all"?all:all.filter(x=>x.m===VMONTH);
+  const chip=(k,lab,n)=>`<button class="vchip${VMONTH===k?" on":""}" data-vm="${k}">${lab}<i>${n}</i></button>`;
+  const bar=`<div class="vbar">${chip("all",L.all,all.length)}${months.map(m=>chip(m,monthLabel(m),all.filter(x=>x.m===m).length)).join("")}</div>`;
+  const rows=list.length?list.map(x=>`<div class="vrow">
     <div class="pv">${x.st==="ready"?"▶":"◷"}</div>
-    <div><h4>${x.t}</h4><div class="mt">9:16 · 1080×1920 · MP4 · <span class="badge ${x.st==="ready"?"done":x.st==="work"?"work":"draft"}">${L[x.st]}</span></div>
+    <div><h4>${x.t}</h4><div class="mt">${monthLabel(x.m)} · 9:16 · 1080×1920 · MP4 · <span class="badge ${x.st==="ready"?"done":x.st==="work"?"work":"draft"}">${L[x.st]}</span></div>
       <div class="cap"><b>${L.cap}:</b> ${x.cap}</div></div>
     <div class="btns">${x.st==="ready"
       ?`<button class="pri" data-dl="${x.k}">${L.dl}</button><button data-cp="${x.k}">${L.cp}</button>`
-      :`<button disabled style="opacity:.5">${L[x.st]}</button>`}</div></div>`).join("");
+      :`<button disabled style="opacity:.5">${L[x.st]}</button>`}</div></div>`).join("")
+    :`<div class="empty">${L.none}</div>`;
+  box.innerHTML=`<p class="sm mut" style="margin:0 0 4px">${L.note}</p>`+bar+rows;
+  const ready=all.filter(x=>x.st==="ready").length;
   const d=$("wd-vd"); if(d){d.textContent=ready;d.classList.toggle("on",ready>0);}
 }
 
@@ -2681,19 +2719,10 @@ function orderTitle(o,zh){
   return (zh?"视频套餐":"Video plan")+" · "+(pk?(zh?pk.zh:pk.n):"—");
 }
 
-const ADACC=[
-  {id:"fbpage",n:["Facebook Page — partner access","Facebook 主页 — 合作方权限"],
-   h:["Business settings → Pages → your page → Assign partner","企业设置 → 主页 → 选中主页 → 分配合作方"]},
-  {id:"fbads",n:["Meta ad account — partner access","Meta 广告账户 — 合作方权限"],
-   h:["Business settings → Ad accounts → Assign partner → paste our ID","企业设置 → 广告账户 → 分配合作方 → 填我们的 ID"]},
-  {id:"ttads",n:["TikTok Ads Manager — member access","TikTok 广告后台 — 成员权限"],
-   h:["TikTok Ads → Account setup → Users → Invite by email","TikTok 广告后台 → 账户设置 → 用户 → 邮箱邀请"]}
-];
 function hasAdsOrder(){return ORDERS.some(o=>o.type==="ads"&&o.st!=="refunded");}
 function adsDone(){
-  const a=ADS, formOk=!!(a.name&&a.city&&a.goal!==undefined);
-  const accOk=ADACC.filter(x=>a.acc&&a.acc[x.id]).length;
-  return {formOk,accOk,accAll:accOk===ADACC.length};
+  const a=ADS;
+  return {formOk:!!(a.name&&a.city&&a.goal!==undefined)};
 }
 function fillAds(){
   const set=(id,v)=>{const e=$(id); if(e&&v!==undefined&&v!==null&&v!=="")e.value=v;};
@@ -2705,75 +2734,44 @@ function renderAds(){
   const box=$("adwiz"); if(!box)return;
   const zh=LANG==="zh", d=adsDone(), paid=hasAdsOrder();
   const L=zh?{no:"你还没有开通广告代投。",nob:"看看广告代投",
-              s1:"填写账户信息",s1p:"门店、城市、平台、投放目标。",
-              s2:"把账户权限给我们",s2p:"合作方权限，随时可收回。",
-              s3:"选要投的片子",s3p:"套餐成片，或你自己的。",
-              go:"去填写",rev:"查看修改",open:"去授权",vid:"看我的成片",
-              done:"已完成",wait:"待处理",of:" / "}
+              s1:"填写基本信息",s1p:"门店、城市、平台、投放目标。填一次就好。",
+              s2:"等月度报告",s2p:"我们搭建、买量、每天盯。每月一份书面报告发给你。",
+              go:"去填写",rev:"查看修改",wait:"等我们",done:"已完成"}
            :{no:"You have not started ad management yet.",nob:"See ad management",
-              s1:"Account details",s1p:"Store, city, platforms, goal.",
-              s2:"Give us access",s2p:"Partner access. Removable any time.",
-              s3:"Pick the videos",s3p:"From your plan, or your own.",
-              go:"Fill this in",rev:"Review",open:"Grant access",vid:"See my videos",
-              done:"Done",wait:"To do",of:" of "};
+              s1:"Fill in the basics",s1p:"Store, city, platforms, goal. Once is enough.",
+              s2:"Wait for the monthly report",s2p:"We build, buy and watch it daily. One written report a month.",
+              go:"Fill this in",rev:"Review",wait:"On us",done:"Done"};
   if(!paid){
     box.innerHTML=`<div class="empty" style="text-align:left">${L.no}
       <div style="margin-top:14px"><a class="pill o" href="#" data-go="ads"><span>${L.nob}</span><span class="arw">→</span></a></div></div>`;
-    ["adform","adaccess","adlive"].forEach(id=>{const e=$(id); if(e)e.style.display="none";});
+    ["adform","adlive"].forEach(id=>{const e=$(id); if(e)e.style.display="none";});
     const dt=$("wd-ad"); if(dt)dt.classList.remove("on");
     return;
   }
-  ["adform","adaccess"].forEach(id=>{const e=$(id); if(e)e.style.display="";});
-  const vids=vidList().filter(v=>v.st==="ready").length;
+  $("adform").style.display="";
   const steps=[
-    {done:d.formOk,h:L.s1,p:L.s1p,v:d.formOk?L.done:L.wait,b:d.formOk?L.rev:L.go,to:"adform"},
-    {done:d.accAll,h:L.s2,p:L.s2p,v:d.accOk+L.of+ADACC.length,b:L.open,to:"adaccess"},
-    {done:vids>0||!!ADS.ownvid,h:L.s3,p:L.s3p,
-     v:vids>0?vids+(zh?" 条可投":" ready"):(ADS.ownvid?(zh?"用你自己的片子":"Using your own videos"):(zh?"还没有片子":"No videos yet")),
-     b:vids>0?L.vid:(zh?"选来源":"Choose"),to:vids>0?"videos":"adown"}
+    {done:d.formOk,h:L.s1,p:L.s1p,v:d.formOk?L.done:"",b:d.formOk?L.rev:L.go,to:"adform"},
+    {done:false,h:L.s2,p:L.s2p,v:L.wait,b:null,to:null}
   ];
-  const first=steps.findIndex(x=>!x.done);
   box.className="wiz";
-  box.innerHTML=steps.map((x,i)=>`<div class="wz ${x.done?"ok":(i===first?"now":"")}">
+  box.innerHTML=steps.map((x,i)=>`<div class="wz ${x.done?"ok":(i===0&&!d.formOk?"now":"")}">
     <div class="n">${x.done?"✓":i+1}</div>
-    <div><h4>${x.h}</h4><p>${x.p}</p><p class="sm mut" style="margin-top:6px">${x.v}</p></div>
-    <button class="go" data-adgo="${x.to}">${x.b}</button></div>`).join("");
+    <div><h4>${x.h}</h4><p>${x.p}</p>${x.v?`<p class="sm mut" style="margin-top:6px">${x.v}</p>`:""}</div>
+    ${x.b?`<button class="go" data-adgo="${x.to}">${x.b}</button>`:""}</div>`).join("");
 
-  $("adacclist").innerHTML=ADACC.map(x=>{
-    const on=!!(ADS.acc&&ADS.acc[x.id]);
-    return `<div class="opt" style="cursor:pointer;margin-top:10px" data-adacc="${x.id}">
-      <span class="t"><b>${x.n[zh?1:0]}</b><span>${x.h[zh?1:0]}</span></span>
-      <span class="tagx ${on?"real":"ai"}">${on?L.done:L.wait}</span></div>`;
-  }).join("");
-
-  const own=$("adown");
-  if(own){
-    if(vids>0){own.style.display="none";}
-    else{
-      own.style.display="block";
-      own.innerHTML=(zh
-        ?"<b>还没有可投的片子。</b>买个视频套餐，或者用你自己的。"
-        :"<b>No videos to run.</b> Order a plan, or use your own.")+
-        `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-          <a class="pill o s" href="#" data-go="videos">${zh?"看视频套餐":"See video plans"}</a>
-          <button class="pill gh s" data-adown="1">${ADS.ownvid?(zh?"已选：我自己提供":"Chosen: I send my own"):(zh?"我自己提供片子":"I'll send my own")}</button>
-        </div>`;
-    }
-  }
   const live=$("adlive");
-  const ready=d.formOk&&d.accAll;
-  live.style.display=ready?"":"none";
-  if(ready){
+  live.style.display=d.formOk?"":"none";
+  if(d.formOk){
     const o=ORDERS.find(x=>x.type==="ads");
-    const t=ATIERS.find(x=>x.id===(o&&o.tier));
+    const plat={both:"Facebook + TikTok",fb:"Facebook",tt:"TikTok"}[ADS.plat||"both"];
     $("adlivekv").innerHTML=
       `<div class="r"><span>${zh?"月度预算":"Monthly budget"}</span><b>${money((o&&o.spend)||0)}</b></div>`+
-      `<div class="r"><span>${zh?"投放平台":"Platforms"}</span><b>${({both:"Facebook + TikTok",fb:"Facebook",tt:"TikTok"})[ADS.plat||"both"]}</b></div>`+
-      `<div class="r"><span>${zh?"状态":"Status"}</span><b>${zh?"搭建中，48 小时内上线":"Building — live within 48 hours"}</b></div>`+
+      `<div class="r"><span>${zh?"投放平台":"Platforms"}</span><b>${plat}</b></div>`+
+      `<div class="r"><span>${zh?"进度":"Progress"}</span><b>${zh?"搭建中，48 小时内上线":"Building — live within 48 hours"}</b></div>`+
       `<div class="r"><span>${zh?"下一份报告":"Next report"}</span><b>${zh?"下月 1 号":"1st of next month"}</b></div>`;
   }
   const dt=$("wd-ad");
-  if(dt){const left=steps.filter(x=>!x.done).length; dt.textContent=left; dt.classList.toggle("on",left>0);}
+  if(dt){const left=d.formOk?0:1; dt.textContent=left; dt.classList.toggle("on",left>0);}
 }
 function renderOrders(){
   const box=$("ordlist"); if(!box)return;
@@ -3010,19 +3008,14 @@ document.addEventListener("click",e=>{
   const ag=e.target.closest("[data-adgo]");
   if(ag){const to=ag.dataset.adgo;
     if(to==="videos"){wsGo("videos");return;}
-    if(to==="adown"){const o=$("adown"); if(o)o.scrollIntoView({behavior:"smooth",block:"center"}); return;}
     const el=$(to); if(el){el.scrollIntoView({behavior:"smooth",block:"start"});
       const f=el.querySelector("input,select"); if(f&&to==="adform")setTimeout(()=>f.focus(),350);}
     return;}
-  if(e.target.closest("[data-adown]")){ADS.ownvid=!ADS.ownvid;save("vt_ads",ADS);renderAds();return;}
-  const aa=e.target.closest("[data-adacc]");
-  if(aa){ADS.acc=ADS.acc||{}; const k=aa.dataset.adacc; ADS.acc[k]=!ADS.acc[k];
-    save("vt_ads",ADS); renderAds(); return;}
   if(e.target.closest("#adsave")){
     ADS.name=$("ad-name").value.trim(); ADS.city=$("ad-city").value.trim();
     ADS.plat=$("ad-plat").value; ADS.acct=$("ad-acct").value;
     ADS.fb=$("ad-fb").value.trim(); ADS.tt=$("ad-tt").value.trim(); ADS.goal=$("ad-goal").value;
-    ADS.acc=ADS.acc||{}; save("vt_ads",ADS); renderAds();
+    save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
   const tk=e.target.closest("[data-tk]");
@@ -3092,6 +3085,8 @@ document.addEventListener("click",e=>{
   if(ss){const x=scripts()[+ss.dataset.scsend], t=$("scnote");
     x.note=t?t.value.trim():""; x.st=x.note?"note":"wait"; NOTEON=null;
     save("vt_scr",SCR);renderWScripts();return;}
+  const vm=e.target.closest("[data-vm]");
+  if(vm){VMONTH=vm.dataset.vm;renderWVideos();return;}
   const dl=e.target.closest("[data-dl]");
   if(dl){const b=dl;const o=b.textContent;b.textContent=LANG==="zh"?"下载中…":"Downloading…";
     setTimeout(()=>{b.textContent=o},1200);return;}
