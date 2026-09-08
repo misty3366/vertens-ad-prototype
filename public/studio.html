@@ -479,6 +479,16 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .ord .act{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .ord .act button{font-size:13px;font-weight:600;padding:7px 15px;border-radius:999px;border:1px solid var(--line2);background:var(--cream);color:var(--ink2);cursor:pointer}
 .ord .act button:hover{border-color:var(--orange);color:var(--orange)}
+.ordrow{cursor:pointer;transition:.15s}
+.ordrow:hover{border-color:var(--ink2)}
+.otot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:6px}
+.otot span:first-child{font-size:13px;color:var(--faint)}
+.otot b{font-family:var(--disp);font-size:30px;font-weight:400}
+.osteps{display:grid;gap:0;margin-top:4px}
+.ostep{display:flex;align-items:center;gap:12px;padding:9px 0;font-size:14.5px;color:var(--faint)}
+.ostep .dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--line2);flex:none}
+.ostep.ok{color:var(--ink)}
+.ostep.ok .dot{background:var(--green);border-color:var(--green)}
 .ord textarea{width:100%;margin-top:12px;font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--cream);color:var(--ink);min-height:70px;resize:vertical}
 .ord .case{margin-top:12px;background:var(--cream);border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--ink2)}
 .ord .case b{color:var(--ink)}
@@ -1218,6 +1228,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 56px;color:var(--faint);f
     </section>
 
     <div class="scmodal" id="scmodal"><div class="scbox" id="scbox"></div></div>
+    <div class="scmodal" id="ordmodal"><div class="scbox" id="ordbox"></div></div>
 
     <!-- ---------- ORDERS ---------- -->
     <section class="wsec" id="ws-orders">
@@ -1665,7 +1676,7 @@ let USER=(()=>{try{return JSON.parse(localStorage.getItem("vt_user"))}catch(e){r
 let BRAND=(()=>{try{return JSON.parse(localStorage.getItem("vt_brand"))||{}}catch(e){return{}}})();
 let PROF=(()=>{try{return JSON.parse(localStorage.getItem("vt_prof"))||{}}catch(e){return{}}})();
 let ASSETS=(()=>{try{return JSON.parse(localStorage.getItem("vt_assets"))||[]}catch(e){return[]}})();
-let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, VMONTH="all", PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
+let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, ORDOPEN=null, VMONTH="all", PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
 let ORDERS=(()=>{try{return JSON.parse(localStorage.getItem("vt_orders"))||[]}catch(e){return[]}})();
 let SCR=(()=>{try{return JSON.parse(localStorage.getItem("vt_scr"))||null}catch(e){return null}})();
 let ADS=(()=>{try{return JSON.parse(localStorage.getItem("vt_ads"))||{acc:{}}}catch(e){return{acc:{}}}})();
@@ -2773,48 +2784,97 @@ function renderAds(){
   const dt=$("wd-ad");
   if(dt){const left=d.formOk?0:1; dt.textContent=left; dt.classList.toggle("on",left>0);}
 }
+function orderRows(o,zh,L){
+  const pay={card:zh?"银行卡":"Card",paypal:"PayPal",invoice:zh?"账单":"Invoice"}[o.pay]||o.pay;
+  const r=(a,b)=>`<div class="r"><span>${a}</span><b>${b}</b></div>`;
+  let lines="";
+  if(o.type==="ads"){
+    const f=adFee(o.spend||0);
+    lines=r(L.bud,money(o.spend||0))+r(zh?"账户管理费":"Account management",money(MGMT))+
+      r(zh?"服务佣金":"Our commission",money(f.fee))+r(L.plat,"Facebook + TikTok");
+  }else{
+    const pk=PKG[o.pkg];
+    lines=r(zh?"套餐":"Plan",pk?(zh?pk.zh:pk.n):"—")+
+      r(zh?"30 秒片":"30-second videos",pk?pk.v30:"—")+
+      r(zh?"15 秒片":"15-second videos",pk?pk.v15:"—")+
+      r(zh?"成片比例":"Aspect ratio","9:16");
+  }
+  return lines+r(L.pay,pay)+r(L.when,o.when||o.date||"—")+r(L.no,o.id||"—");
+}
+function orderSteps(o,zh){
+  const paid=true, working=o.st!=="refunded";
+  const done=o.type==="ads"
+    ? [[zh?"下单并付款":"Ordered and paid",paid],
+       [zh?"搭建 campaign":"Campaigns built",working],
+       [zh?"投放中":"Running",working],
+       [zh?"月度报告":"Monthly report",false]]
+    : [[zh?"下单并付款":"Ordered and paid",paid],
+       [zh?"素材齐备":"Material complete",C.c1>=ANEED.c1&&C.c2>=ANEED.c2&&C.c3>=ANEED.c3],
+       [zh?"第一条交付":"First video delivered",working],
+       [zh?"当月交付完成":"Month delivered",false]];
+  return done.map(([t,ok])=>`<div class="ostep${ok?" ok":""}"><span class="dot"></span><span>${t}</span></div>`).join("");
+}
 function renderOrders(){
   const box=$("ordlist"); if(!box)return;
   const zh=LANG==="zh";
   const L=zh?{empty:"还没有订单。选好套餐付款后，订单会出现在这里。",
               paid:"已支付",case:"售后处理中",refund:"退款申请中",refunded:"已退款",
-              sup:"发起售后",ref:"申请退款",send:"提交",cancel:"取消",
+              sup:"发起售后",ref:"申请退款",send:"提交",cancel:"取消",close:"关闭",detail:"查看详情",
               ph:"哪里出了问题？说得越具体，我们处理得越快。",
               opened:"售后已提交",ropened:"退款申请已提交",reply:"我们会在一个工作日内回复到你的 WhatsApp。",
               amt:"金额",when:"下单时间",pay:"支付方式",no:"订单号",
-              plat:"投放平台",bud:"广告预算",monthly:"按月扣费"}
+              plat:"投放平台",bud:"广告预算",monthly:"按月扣费",prog:"进度",sum:"订单内容"}
            :{empty:"No orders yet. Once you pick a plan and pay, it shows up here.",
               paid:"Paid",case:"Case open",refund:"Refund requested",refunded:"Refunded",
-              sup:"Open a case",ref:"Request a refund",send:"Send",cancel:"Cancel",
+              sup:"Open a case",ref:"Request a refund",send:"Send",cancel:"Cancel",close:"Close",detail:"View order",
               ph:"What went wrong? The more specific you are, the faster we fix it.",
               opened:"Case opened",ropened:"Refund requested",reply:"We reply on WhatsApp within one business day.",
               amt:"Amount",when:"Ordered",pay:"Paid with",no:"Order",
-              plat:"Platforms",bud:"Ad budget",monthly:"Billed monthly"};
-  if(!ORDERS.length){box.innerHTML=`<div class="empty">${L.empty}</div>`;return;}
-  box.innerHTML=ORDERS.map((o,i)=>{
-    const badge=o.st==="refunded"?"done":o.st==="refund"?"new":o.st==="case"?"work":"done";
-    const stt=L[o.st==="paid"?"paid":o.st];
-    const pay={card:zh?"银行卡":"Card",paypal:"PayPal",invoice:zh?"账单":"Invoice"}[o.pay]||o.pay;
-    return `<div class="ord">
+              plat:"Platforms",bud:"Ad budget",monthly:"Billed monthly",prog:"Progress",sum:"What you bought"};
+  const badgeOf=o=>o.st==="refunded"?"done":o.st==="refund"?"new":o.st==="case"?"work":"done";
+  const stOf=o=>L[o.st==="paid"?"paid":o.st];
+
+  if(!ORDERS.length){box.innerHTML=`<div class="empty">${L.empty}</div>`;}
+  else box.innerHTML=ORDERS.map((o,i)=>`<div class="ord ordrow" data-ord="${i}">
       <div class="top">
-        <div><h4>${orderTitle(o,zh)}</h4><div class="id">${L.no} ${o.id||"—"}</div></div>
+        <div><h4>${orderTitle(o,zh)}</h4><div class="id">${L.no} ${o.id||"—"} · ${o.when||o.date||"—"}</div></div>
         <div style="text-align:right"><div class="amt">${money(o.amount||0)}</div>
-          <span class="badge ${badge}">${stt}</span></div>
+          <span class="badge ${badgeOf(o)}">${stOf(o)}</span></div>
       </div>
-      <div class="meta">
-        <span>${L.when}: ${o.when||o.date||"—"}</span>
-        <span>${L.pay}: ${pay}</span>
-        ${o.type==="ads"?`<span>${L.bud}: ${money(o.spend||0)}</span><span>${L.plat}: Facebook + TikTok</span>`:`<span>${L.monthly}</span>`}
-      </div>
-      ${o.note?`<div class="case"><b>${o.st==="refund"?L.ropened:L.opened}:</b> ${o.note}<br>${L.reply}</div>`:""}
-      ${TICKET===i?`<textarea id="tknote" placeholder="${L.ph}"></textarea>
-        <div class="act"><button data-tksend="${i}">${L.send}</button><button data-tkcancel="1">${L.cancel}</button></div>`
-        :`<div class="act">
-            ${o.st==="paid"||o.st==="case"?`<button data-tk="${i}" data-kind="case">${L.sup}</button>`:""}
-            ${o.st==="paid"||o.st==="case"?`<button data-tk="${i}" data-kind="refund">${L.ref}</button>`:""}
-          </div>`}
+      <div class="act"><button data-ord="${i}">${L.detail}</button></div>
+    </div>`).join("");
+
+  const mo=$("ordmodal"), bx=$("ordbox");
+  if(!mo||!bx)return;
+  if(ORDOPEN===null||ORDOPEN===undefined||!ORDERS[ORDOPEN]){mo.classList.remove("on");bx.innerHTML="";return;}
+  const i=ORDOPEN, o=ORDERS[i];
+  const acting=TICKET===i;
+  bx.innerHTML=`<div class="schd"><div>
+      <span class="eyebrow">${L.no} ${o.id||"—"}</span>
+      <h3 style="margin-top:6px">${orderTitle(o,zh)}</h3></div>
+    <button class="scx" data-ordclose="1" aria-label="${L.close}">✕</button></div>
+    <div class="scbody">
+      <div class="otot"><span>${L.amt}</span><b>${money(o.amount||0)}</b><span class="badge ${badgeOf(o)}">${stOf(o)}</span></div>
+      <label class="scl">${L.sum}</label>
+      <div class="kv">${orderRows(o,zh,L)}</div>
+      <label class="scl">${L.prog}</label>
+      <div class="osteps">${orderSteps(o,zh)}</div>
+      ${o.note?`<div class="case" style="margin-top:14px"><b>${o.st==="refund"?L.ropened:L.opened}:</b> ${o.note}<br>${L.reply}</div>`:""}
+      ${acting?`<label class="scl">${TKIND==="refund"?L.ref:L.sup}</label>
+        <textarea class="sci" id="tknote" placeholder="${L.ph}"></textarea>`:""}
+    </div>
+    <div class="scft">
+      ${acting
+        ? `<span class="sm mut">${L.reply}</span>
+           <span style="display:flex;gap:8px"><button data-tkcancel="1">${L.cancel}</button>
+           <button class="pri" data-tksend="${i}">${L.send}</button></span>`
+        : `<span class="sm mut">${o.type==="ads"?L.monthly:L.monthly}</span>
+           <span style="display:flex;gap:8px">
+           ${o.st==="paid"||o.st==="case"
+             ? `<button data-tk="${i}" data-kind="case">${L.sup}</button><button data-tk="${i}" data-kind="refund">${L.ref}</button>`
+             : `<button data-ordclose="1">${L.close}</button>`}</span>`}
     </div>`;
-  }).join("");
+  mo.classList.add("on");
 }
 function renderOrder(){
   const box=$("wsorder"); if(!box)return;
@@ -3018,6 +3078,10 @@ document.addEventListener("click",e=>{
     save("vt_ads",ADS); renderAds();
     $("admsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("admsg"); if(m)m.textContent=""},2000); return;}
+  const orow=e.target.closest("[data-ord]");
+  if(orow){ORDOPEN=+orow.dataset.ord;TICKET=null;renderOrders();return;}
+  if(e.target.closest("[data-ordclose]")){ORDOPEN=null;TICKET=null;renderOrders();return;}
+  if(e.target.id==="ordmodal"){ORDOPEN=null;TICKET=null;renderOrders();return;}
   const tk=e.target.closest("[data-tk]");
   if(tk){TICKET=+tk.dataset.tk; TKIND=tk.dataset.kind; renderOrders();
     setTimeout(()=>{const t=$("tknote"); if(t)t.focus()},30); return;}
@@ -3175,7 +3239,9 @@ document.addEventListener("click",e=>{
   ["dragover","drop"].forEach(t=>window.addEventListener(t,e=>{if(!dz.contains(e.target))e.preventDefault();}));
 })();
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&(SCEDIT!==null||SCOPEN!==null)){SCEDIT=null;SCOPEN=null;renderWScripts();}
+  if(e.key!=="Escape")return;
+  if(SCEDIT!==null||SCOPEN!==null){SCEDIT=null;SCOPEN=null;renderWScripts();}
+  if(ORDOPEN!==null){ORDOPEN=null;TICKET=null;renderOrders();}
 });
 $("lang").innerHTML=LANGS.map(([c,n])=>`<option value="${c}">${n}</option>`).join("");
 $("lang").addEventListener("change",e=>setLang(e.target.value));
