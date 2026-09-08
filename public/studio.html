@@ -501,6 +501,21 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .recv .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--sand);color:var(--ink2);
  display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:15px}
 
+.scr.open{border-color:var(--line2)}
+.scd{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:12px}
+.scseg{background:var(--cream);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--ink2)}
+.scseg .tm{display:inline-block;font-family:var(--disp);font-size:13px;color:var(--orange);margin-bottom:6px}
+.scseg.read .ln{margin-top:6px;color:var(--ink);font-size:15px}
+.scseg b{color:var(--ink)}
+.scend{font-size:14px;color:var(--ink2)}
+.scend b{color:var(--ink)}
+.scl{display:block;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:10px 0 5px}
+.scseg .scl{margin-top:8px}
+.sci{width:100%;font:inherit;font-size:14.5px;padding:9px 11px;border:1px solid var(--line2);border-radius:10px;
+ background:var(--paper);color:var(--ink)}
+textarea.sci{min-height:58px;resize:vertical;line-height:1.5}
+.sci:focus{outline:none;border-color:var(--orange)}
+
 /* about */
 .teamfig{margin:32px 0 0;position:relative}
 .teamfig img{width:100%;border-radius:20px;display:block;border:1px solid var(--line)}
@@ -1597,7 +1612,7 @@ let USER=(()=>{try{return JSON.parse(localStorage.getItem("vt_user"))}catch(e){r
 let BRAND=(()=>{try{return JSON.parse(localStorage.getItem("vt_brand"))||{}}catch(e){return{}}})();
 let PROF=(()=>{try{return JSON.parse(localStorage.getItem("vt_prof"))||{}}catch(e){return{}}})();
 let ASSETS=(()=>{try{return JSON.parse(localStorage.getItem("vt_assets"))||[]}catch(e){return[]}})();
-let WS="home", EDIT=null, PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
+let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, PAY="card", CKTYPE="video", ATIER="growth", TICKET=null, TKIND="case";
 let ORDERS=(()=>{try{return JSON.parse(localStorage.getItem("vt_orders"))||[]}catch(e){return[]}})();
 let SCR=(()=>{try{return JSON.parse(localStorage.getItem("vt_scr"))||null}catch(e){return null}})();
 let ADS=(()=>{try{return JSON.parse(localStorage.getItem("vt_ads"))||{acc:{}}}catch(e){return{acc:{}}}})();
@@ -2354,24 +2369,100 @@ function seedScripts(){
   return ind.s.slice(0,10).map((x,i)=>({i,en:x[0],zh:x[1],sec:x[2],st:"wait",note:""}));
 }
 function scripts(){ if(!SCR||!SCR.length){SCR=seedScripts();save("vt_scr",SCR);} return SCR; }
+
+/* 每条脚本的分镜详情：首次展开时按行业与时长生成，之后跟着编辑走 */
+const SHOTLIB={
+  food:{a:["Standing at your door, look into the camera","站在门口，看着镜头"],
+        b:["Inside, at the pass — food going out","店内出餐口，正在出的那道菜"],
+        c:["Holding the dish, turning it slowly","端起那道菜，慢慢转一圈"],
+        cta:["Come try it at","来尝尝："]},
+  beauty:{a:["At the front desk, to camera","在前台，对着镜头"],
+          b:["At the station, mid-service","操作位上，做到一半"],
+          c:["The finished hands, turning slowly","做完的手，慢慢转一圈"],
+          cta:["Book a seat at","来店预约："]},
+  tile:{a:["At the showroom entrance","在展厅门口"],
+        b:["At the slab wall, hand on the stone","在板材墙前，手放在石材上"],
+        c:["Holding a sample up to the light","把样板举到光下"],
+        cta:["Come see it at","来看实物："]},
+  auto:{a:["In the bay, to camera","在工位前，对着镜头"],
+        b:["At the lift, pointing at the part","举升机旁，指着那个部件"],
+        c:["Handing the keys back, car clean","把钥匙交回去，车已经洗好"],
+        cta:["Book it at","来店预约："]},
+  def:{a:["At your front door, to camera","在门口，看着镜头"],
+       b:["Inside, at the spot worth showing","店内最值得看的位置"],
+       c:["Holding the product, talking about it","拿起产品，边看边说"],
+       cta:["Come in at","来店里："]}
+};
+function shotSet(){
+  const id=(BRAND.ind||"").toLowerCase();
+  return SHOTLIB[id]||SHOTLIB[Object.keys(SHOTLIB).find(k=>id.includes(k))]||SHOTLIB.def;
+}
+function buildDetail(x){
+  const zh=LANG==="zh", k=zh?1:0, sh=shotSet();
+  const store=BRAND.name||(zh?"你的门店":"your store");
+  const why=BRAND.why||(zh?"你最想让人记住的那一点":"the one thing you want remembered");
+  const segs=x.sec===30
+    ? [{t:"0–10s",shot:sh.a[k],line:(zh?x.zh:x.en)},
+       {t:"10–20s",shot:sh.b[k],line:zh?`说说为什么：${why}`:`Say why: ${why}`},
+       {t:"20–30s",shot:sh.c[k],line:zh?"把产品拿到镜头前，说一句它好在哪":"Bring it to camera and say what makes it good"}]
+    : [{t:"0–7s",shot:sh.a[k],line:(zh?x.zh:x.en)},
+       {t:"7–15s",shot:sh.c[k],line:zh?"直接给结果，一句话说完":"Show the result and say it in one line"}];
+  return {title:(zh?x.zh:x.en),segs,cta:`${sh.cta[k]} ${store}`};
+}
+function detOf(x){
+  /* 编辑过的保留客户改动；没编辑过的跟着当前语言重建 */
+  if(x.edited&&x.det)return x.det;
+  x.det=buildDetail(x);
+  return x.det;
+}
 function renderWScripts(){
   const box=$("wslist"); if(!box)return;
   const zh=LANG==="zh", list=scripts();
   const L=zh?{ok:"已确认",wait:"待你确认",note:"已提修改",app:"确认，就拍这条",chg:"要改一下",undo:"撤回确认",send:"提交修改意见",ph:"想改哪里？比如：把价格换成套餐、开头提一下停车位。",sec:" 秒",st:"状态"}
             :{ok:"Approved",wait:"Waiting on you",note:"Changes asked",app:"Approve — film this",chg:"Ask for changes",undo:"Undo approval",send:"Send changes",ph:"What should change? e.g. swap the price for the set menu, mention parking at the start.",sec:" sec",st:"Status"};
-  box.innerHTML=list.map(x=>`<div class="scr">
+  const T=zh?{det:"查看详情",hide:"收起",edit:"编辑脚本",save:"保存",cancel:"取消",
+              shot:"画面",line:"台词",end:"结尾",tt:"标题",edited:"已编辑"}
+            :{det:"View script",hide:"Hide",edit:"Edit script",save:"Save",cancel:"Cancel",
+              shot:"Shot",line:"Line",end:"Ends with",tt:"Title",edited:"Edited"};
+  box.innerHTML=list.map(x=>{
+    const open=SCOPEN===x.i, editing=SCEDIT===x.i, d=(open||editing)?detOf(x):null;
+    let body="";
+    if(editing){
+      body=`<div class="scd">
+        <label class="scl">${T.tt}</label><input class="sci" id="sc-t" value="${(d.title||"").replace(/"/g,"&quot;")}">
+        ${d.segs.map((g,gi)=>`<div class="scseg">
+          <span class="tm">${g.t}</span>
+          <label class="scl">${T.shot}</label><input class="sci" id="sc-s${gi}" value="${g.shot.replace(/"/g,"&quot;")}">
+          <label class="scl">${T.line}</label><textarea class="sci" id="sc-l${gi}">${g.line}</textarea>
+        </div>`).join("")}
+        <label class="scl">${T.end}</label><input class="sci" id="sc-c" value="${(d.cta||"").replace(/"/g,"&quot;")}">
+      </div>`;
+    }else if(open){
+      body=`<div class="scd">
+        ${d.segs.map(g=>`<div class="scseg read"><span class="tm">${g.t}</span>
+          <div><b>${T.shot}:</b> ${g.shot}</div><div class="ln">“${g.line}”</div></div>`).join("")}
+        <div class="scend"><b>${T.end}:</b> ${d.cta}</div>
+      </div>`;
+    }
+    return `<div class="scr${open||editing?" open":""}">
     <div class="hd"><span class="num">${String(x.i+1).padStart(2,"0")}</span>
-      <h4>${zh?x.zh:x.en}</h4>
+      <h4>${x.det?x.det.title:(zh?x.zh:x.en)}</h4>
       <span class="badge ${x.st==="ok"?"done":x.st==="note"?"new":"draft"}">${L[x.st]}</span></div>
-    <div class="bd"><b>${x.sec}${L.sec}</b> · ${zh?"9:16 竖版":"9:16 vertical"}${x.note?` · <b>${zh?"你的意见":"Your note"}:</b> ${x.note}`:""}</div>
+    <div class="bd"><b>${x.sec}${L.sec}</b> · ${zh?"9:16 竖版":"9:16 vertical"}${x.edited?` · ${T.edited}`:""}${x.note?` · <b>${zh?"你的意见":"Your note"}:</b> ${x.note}`:""}</div>
+    ${body}
     ${NOTEON===x.i?`<textarea id="scnote" placeholder="${L.ph}">${x.note||""}</textarea>`:""}
     <div class="act">
-      ${NOTEON===x.i
-        ? `<button class="pri" data-scsend="${x.i}">${L.send}</button><button data-sccancel="1">${zh?"取消":"Cancel"}</button>`
-        : (x.st==="ok"
-            ? `<button data-scundo="${x.i}">${L.undo}</button>`
-            : `<button class="pri" data-scok="${x.i}">${L.app}</button><button data-scnote="${x.i}">${L.chg}</button>`)}
-    </div></div>`).join("");
+      ${editing
+        ? `<button class="pri" data-scsave="${x.i}">${T.save}</button><button data-sccancele="1">${T.cancel}</button>`
+        : NOTEON===x.i
+        ? `<button class="pri" data-scsend="${x.i}">${L.send}</button><button data-sccancel="1">${T.cancel}</button>`
+        : `<button data-scopen="${x.i}">${open?T.hide:T.det}</button>
+           <button data-scedit="${x.i}">${T.edit}</button>
+           ${x.st==="ok"
+             ? `<button data-scundo="${x.i}">${L.undo}</button>`
+             : `<button class="pri" data-scok="${x.i}">${L.app}</button><button data-scnote="${x.i}">${L.chg}</button>`}`}
+    </div></div>`;
+  }).join("");
   const c={ok:0,wait:0,note:0}; list.forEach(x=>c[x.st]++);
   if($("sc-app"))$("sc-app").textContent=c.ok;
   if($("sc-wait"))$("sc-wait").textContent=c.wait;
@@ -2896,8 +2987,23 @@ document.addEventListener("click",e=>{
     renderOrder();renderOrders();renderReqs();renderAdmin();
     setTimeout(()=>{goto("dashboard");wsGo(CKTYPE==="ads"?"ads":"home");},1500);
     return;}
+  const sop=e.target.closest("[data-scopen]");
+  if(sop){const i=+sop.dataset.scopen; SCOPEN=SCOPEN===i?null:i; SCEDIT=null; NOTEON=null; renderWScripts(); return;}
+  const sed=e.target.closest("[data-scedit]");
+  if(sed){SCEDIT=+sed.dataset.scedit; SCOPEN=null; NOTEON=null; renderWScripts();
+    setTimeout(()=>{const t=$("sc-t"); if(t)t.focus()},40); return;}
+  if(e.target.closest("[data-sccancele]")){SCEDIT=null;renderWScripts();return;}
+  const ssv=e.target.closest("[data-scsave]");
+  if(ssv){
+    const x=scripts()[+ssv.dataset.scsave], d=detOf(x);
+    const g=id=>{const e2=$(id); return e2?e2.value.trim():"";};
+    const t=g("sc-t"); if(t)d.title=t;
+    d.segs.forEach((seg,gi)=>{const sh=g("sc-s"+gi), ln=g("sc-l"+gi); if(sh)seg.shot=sh; if(ln)seg.line=ln;});
+    const c=g("sc-c"); if(c)d.cta=c;
+    x.det=d; x.edited=true; SCEDIT=null; SCOPEN=x.i;
+    save("vt_scr",SCR); renderWScripts(); return;}
   const so=e.target.closest("[data-scok]");
-  if(so){const x=scripts()[+so.dataset.scok];x.st="ok";x.note="";NOTEON=null;save("vt_scr",SCR);renderWScripts();return;}
+  if(so){const x=scripts()[+so.dataset.scok];x.st="ok";x.note="";NOTEON=null;SCEDIT=null;save("vt_scr",SCR);renderWScripts();return;}
   const su=e.target.closest("[data-scundo]");
   if(su){scripts()[+su.dataset.scundo].st="wait";save("vt_scr",SCR);renderWScripts();return;}
   const sn=e.target.closest("[data-scnote]");
