@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vertens Ad Studio</title>
+<title>Vertens Ad</title>
 <!-- SEO · 上线到自有域名时把这一段放进 <head> -->
-<meta name="description" content="Vertens Ad Studio — human-led, AI-assisted short video ads for local stores. Real editors turn your store, products and story into 9:16 vertical ads for TikTok and Facebook. Ten free scripts, then a free 15-second sample. Monthly plans from $499. Ad management from $100/mo plus 10% of ad spend, from $500 a month.">
-<meta property="og:title" content="Vertens Ad Studio — real ads filmed in your real store">
+<meta name="description" content="Vertens Ad — human-led, AI-assisted short video ads for local stores. Real editors turn your store, products and story into 9:16 vertical ads for TikTok and Facebook. Ten free scripts, then a free 15-second sample. Monthly plans from $499. Ad management from $100/mo plus 10% of ad spend, from $500 a month.">
+<meta property="og:title" content="Vertens Ad — real ads filmed in your real store">
 <meta property="og:description" content="Free 15-second sample. Made from your real store footage, not stock.">
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
@@ -34,7 +34,7 @@
   },
   {
    "@type": "Service",
-   "name": "Vertens Ad Studio",
+   "name": "Vertens Ad",
    "serviceType": "Local store marketing — video ad production and ad management",
    "provider": {
     "@id": "https://vertens.ai/#org"
@@ -462,8 +462,88 @@ h3{font-family:var(--body);font-weight:600;letter-spacing:-.01em}
 .asum .srow.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:14px;font-size:17px}
 .asum .srow.tot b{font-family:var(--disp);font-size:30px;font-weight:400}
 .asum-cta{display:flex;flex-direction:column}
-.asum-cta .pill{width:100%;justify-content:center}
-@media (max-width:860px){.apl{grid-template-columns:1fr}.asum{grid-template-columns:1fr}}
+ .asum-cta .pill{width:100%;justify-content:center}
+ @media (max-width:860px){.apl{grid-template-columns:1fr}.asum{grid-template-columns:1fr}}
+
+ /* payment page: faithful pending-payment reference layout */
+ .checkout-page{background:#f7f7f7;min-height:100vh;color:#14202b}
+ .checkout-wrap{max-width:none;margin:0;padding:13px 3.4% 72px}
+ .checkout-head{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:31px}
+ .checkout-title{display:flex;align-items:center;gap:14px}
+ .checkout-title h1{font-family:var(--body);font-size:31px;font-weight:800;letter-spacing:-.035em;margin:0}
+ .checkout-back{width:38px;height:38px;padding:0;border:0;border-radius:50%;background:#fff1eb;color:#ff7047;display:flex;align-items:center;justify-content:center;cursor:pointer}
+ .checkout-back svg{width:18px;height:18px}
+ .checkout-timer{border:1px solid #f5ddd3;border-radius:999px;color:#ff7047;font-size:16px;font-weight:700;padding:11px 21px;white-space:nowrap}
+ .checkout-grid{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(440px,1fr);gap:32px;align-items:start}
+ .checkout-left{display:grid;gap:25px}
+ .checkout-card{background:#fff;border:1px solid #e4e5e6;border-radius:27px;padding:26px 24px;box-shadow:none}
+ .checkout-account{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:15px;font-weight:700;margin:0}
+ .checkout-account b{font-size:15px;color:#455767}
+ .checkout-account #ck-out,.checkout-account #ck-in{margin-left:auto}
+ .checkout-account #ck-out{display:none!important}
+ .checkout-order{min-height:164px;padding:32px 32px 28px}
+ .checkout-order h2{font-family:var(--body);font-size:23px;font-weight:800;margin:0 0 27px}
+ .checkout-order-line{display:flex;justify-content:space-between;gap:20px;font-size:16px;font-weight:700}
+ .checkout-order-line span:last-child{white-space:nowrap}
+ .checkout-summary{position:sticky;top:24px;padding:32px 32px 36px}
+ .checkout-summary .eyebrow{color:#999fa3;letter-spacing:.18em;text-transform:uppercase;font-size:13px;font-weight:800}
+ .checkout-summary h2{font-family:var(--body);font-size:40px;font-weight:800;letter-spacing:-.045em;margin:7px 0 23px;line-height:1}
+ .checkout-summary .summary-due{display:flex;justify-content:space-between;gap:16px;padding-bottom:22px;border-bottom:1px solid #ececec;font-size:17px;font-weight:800}
+ .checkout-summary .summary-due b{font-size:16px}
+ .checkout-payment-label{font-size:14px;color:#9a9fa3;font-weight:800;margin:20px 0 5px}
+ .checkout-payment-copy{font-size:13px;color:#5e656b;line-height:1.5;margin:0 0 16px}
+ .checkout-methods{display:grid;grid-template-columns:1fr 1fr;border:4px solid #f0f1f2;border-radius:999px;background:#f0f1f2;overflow:hidden;margin:0 0 16px}
+ .checkout-methods .opt{border:0;border-radius:999px;background:transparent;padding:13px 10px;text-align:center;cursor:pointer;font-size:14px;font-weight:800;color:#5f6569}
+ .checkout-methods .opt.sel{background:#fff;box-shadow:0 3px 13px rgba(0,0,0,.08);color:#303337}
+ .checkout-methods .opt input{position:absolute;opacity:0;pointer-events:none}
+ .checkout-methods .opt .t span{display:none}
+ .checkout-paypal{width:100%;height:55px;border:0;border-radius:999px;background:#ededee;color:#1253a0;font-size:23px;font-weight:900;font-style:italic;padding:0;cursor:pointer;margin:0 0 16px}
+ .checkout-cardpay{width:100%;height:55px;border:0;border-radius:999px;background:#2d2f30;color:#fff;font-size:18px;font-weight:700;padding:0;cursor:pointer}
+ .checkout-cardpay:disabled{opacity:.55;cursor:not-allowed}
+ .checkout-provider{text-align:center;color:#9aa3aa;font-size:12px;margin-top:13px}
+ .checkout-provider b{color:#1262b2;font-size:16px;font-style:italic;margin-left:4px}
+ .checkout-card-options{display:none;gap:16px;margin:0 0 35px}
+ .checkout-card-options button{height:46px;border:0;border-radius:5px;background:#000;color:#fff;font-weight:700;font-size:18px;cursor:pointer}
+ .checkout-card-options button:nth-child(3){background:#35d7ed;color:#111;font-family:monospace;font-size:21px}
+ .checkout-card-form{display:none}
+ .checkout-card-form .f{display:block;margin-bottom:18px}
+ .checkout-card-form label{display:block;color:#26333d;font-size:13px;margin:0 0 7px}
+ .checkout-card-form .inp{height:42px;background:#f1f2f3;border:1px solid #e1e3e5;border-radius:6px;padding:0 14px;color:#5c6b79}
+ .checkout-card-form .card-split{display:grid;grid-template-columns:1fr 1fr}
+ .checkout-card-form .card-split .f{margin:0}
+ .checkout-card-form .card-split .f:first-child .inp{border-radius:6px 0 0 6px}
+ .checkout-card-form .card-split .f:last-child .inp{border-radius:0 6px 6px 0;border-left:0}
+ .checkout-card-form .card-brand{position:relative}
+ .checkout-card-form .card-brand:after{content:"VISA  •  Mastercard";position:absolute;right:12px;bottom:12px;color:#8d99a4;font-size:10px}
+ .checkout-card-form .checkout-cardpay{background:#638de4;border-radius:5px;margin-top:21px;font-size:13px}
+ .checkout-card-mode .checkout-paypal{display:none}
+ .checkout-card-mode .checkout-cardpay{display:block}
+ .checkout-card-mode .checkout-card-options{display:grid;grid-template-columns:1fr}
+ .checkout-card-mode .checkout-card-form{display:block}
+ .checkout-card-mode .checkout-provider,.checkout-card-mode .checkout-summary .note.ok{display:none}
+ .checkout-page:not(.checkout-card-mode) .checkout-card-form,.checkout-page:not(.checkout-card-mode) .checkout-card-options{display:none}
+ .checkout-page:not(.checkout-card-mode) .checkout-cardpay{display:block}
+ .checkout-page:not(.checkout-card-mode) .checkout-cardpay #paybtn-t:after{content:""}
+.required-star{color:#e9532d;font-weight:800;margin-left:0;margin-right:4px;order:-1}
+.f>label{display:flex;align-items:baseline;flex-wrap:wrap}
+.checkout-signin{display:none}
+.checkout-summary .note.ok{margin-top:16px;font-size:13px}
+.checkout-pay-divider{display:flex;align-items:center;gap:14px;color:#8c969d;font-size:13px;margin:8px 0 18px}
+.checkout-pay-divider:before,.checkout-pay-divider:after{content:"";height:1px;background:#e4e6e8;flex:1}
+.checkout-page #cardf{display:none!important}
+.checkout-page #paynote{display:none!important}
+.checkout-page .checkout-account #ck-out{display:none!important}
+.checkout-page .checkout-account #ck-in{display:block!important}
+.checkout-legacy{display:none!important}
+#estbox{display:none!important}
+#asum>div:first-child,#asubmit,.asum-cta>p{display:none!important}
+#samplegate,#samplein{display:none!important}
+.asum{display:block;border:0;background:transparent;padding:4px 0;margin-top:18px}
+.asum-cta{width:min(360px,100%);margin:0 auto;align-items:center}
+.asum-cta .pill{width:auto!important;min-width:180px;justify-content:center}
+.asum-cta .waline{justify-content:center}
+ @media (max-width:800px){.checkout-wrap{padding:20px 16px 60px}.checkout-grid{grid-template-columns:1fr}.checkout-summary{position:static}.checkout-card{padding:22px}.checkout-order{min-height:150px}.checkout-head{align-items:flex-start}.checkout-title h1{font-size:26px}.checkout-timer{font-size:12px;padding:8px 12px}}
+ @media (max-width:1080px){.checkout-grid{grid-template-columns:minmax(0,1.15fr) minmax(380px,.85fr);gap:22px}.checkout-summary{padding:26px 24px}}
 
 .ord{border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:18px 20px;margin-top:12px}
 .ord .top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
@@ -788,12 +868,33 @@ body.adminmode{background:var(--cream)}
 .ast.ed .mt select{width:100%;font:inherit;font-size:12px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;margin-top:6px;background:var(--cream);color:var(--ink)}
 .empty{border:1px dashed var(--line2);border-radius:18px;padding:32px 24px;text-align:center;
  color:var(--faint);font-size:15px;margin-top:16px;background:var(--cream)}
+.asset-upload-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 24px}
+.asset-uploader{position:relative;min-height:220px;border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:18px;display:flex;flex-direction:column;align-items:flex-start;transition:.18s}
+.asset-uploader:hover{border-color:var(--orange);box-shadow:0 8px 22px rgba(39,29,20,.06)}
+.asset-uploader .asset-type{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:var(--orangeSoft);color:var(--orange);font-size:18px;margin-bottom:16px}
+.asset-uploader h3{font-family:var(--disp);font-size:20px;font-weight:400;margin:0 0 7px}.asset-uploader p{font-size:13px;color:var(--ink2);line-height:1.55;margin:0;min-height:40px}
+.asset-uploader .asset-meta{display:flex;justify-content:space-between;width:100%;margin-top:15px;padding-top:13px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+.asset-uploader .asset-meta b{color:var(--orange);font-size:13px}.asset-uploader button{width:100%;height:38px;border:1px solid var(--dark);border-radius:9px;background:var(--dark);color:#fff;font-weight:700;margin-top:16px;cursor:pointer}.asset-uploader button:hover{background:var(--orange);border-color:var(--orange)}
+.asset-library-head{display:flex;justify-content:space-between;align-items:flex-end;margin:4px 0 10px}.asset-library-head b{font-family:var(--disp);font-size:21px;font-weight:400}.asset-library-head span{font-size:12px;color:var(--faint)}
+.asset-folder-back{margin-left:14px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}.asset-folder-back:hover{border-color:var(--orange);color:var(--orange)}
+.asset-groups{display:grid;gap:24px}.asset-group{border-top:1px solid var(--line);padding-top:16px}.asset-group>header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}.asset-group>header b{font-size:15px}.asset-group>header span{font-size:12px;color:var(--faint)}.asset-group .agrid{margin-top:12px}
+.asset-group-empty{min-height:72px;border:1px dashed var(--line2);border-radius:11px;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px}
+#ws-assets .legacy-asset-drop,#ws-assets>.qbar{display:none}
+#ws-assets .asset-library-head,#ws-assets>#agrid,#ws-assets>#aempty{display:none!important}
+.asset-uploader .asset-folder-preview{display:none!important}.asset-uploader .asset-type,.asset-uploader h3,.asset-uploader p,.asset-uploader .asset-meta,.asset-uploader button{position:relative;z-index:1}
+.asset-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:16px}.asset-actions button{width:100%;height:36px;margin-top:0!important;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12px}.asset-actions svg{width:15px;height:15px}.asset-actions .asset-view-button{background:var(--paper);color:var(--ink);border-color:var(--line)}.asset-actions .asset-view-button:hover{background:var(--cream);color:var(--orange);border-color:var(--orange)}
+.asset-folder-modal{position:fixed;inset:0;z-index:80;background:rgba(26,20,15,.38);display:flex;align-items:center;justify-content:center;padding:24px}.asset-folder-dialog{width:min(860px,100%);max-height:min(760px,92vh);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 24px 70px rgba(31,20,10,.2)}.asset-folder-dialog>header{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:16px}.asset-folder-dialog>header b{font-family:var(--disp);font-size:25px;font-weight:400}.asset-folder-dialog>header span{display:block;color:var(--faint);font-size:13px;margin-top:5px}.asset-folder-dialog>header button{border:1px solid var(--line);background:var(--cream);border-radius:8px;padding:6px 11px;cursor:pointer}.asset-folder-dialog .agrid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:18px}.asset-folder-dialog .asset-group-empty{grid-column:1/-1}.asset-folder-dialog .ast{min-width:0}
+.asset-folder{cursor:pointer;overflow:hidden}.asset-folder:before{content:"";position:absolute;left:18px;top:-1px;width:44px;height:5px;border-radius:0 0 5px 5px;background:var(--orange);opacity:.55}.asset-folder-preview{display:none!important}.asset-folder.is-open{border-color:var(--orange);box-shadow:0 0 0 2px var(--orangeSoft)}
+.asset-uploader .asset-type{font-size:0;position:relative}.asset-uploader .asset-type:after{content:"";width:18px;height:18px;border:1.8px solid currentColor;border-radius:5px;display:block}.asset-uploader:nth-child(1) .asset-type:after{border-radius:50%;box-shadow:inset 0 0 0 4px var(--orangeSoft)}.asset-uploader:nth-child(2) .asset-type:after{border-width:0 0 1.8px 1.8px;transform:skewY(-25deg)}.asset-uploader:nth-child(3) .asset-type:after{transform:rotate(30deg);border-radius:2px}
+.asset-folder-dialog>header button{width:32px;height:32px;padding:0;border:0;background:transparent;position:relative;font-size:0}.asset-folder-dialog>header button:before,.asset-folder-dialog>header button:after{content:"";position:absolute;left:8px;top:15px;width:17px;height:1.5px;background:var(--ink);border-radius:2px}.asset-folder-dialog>header button:before{transform:rotate(45deg)}.asset-folder-dialog>header button:after{transform:rotate(-45deg)}.asset-folder-dialog>header button:hover{background:var(--cream)}
+ .asset-uploader .asset-type,.asset-folder:before{display:none!important}.asset-uploader h3{margin-top:2px}.asset-uploader{min-height:214px;padding-top:20px}.asset-uploader .asset-meta{margin-top:18px}.asset-actions{margin-top:14px}
 @media (max-width:900px){
  .ws{grid-template-columns:1fr;gap:16px}
  .wsn{position:static;flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px}
  .wsn .who,.wsn .sep{display:none}
  .wsn a{white-space:nowrap}
  .qbar{grid-template-columns:1fr}
+ .asset-upload-grid{grid-template-columns:1fr}
 }
 
 /* three ways */
@@ -1074,7 +1175,7 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 </head>
 <body>
 <nav class="nav"><div class="wrap">
-  <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Ad Studio</span></span></div>
+  <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span>Ad</span></span></div>
   <div class="sp"></div>
   <div class="seg" id="route"><button data-go="studio" aria-pressed="true" data-i="nav1">Home</button><button data-go="videos" aria-pressed="false" data-i="nav2">Videos</button><button data-go="ads" aria-pressed="false" data-i="nav3">Ad management</button><button data-go="about" aria-pressed="false" data-i="nav6">About us</button></div>
   <select id="lang" class="langsel" aria-label="Language"></select>
@@ -1221,23 +1322,24 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
   <div class="block" id="qform">
     <h3><span class="stepn">1</span><span data-i="qs1">Your page</span></h3>
     <div class="g2" style="margin-top:14px">
-      <div class="f" style="grid-column:1/-1"><label data-i="qf1">Facebook, Instagram or Google page</label><input class="inp" id="q-link" placeholder="instagram.com/yourstore"></div>
+      <div class="f" style="grid-column:1/-1"><label><span data-i="qf1">Facebook, Instagram or Google page</span> <span class="sm mut">（选填）</span></label><input class="inp" id="q-link" placeholder="instagram.com/yourstore"></div>
     </div>
 
     <h3 style="margin-top:28px"><span class="stepn">2</span><span data-i="qs2">Your store</span></h3>
     <div class="g2" style="margin-top:14px">
-      <div class="f" style="grid-column:1/-1"><label data-i="sf1">Store name and address</label><input class="inp" id="q-name" placeholder="Casa Luma · 1820 Harbor Blvd, Costa Mesa CA"></div>
-      <div class="f"><label data-i="qf2">Type of business</label><select class="inp" id="q-ind"></select></div>
+      <div class="f" style="grid-column:1/-1"><label><span data-i="sf1">Store name and address</span> <span class="required-star" aria-hidden="true">*</span><span class="sm mut">（名称必填，地址选填）</span></label><input class="inp" id="q-name" required placeholder="Casa Luma · 1820 Harbor Blvd, Costa Mesa CA"></div>
+      <div class="f"><label><span data-i="qf2">Type of business</span> <span class="required-star" aria-hidden="true">*</span></label><select class="inp" id="q-ind" required></select></div>
       <div class="f"><label data-i="qf4">How many locations</label><select class="inp" id="q-size"><option>1</option><option>2</option><option>3–5</option><option>6–20</option><option>20+</option></select></div>
-      <div class="f" style="grid-column:1/-1"><label data-i="sf2">What you sell</label><input class="inp" id="q-sell" placeholder="Handmade dumplings and noodles, dine-in and takeout"></div>
-      <div class="f" style="grid-column:1/-1"><label data-i="sf3">Why people choose you</label><input class="inp" id="q-why" placeholder="Everything made the same morning; family recipe since 2012"></div>
-      <div class="f" style="grid-column:1/-1"><label data-i="sf4">Who you want to reach</label><input class="inp" id="q-who" placeholder="Families within 10 miles, office lunch crowd"></div>
+      <div class="f" style="grid-column:1/-1"><label><span data-i="sf2">What you sell</span> <span class="required-star" aria-hidden="true">*</span></label><input class="inp" id="q-sell" required placeholder="Handmade dumplings and noodles, dine-in and takeout"></div>
+      <div class="f" style="grid-column:1/-1"><label><span data-i="sf3">Why people choose you</span> <span class="sm mut">（选填）</span></label><input class="inp" id="q-why" placeholder="Everything made the same morning; family recipe since 2012"></div>
+      <div class="f" style="grid-column:1/-1"><label><span data-i="sf4">Who you want to reach</span> <span class="sm mut">（选填）</span></label><input class="inp" id="q-who" placeholder="Families within 10 miles, office lunch crowd"></div>
     </div>
 
     <h3 style="margin-top:28px"><span class="stepn">3</span><span data-i="qs3">Where we send it</span></h3>
     <div class="g2" style="margin-top:14px">
-      <div class="f"><label data-i="qf5">Phone</label><input class="inp" id="q-phone" placeholder="+1 626 000 0000"></div>
+      <div class="f"><label><span data-i="qf5">Phone</span> <span class="required-star" aria-hidden="true">*</span></label><input class="inp" id="q-phone" placeholder="+1 626 000 0000"></div>
       <div class="f"><label data-i="qf6">WhatsApp (if different)</label><input class="inp" id="q-wa" placeholder="+1 626 000 0000"></div>
+      <p class="sm mut" style="grid-column:1/-1;margin:0">电话或 WhatsApp 至少填写一项</p>
     </div>
 
     <button class="pill o" id="qgo" style="margin-top:22px"><span data-i="qb">Send me the scripts</span><span class="arw">→</span></button>
@@ -1347,12 +1449,12 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
         <h3 data-i="db1">Store information</h3>
         <p class="hint" data-i="dbh1">This is what goes into the script and onto the screen.</p>
         <div class="g2">
-          <div class="f" style="grid-column:1/-1"><label data-i="sf1b">Store name and address</label><input class="inp" id="b-name" placeholder="Casa Luma · 1820 Harbor Blvd, Costa Mesa CA"></div>
-          <div class="f"><label data-i="dfi">Industry</label><select class="inp" id="b-ind"></select></div>
-          <div class="f"><label data-i="dfc">Contact (WhatsApp or phone)</label><input class="inp" id="b-contact" placeholder="+1 626 000 0000"></div>
-          <div class="f" style="grid-column:1/-1"><label data-i="sf2b">What you sell</label><input class="inp" id="b-sell" placeholder="Handmade dumplings and noodles, dine-in and takeout"></div>
-          <div class="f" style="grid-column:1/-1"><label data-i="sf3b">Why people choose you</label><input class="inp" id="b-why" placeholder="Everything made same morning; family recipe since 2012"></div>
-          <div class="f" style="grid-column:1/-1"><label data-i="sf4b">Who you want to reach</label><input class="inp" id="b-who" placeholder="Families within 10 miles, office lunch crowd"></div>
+          <div class="f" style="grid-column:1/-1"><label><span data-i="sf1b">Store name and address</span> <span class="required-star" aria-hidden="true">*</span><span class="sm mut">（名称必填，地址选填）</span></label><input class="inp" id="b-name" required placeholder="Casa Luma · 1820 Harbor Blvd, Costa Mesa CA"></div>
+          <div class="f"><label><span data-i="dfi">Industry</span> <span class="required-star" aria-hidden="true">*</span></label><select class="inp" id="b-ind" required></select></div>
+          <div class="f"><label><span data-i="dfc">Contact (WhatsApp or phone)</span> <span class="required-star" aria-hidden="true">*</span></label><input class="inp" id="b-contact" required placeholder="+1 626 000 0000"></div>
+          <div class="f" style="grid-column:1/-1"><label><span data-i="sf2b">What you sell</span> <span class="required-star" aria-hidden="true">*</span></label><input class="inp" id="b-sell" required placeholder="Handmade dumplings and noodles, dine-in and takeout"></div>
+          <div class="f" style="grid-column:1/-1"><label><span data-i="sf3b">Why people choose you</span> <span class="sm mut">（选填）</span></label><input class="inp" id="b-why" placeholder="Everything made same morning; family recipe since 2012"></div>
+          <div class="f" style="grid-column:1/-1"><label><span data-i="sf4b">Who you want to reach</span> <span class="sm mut">（选填）</span></label><input class="inp" id="b-who" placeholder="Families within 10 miles, office lunch crowd"></div>
         </div>
         <button class="mini2" id="savebrand" style="margin-top:16px" data-i="dsave">Save store</button>
         <span class="sm mut" id="savedmsg" style="margin-left:10px"></span>
@@ -1371,7 +1473,13 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
         <p data-i="wsp2">Everything you have filmed or photographed for your store. Drag files in, rename them, put them in the right group, delete what you do not want us to use.</p>
       </div>
 
-      <div class="drop" id="drop">
+      <div class="asset-upload-grid" aria-label="素材分类上传">
+        <article class="asset-uploader" data-drop-cat="c1"><i class="asset-type">◉</i><h3>人物口播</h3><p>真人正对镜头讲解。建议竖屏，每条约 30 秒；可分三段拍摄。</p><div class="asset-meta"><b id="uc1n">0 / 2</b><span>视频 · MP4 / MOV</span></div><button type="button" data-upload-cat="c1">上传口播视频</button><input type="file" id="afile-c1" accept="video/*" multiple hidden></article>
+        <article class="asset-uploader" data-drop-cat="c2"><i class="asset-type">⌁</i><h3>细节片段</h3><p>产品、服务过程和门店环境。靠近拍、拿稳拍，不需要口播。</p><div class="asset-meta"><b id="uc2n">0 / 5</b><span>视频 · 每条约 5 秒</span></div><button type="button" data-upload-cat="c2">上传细节片段</button><input type="file" id="afile-c2" accept="video/*" multiple hidden></article>
+        <article class="asset-uploader" data-drop-cat="c3"><i class="asset-type">▧</i><h3>门店照片</h3><p>门头、店内、产品和 Logo。优先上传清晰、明亮的原图。</p><div class="asset-meta"><b id="uc3n">0 / 10</b><span>照片 · JPG / PNG</span></div><button type="button" data-upload-cat="c3">上传门店照片</button><input type="file" id="afile-c3" accept="image/*" multiple hidden></article>
+      </div>
+      <div class="asset-library-head"><b>已上传素材</b><span>已按用途自动归类，可在素材卡片中编辑或删除</span></div>
+      <div class="drop legacy-asset-drop" id="drop">
         <b data-i="dz1">Drag your files here</b>
         <span data-i="dz2">Videos and photos, straight off your phone. Or click to choose.</span>
         <input type="file" id="afile" accept="video/*,image/*" multiple hidden>
@@ -1493,8 +1601,70 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 </div>
 
 <!-- ============ CHECKOUT ============ -->
-<div class="page" id="p-checkout">
-<div class="wrap dash" style="padding-top:34px;padding-bottom:70px">
+<div class="page checkout-page" id="p-checkout">
+<div class="checkout-wrap">
+  <div class="checkout-head">
+    <div class="checkout-title">
+      <button class="checkout-back" id="ckback" data-go="videos" aria-label="Back to plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <h1 data-i="ckh">Pending Payment</h1>
+    </div>
+    <div class="checkout-timer">23h 59m Remaining</div>
+  </div>
+  <div class="checkout-grid">
+    <div class="checkout-left">
+    <div class="checkout-card checkout-account">
+        <span>Account</span>
+        <div id="ck-out"><button class="gbtn" id="ckgoogle"><span data-i="gsign">Continue with Google</span></button></div>
+        <div id="ck-in" style="display:none"><b id="ck-mail">—</b></div>
+    </div>
+    <div class="checkout-card checkout-order">
+      <h2>Kitchen &amp; Dining Concept</h2>
+      <div class="checkout-order-line"><span id="ck-order-amount">$ 198 * 1</span><span id="k-total">$198</span></div>
+      <div id="cklines" style="display:none"></div>
+    </div>
+    </div>
+    <div class="checkout-card checkout-summary">
+      <div class="eyebrow">Payment summary</div>
+      <h2 id="ck-summary-total">$198</h2>
+      <div class="summary-due"><span>Amount Due</span><b id="ck-due">$198</b></div>
+      <div class="checkout-payment-label">Payment Method</div>
+      <p class="checkout-payment-copy">Choose PayPal, or switch to other payment methods such as credit/debit cards, Google Pay, Apple Pay, and more.</p>
+      <div class="checkout-methods opts" id="paym">
+        <label class="opt sel" data-pay="paypal"><input type="radio" name="pay" value="paypal"><span class="t"><b>PayPal</b><span>Pay securely with PayPal</span></span></label>
+        <label class="opt" data-pay="card"><input type="radio" name="pay" value="card"><span class="t"><b>Cards &amp; Wallets</b><span>Debit or credit card</span></span></label>
+        <label class="opt" data-pay="invoice" style="display:none"><input type="radio" name="pay" value="invoice"></label>
+      </div>
+      <div class="g2" id="cardf" style="margin-top:16px">
+        <div class="f" style="grid-column:1/-1"><label data-i="cf1">Card number</label><input class="inp" inputmode="numeric" autocomplete="off" placeholder="•••• •••• •••• ••••"></div>
+        <div class="f"><label data-i="cf2">Expiry</label><input class="inp" placeholder="MM / YY" autocomplete="off"></div>
+        <div class="f"><label data-i="cf3">Security code</label><input class="inp" placeholder="•••" autocomplete="off"></div>
+      </div>
+      <div class="checkout-card-options" id="card-options">
+        <button type="button">G Pay</button>
+        <button type="button"> Pay</button>
+        <button type="button">aii1</button>
+      </div>
+      <div class="checkout-card-form" id="card-form">
+        <div class="checkout-pay-divider"><span>Or pay with</span></div>
+        <div class="f"><label>Email</label><input class="inp" type="email" value="1135782037@qq.com" autocomplete="email"></div>
+        <div class="f card-brand"><label>Card information</label><input class="inp" inputmode="numeric" autocomplete="off" placeholder="1234 1234 1234 1234"></div>
+        <div class="card-split">
+          <div class="f"><input class="inp" placeholder="MM / YY" autocomplete="off"></div>
+          <div class="f"><input class="inp" placeholder="CVC" autocomplete="off"></div>
+        </div>
+        <div class="f"><label>Name on card</label><input class="inp" autocomplete="cc-name"></div>
+      </div>
+      <div class="note" id="paynote"></div>
+      <button class="checkout-paypal" type="button" id="paypal-display">PayPal</button>
+      <button class="checkout-cardpay" type="button" id="paybtn"><span id="paybtn-t">Pay with debit or credit card</span></button>
+      <div class="checkout-provider">Powered by <b>PayPal</b></div>
+      <div class="note ok" data-i="ckpr"><b>First video redone until it is right, or refunded.</b> Stop later and we refund what we have not made.</div>
+      <div class="done" id="ckdone" data-i="ckdonetxt"><b>Paid.</b> Opening your workspace — upload your material there and we start today.</div>
+    </div>
+  </div>
+</div>
+<!-- legacy checkout markup intentionally retained in backup only -->
+<div class="wrap dash checkout-legacy" style="padding-top:34px;padding-bottom:70px">
   <div>
     <div style="margin-bottom:24px">
       <a class="back" id="ckback" data-go="videos">← Back to plans</a>
@@ -1559,11 +1729,11 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
   <section id="ab-who">
     <div style="max-width:60ch">
       <h1 data-i="abh">The team behind the videos</h1>
-      <p class="lead" style="margin-top:14px" data-i="abp1">Vertens Ad Studio is the short-video team of the Sunvega Group. We do overseas social media marketing, and what we are best at is marketing for physical stores abroad — the restaurants, salons, showrooms and garages that live on people walking through the door.</p>
+      <p class="lead" style="margin-top:14px" data-i="abp1">Vertens Ad is the short-video team of the Sunvega Group. We do overseas social media marketing, and what we are best at is marketing for physical stores abroad — the restaurants, salons, showrooms and garages that live on people walking through the door.</p>
     </div>
 
     <figure class="teamfig">
-      <img src="team.jpg" alt="The Vertens Ad Studio team, part of Sunvega Group" id="teamimg" onerror="this.style.display='none';this.parentNode.classList.add('ph')">
+      <img src="team.jpg" alt="The Vertens Ad team, part of Sunvega Group" id="teamimg" onerror="this.style.display='none';this.parentNode.classList.add('ph')">
       <div class="phbox"><b data-i="abph">Team photo</b><span data-i="abphn">Drop a file named team.jpg next to this page to replace this.</span></div>
       <figcaption data-i="abcap">Our writers, editors and ad buyers. Sunvega Group.</figcaption>
     </figure>
@@ -1844,7 +2014,7 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
 <footer class="sitefoot"><div class="wrap">
   <div class="fgrid">
     <div class="fbrand">
-      <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span style="color:var(--faint)">Ad Studio</span></span></div>
+      <div class="mark"><span class="logo">V</span><span><b style="font-weight:700">Vertens</b> <span>Ad</span></span></div>
       <p data-i="fdesc">Human-led, AI-assisted short video ads for local stores. Part of the Sunvega Group.</p>
       <p class="fsun" data-i="fsun">Sunvega Group · Overseas social media marketing</p>
     </div>
@@ -1870,7 +2040,7 @@ h4{font-size:17px;font-weight:600;font-family:var(--body)}
     </div>
   </div>
   <div class="fbot">
-    <span data-i="fcopy">© 2026 Vertens Ad Studio, a Sunvega Group company. All rights reserved.</span>
+    <span data-i="fcopy">© 2026 Vertens Ad, a Sunvega Group company. All rights reserved.</span>
     <span class="flinks"><a data-go="about" data-i="fpriv">Privacy</a><a data-go="about" data-i="fterm">Terms</a><a data-go="about" data-i="fref">Refunds</a></span>
   </div>
 </div></footer>
@@ -1901,7 +2071,7 @@ let USER=(()=>{try{return JSON.parse(localStorage.getItem("vt_user"))}catch(e){r
 let BRAND=(()=>{try{return JSON.parse(localStorage.getItem("vt_brand"))||{}}catch(e){return{}}})();
 let PROF=(()=>{try{return JSON.parse(localStorage.getItem("vt_prof"))||{}}catch(e){return{}}})();
 let ASSETS=(()=>{try{return JSON.parse(localStorage.getItem("vt_assets"))||[]}catch(e){return[]}})();
-let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, ORDOPEN=null, VMONTH="all", PAY="card", CKTYPE="video", ATIER="starter", TICKET=null, TKIND="case";
+let WS="home", EDIT=null, SCOPEN=null, SCEDIT=null, ORDOPEN=null, VMONTH="all", PAY="paypal", CKTYPE="video", ATIER="starter", TICKET=null, TKIND="case", ASSET_FOLDER="all";
 let ORDERS=(()=>{try{return JSON.parse(localStorage.getItem("vt_orders"))||[]}catch(e){return[]}})();
 let SCR=(()=>{try{return JSON.parse(localStorage.getItem("vt_scr"))||null}catch(e){return null}})();
 let ADS=(()=>{try{return JSON.parse(localStorage.getItem("vt_ads"))||{acc:{}}}catch(e){return{acc:{}}}})();
@@ -2084,7 +2254,7 @@ const ZH={nav1:"介绍",nav0:"免费样片",nav2:"短视频",nav3:"广告代投"
  kp3:"出镜的人",ks3:"场景",kv4:"声音",w3p:"AI",w3s:"由你的照片生成",w3v:"AI 配音",
  send3:"你要给的：",w3n:"<b>你要给的：</b>5–10 张照片。就这些。",
  wnote:"把手上有的给我们 —— 我们用素材允许的最真做法，价格都一样。",
- brandsub:"实体店广告工作室",foot:"Vertens Ad Studio · 实体店广告工作室",
+ brandsub:"实体店广告工作室",foot:"Vertens Ad · 实体店广告工作室",
  eb:"免费做一条 15 秒样片 · 不用留卡",
  navcta:"免费脚本",c1:"领 10 条免费脚本",
  n1:"不用注册",n2:"只要一个主页链接",n3:"脚本一个工作日回",c3:"领我的 10 条脚本",
@@ -2173,7 +2343,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  fc1:"服务","fl-vid":"视频套餐","fl-ads":"广告代投","fl-scr":"十条免费脚本","fl-sam":"免费样片",
  fc2:"关于","fl-abt":"关于我们","fl-wrk":"服务范围","fl-faq":"常见问题","fl-ws":"我的工作台",
  fc3:"联系我们",fhours:"周一至周六 9:00–19:00（太平洋时间）",flangs:"English · 中文",
- fcopy:"© 2026 Vertens Ad Studio，Sunvega 集团成员企业。保留所有权利。",
+ fcopy:"© 2026 Vertens Ad，Sunvega 集团成员企业。保留所有权利。",
  fpriv:"隐私政策",fterm:"服务条款",fref:"退款政策",
  wn9:"广告代投",wsh7:"广告代投",
  adf0:"账户信息",adf0h:"用来开户和圈人群。",
@@ -2205,7 +2375,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  pk2c:"一个月 15 条，按条买要 $980",
  abend:"还在犹豫？想知道我们会怎么做你的店，最快的办法是先拿<a href=\"#\" data-go=\"scripts\">十条免费脚本</a>——一个工作日，不用注册。",
  wafab:"WhatsApp 咨询",wa1:"不想填表？直接 WhatsApp 找我们",wa2:"不确定怎么拍？WhatsApp 问我们",
- wa3:"或者 WhatsApp 问我们",wa4:"预算有疑问？WhatsApp 找我们",
+ wa1:"不想填表？WhatsApp 联系我们，专人对接定制免费脚本",wa2:"WhatsApp 联系我们，发送素材，专人对接定制免费样片",wa3:"或者 WhatsApp 问我们",wa4:"预算有疑问？WhatsApp 找我们",
  adm0:"运营后台",admg1:"每天要做的",admg2:"生意",admg3:"配置",
  adm1:"总览",adm2:"线索",adm3:"制作队列",adm4:"售后",adm5:"客户",adm6:"订单",adm7:"广告账户",
  adm8:"样片库",adm9:"服务区域",adm10:"团队",adm11:"设置",adm12:"打开官网",
@@ -2221,7 +2391,7 @@ fdesc:"给海外实体店做的短视频广告——人来主导，AI 辅助。S
  pk1d:"第一条 3 个工作日交付",pk2d:"第一条 3 个工作日交付",
  backai:"VertensAI 工具",whyh:"为什么一个月是几百块，不是几千块",wd1:"3 个工作日",wd1s:"拿到第一条",wd2:"10 条以上",wd2s:"来自一次拍摄",wd3:"你自己的店",wd3s:"不是别人家的厨房",wd4:"我们定镜头",wd4s:"你只管举手机",whyn:"一样的实拍素材、一样的编导、一样的 9:16 成片。我们只是不再为那些永远上不了画面的部分付钱。",nav6:"关于我们",abt1:"我们是谁",abt2:"服务范围",abt3:"常见问题",bkhome:"回到首页",nav7:"常见问题",qmore:"全部问题",
  fqh:"店主们常问的问题",fqp:"给实体店做的短视频广告——多少钱、怎么做、你要做什么。这里没写到的，直接 WhatsApp 问我们。",
- abh:"做这些片子的团队",abp1:"Vertens Ad Studio 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
+ abh:"做这些片子的团队",abp1:"Vertens Ad 是 Sunvega 集团旗下的专业短视频团队。我们做海外社媒营销，最擅长的是海外实体店营销——那些靠客人走进门做生意的餐厅、美容店、展厅和修车行。",
  abph:"团队照片",abphn:"把一张名为 team.jpg 的照片放在本页同目录下即可替换。",abcap:"我们的编导、剪辑与投放团队。Sunvega 集团。",
  ab1h:"Sunvega 集团旗下",ab1p:"我们是 Sunvega 集团内部的短视频团队，与集团的海外营销和供应链业务并行。",
  ab2h:"海外社媒",ab2p:"TikTok、Instagram、Facebook、YouTube Shorts——五种语言的撰稿、剪辑和付费投放。",
@@ -2793,7 +2963,7 @@ const ACAT={c1:["Talking clip","口播"],c2:["Detail clip","细节片段"],c3:["
 const ANEED={c1:2,c2:5,c3:10};
 function saveAssets(){save("vt_assets",ASSETS);}
 function fsize(n){return n>=1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB";}
-function addFiles(list){
+function addFiles(list,cat){
   [...list].forEach(f=>{
     const img=/^image\//.test(f.type), id="a"+Date.now()+Math.random().toString(36).slice(2,7);
     try{BLOB[id]=URL.createObjectURL(f)}catch(e){}
@@ -2804,7 +2974,7 @@ function addFiles(list){
       IDB.put(id,{blob:f,poster:pt}).catch(()=>{});
       renderAssets();
     });
-    ASSETS.unshift({id,name:f.name||"file",size:f.size||0,img,cat:img?"c3":"c2",
+    ASSETS.unshift({id,name:f.name||"file",size:f.size||0,img,cat:cat|| (img?"c3":"c2"),
       date:new Date().toLocaleDateString("en-US",{month:"short",day:"numeric"})});
   });
   saveAssets(); syncCounts(); renderAssets(); renderS();
@@ -2813,12 +2983,15 @@ function syncCounts(){
   C={c1:0,c2:0,c3:0};
   ASSETS.forEach(a=>{if(C[a.cat]!==undefined)C[a.cat]++;});
   save("vt_mat",C);
+  ["c1","c2","c3"].forEach(k=>{const e=$("u"+k+"n");if(e)e.textContent=C[k]+" / "+ANEED[k];});
 }
 function renderAssets(){
   const g=$("agrid"); if(!g)return;
   const zh=LANG==="zh", k=zh?1:0;
   const L={edit:zh?"编辑":"Edit",del:zh?"删除":"Delete",save:zh?"保存":"Save",cancel:zh?"取消":"Cancel"};
-  g.innerHTML=ASSETS.map(a=>{
+  const groups={c1:[],c2:[],c3:[]}; ASSETS.forEach(a=>(groups[a.cat]||groups.c2).push(a));
+  const labels=zh?{c1:"人物口播",c2:"细节片段",c3:"门店照片"}:{c1:"Talking clips",c2:"Detail clips",c3:"Store photos"};
+  const card=a=>{
     const th=a.img
       ? (BLOB[a.id]?`<img src="${BLOB[a.id]}" alt="">`:"▨")
       : (POSTER[a.id]?`<img src="${POSTER[a.id]}" alt="">`
@@ -2832,9 +3005,23 @@ function renderAssets(){
       <div class="th">${th}</div>
       <div class="mt"><b>${a.name}</b><span>${ACAT[a.cat]?ACAT[a.cat][k]:"—"} · ${fsize(a.size)} · ${a.date}</span></div>
       <div class="act"><button data-edit="${a.id}">${L.edit}</button><button class="del" data-del="${a.id}">${L.del}</button></div></div>`;
-  }).join("");
+  };
+  g.innerHTML=["c1","c2","c3"].map(cat=>`<section class="asset-group"><header><b>${labels[cat]}</b><span>${groups[cat].length} / ${ANEED[cat]}</span></header><div class="agrid">${groups[cat].map(card).join("")||`<div class="asset-group-empty">${zh?"暂无素材":"No files yet"}</div>`}</div></section>`).join("");
+  document.querySelectorAll(".asset-group").forEach((group,index)=>{group.style.display=ASSET_FOLDER==="all"||ASSET_FOLDER==="c"+(index+1)?"block":"none";});
+  const head=document.querySelector(".asset-library-head"); if(head){let back=head.querySelector("[data-asset-back]");if(!back){back=document.createElement("button");back.dataset.assetBack="1";back.className="asset-folder-back";back.textContent="查看全部文件夹";back.onclick=()=>{ASSET_FOLDER="all";renderAssets();};head.appendChild(back);}back.style.display=ASSET_FOLDER==="all"?"none":"inline-flex";}
+  ["c1","c2","c3"].forEach(cat=>{const folder=document.querySelector(`[data-drop-cat="${cat}"]`);if(!folder)return;folder.classList.add("asset-folder");let pv=folder.querySelector(".asset-folder-preview");if(!pv){pv=document.createElement("div");pv.className="asset-folder-preview";folder.insertBefore(pv,folder.firstChild);}pv.innerHTML=groups[cat].slice(0,3).map(a=>{const src=a.img?BLOB[a.id]:POSTER[a.id];return src?`<img src="${src}" alt="">`:""}).join("")+(groups[cat].length>3?`<span class="folder-more">+${groups[cat].length-3}</span>`:"");let vb=folder.querySelector("[data-view-cat]");if(!vb){vb=document.createElement("button");vb.type="button";vb.dataset.viewCat=cat;vb.className="asset-view-button";vb.textContent=LANG==="zh"?"查看已上传素材":"View uploaded files";const up=folder.querySelector("[data-upload-cat]");if(up)up.after(vb);}});
+  ["c1","c2","c3"].forEach(cat=>{const folder=document.querySelector(`[data-drop-cat="${cat}"]`);if(!folder)return;const up=folder.querySelector("[data-upload-cat]"),view=folder.querySelector("[data-view-cat]");if(!up||!view)return;let actions=folder.querySelector(".asset-actions");if(!actions){actions=document.createElement("div");actions.className="asset-actions";up.before(actions);actions.append(up,view);}up.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"/></svg><span>${LANG==="zh"?"上传":"Upload"}</span>`;view.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h7l2 2h9v10H3z"/><path d="M3 7V5h7l2 2"/></svg><span>${LANG==="zh"?"查看素材":"View files"}</span>`;up.title=LANG==="zh"?"上传到此分类":"Upload to this folder";view.title=LANG==="zh"?"查看该分类已上传素材":"View uploaded files";});
   const em=$("aempty"); if(em)em.style.display=ASSETS.length?"none":"block";
 }
+function openAssetFolder(cat){
+  ASSET_FOLDER=cat; renderAssets();
+  const group=document.querySelector(`.asset-group[style*="display: block"]`); if(!group)return;
+  let modal=$("asset-folder-modal"); if(!modal){modal=document.createElement("div");modal.id="asset-folder-modal";modal.className="asset-folder-modal";document.body.appendChild(modal);}
+  const title=group.querySelector("header b")?.textContent||"素材文件夹", count=group.querySelector("header span")?.textContent||"";
+  modal.innerHTML=`<section class="asset-folder-dialog" role="dialog" aria-modal="true"><header><div><b>${title}</b><span>${count} · 已上传素材</span></div><button type="button" data-close-folder aria-label="关闭素材文件夹" title="关闭">关闭</button></header><div class="agrid">${group.querySelector(".agrid")?.innerHTML||""}</div></section>`;
+  modal.style.display="flex";
+}
+function closeAssetFolder(){const modal=$("asset-folder-modal");if(modal)modal.style.display="none";ASSET_FOLDER="all";renderAssets();}
 function wsGo(v){
   WS=v; renderWizard(); renderAds(); fillAds();
   document.querySelectorAll(".wsec").forEach(x=>x.classList.toggle("on",x.id==="ws-"+v));
@@ -3101,6 +3288,8 @@ function ckAmount(){
 function renderCk(){
   const zh=LANG==="zh", pk=PKG[V.pkg], el=id=>$(id);
   if(!el("k-total"))return;
+  const checkoutPage=document.querySelector(".checkout-page");
+  if(checkoutPage)checkoutPage.classList.toggle("checkout-card-mode",PAY==="card");
   const row=(a,b)=>`<div class="srow"><span>${a}</span><b>${b}</b></div>`;
   if(CKTYPE==="ads"){
     const f=adFee(A.spend);
@@ -3123,6 +3312,11 @@ function renderCk(){
       row(zh?"成片比例":"Aspect ratio","9:16");
   }
   el("k-total").textContent=money(ckAmount());
+  const orderAmount=el("ck-order-amount");
+  if(orderAmount)orderAmount.textContent=money(ckAmount())+" * 1";
+  const summaryTotal=el("ck-summary-total"), due=el("ck-due");
+  if(summaryTotal)summaryTotal.textContent=money(ckAmount());
+  if(due)due.textContent=money(ckAmount());
   const kp=document.querySelector('[data-i="ckp"]');
   if(kp)kp.textContent=CKTYPE==="ads"
     ? (zh?"登录、付款，然后在工作台补齐账户信息，我们就开始搭 campaign。":"Sign in, pay, then fill in the account details in your workspace and we start building.")
@@ -3130,13 +3324,14 @@ function renderCk(){
   const bk=el("ckback");
   if(bk){
     bk.dataset.go=CKTYPE==="ads"?"ads":"videos";
-    bk.textContent=CKTYPE==="ads"
-      ? (zh?"← 回到广告代投":"← Back to ad management")
-      : (zh?"← 回到套餐":"← Back to plans");
+    bk.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    bk.setAttribute("aria-label",CKTYPE==="ads"
+      ? (zh?"回到广告代投":"Back to ad management")
+      : (zh?"回到套餐":"Back to plans"));
   }
   el("ck-out").style.display=USER?"none":"block";
   el("ck-in").style.display=USER?"block":"none";
-  if(USER)el("ck-mail").textContent=USER.email;
+  if(el("ck-mail"))el("ck-mail").textContent=USER?USER.email:"1135782037@qq.com";
   document.querySelectorAll("#paym .opt").forEach(o=>o.classList.toggle("sel",o.dataset.pay===PAY));
   el("cardf").style.display=PAY==="card"?"":"none";
   const T={en:{card:"",paypal:"You will approve the payment in PayPal, then come straight back here.",invoice:"We email an invoice today. Production starts when it is paid."},
@@ -3435,7 +3630,6 @@ function renderS(){
   }
 }
 function fillBrand(){
-  const sel=$("b-ind"); if(sel&&!sel.dataset.done){sel.innerHTML=LIB.map(i=>`<option>${LANG==="zh"?i.zh:i.en}</option>`).join("");sel.dataset.done=1;}
   [["b-name","name"],["b-sell","sell"],["b-why","why"],["b-who","who"],["b-contact","contact"]].forEach(([id,k])=>{
     const el=$(id); if(el&&BRAND[k]!==undefined&&!el.value)el.value=BRAND[k];});
 }
@@ -3864,7 +4058,16 @@ function renderAdmin(){
     return;
   }
 }
-function render(){renderHomeSamples();renderV();renderA();renderEst();renderOrders();renderAds();fillAds();renderCk();renderOrder();renderWizard();renderWScripts();renderWVideos();renderS();renderAssets();fillProf();renderLib();renderGeo();fillBrand();renderReqs();renderAdmin();renderAuth();}
+function fillScriptIndustry(){
+  const items=[['food','餐饮','Restaurants & cafés'],['beauty','美业','Beauty'],['home','建材家居','Home & building'],['auto','汽车服务','Auto service']];
+  [$("q-ind"),$("b-ind")].forEach(sel=>{
+    if(!sel)return;
+    const current=sel.value;
+    sel.innerHTML=items.map(x=>`<option value="${x[0]}">${LANG==="zh"?x[1]:x[2]}</option>`).join("");
+    if(current&&items.some(x=>x[0]===current))sel.value=current;
+  });
+}
+function render(){fillScriptIndustry();renderHomeSamples();renderV();renderA();renderEst();renderOrders();renderAds();fillAds();renderCk();renderOrder();renderWizard();renderWScripts();renderWVideos();renderS();renderAssets();fillProf();renderLib();renderGeo();fillBrand();renderReqs();renderAdmin();renderAuth();}
 const WAHIDE=["dashboard","admin","checkout"];
 function goto(p){
   if(p==="faq"||p==="work")p="about";
@@ -3893,6 +4096,10 @@ function setLang(l){
 document.addEventListener("click",e=>{
   if(e.target.closest("#qgo")){
     const g=id=>($(id)&&$(id).value.trim())||"";
+    const required=["q-name","q-ind","q-sell"];
+    const missing=required.find(id=>!g(id));
+    if(missing){const field=$(missing);if(field){field.focus();field.reportValidity&&field.reportValidity();}return;}
+    if(!g("q-phone")&&!g("q-wa")){const field=$("q-phone");if(field){field.focus();}return;}
     const ind=LIB.find(x=>x.id===$("q-ind").value);
     LEADS.unshift({type:"script",biz:g("q-name")||g("q-link")||"—",ind:ind?ind.en:"—",city:"—",
       contact:g("q-phone")||g("q-wa")||"—",size:g("q-size"),link:g("q-link"),
@@ -4173,20 +4380,23 @@ document.addEventListener("click",e=>{
     return;}
   const wsb=e.target.closest("[data-ws]"); if(wsb){wsGo(wsb.dataset.ws);return;}
   if(e.target.closest("#wsout")){signOut();return;}
+  const closeFolder=e.target.closest("[data-close-folder]"); if(closeFolder){closeAssetFolder();return;}
+  const viewFolder=e.target.closest("[data-view-cat]"); if(viewFolder){openAssetFolder(viewFolder.dataset.viewCat);return;}
+  const upload=e.target.closest("[data-upload-cat]"); if(upload){const fi=$("afile-"+upload.dataset.uploadCat);if(fi)fi.click();return;}
   if(e.target.closest("#drop")&&!e.target.closest("input")){$("afile").click();return;}
-  const ae=e.target.closest("[data-edit]"); if(ae){EDIT=ae.dataset.edit;renderAssets();return;}
+  const ae=e.target.closest("[data-edit]"); if(ae){EDIT=ae.dataset.edit;renderAssets();if($("asset-folder-modal")?.style.display!=="none")openAssetFolder(ASSET_FOLDER);return;}
   if(e.target.closest("[data-ecancel]")){EDIT=null;renderAssets();return;}
   const as=e.target.closest("[data-esave]");
   if(as){const a=ASSETS.find(x=>x.id===as.dataset.esave);
     if(a){const n=$("ed-n").value.trim(); if(n)a.name=n; a.cat=$("ed-c").value;}
-    EDIT=null;saveAssets();syncCounts();renderAssets();renderS();renderWizard();return;}
+    EDIT=null;saveAssets();syncCounts();renderAssets();renderS();renderWizard();if($("asset-folder-modal")?.style.display!=="none")openAssetFolder(ASSET_FOLDER);return;}
   const ad=e.target.closest("[data-del]");
   if(ad){const id=ad.dataset.del;
     if(BLOB[id]){try{URL.revokeObjectURL(BLOB[id])}catch(err){} delete BLOB[id];}
     delete POSTER[id]; IDB.del(id);
     ASSETS=ASSETS.filter(x=>x.id!==id);
     if(EDIT===id)EDIT=null;
-    saveAssets();syncCounts();renderAssets();renderS();renderWizard();return;}
+    saveAssets();syncCounts();renderAssets();renderS();renderWizard();if($("asset-folder-modal")?.style.display!=="none")openAssetFolder(ASSET_FOLDER);return;}
   if(e.target.closest("#saveprof")){
     PROF={name:$("p-name").value,title:$("p-title").value,phone:$("p-phone").value,
           wa:$("p-wa").value,size:$("p-size").value,pref:$("p-pref").value};
@@ -4194,6 +4404,8 @@ document.addEventListener("click",e=>{
     $("profmsg").textContent=LANG==="zh"?"已保存":"Saved";
     setTimeout(()=>{const m=$("profmsg");if(m)m.textContent=""},2000); return;}
   if(e.target.closest("#savebrand")){
+    const required=["b-name","b-ind","b-contact","b-sell"], missing=required.find(x=>!$(x)||!$(x).value.trim());
+    if(missing){const field=$(missing);if(field){field.focus();field.reportValidity&&field.reportValidity();}return;}
     BRAND={name:$("b-name").value,ind:$("b-ind").value,contact:$("b-contact").value,
            sell:$("b-sell").value,why:$("b-why").value,who:$("b-who").value};
     save("vt_brand",BRAND); SCR=null; renderWScripts(); renderWizard(); $("savedmsg").textContent=LANG==="zh"?"已保存":"Saved";
@@ -4257,6 +4469,13 @@ document.addEventListener("change",e=>{
     else addSamples(e.dataTransfer.files);}
 }));
 (function(){
+  ["c1","c2","c3"].forEach(cat=>{const fi=$("afile-"+cat),dz=document.querySelector(`[data-drop-cat="${cat}"]`);if(!fi||!dz)return;
+    dz.addEventListener("click",e=>{if(e.target.closest("button,input"))return;openAssetFolder(cat);});
+    fi.addEventListener("change",()=>{if(fi.files&&fi.files.length)addFiles(fi.files,cat);fi.value="";});
+    ["dragenter","dragover"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add("hot");}));
+    ["dragleave","drop"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove("hot");}));
+    dz.addEventListener("drop",e=>{const d=e.dataTransfer;if(d&&d.files&&d.files.length)addFiles(d.files,cat);});
+  });
   const fi=$("afile"), dz=$("drop"); if(!fi||!dz)return;
   fi.addEventListener("change",()=>{if(fi.files&&fi.files.length)addFiles(fi.files);fi.value="";});
   ["dragenter","dragover"].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add("hot");}));
@@ -4279,6 +4498,7 @@ try{const sv=localStorage.getItem("vt_lang"); if(sv&&DICT[sv])setLang(sv);}catch
     const hit=ATIERS.find(t=>t.budget===A.spend); ATIER=hit?hit.id:"custom";
     renderA();renderEst();}));})();
 const h=location.hash.slice(1); if(["videos","ads","sample","scripts","about","checkout","dashboard","admin"].includes(h)&&(["videos","ads","sample","scripts","about","checkout"].includes(h)||USER))goto(h);
+if(h==="assets"&&USER){goto("dashboard");wsGo("assets");}
 if(h==="faq"||h==="work")goto("about");
 function armReveal(){
   if(!("IntersectionObserver" in window))return;
@@ -4302,7 +4522,7 @@ hydrateSamples();
 
 (function(){
   const b=$("backai"); if(b){
-    b.href=/studio\.html$/.test(location.pathname)?"./":"https://sunadsai.vercel.app/";
+    b.href="./";
   }
 })();
 (function(){
@@ -4320,6 +4540,17 @@ hydrateSamples();
     });
   },{passive:true});
 })();
+</script>
+<script>
+  (function(){
+    var h=location.hash.slice(1), allowed={videos:1,ads:1,sample:1,scripts:1,about:1,checkout:1};
+    if(allowed[h]){
+      document.querySelectorAll('.page').forEach(function(p){p.classList.toggle('on',p.id==='p-'+h);});
+    } else if(!document.querySelector('.page.on')){
+      var first=document.getElementById('p-videos');
+      if(first)first.classList.add('on');
+    }
+  })();
 </script>
 </body>
 </html>

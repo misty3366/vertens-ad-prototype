@@ -1328,6 +1328,54 @@ function SimplePage({ page, product, setPage, language, setActiveProject }) {
   </div>;
 }
 
+function InspirationHome({ onDesign }) {
+  const cards = [
+    ['TCV三箱洗衣机静享','三箱洗衣机，实现衣物分区分类洗护，静音运行不扰。',images.bath],
+    ['保利天汇品质大盘宣传','生态大盘景观位，天河上车门槛首选。',images.patio],
+    ['Vertens品牌楼盘探店主播','地产探店女主播介绍楼盘，情绪饱满吐词清晰。',images.sofia],
+    ['虫子姐探店三维川菜','真人在餐厅招牌前讲解，身临其境感官信任更强。',images.presenter],
+    ['TVC橙汁冰爽特写','透亮发光的饮料产品镜头，橙色冰块扑面而来。',images.kitchen],
+    ['人物三视图','人物三视图_示例',images.avatar],
+    ['复古棕色皮艺沙发','复古棕色皮艺沙发，让每一次落座都温柔舒适。',images.kitchen],
+    ['椅子商业广告','以北欧极简实木餐椅为主角，通过木材细节建立信任。',images.bath],
+    ['椅子商业广告','单品广告',images.patio],
+    ['意式轻奢拉链单人可旋转沙发椅','意式轻奢拉链单人可旋转沙发椅',images.kitchen],
+    ['欧式扶手椅宣传视频','家具广告',images.bath],
+    ['轻奢真皮意式电动多功能沙发','本片以回家、身体终于可以放松为核心创意。',images.kitchen],
+    ['深夜便利店','用一个夜晚，讲清楚门店的温暖与便利。',images.presenter],
+    ['好眠神器','中式轻奢软装，用舒适细节打动每一位客户。',images.patio],
+    ['坐见不凡','质感家具展示',images.bath],
+    ['一室尽享松弛','卧室家居广告',images.kitchen]
+  ];
+  const [active, setActive] = useState('全部');
+  const [query, setQuery] = useState('');
+  const visible = cards.filter(card => card[0].includes(query) || !query);
+  return <div className="inspiration-app">
+    <aside className="inspiration-side">
+      <button className="inspiration-logo" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}><i>✦</i><b>Vertens</b></button>
+      <button className="inspiration-new"><Plus weight="bold"/>新建项目</button>
+      <nav className="inspiration-nav">
+        <button className="active"><Sparkle weight="fill"/>灵感广场</button>
+        <button onClick={()=>window.location.hash='projects'}><FolderSimple/>项目</button>
+        <button><BookOpen/>Skills</button>
+        <button><Package/>资产</button>
+      </nav>
+      <button className="inspiration-design" onClick={onDesign}><VideoCamera weight="fill"/>帮我设计 <ArrowRight weight="bold"/></button>
+      <span className="inspiration-recent">最近项目</span>
+      <button className="inspiration-recent-card"><img src={images.kitchen}/><b>自由画布 2</b></button>
+      <button className="inspiration-recent-card"><i><MagicWand/></i><b>自由画布 1</b></button>
+    </aside>
+    <main className="inspiration-main">
+      <header className="inspiration-top"><div className="inspiration-credit">✦ 19,997.50 <span>充值</span></div><button className="inspiration-user">◖ ◗</button></header>
+      <section className="inspiration-content">
+        <div className="inspiration-heading"><h1>灵感·<em>自由生长</em></h1><label><MagnifyingGlass/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="搜索灵感"/><span>✦</span></label></div>
+        <div className="inspiration-filters">{['全部','家装','建材','地产','餐饮','家电','汽车'].map(item=><button key={item} className={active===item?'active':''} onClick={()=>setActive(item)}>{item}</button>)}</div>
+        <div className="inspiration-grid">{visible.map(([title,copy,image],index)=><article key={`${title}-${index}`}><div className="inspiration-cover"><img src={image}/><button aria-label={`播放 ${title}`}><Play weight="fill"/></button></div><b>{title}</b><small>{copy}</small></article>)}</div>
+      </section>
+    </main>
+  </div>;
+}
+
 export function App() {
   const [page, setPage] = useState(() => {
     // /#performance 等锚点可直达对应页面（Storefront Ad Studio 会这样跳回来）
@@ -1383,7 +1431,7 @@ export function App() {
   const addPersonalAvatar = avatar => setPersonalAvatars(current => current.some(item => item.id === avatar.id) ? current : [avatar, ...current]);
   const openAgentWithDraft = draft => { setAgentDraft(draft || ''); setActiveProject(null); setPage('agent'); };
   const content = useMemo(() => {
-    if (page === 'home') return <HomePage setPage={setPage} notify={notify} language={language} tier={tier} startBrandImport={startBrandImport} checkups={checkups} addCheckup={addCheckup} onBuildCalendar={buildCalendarFromCheckup} doneMoves={doneMoves} toggleMove={toggleMove}/>;
+    if (page === 'home') return <InspirationHome onDesign={() => { window.location.href = `${import.meta.env.BASE_URL || '/'}studio.html`; }} />;
     if (page === 'profile') return <ProfilePage tier={tier} language={language} setPage={setPage}/>;
     if (page === 'plan') return <PlanPage tier={tier} setTier={setTier} language={language} notify={notify}/>;
     if (page === 'agent') return <AgentPage product={product} setPage={setPage} notify={notify} language={language} tier={tier} selectedAvatar={selectedAvatar} setSelectedAvatar={setSelectedAvatar} activeProject={activeProject} setActiveProject={setActiveProject} initialDraft={agentDraft} clearInitialDraft={() => setAgentDraft('')}/>;
@@ -1403,5 +1451,6 @@ export function App() {
     return <SimplePage page={page} product={product} setPage={setPage} language={language} setActiveProject={setActiveProject}/>;
   }, [page, product, canvasTemplate, language, publishAsset, theme, tier, selectedAvatar, avatarWizardOpen, activeProject, agentDraft, personalAvatars, brandImportRequest, checkups, calendarFromCheckup, doneMoves]);
   if (page === 'studio') return <><StudioSite language={language} theme={theme} notify={notify} onExit={() => setPage('home')}/>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</>;
+  if (page === 'home') return <>{content}</>;
   return <div className={`app-shell ${menuPinned ? 'sidebar-open' : 'sidebar-collapsed'}`}><Sidebar page={page} setPage={setPage} expanded={menuExpanded} pinned={menuPinned} setPinned={setMenuPinned} setHovered={setMenuHovered} theme={theme} setTheme={setTheme} tier={tier} setTier={setTier} language={language} setLanguage={setLanguage}/><main>{content}</main>{notice && <div className="toast"><CheckCircle weight="fill"/>{notice}</div>}</div>;
 }
